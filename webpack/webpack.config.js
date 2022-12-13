@@ -4,6 +4,7 @@ const webpack = require("webpack");
 const DefinePlugin = webpack.DefinePlugin;
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 const IS_DEV = process.env.NODE_ENV === "development";
 
@@ -77,6 +78,10 @@ module.exports = {
         },
       },
       {
+        test: /\.(jpe?g|webp|png)$/,
+        type: "asset",
+      },
+      {
         test: /\.(glsl|frag|vert)$/,
         loader: "raw-loader",
         exclude: /node_modules/,
@@ -87,6 +92,32 @@ module.exports = {
         loader: "glslify-loader",
         exclude: /node_modules/,
       },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      "...",
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.squooshMinify,
+          options: {
+            encodeOptions: {
+              mozjpeg: {
+                // That setting might be close to lossless, but it’s not guaranteed
+                // https://github.com/GoogleChromeLabs/squoosh/issues/85
+                quality: 100,
+              },
+              webp: {
+                lossless: 1,
+              },
+              avif: {
+                // https://github.com/GoogleChromeLabs/squoosh/blob/dev/codecs/avif/enc/README.md
+                cqLevel: 0,
+              },
+            },
+          },
+        },
+      }),
     ],
   },
 };
