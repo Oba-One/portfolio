@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 const DefinePlugin = webpack.DefinePlugin;
+const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
@@ -78,7 +79,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(jpe?g|webp|png)$/,
+        test: /\.(jpe?g|webp|svg|gif|png)$/,
         type: "asset",
       },
       {
@@ -95,8 +96,8 @@ module.exports = {
     ],
   },
   optimization: {
+    // minimize: true,
     minimizer: [
-      "...",
       new ImageMinimizerPlugin({
         minimizer: {
           implementation: ImageMinimizerPlugin.squooshMinify,
@@ -118,6 +119,7 @@ module.exports = {
           },
         },
       }),
+      new TerserPlugin(),
     ],
   },
 };
