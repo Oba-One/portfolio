@@ -1,60 +1,45 @@
 block variables
 
 doctype html
+html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "" lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
-if !isAJAX
-  html(
-    class=isPhone || isTablet ? 'mobile' : 'desktop'
-    lang="en"
-  )
-    head
-      meta(charset="UTF-8")
-      meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    base(href="/")
 
-      base(href="/")
+    title=meta.data.title
 
-      title=meta.data.title
+    meta(name="description" content=meta.data.description)
 
-      meta(name="description" content=meta.data.description)
+    link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png")
+    link(rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png")
+    link(rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png")
+    link(rel="manifest" href="/site.webmanifest")
+    link(rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff3a00")
 
-      link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png")
-      link(rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png")
-      link(rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png")
-      link(rel="manifest" href="/site.webmanifest")
-      link(rel="mask-icon" href="/safari-pinned-tab.svg" color="#fbf7ec")
-      meta(name="msapplication-TileColor" content="#fbf7ec")
-      meta(name="theme-color" content="#fbf7ec")
+    link(href="main.css" rel="stylesheet")
 
-      meta(property="og:type" content="website")
-      meta(property="og:title" content=meta.data.title)
-      meta(property="og:description" content=meta.data.description)
-      meta(property="og:image" content=meta.data.image ? meta.data.image.url : '')
+    meta(name="msapplication-TileColor" content="#f4d8cc")
+    meta(name="theme-color" content="#f4d8cc")
 
-      meta(name="twitter:card" content="summary_large_image")
-      meta(name="twitter:title" content=meta.data.title)
-      meta(name="twitter:description" content=meta.data.description)
-      meta(name="twitter:image" content=meta.data.image ? meta.data.image.url : '')
+    meta(property="og:type" content="website")
+    meta(property="og:title" content=meta.data.title)
+    meta(property="og:description" content=meta.data.description)
+    meta(property="og:image" content=meta.data.image ? meta.data.image.url : '')
 
-      link(rel="preconnect" href="https://www.google-analytics.com")
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:title" content=meta.data.title)
+    meta(name="twitter:description" content=meta.data.description)
+    meta(name="twitter:image" content=meta.data.image ? meta.data.image.url : '')
+  body
+    include ./partials/preloader
+    include ./partials/navigation
 
-      style
-        include ../public/main.css
+    include ./pages/about.pug
+    include ./pages/home.pug
 
-    body
-      include ./partials/preloader
-      include ./partials/navigation
+    script.
+      window.ASSETS = !{JSON.stringify(assets).replace(/<\//g, "<\\/")}
 
-      .content#content(data-template=template)
-        block body
-
-      include ./partials/noscript
-
-      script(async src=getVersionedPath('/main.js'))
-else
-  html(lang="en")
-    head
-      title=meta.data.title
-
-    body
-      .content#content(data-template=template)
-        block body
+    script(src="main.js")
