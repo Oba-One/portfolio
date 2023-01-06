@@ -1,0 +1,112 @@
+@import "open-props/style";
+@import "open-props/normalize";
+@import "open-props/media";
+@import "open-props/buttons";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+}
+
+body {
+  background: #fff;
+}
+
+dialog {
+  #loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    z-index: 9999;
+  }
+
+  #contact {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    z-index: 9999;
+  }
+}
+
+header {
+  nav {
+  }
+  button {
+    #contact-button {
+    }
+  }
+
+  #controls {
+  }
+}
+
+main {
+  position: absolute;
+}
+
+section {
+  #leafs {
+    article {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: #fff;
+      border-radius: 50%;
+
+      .mobile {
+      }
+
+      .desktop {
+      }
+
+      .mini {
+      }
+
+      .full {
+      }
+    }
+  }
+
+  #seed {
+    #nav-leafs {
+    }
+
+    #nav-roots {
+    }
+  }
+
+  #roots {
+    article {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: #fff;
+      border-radius: 50%;
+
+      .mini {
+      }
+
+      .full {
+      }
+    }
+  }
+}
+
+article {
+  .mini {
+  }
+
+  .full {
+  }
+}
+
+a {
+}
