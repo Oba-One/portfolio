@@ -16,109 +16,18 @@
       content="#000000"
       media="(prefers-color-scheme: dark)"
     />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:wght@300;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    
     <title>Afo's Portfolio</title>
   </head>
   <body>
-    <dialog id="loader" open>
-      <div id="loader-animation">
-        <div class="stickman">
-          <div class="head">
-            <div class="eye"></div>
-            <div class="mouth"></div>
-            <!-- <div class="beard"></div> -->
-          </div>
-          <div class="torso">
-            <div class="shirt"></div>
-            <div class="left-arm">
-              <div class="sleeve"></div>
-              <div class="hand"></div>
-            </div>
-            <div class="right-arm">
-              <div class="sleeve"></div>
-              <div class="hand"></div>
-            </div>
-            <div class="left-leg">
-              <div class="pants"></div>
-              <div class="foot"></div>
-              <div class="shoe"></div>
-            </div>
-            <div class="right-leg">
-              <div class="pants"></div>
-              <div class="foot"></div>
-              <div class="shoe"></div>
-            </div>
-          </div>
-          <div class="shadow"></div>
-        </div>
-      </div>
-      <div id="loader-actions">
-        <button type="button">Yes</button>
-        <button type="button">No</button>
-      </div>
-    </dialog>
-    <dialog id="contact">
-      <form>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" />
-        <label for="message">Message</label>
-        <textarea id="message" name="message"></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </dialog>
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <a href="#seed">
-              <img src="" alt="logo" />
-            </a>
-          </li>
-          <li>
-            <a href="#roots">
-              <h3>Roots</h3>
-            </a>
-          </li>
-          <li>
-            <a href="#leafs">
-              <h3>Roots</h3>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <button id="contact-button">CONTACT</button>
-      <div id="controls"></div>
-    </header>
-    <main id="me"></main>
-    <section id="leafs" role="list">
-      <article role="listitem"></article>
-      <article role="listitem"></article>
-      <article role="listitem"></article>
-    </section>
-    <section id="seed">
-      <a id="nav-leafs" href="#leafs">
-        <svg class="arrow-up" viewBox="0 0 24 24">
-          <path
-            d="M12 4.5L5.5 11H9V17H15V11H18.5L12 4.5Z"
-            fill="currentColor"
-          />
-        </svg>
-      </a>
-      <a id="nav-roots" href="#roots">
-        <svg class="arrow-up" viewBox="0 0 24 24">
-          <path
-            d="M12 4.5L5.5 11H9V17H15V11H18.5L12 4.5Z"
-            fill="currentColor"
-          />
-        </svg>
-      </a>
-    </section>
-    <section id="roots" role="list">
-      <article id="education" role="listitem"></article>
-      <article id="sports" role="listitem"></article>
-      <article id="art" role="listitem"></article>
-      <article id="yoruba" role="listitem"></article>
-    </section>
-    <script type="module" src="/src/main.ts"></script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
