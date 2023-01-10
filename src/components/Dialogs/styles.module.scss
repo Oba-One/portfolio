@@ -1,0 +1,286 @@
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 9999;
+}
+
+#contact {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 9999;
+}
+
+@mixin dimensions(
+  $position,
+  $z-index,
+  $top,
+  $right,
+  $bottom,
+  $left,
+  $height,
+  $width
+) {
+  position: $position;
+  z-index: $z-index;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  height: $height;
+  width: $width;
+}
+@mixin border-radius($tl, $bl, $tr, $br) {
+  border-top-left-radius: $tl;
+  border-bottom-left-radius: $bl;
+  border-top-right-radius: $tr;
+  border-bottom-right-radius: $br;
+}
+
+#background-scroll {
+  @include dimensions(absolute, -20, 0, 0, auto, auto, 100%, 100%);
+  background: url(https://opengameart.org/sites/default/files/swamp.png);
+  background-size: 500px 340px;
+  display: none;
+  animation: scrollEast 15s linear infinite;
+}
+
+.stickman {
+  position: absolute;
+  top: 40px;
+  left: calc(50% - 25px);
+
+  .head {
+    @include dimensions(absolute, 25, 0, auto, auto, auto, 50px, 50px);
+    background: #fcd0bd;
+    border-radius: 50px;
+    animation: head 1s infinite;
+
+    .eye {
+      @include dimensions(absolute, 0, 20px, 10px, auto, auto, 5px, 5px);
+      background: #000000;
+      border-radius: 5px;
+      animation: eyes 5s linear 1s infinite;
+      display: none;
+    }
+
+    .mouth {
+      @include dimensions(absolute, 10, 35px, 5px, auto, auto, 5px, 10px);
+      background: #000000;
+      border-radius: 5px;
+      transform: rotate(12deg);
+      animation: mouth 7s linear infinite;
+      display: none;
+    }
+  }
+
+  .torso {
+    @include dimensions(absolute, 0, 45px, auto, auto, 20px, 95px, 5px);
+    background: #fcd0bd;
+    border-radius: 5px;
+    .shirt {
+      @include dimensions(absolute, 0, 0, -5px, auto, auto, 100%, 15px);
+      background: #cd4f39;
+      border-radius: 5px;
+      display: none;
+    }
+    .sleeve {
+      @include dimensions(absolute, 0, 0, -5px, auto, auto, 50%, 15px);
+      @include border-radius(15px, 0, 15px, 0);
+      background: #7b2f22;
+      display: none;
+    }
+    .hand {
+      @include dimensions(absolute, 0, auto, auto, 0, -5px, 13px, 13px);
+      @include border-radius(5px, 5px, 0, 5px);
+      transform: rotate(30deg);
+      background: #fcd0bd;
+    }
+    .left-arm {
+      @include dimensions(absolute, -10, 3px, 22px, auto, auto, 90px, 5px);
+      background: #c9a697;
+      border-radius: 5px;
+      transform: rotate(30deg);
+      animation: walk-left-arm 2s infinite;
+      .sleeve {
+        background: #6e2a1e;
+      }
+      .hand {
+        background: #c9a697;
+      }
+    }
+    .right-arm {
+      @include dimensions(absolute, 20, 3px, auto, auto, 22px, 90px, 5px);
+      background: #fcd0bd;
+      border-radius: 5px;
+      transform: rotate(-30deg);
+      animation: walk-right-arm 2s infinite;
+    }
+    .pants {
+      @include dimensions(absolute, 15, 0, -5px, auto, auto, 98%, 15px);
+      @include border-radius(15px, 0, 15px, 0);
+      background: #336699;
+      display: none;
+    }
+    .foot {
+      @include dimensions(absolute, 0, auto, auto, 0, 0, 5px, 30px);
+      border-top-right-radius: 15px;
+      background: #fcd0bd;
+    }
+    .shoe {
+      @include dimensions(absolute, 10, auto, auto, -5px, auto, 10px, 30px);
+      @include border-radius(3px, 3px, 10px, 3px);
+      background: black;
+      display: none;
+      animation: shoe 2s infinite;
+      box-shadow: -10px 5px 20px 3px rgba(0, 0, 0, 0.5);
+    }
+    .left-leg {
+      @include dimensions(absolute, -10, 85px, auto, auto, 30px, 125px, 5px);
+      background: #c9a697;
+      border-radius: 5px;
+      transform: rotate(-30deg);
+      animation: walk-left-leg 2s infinite;
+      .pants {
+        background: #2d5b89;
+      }
+      .foot {
+        background: #c9a697;
+      }
+      .shoe {
+        animation-delay: 1s;
+      }
+    }
+    .right-leg {
+      @include dimensions(absolute, 0, 85px, 30px, auto, auto, 125px, 5px);
+      background: #fcd0bd;
+      border-radius: 5px;
+      transform: rotate(30deg);
+      animation: walk-right-leg 2s infinite;
+    }
+  }
+  .shadow {
+    @include dimensions(absolute, -15, 240px, -60px, auto, auto, 1px, 200px);
+    background: transparent;
+    box-shadow: 0px 20px 20px 3px rgba(0, 0, 0, 0.5);
+    animation: shadow 1s infinite;
+    display: none;
+  }
+  // Animations //
+
+  @keyframes head {
+    0% {
+      top: 0px;
+      transform: rotate(0deg);
+    }
+    50% {
+      top: 5px;
+      transform: rotate(5deg);
+    }
+  }
+
+  @keyframes eyes {
+    5% {
+      height: 0px;
+    }
+    10% {
+      height: 5px;
+    }
+  }
+
+  @keyframes mouth {
+    5% {
+      width: 5px;
+    }
+    10% {
+      width: 10px;
+    }
+  }
+
+  // @keyframes walk-left-arm
+  // 	0%
+  // 		transform: rotate(30deg)
+  // 		right: 22px
+  // 	50%
+  // 		transform: rotate(-30deg)
+  // 		right: -22px
+  // 	100%
+  // 		transform: rotate(30deg)
+  // 		right: 22px
+
+  // @keyframes walk-right-arm
+  // 	0%
+  // 		transform: rotate(-30deg)
+  // 		left: 22px
+  // 	50%
+  // 		transform: rotate(30deg)
+  // 		left: -22px
+  // 	100%
+  // 		transform: rotate(-30deg)
+  // 		left: 22px
+
+  // @keyframes walk-left-leg
+  // 	0%
+  // 		transform: rotate(-30deg)
+  // 		left: 30px
+  // 	50%
+  // 		transform: rotate(30deg)
+  // 		left: -30px
+  // 	100%
+  // 		transform: rotate(-30deg)
+  // 		left: 30px
+
+  // @keyframes walk-right-leg
+  // 	0%
+  // 		transform: rotate(30deg)
+  // 		right: 30px
+  // 	50%
+  // 		transform: rotate(-30deg)
+  // 		right: -30px
+  // 	100%
+  // 		transform: rotate(30deg)
+  // 		right: 30px
+
+  // @keyframes shoe
+  // 	0%
+  // 		transform: rotate(0deg)
+  // 	25%
+  // 		transform: rotate(-15deg)
+  // 	50%
+  // 		transform: rotate(15deg)
+  // 	75%
+  // 		transform: rotate(-15deg)
+
+  // @keyframes shadow
+  // 	0%
+  // 		right: -60px
+  // 		width: 200px
+  // 	33%
+  // 		right: -50px
+  // 		width: 180px
+  // 	66%
+  // 		right: -60px
+  // 		width: 200px
+
+  // @keyframes scrollEast
+  // 	0%
+  // 		background-position: 0 0
+  // 	100%
+  // 		background-position: -500px 0
+
+  @keyframes scrollWest {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -500px 0;
+    }
+  }
+}
