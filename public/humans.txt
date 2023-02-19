@@ -1,0 +1,36 @@
+__  __  __
+\ \ \ \ \/
+ \ \/\ \
+  \/  \/
+
+The humans.txt file explains the team, technology,
+and graphic assets behind this site humanstxt.org.
+
+_______________________________________________________________________________
+
+DEVELOPER | Olùgbéejáde
+
+Afolabi Aiyeloja
+Web Developer and Architect
+
+Design tools:
+Figma
+Canva
+
+https://twitter.com/Afolabi_A_A_A
+github.com/Oba-One
+
+_______________________________________________________________________________
+
+TECHNOLOGY | Imọ ọna ẹrọ
+
+React
+Next.js
+Framer Motion
+
+_______________________________________________________________________________
+
+FONTS | Awọn nkọwe
+
+Gotham
+Hiragino Kaku Gothic
