@@ -38,14 +38,14 @@ import {
 } from 'layouts/Project';
 import { Fragment } from 'react';
 import { media } from 'utils/style';
-import styles from './Slice.module.css';
+import styles from './Wefa.module.css';
 
 const title = 'Biomedical image collaboration';
 const description =
   'This project involved designing a better way for biomedical educators and learners to annotate digital slides together.';
 const roles = ['User Research', 'UX Design', 'Interface Design'];
 
-export const Slice = () => {
+export const Wefa = () => {
   return (
     <Fragment>
       <Meta title={title} prefix="Projects" description={description} />
@@ -67,7 +67,7 @@ export const Slice = () => {
             <ProjectImage
               srcSet={[sliceApp, sliceAppLarge]}
               placeholder={sliceAppPlaceholder}
-              alt="The Slice web application showing a selected user annotation."
+              alt="The Wefa web application showing a selected user annotation."
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 90vw, 80vw`}
             />
           </ProjectSectionContent>
@@ -78,7 +78,7 @@ export const Slice = () => {
               <ProjectSectionHeading>Bringing it together</ProjectSectionHeading>
               <ProjectSectionText>
                 Teachers needed a better way to create collaborative group activities by
-                annotating slides on Slice. Before starting this project, a layer could
+                annotating slides on Wefa. Before starting this project, a layer could
                 only be annotated by a single user, making it difficult for learners to
                 work together.
               </ProjectSectionText>

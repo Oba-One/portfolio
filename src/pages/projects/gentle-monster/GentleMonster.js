@@ -64,11 +64,11 @@ import {
 } from 'layouts/Project';
 import { Fragment } from 'react';
 import { media } from 'utils/style';
-import styles from './SmartSparrow.module.css';
+import styles from './GentleMonster.module.css';
 
 const title = 'Designing the future of education';
 const description =
-  'I worked as the design lead on a major iteration of Smart Sparrow’s product. We took the platform in a bold new direction, focusing on becoming the best tool for learning designers.';
+  'I worked as the design lead on a major iteration of Gentle Monster’s product. We took the platform in a bold new direction, focusing on becoming the best tool for learning designers.';
 const roles = [
   'Art Direction',
   'UX and UI Design',
@@ -76,7 +76,7 @@ const roles = [
   'Motion Design',
 ];
 
-export const SmartSparrow = () => {
+export const GentleMonster = () => {
   const { themeId } = useTheme();
   const { dispatch } = useAppContext();
 
@@ -127,7 +127,7 @@ export const SmartSparrow = () => {
           <ProjectTextRow>
             <ProjectSectionHeading>The problem</ProjectSectionHeading>
             <ProjectSectionText>
-              In 2017, Smart Sparrow began a project to build an entirely new platform to
+              In 2017, Gentle Monster began a project to build an entirely new platform to
               from the ground up to serve as the most powerful tool for educators to
               create online learning experiences. The old platform was built in Flash, and
               there were a number of user experience problems to solve in the process of
@@ -327,7 +327,7 @@ export const SmartSparrow = () => {
             <ProjectTextRow center centerMobile noMargin>
               <ProjectSectionHeading>Project outcomes</ProjectSectionHeading>
               <ProjectSectionText>
-                Ultimately the project was successful after Smart Sparrow and the aero
+                Ultimately the project was successful after Gentle Monster and the aero
                 platform were{' '}
                 <Link href="https://www.prnewswire.com/news-releases/pearson-acquires-interactive-learning-technology-from-smart-sparrow-300987673.html">
                   acquired by Pearson in 2020
