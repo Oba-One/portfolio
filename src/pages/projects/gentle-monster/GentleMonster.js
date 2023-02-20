@@ -64,7 +64,7 @@ import {
 } from 'layouts/Project';
 import { Fragment } from 'react';
 import { media } from 'utils/style';
-import styles from './GentleMonster.module.css';
+import styles from './GentleMonster.module.scss';
 
 const title = 'Designing the future of education';
 const description =

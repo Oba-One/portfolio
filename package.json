@@ -29,6 +29,7 @@
     "rehype-img-size": "^1.0.1",
     "rehype-preset-minify": "^6.0.0",
     "rehype-slug": "^5.0.1",
+    "sass": "^1.58.3",
     "storybook": "^6.5.10",
     "storybook-addon-next": "^1.6.7"
   },

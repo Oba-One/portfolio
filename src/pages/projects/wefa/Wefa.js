@@ -38,7 +38,7 @@ import {
 } from 'layouts/Project';
 import { Fragment } from 'react';
 import { media } from 'utils/style';
-import styles from './Wefa.module.css';
+import styles from './Wefa.module.scss';
 
 const title = 'Biomedical image collaboration';
 const description =
