@@ -1,10 +1,10 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "homepage": "https://hamishw.com",
+  "homepage": "https://afolabi.info",
   "description": "Portfolio site for Afolabi Aiyeloja",
-  "repository": "https://github.com/HamishMW/portfolio.git",
-  "author": "Afolabi Aiyeloja <hello@hamishw.com>",
+  "repository": "https://github.com/Oba-One/portfolio.git",
+  "author": "Afolabi Aiyeloja <afo@wefa.app>",
   "devDependencies": {
     "@mapbox/rehype-prism": "^0.8.0",
     "@storybook/addon-a11y": "^6.5.10",
@@ -34,22 +34,19 @@
     "storybook-addon-next": "^1.6.7"
   },
   "dependencies": {
-    "fathom-client": "^3.5.0",
     "framer-motion": "^7.1.0",
-    "mdx-bundler": "^9.0.1",
+    "mdx-bundler": "^9.2.1",
     "next": "^12.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.146.0",
-    "three-stdlib": "^2.18.1"
+    "three": "^0.149.0",
+    "three-stdlib": "^2.21.8"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export -o build/",
     "build:storybook": "build-storybook -o build-storybook && node scripts/draco-storybook",
-    "deploy": "aws s3 sync --delete build/ s3://hamish-portfolio-site",
     "deploy:storybook": "aws s3 sync --delete build-storybook s3://hamish-portfolio-storybook",
-    "deploy:functions": "cd functions && npm run deploy",
     "start": "next start",
     "test": "echo 'write some tests'",
     "storybook": "start-storybook -p 9009 -h localhost"
