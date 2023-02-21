@@ -7,7 +7,7 @@ import { Meta } from 'components/Meta';
 import { Text } from 'components/Text';
 import { Transition } from 'components/Transition';
 import { Fragment } from 'react';
-import styles from './404.module.css';
+import styles from './404.module.scss';
 
 export function Page404() {
   return (

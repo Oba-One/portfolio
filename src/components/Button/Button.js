@@ -4,7 +4,7 @@ import { Transition } from 'components/Transition';
 import RouterLink from 'next/link';
 import { forwardRef } from 'react';
 import { classes } from 'utils/style';
-import styles from './Button.module.css';
+import styles from './Button.module.scss';
 
 function isExternalLink(href) {
   return href?.includes('://');

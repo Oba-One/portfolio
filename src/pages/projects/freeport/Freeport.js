@@ -39,15 +39,15 @@ import { Footer } from 'components/Footer';
 import { useTheme } from 'components/ThemeProvider';
 
 import { projects } from '../../../constants';
-import styles from './GentleMonster.module.scss';
+import styles from './Freeport.module.scss';
 
-const project = projects['gentle_monster'];
+const project = projects['freeport'];
 
 const title = project.title;
 const description = project.description;
 const roles = project.skills;
 
-export const GentleMonster = () => {
+export const Freeport = () => {
   const { themeId } = useTheme();
 
   const isDark = themeId === 'dark';

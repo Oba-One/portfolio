@@ -33,12 +33,12 @@ export const projects = {
   wefa: {
     title: 'WEFA',
     description:
-      'Connecting people to the environment and community in a simple & fun way',
+      'Connecting people to the environment and community in a simple and fun way',
     cta: {
       label: 'View project',
       link: '/projects/wefa',
     },
-    platform: 'mobile',
+    platform: 'phone',
     year: 2021,
     skills: ['WebXR (Augmented Reality)', 'Typescript', 'Solidity', 'React'],
     problem:
@@ -64,12 +64,12 @@ export const projects = {
   },
   freeport: {
     title: 'Freeport',
-    description: 'Ushering in a new form of art and asset ownership',
+    description: 'Ushering in a new form of art and asset ownership with DeFi and NFTs',
     cta: {
       label: 'View wesbsite',
       link: '/projects/freeport',
     },
-    platform: 'web',
+    platform: 'laptop',
     year: 2022,
     skills: ['DeFi (Decentralized Finance)', 'Solidity', 'Jotai', 'Next.js'],
     problem:
@@ -89,12 +89,13 @@ export const projects = {
   },
   mira_connect: {
     title: 'Mira Connect',
-    description: 'Making connections more seamless and productive',
+    description:
+      'Making connections more seamless and productive for field operators and office experts',
     cta: {
       label: 'View project',
       link: '/projects/mira-connect',
     },
-    platform: 'web',
+    platform: 'laptop',
     year: 2020,
     skills: ['WebRTC', 'RabbitMQ', 'React', 'Websockets'],
     problem:
@@ -114,12 +115,13 @@ export const projects = {
   },
   mira_flow: {
     title: 'Mira Flow',
-    description: 'Creating a companion to handsfree workflows',
+    description:
+      'Creating a companion to handsfree app, enabling a unified platform for workflows',
     cta: {
       label: 'View project',
       link: '/projects/mira-flow',
     },
-    platform: 'mobile',
+    platform: 'phone',
     year: 2019,
     skills: ['React Native', 'Swift', 'Typescript', 'MobX'],
     problem:
@@ -139,12 +141,13 @@ export const projects = {
   },
   gentle_monster: {
     title: 'Gentle Monster',
-    description: 'Reimagining form and presentation',
+    description:
+      'Reimagining form and presentation of a unique and eccentric eyewear brand',
     cta: {
       label: 'View project',
       link: '/projects/gentle-monster',
     },
-    platform: 'web',
+    platform: 'laptop',
     year: 2018,
     skills: ['E-Commerce', 'React', 'Javascript', 'GraphQL'],
     problem:

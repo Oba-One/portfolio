@@ -13,7 +13,7 @@ import { Transition } from 'components/Transition';
 import { useFormInput } from 'hooks';
 import { useRef, useState } from 'react';
 import { cssProps, msToNum, numToMs } from 'utils/style';
-import styles from './Contact.module.css';
+import styles from './Contact.module.scss';
 
 export const Contact = () => {
   const errorRef = useRef();
@@ -160,7 +160,7 @@ export const Contact = () => {
               data-status={status}
               style={getDelay(tokens.base.durationXS)}
             >
-              Thanks for getting in touch! 
+              Thanks for getting in touch!
             </Text>
             <Button
               secondary

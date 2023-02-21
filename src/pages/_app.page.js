@@ -1,19 +1,20 @@
-import 'layouts/App/reset.css';
-import 'layouts/App/global.css';
-
-import { Navbar } from 'components/Navbar';
-import { ThemeProvider } from 'components/ThemeProvider';
-import { tokens } from 'components/ThemeProvider/theme';
-import { VisuallyHidden } from 'components/VisuallyHidden';
-import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
-import { useFoucFix, useLocalStorage } from 'hooks';
-import styles from 'layouts/App/App.module.css';
-import { initialState, reducer } from 'layouts/App/reducer';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Fragment, createContext, useEffect, useReducer } from 'react';
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+
 import { msToNum } from 'utils/style';
-import { ScrollRestore } from '../layouts/App/ScrollRestore';
+import { useFoucFix, useLocalStorage } from 'hooks';
+import { Navbar } from 'components/Navbar';
+import { tokens } from 'components/ThemeProvider/theme';
+import { ThemeProvider } from 'components/ThemeProvider';
+import { VisuallyHidden } from 'components/VisuallyHidden';
+import { ScrollRestore } from 'layouts/App/ScrollRestore';
+import { initialState, reducer } from 'layouts/App/reducer';
+
+import styles from 'layouts/App/App.module.scss';
+import 'layouts/App/reset.css';
+import 'layouts/App/global.scss';
 
 export const AppContext = createContext({});
 

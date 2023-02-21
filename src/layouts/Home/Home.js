@@ -12,17 +12,12 @@ import gamestackTexture2Large from 'assets/gamestack-list-large.jpg';
 import gamestackTextureLarge from 'assets/gamestack-login-large.jpg';
 import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
 import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
-import sliceTexture from 'assets/slice-app.jpg';
-import sliceTextureLarge from 'assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
-import sprTexture from 'assets/spr-lesson-builder-dark.jpg';
-import sprTextureLarge from 'assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
+import { sliceApp, sliceAppLarge, sliceAppPlaceholder } from 'assets/wefa';
 
 import styles from './Home.module.css';
 import { projects } from '../../constants';
 
-const disciplines = ['Developer', 'Engineer', 'Producer', 'Architect'];
+const disciplines = ['Engineer', 'Producer', 'Architect'];
 
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([]);
@@ -38,7 +33,15 @@ export const Home = () => {
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, details];
+    const sections = [
+      intro,
+      projectOne,
+      projectTwo,
+      projectThree,
+      projectFour,
+      projectFive,
+      details,
+    ];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -77,7 +80,7 @@ export const Home = () => {
     <div className={styles.home}>
       <Meta
         title="Developer & Architect"
-        description="Developer portfolio of Afolabi Aiyeloja — a product designer working on web & mobile
+        description="Developer portfolio of Afolabi Aiyeloja — a developer working on web & mobile
           apps with a focus on Augmented Reality, Blockchains, & Artificial Intelligence."
       />
       <Intro
@@ -117,11 +120,15 @@ export const Home = () => {
         buttonLink={projects['wefa'].cta.link}
         model={{
           type: projects['wefa'].platform,
-          alt: 'Smart Sparrow lesson builder',
+          alt: 'App login screen',
           textures: [
             {
-              srcSet: [sprTexture, sprTextureLarge],
-              placeholder: sprTexturePlaceholder,
+              srcSet: [gamestackTexture, gamestackTextureLarge],
+              placeholder: gamestackTexturePlaceholder,
+            },
+            {
+              srcSet: [gamestackTexture2, gamestackTexture2Large],
+              placeholder: gamestackTexture2Placeholder,
             },
           ],
         }}
@@ -137,16 +144,12 @@ export const Home = () => {
         buttonText={projects['freeport'].cta.label}
         buttonLink={projects['freeport'].cta.link}
         model={{
-          type: 'phone',
-          alt: 'App login screen',
+          type: projects['freeport'].platform,
+          alt: 'Annotating a biomedical image in the Slice app',
           textures: [
             {
-              srcSet: [gamestackTexture, gamestackTextureLarge],
-              placeholder: gamestackTexturePlaceholder,
-            },
-            {
-              srcSet: [gamestackTexture2, gamestackTexture2Large],
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: [sliceApp, sliceAppLarge],
+              placeholder: sliceAppPlaceholder,
             },
           ],
         }}
@@ -161,12 +164,12 @@ export const Home = () => {
         buttonText={projects['mira_connect'].cta.label}
         buttonLink={projects['mira_connect'].cta.link}
         model={{
-          type: 'laptop',
+          type: projects['mira_connect'].platform,
           alt: 'Annotating a biomedical image in the Slice app',
           textures: [
             {
-              srcSet: [sliceTexture, sliceTextureLarge],
-              placeholder: sliceTexturePlaceholder,
+              srcSet: [sliceApp, sliceAppLarge],
+              placeholder: sliceAppPlaceholder,
             },
           ],
         }}
@@ -182,11 +185,15 @@ export const Home = () => {
         buttonLink={projects['mira_flow'].cta.link}
         model={{
           type: projects['mira_flow'].platform,
-          alt: 'Smart Sparrow lesson builder',
+          alt: 'App login screen',
           textures: [
             {
-              srcSet: [sprTexture, sprTextureLarge],
-              placeholder: sprTexturePlaceholder,
+              srcSet: [gamestackTexture, gamestackTextureLarge],
+              placeholder: gamestackTexturePlaceholder,
+            },
+            {
+              srcSet: [gamestackTexture2, gamestackTexture2Large],
+              placeholder: gamestackTexture2Placeholder,
             },
           ],
         }}
@@ -202,11 +209,11 @@ export const Home = () => {
         buttonLink={projects['gentle_monster'].cta.link}
         model={{
           type: projects['gentle_monster'].platform,
-          alt: 'Smart Sparrow lesson builder',
+          alt: 'Annotating a biomedical image in the Slice app',
           textures: [
             {
-              srcSet: [sprTexture, sprTextureLarge],
-              placeholder: sprTexturePlaceholder,
+              srcSet: [sliceApp, sliceAppLarge],
+              placeholder: sliceAppPlaceholder,
             },
           ],
         }}
