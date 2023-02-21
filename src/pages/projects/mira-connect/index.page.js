@@ -1,1 +1,1 @@
-export { GentleMonster as default } from './MiraConnect';
+export { MiraConnect as default } from './MiraConnect';

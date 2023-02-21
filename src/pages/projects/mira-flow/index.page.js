@@ -1,1 +1,1 @@
-export { GentleMonster as default } from './MiraFlow';
+export { MiraFlow as default } from './MiraFlow';

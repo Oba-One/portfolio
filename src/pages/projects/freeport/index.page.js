@@ -1,1 +1,1 @@
-export { GentleMonster as default } from './Freeport';
+export { Freeport as default } from './Freeport';
