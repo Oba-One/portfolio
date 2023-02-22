@@ -116,7 +116,7 @@ export const projects = {
   mira_flow: {
     title: 'Mira Flow',
     description:
-      'Creating a companion to handsfree app, enabling a unified platform for workflows',
+      'Creating a companion to a handsfree app, enabling a unified platform for workflows',
     cta: {
       label: 'View project',
       link: '/projects/mira-flow',
@@ -142,7 +142,7 @@ export const projects = {
   gentle_monster: {
     title: 'Gentle Monster',
     description:
-      'Reimagining form and presentation of a unique and eccentric eyewear brand',
+      'Reimagining the form and presentation of a unique and eccentric eyewear brand',
     cta: {
       label: 'View project',
       link: '/projects/gentle-monster',
