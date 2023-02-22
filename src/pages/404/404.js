@@ -84,7 +84,7 @@ const videos = [
   {
     src: KorraVid,
     alt: 'Korra Ending Theme with Zhonghu instrument',
-    title: 'Korra',
+    title: 'Legend of Korra',
     imdb: 'https://www.imdb.com/title/tt3830016',
   },
   {
@@ -221,7 +221,10 @@ export function Page404() {
               </div>
             </div>
 
-            <div className={styles.videoContainer} data-visible={visible}>
+            <div
+              className={styles.videoContainer}
+              data-visible={visible && randomVideo.src}
+            >
               {randomVideo.src && (
                 <>
                   <video
@@ -239,7 +242,7 @@ export function Page404() {
                   <a
                     className={styles.credit}
                     data-visible={visible}
-                    href=""
+                    href={randomVideo.imdb}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
