@@ -33,16 +33,16 @@ export const Contact = () => {
     try {
       setSending(true);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/message`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
         method: 'POST',
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        body: {
           email: email.value,
           message: message.value,
-        }),
+        },
       });
 
       const responseMessage = await response.json();
