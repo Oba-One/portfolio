@@ -12,10 +12,7 @@ import styles from './404.module.scss';
 export function Page404() {
   return (
     <section className={styles.page}>
-      <Meta
-        title="404 Not Found"
-        description="404 page not found. This page doesn't exist"
-      />
+      <Meta title="404 Not Found" description="Page not found. This page doesn't exist" />
       <Transition in>
         {visible => (
           <Fragment>
@@ -34,13 +31,13 @@ export function Page404() {
                   className={styles.subheading}
                   data-visible={visible}
                   as="h2"
-                  level={3}
+                  level={4}
                 >
-                  <DecoderText text="Error: Redacted" start={visible} delay={300} />
+                  <DecoderText text="Error: Nostalgia Pit" start={visible} delay={300} />
                 </Heading>
                 <Text className={styles.description} data-visible={visible} as="p">
-                  This page could not be found. It either doesn’t exist or was deleted. Or
-                  perhaps you don’t exist.
+                  This page either doesn’t exist or was deleted. Refresh for a random
+                  nostalgia trip.
                 </Text>
                 <Button
                   secondary
@@ -60,6 +57,7 @@ export function Page404() {
                 autoPlay
                 muted
                 loop
+                controls
                 playsInline
                 className={styles.video}
                 data-visible={visible}
@@ -74,7 +72,7 @@ export function Page404() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Animation from Ghost in the Shell (1995)
+                Dragon Ball Z Intro (1995)
               </a>
             </div>
           </Fragment>

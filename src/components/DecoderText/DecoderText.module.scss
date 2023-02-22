@@ -1,4 +1,5 @@
 .text {
+  max-width: 95%;
   &::after {
     content: '_';
     visibility: hidden;

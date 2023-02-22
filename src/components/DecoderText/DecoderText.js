@@ -3,7 +3,7 @@ import { useReducedMotion, useSpring } from 'framer-motion';
 import { memo, useEffect, useRef } from 'react';
 import { delay } from 'utils/delay';
 import { classes } from 'utils/style';
-import styles from './DecoderText.module.css';
+import styles from './DecoderText.module.scss';
 
 // prettier-ignore
 const glyphs = [
