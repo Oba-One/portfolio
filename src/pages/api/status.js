@@ -1,3 +1,7 @@
+export const config = {
+  runtime: 'edge',
+};
+
 /**
  * @param {import('next').NextApiRequest} req
  * @param {import('next').NextApiResponse} res
