@@ -38,10 +38,10 @@ export const Contact = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: {
+        body: JSON.stringify({
           email: email.value,
           message: message.value,
-        },
+        }),
       });
 
       const responseMessage = await response.json();
