@@ -2,7 +2,7 @@ import { transporter } from 'utils/email';
 
 const AUTH_EMAIL_USER = process.env.AUTH_EMAIL_USER ?? '';
 export const config = {
-  runtime: 'edge',
+  runtime: 'experimental-edge',
 };
 
 const mailOptions = {
