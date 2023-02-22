@@ -124,7 +124,7 @@ const light = {
   themeId: 'light',
   rgbBackground: '242 242 242',
   rgbBackgroundLight: '255 255 255',
-  rgbPrimary: '0 0 0',
+  rgbPrimary: '4 96 107',
   rgbAccent: '0 229 255',
   rgbText: '0 0 0',
   rgbError: '255 0 60',
