@@ -13,7 +13,7 @@ import { Text } from 'components/Text';
 import { Transition } from 'components/Transition';
 import { Fragment, useState } from 'react';
 import { media } from 'utils/style';
-import styles from './Profile.module.css';
+import styles from './Profile.module.scss';
 
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>

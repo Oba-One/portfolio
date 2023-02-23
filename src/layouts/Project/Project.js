@@ -1,13 +1,15 @@
+import { forwardRef, useRef } from 'react';
+
+import { useParallax } from 'hooks';
+import { Text } from 'components/Text';
+import { Image } from 'components/Image';
 import { Button } from 'components/Button';
 import { Heading } from 'components/Heading';
-import { Image } from 'components/Image';
 import { Section } from 'components/Section';
-import { Text } from 'components/Text';
-import { tokens } from 'components/ThemeProvider/theme';
 import { Transition } from 'components/Transition';
-import { useParallax } from 'hooks';
-import { forwardRef, useRef } from 'react';
+import { tokens } from 'components/ThemeProvider/theme';
 import { classes, cssProps, msToNum, numToMs } from 'utils/style';
+
 import styles from './Project.module.scss';
 
 const initDelay = 300;

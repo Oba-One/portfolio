@@ -19,7 +19,7 @@ import {
 } from 'three';
 import { media, rgbToThreeColor } from 'utils/style';
 import { cleanRenderer, cleanScene, removeLights } from 'utils/three';
-import styles from './DisplacementSphere.module.css';
+import styles from './DisplacementSphere.module.scss';
 import fragShader from './displacementSphereFragment.glsl';
 import vertShader from './displacementSphereVertex.glsl';
 
