@@ -44,7 +44,7 @@
   grid-column-gap: var(--space2XL);
 
   @nest .summary[data-alternate='true'] & {
-    grid-template-columns: 1fr var(--textColumnWidth);
+    grid-template-columns: 1fr 1fr;
   }
 
   @media (--mediaLaptop) {

@@ -12,7 +12,12 @@ import gamestackTexture2Large from 'assets/gamestack-list-large.jpg';
 import gamestackTextureLarge from 'assets/gamestack-login-large.jpg';
 import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
 import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
-import { sliceApp, sliceAppLarge, sliceAppPlaceholder } from 'assets/wefa';
+
+import { GMBackgroundImg } from 'assets/gm';
+// import { WefaBackgroundImg } from 'assets/wefa';
+// import { FlowBackgroundImg } from 'assets/mira-flow';
+import { FreeportBackgroundImg } from 'assets/freeport';
+import { ConnectBackgroundImg } from 'assets/mira-connect';
 
 import styles from './Home.module.css';
 import { projects } from '../../constants';
@@ -148,8 +153,8 @@ export const Home = () => {
           alt: 'Annotating a biomedical image in the Slice app',
           textures: [
             {
-              srcSet: [sliceApp, sliceAppLarge],
-              placeholder: sliceAppPlaceholder,
+              srcSet: [FreeportBackgroundImg, FreeportBackgroundImg],
+              placeholder: FreeportBackgroundImg,
             },
           ],
         }}
@@ -168,14 +173,15 @@ export const Home = () => {
           alt: 'Annotating a biomedical image in the Slice app',
           textures: [
             {
-              srcSet: [sliceApp, sliceAppLarge],
-              placeholder: sliceAppPlaceholder,
+              srcSet: [ConnectBackgroundImg, ConnectBackgroundImg],
+              placeholder: ConnectBackgroundImg,
             },
           ],
         }}
       />
       <ProjectSummary
         id="project-4"
+        alternate
         sectionRef={projectFour}
         visible={visibleSections.includes(projectFour.current)}
         index={4}
@@ -212,8 +218,8 @@ export const Home = () => {
           alt: 'Annotating a biomedical image in the Slice app',
           textures: [
             {
-              srcSet: [sliceApp, sliceAppLarge],
-              placeholder: sliceAppPlaceholder,
+              srcSet: [GMBackgroundImg, GMBackgroundImg],
+              placeholder: GMBackgroundImg,
             },
           ],
         }}
