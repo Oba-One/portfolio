@@ -4,17 +4,17 @@ import { Fragment, createContext, useEffect, useReducer } from 'react';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 
 import { msToNum } from 'utils/style';
-import { useFoucFix, useLocalStorage } from 'hooks';
 import { Navbar } from 'components/Navbar';
 import { tokens } from 'components/ThemeProvider/theme';
 import { ThemeProvider } from 'components/ThemeProvider';
 import { VisuallyHidden } from 'components/VisuallyHidden';
+import { useFoucFix, useLocalStorage } from 'hooks';
 import { ScrollRestore } from 'layouts/App/ScrollRestore';
 import { initialState, reducer } from 'layouts/App/reducer';
 
 import styles from 'layouts/App/App.module.scss';
-import 'layouts/App/reset.css';
 import 'layouts/App/global.scss';
+import 'layouts/App/reset.css';
 
 export const AppContext = createContext({});
 

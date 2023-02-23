@@ -4,9 +4,9 @@ import {
   FlowBackgroundImg,
   FlowProblemImg,
   FlowArchitectureImg,
+  FlowArchitecture2Img,
   FlowDevelopmentImg,
   FlowLearningsImg,
-  // FlowArchitecture2Img,
   // FlowDevelopment2Img
 } from 'assets/mira-flow';
 import {
@@ -77,20 +77,30 @@ export const MiraFlow = () => {
           </ProjectTextRow>
         </ProjectSection>
         <ProjectSection>
-          <ProjectSectionContent>
-            <Image
-              raised
-              key={themeId}
-              srcSet={[FlowArchitectureImg, FlowArchitectureImg]}
-              placeholder={FlowArchitectureImg}
-              alt="The homepage of the aero design system docs website linking to principles and components."
-              sizes="100vw"
-            />
-            <ProjectTextRow>
-              <ProjectSectionHeading>Architecture</ProjectSectionHeading>
-              <ProjectSectionText>{project.architecture}</ProjectSectionText>
-            </ProjectTextRow>
-          </ProjectSectionContent>
+          <ProjectSectionColumns>
+            <ProjectSectionContent>
+              <ProjectTextRow>
+                <ProjectSectionHeading>Architecture</ProjectSectionHeading>
+                <ProjectSectionText>{project.architecture}</ProjectSectionText>
+              </ProjectTextRow>
+            </ProjectSectionContent>
+            <div className={styles.sidebarImages}>
+              <Image
+                className={styles.sidebarImage}
+                srcSet={[FlowArchitectureImg, FlowArchitectureImg]}
+                placeholder={FlowArchitectureImg}
+                alt="Configuration options for a component."
+                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+              />
+              <Image
+                className={styles.sidebarImage}
+                srcSet={[FlowArchitecture2Img, FlowArchitecture2Img]}
+                placeholder={FlowArchitecture2Img}
+                alt="Configuration options for text."
+                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+              />
+            </div>
+          </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection>
           <ProjectSectionContent>
@@ -99,8 +109,8 @@ export const MiraFlow = () => {
               key={themeId}
               srcSet={[FlowDevelopmentImg, FlowDevelopmentImg]}
               placeholder={FlowDevelopmentImg}
-              alt="A drag and drop storyboard style editor for creating an adaptive lesson."
-              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+              alt="The homepage of the aero design system docs website linking to principles and components."
+              sizes="100vw"
             />
             <ProjectTextRow>
               <ProjectSectionHeading>Development</ProjectSectionHeading>
@@ -109,30 +119,20 @@ export const MiraFlow = () => {
           </ProjectSectionContent>
         </ProjectSection>
         <ProjectSection>
-          <ProjectSectionColumns>
-            <ProjectSectionContent>
-              <ProjectTextRow>
-                <ProjectSectionHeading>Learnings</ProjectSectionHeading>
-                <ProjectSectionText>{project.learnings}</ProjectSectionText>
-              </ProjectTextRow>
-            </ProjectSectionContent>
-            <div className={styles.sidebarImages}>
-              <Image
-                className={styles.sidebarImage}
-                srcSet={[FlowLearningsImg, FlowLearningsImg]}
-                placeholder={FlowLearningsImg}
-                alt="Configuration options for a component."
-                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-              />
-              <Image
-                className={styles.sidebarImage}
-                srcSet={[FlowLearningsImg, FlowLearningsImg]}
-                placeholder={FlowLearningsImg}
-                alt="Configuration options for text."
-                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-              />
-            </div>
-          </ProjectSectionColumns>
+          <ProjectSectionContent>
+            <Image
+              raised
+              key={themeId}
+              srcSet={[FlowLearningsImg, FlowLearningsImg]}
+              placeholder={FlowLearningsImg}
+              alt="A drag and drop storyboard style editor for creating an adaptive lesson."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+            />
+            <ProjectTextRow>
+              <ProjectSectionHeading>Learnings</ProjectSectionHeading>
+              <ProjectSectionText>{project.learnings}</ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
         </ProjectSection>
       </ProjectContainer>
       <Footer />
