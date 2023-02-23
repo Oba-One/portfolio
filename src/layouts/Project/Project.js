@@ -12,14 +12,7 @@ import styles from './Project.module.scss';
 
 const initDelay = 300;
 
-export function ProjectHeader({
-  title,
-  description,
-  linkLabel = 'Visit website',
-  links = [],
-  roles,
-  className,
-}) {
+export function ProjectHeader({ title, description, links = [], roles, className }) {
   return (
     <Section className={classes(styles.header, className)} as="section">
       <div
@@ -35,16 +28,16 @@ export function ProjectHeader({
           </Text>
           {links?.length && (
             <ul className={styles.links}>
-              {links.map(({ label, url }) => (
+              {links.map(({ label, link }) => (
                 <Button
                   secondary
                   iconHoverShift
                   className={styles.linkButton}
                   icon="chevronRight"
-                  href={url}
+                  href={link}
                   key={label}
                 >
-                  {linkLabel}
+                  {label}
                 </Button>
               ))}
             </ul>

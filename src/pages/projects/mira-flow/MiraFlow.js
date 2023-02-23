@@ -6,6 +6,8 @@ import {
   FlowArchitectureImg,
   FlowDevelopmentImg,
   FlowLearningsImg,
+  // FlowArchitecture2Img,
+  // FlowDevelopment2Img
 } from 'assets/mira-flow';
 import {
   ProjectBackground,
@@ -53,6 +55,7 @@ export const MiraFlow = () => {
           title={title}
           description={description}
           url="https://www.smartsparrow.com/"
+          links={project.links}
           roles={roles}
         />
         <ProjectSection padding="top">

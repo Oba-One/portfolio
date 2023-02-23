@@ -35,7 +35,7 @@ export const projects = {
     description:
       'Connecting people to the environment and community in a simple and fun way',
     cta: {
-      label: 'View project',
+      label: 'View Project',
       link: '/projects/wefa',
     },
     platform: 'phone',
@@ -46,19 +46,14 @@ export const projects = {
     architecture:
       'Built to be Web3 focused, the stack of WEFA can be broken down into three core parts, interface, logic, and data. The interface is a web based AR client using WebXR, React, and Typescript. Logic is handled by smart contracts on an ethereum based blockchain for the app and game along with AI/ML APIs for plant detection and planting. Data is also stored on a blockchain, for more assets (image. video) focused ones Filecoin’s FVM is used.',
     development: '',
-    learnings: '',
     links: [
       {
-        label: 'Site',
+        label: 'Learn More',
         link: 'https://wefa.app',
       },
       {
-        label: 'Github',
+        label: 'View Github',
         link: 'https://github.com/wefa-tech',
-      },
-      {
-        label: 'Diagrams',
-        link: 'https://miro.com/app/board/o9J_lZ2ZQqU=/',
       },
     ],
   },
@@ -66,7 +61,7 @@ export const projects = {
     title: 'Freeport',
     description: 'Ushering in a new form of art and asset ownership with DeFi and NFTs',
     cta: {
-      label: 'View wesbsite',
+      label: 'View Project',
       link: '/projects/freeport',
     },
     platform: 'laptop',
@@ -82,7 +77,7 @@ export const projects = {
       'Being a contract role I was able to learn a ton in a short period of time. First developing and deploying contracts to a testnet was great experience in solidity development and gave me confidence to continue building contracts. Also working on a very early project allowed me to gain the vantage point of how development is at that stage. Having full autonomy for certain functionality showed where I can improve as a developer and iterate faster. ',
     links: [
       {
-        label: 'Site',
+        label: 'View Website',
         link: 'https://freeport.app',
       },
     ],
@@ -92,7 +87,7 @@ export const projects = {
     description:
       'Making connections more seamless and productive for field operators and office experts',
     cta: {
-      label: 'View project',
+      label: 'View Project',
       link: '/projects/mira-connect',
     },
     platform: 'laptop',
@@ -108,7 +103,7 @@ export const projects = {
       ' Leading a project as an individual contributor was much simpler than leading a team, in this case contracted developers based in Romania. Having to traverse the time difference and delineate work at times was challenging but overall a rewarding experience. Also was the 1st project where I led the architecture discussions creating initial PRDs for the web, sequence and flow diagrams, and more. This taught me more about network protocols and how they transfer data in different manners. Lastly cross team collaboration from the headset, web and api is not always easy and being transparent is the best way to avoid friction.',
     links: [
       {
-        label: 'Site',
+        label: 'Learn More',
         link: 'https://www.mirareality.com/connect',
       },
     ],
@@ -118,7 +113,7 @@ export const projects = {
     description:
       'Creating a companion to a handsfree app, enabling a unified platform for workflows',
     cta: {
-      label: 'View project',
+      label: 'View Project',
       link: '/projects/mira-flow',
     },
     platform: 'phone',
@@ -134,7 +129,7 @@ export const projects = {
       'This was a huge step forward for me in responsibility and leading a project. Along with my 1st time stepping into mobile development which though using React Native still was a different development process and subtle difference in code. Within the code the workflow logic was a fun exercise in building complex logic and conditional flows. One thing I learned to improve was over optimizing too early in a project which actually causes more performance issues, it’s a lot simpler to complete the initial flow and structure then key in on optimization. ',
     links: [
       {
-        label: 'Site',
+        label: 'Learn More',
         link: 'https://www.mirareality.com/flow',
       },
     ],
@@ -144,7 +139,7 @@ export const projects = {
     description:
       'Reimagining the form and presentation of a unique and eccentric eyewear brand',
     cta: {
-      label: 'View project',
+      label: 'View Project',
       link: '/projects/gentle-monster',
     },
     platform: 'laptop',
@@ -160,7 +155,7 @@ export const projects = {
       'This was my 1st full time role working in a team, before this point I mainly had done freelance work for clients. Stepping into a team environment was invigorating and gave me a boost in confidence and peers to learn from. Initially I had imposter syndrome having not worked in a professional software environment and it took a week to settle into the role. It helped having a supportive team and manager in traversing the environment. One of the key things I learned is I had more to learn as a developer from advanced methods, data structures, and new languages like Typescript. ',
     links: [
       {
-        label: 'Site',
+        label: 'View Website',
         link: 'https://gentlemonster.com',
       },
     ],
