@@ -7,6 +7,16 @@
   align-items: center;
 }
 
+.links {
+  display: flex;
+  gap: var(--spaceS);
+
+  @media (--mediaMobile) {
+    flex-direction: column;
+    gap: var(--spaceM);
+  }
+}
+
 .section {
   width: 100%;
   position: relative;

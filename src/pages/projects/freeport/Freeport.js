@@ -1,25 +1,12 @@
 import { Fragment } from 'react';
 
 import {
-  gmBackgroundImg,
-  gmBackgroundImgLarge,
-  gmBackgroundImgPlaceholder,
-  gmProblemImg,
-  gmProblemImgLarge,
-  gmProblemImgPlaceholder,
-  gmArchitectureImg,
-  gmArchitectureImgLarge,
-  gmArchitectureImgPlaceholder,
-  gmDevelopmentImgLight,
-  gmDevelopmentImgLightLarge,
-  gmDevelopmentImgLightPlaceholder,
-  gmLearningsImg,
-  gmLearningsImgLarge,
-  gmLearningsImgPlaceholder,
-  gmLearnings2Img,
-  gmLearnings2ImgLarge,
-  gmLearnings2ImgPlaceholder,
-} from 'assets/gm';
+  FreeportBackgroundImg,
+  FreeportProblemImg,
+  FreeportArchitectureImg,
+  FreeportDevelopmentImg,
+  FreeportLearningsImg,
+} from 'assets/freeport';
 import {
   ProjectBackground,
   ProjectContainer,
@@ -39,7 +26,6 @@ import { Footer } from 'components/Footer';
 import { useTheme } from 'components/ThemeProvider';
 
 import { projects } from '../../../constants';
-import styles from './Freeport.module.scss';
 
 const project = projects['freeport'];
 
@@ -58,14 +44,14 @@ export const Freeport = () => {
         <Meta title={title} prefix="Projects" description={description} />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
-          src={gmBackgroundImg}
-          srcSet={`${gmBackgroundImg.src} 1080w, ${gmBackgroundImgLarge.src} 2160w`}
-          placeholder={gmBackgroundImgPlaceholder}
+          src={FreeportBackgroundImg}
+          srcSet={`${FreeportBackgroundImg.src} 1080w, ${FreeportBackgroundImg.src} 2160w`}
+          placeholder={FreeportBackgroundImg}
         />
         <ProjectHeader
           title={title}
           description={description}
-          url="https://www.smartsparrow.com/"
+          links={project.links}
           roles={roles}
         />
         <ProjectSection padding="top">
@@ -73,8 +59,8 @@ export const Freeport = () => {
             <ProjectImage
               raised
               key={themeId}
-              srcSet={[gmProblemImg, gmProblemImgLarge]}
-              placeholder={gmProblemImgPlaceholder}
+              srcSet={[FreeportProblemImg, FreeportProblemImg]}
+              placeholder={FreeportProblemImg}
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
               alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
             />
@@ -91,8 +77,8 @@ export const Freeport = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[gmArchitectureImg, gmArchitectureImgLarge]}
-              placeholder={gmArchitectureImgPlaceholder}
+              srcSet={[FreeportArchitectureImg, FreeportArchitectureImg]}
+              placeholder={FreeportArchitectureImg}
               alt="The homepage of the aero design system docs website linking to principles and components."
               sizes="100vw"
             />
@@ -107,8 +93,8 @@ export const Freeport = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[gmDevelopmentImgLight, gmDevelopmentImgLightLarge]}
-              placeholder={gmDevelopmentImgLightPlaceholder}
+              srcSet={[FreeportDevelopmentImg, FreeportDevelopmentImg]}
+              placeholder={FreeportDevelopmentImg}
               alt="A drag and drop storyboard style editor for creating an adaptive lesson."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
@@ -126,22 +112,12 @@ export const Freeport = () => {
                 <ProjectSectionText>{project.learnings}</ProjectSectionText>
               </ProjectTextRow>
             </ProjectSectionContent>
-            <div className={styles.sidebarImages}>
-              <Image
-                className={styles.sidebarImage}
-                srcSet={[gmLearnings2Img, gmLearnings2ImgLarge]}
-                placeholder={gmLearnings2ImgPlaceholder}
-                alt="Configuration options for a component."
-                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-              />
-              <Image
-                className={styles.sidebarImage}
-                srcSet={[gmLearningsImg, gmLearningsImgLarge]}
-                placeholder={gmLearningsImgPlaceholder}
-                alt="Configuration options for text."
-                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-              />
-            </div>
+            <Image
+              srcSet={[FreeportLearningsImg, FreeportLearningsImg]}
+              placeholder={FreeportLearningsImg}
+              alt="Configuration options for a component."
+              sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+            />
           </ProjectSectionColumns>
         </ProjectSection>
       </ProjectContainer>

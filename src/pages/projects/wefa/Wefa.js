@@ -4,9 +4,6 @@ import {
   sliceAppLarge,
   sliceAppPlaceholder,
   sliceApp,
-  sliceBackgroundLarge,
-  sliceBackgroundPlaceholder,
-  sliceBackground,
   sliceIrlPlaceholder,
   sliceIrl,
   sliceSidebarAnnotationsLarge,
@@ -18,6 +15,7 @@ import {
   sliceSlidesLarge,
   sliceSlidesPlaceholder,
   sliceSlides,
+  WefaBackgroundImg,
 } from 'assets/wefa';
 import {
   ProjectBackground,
@@ -56,9 +54,9 @@ export const Wefa = () => {
       <Meta title={title} prefix="Projects" description={description} />
       <ProjectContainer className={styles.slice}>
         <ProjectBackground
-          src={sliceBackground}
-          srcSet={`${sliceBackground.src} 1280w, ${sliceBackgroundLarge.src} 2560w`}
-          placeholder={sliceBackgroundPlaceholder}
+          src={WefaBackgroundImg}
+          srcSet={`${WefaBackgroundImg.src} 1280w, ${WefaBackgroundImg.src} 2560w`}
+          placeholder={WefaBackgroundImg}
           opacity={isDark ? 0.5 : 0.8}
         />
         <ProjectHeader

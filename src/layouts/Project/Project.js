@@ -8,7 +8,7 @@ import { Transition } from 'components/Transition';
 import { useParallax } from 'hooks';
 import { forwardRef, useRef } from 'react';
 import { classes, cssProps, msToNum, numToMs } from 'utils/style';
-import styles from './Project.module.css';
+import styles from './Project.module.scss';
 
 const initDelay = 300;
 
@@ -16,7 +16,7 @@ export function ProjectHeader({
   title,
   description,
   linkLabel = 'Visit website',
-  url,
+  links = [],
   roles,
   className,
 }) {
@@ -33,16 +33,21 @@ export function ProjectHeader({
           <Text className={styles.description} size="xl" as="p">
             {description}
           </Text>
-          {!!url && (
-            <Button
-              secondary
-              iconHoverShift
-              className={styles.linkButton}
-              icon="chevronRight"
-              href={url}
-            >
-              {linkLabel}
-            </Button>
+          {links?.length && (
+            <ul className={styles.links}>
+              {links.map(({ label, url }) => (
+                <Button
+                  secondary
+                  iconHoverShift
+                  className={styles.linkButton}
+                  icon="chevronRight"
+                  href={url}
+                  key={label}
+                >
+                  {linkLabel}
+                </Button>
+              ))}
+            </ul>
           )}
         </div>
         {!!roles?.length && (

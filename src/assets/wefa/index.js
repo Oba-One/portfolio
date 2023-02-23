@@ -1,4 +1,4 @@
-export { default as GMBackgroundImg } from './wefa-background.svg';
+export { default as WefaBackgroundImg } from './wefa-background.svg';
 
 export { default as sliceAppLarge } from './slice-app-large.jpg';
 export { default as sliceAppPlaceholder } from './slice-app-placeholder.jpg';

@@ -1,18 +1,20 @@
-import { Button } from 'components/Button';
-import { DecoderText } from 'components/DecoderText';
-import { Divider } from 'components/Divider';
-import { Footer } from 'components/Footer';
-import { Heading } from 'components/Heading';
+import { useRef, useState } from 'react';
+
+import { useFormInput } from 'hooks';
+import { Meta } from 'components/Meta';
+import { Text } from 'components/Text';
 import { Icon } from 'components/Icon';
 import { Input } from 'components/Input';
-import { Meta } from 'components/Meta';
+import { Footer } from 'components/Footer';
+import { Button } from 'components/Button';
 import { Section } from 'components/Section';
-import { Text } from 'components/Text';
-import { tokens } from 'components/ThemeProvider/theme';
+import { Heading } from 'components/Heading';
+import { Divider } from 'components/Divider';
 import { Transition } from 'components/Transition';
-import { useFormInput } from 'hooks';
-import { useRef, useState } from 'react';
+import { DecoderText } from 'components/DecoderText';
+import { tokens } from 'components/ThemeProvider/theme';
 import { cssProps, msToNum, numToMs } from 'utils/style';
+
 import styles from './Contact.module.scss';
 
 export const Contact = () => {

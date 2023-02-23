@@ -1,25 +1,13 @@
 import { Fragment } from 'react';
 
 import {
-  gmBackgroundImg,
-  gmBackgroundImgLarge,
-  gmBackgroundImgPlaceholder,
-  gmProblemImg,
-  gmProblemImgLarge,
-  gmProblemImgPlaceholder,
-  gmArchitectureImg,
-  gmArchitectureImgLarge,
-  gmArchitectureImgPlaceholder,
-  gmDevelopmentImgLight,
-  gmDevelopmentImgLightLarge,
-  gmDevelopmentImgLightPlaceholder,
-  gmLearningsImg,
-  gmLearningsImgLarge,
-  gmLearningsImgPlaceholder,
-  gmLearnings2Img,
-  gmLearnings2ImgLarge,
-  gmLearnings2ImgPlaceholder,
-} from 'assets/gm';
+  ConnectBackgroundImg,
+  ConnectProblemImg,
+  ConnectArchitectureImg,
+  ConnectDevelopmentImg,
+  ConnectLearningsImg,
+  // ConnectBackground2Img
+} from 'assets/mira-connect';
 import {
   ProjectBackground,
   ProjectContainer,
@@ -39,7 +27,6 @@ import { Footer } from 'components/Footer';
 import { useTheme } from 'components/ThemeProvider';
 
 import { projects } from '../../../constants';
-import styles from './MiraConnect.module.scss';
 
 const project = projects['mira_connect'];
 
@@ -58,14 +45,14 @@ export const MiraConnect = () => {
         <Meta title={title} prefix="Projects" description={description} />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
-          src={gmBackgroundImg}
-          srcSet={`${gmBackgroundImg.src} 1080w, ${gmBackgroundImgLarge.src} 2160w`}
-          placeholder={gmBackgroundImgPlaceholder}
+          src={ConnectBackgroundImg}
+          srcSet={`${ConnectBackgroundImg.src} 1080w, ${ConnectBackgroundImg.src} 2160w`}
+          placeholder={ConnectBackgroundImg}
         />
         <ProjectHeader
           title={title}
           description={description}
-          url="https://www.smartsparrow.com/"
+          links={project.links}
           roles={roles}
         />
         <ProjectSection padding="top">
@@ -73,8 +60,8 @@ export const MiraConnect = () => {
             <ProjectImage
               raised
               key={themeId}
-              srcSet={[gmProblemImg, gmProblemImgLarge]}
-              placeholder={gmProblemImgPlaceholder}
+              srcSet={[ConnectProblemImg, ConnectProblemImg]}
+              placeholder={ConnectProblemImg}
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
               alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
             />
@@ -91,8 +78,8 @@ export const MiraConnect = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[gmArchitectureImg, gmArchitectureImgLarge]}
-              placeholder={gmArchitectureImgPlaceholder}
+              srcSet={[ConnectArchitectureImg, ConnectArchitectureImg]}
+              placeholder={ConnectArchitectureImg}
               alt="The homepage of the aero design system docs website linking to principles and components."
               sizes="100vw"
             />
@@ -107,8 +94,8 @@ export const MiraConnect = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[gmDevelopmentImgLight, gmDevelopmentImgLightLarge]}
-              placeholder={gmDevelopmentImgLightPlaceholder}
+              srcSet={[ConnectDevelopmentImg, ConnectDevelopmentImg]}
+              placeholder={ConnectDevelopmentImg}
               alt="A drag and drop storyboard style editor for creating an adaptive lesson."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
@@ -126,22 +113,12 @@ export const MiraConnect = () => {
                 <ProjectSectionText>{project.learnings}</ProjectSectionText>
               </ProjectTextRow>
             </ProjectSectionContent>
-            <div className={styles.sidebarImages}>
-              <Image
-                className={styles.sidebarImage}
-                srcSet={[gmLearnings2Img, gmLearnings2ImgLarge]}
-                placeholder={gmLearnings2ImgPlaceholder}
-                alt="Configuration options for a component."
-                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-              />
-              <Image
-                className={styles.sidebarImage}
-                srcSet={[gmLearningsImg, gmLearningsImgLarge]}
-                placeholder={gmLearningsImgPlaceholder}
-                alt="Configuration options for text."
-                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-              />
-            </div>
+            <Image
+              srcSet={[ConnectLearningsImg, ConnectLearningsImg]}
+              placeholder={ConnectLearningsImg}
+              alt="Configuration options for a component."
+              sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+            />
           </ProjectSectionColumns>
         </ProjectSection>
       </ProjectContainer>
