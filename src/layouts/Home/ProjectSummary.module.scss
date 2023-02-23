@@ -40,12 +40,12 @@
   align-items: center;
   justify-content: center;
   display: grid;
-  grid-template-columns: var(--textColumnWidth) 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: var(--space2XL);
 
-  @nest .summary[data-alternate='true'] & {
-    grid-template-columns: 1fr 1fr;
-  }
+  // @nest .summary[data-alternate='true'] & {
+  //   grid-template-columns: 1fr var(--textColumnWidth);
+  // }
 
   @media (--mediaLaptop) {
     --textColumnWidth: 40%;
@@ -92,7 +92,7 @@
   min-width: var(--width);
   aspect-ratio: var(--aspectRatio);
   display: grid;
-  position: relative;
+  // position: relative;
 
   &[data-device='laptop'] {
     top: 6%;
