@@ -1,1 +1,1 @@
-export { GentleMonster as default } from './GentleMonster';
+export { GentleMonster as default } from './GentleMonster'

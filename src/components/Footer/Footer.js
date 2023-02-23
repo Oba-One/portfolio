@@ -1,7 +1,7 @@
-import { Text } from 'components/Text';
-import { Link } from 'components/Link';
-import { classes } from 'utils/style';
-import styles from './Footer.module.css';
+import { Text } from 'components/Text'
+import { Link } from 'components/Link'
+import { classes } from 'utils/style'
+import styles from './Footer.module.css'
 
 export const Footer = ({ className }) => (
   <footer className={classes(styles.footer, className)}>
@@ -12,4 +12,4 @@ export const Footer = ({ className }) => (
       <Link href="/help-im-lost">Click for Nostalgia</Link>
     </Text>
   </footer>
-);
+)

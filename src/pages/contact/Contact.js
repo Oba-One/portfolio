@@ -1,39 +1,39 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from 'react'
 
-import { useFormInput } from 'hooks';
-import { Meta } from 'components/Meta';
-import { Text } from 'components/Text';
-import { Icon } from 'components/Icon';
-import { Input } from 'components/Input';
-import { Footer } from 'components/Footer';
-import { Button } from 'components/Button';
-import { Section } from 'components/Section';
-import { Heading } from 'components/Heading';
-import { Divider } from 'components/Divider';
-import { Transition } from 'components/Transition';
-import { DecoderText } from 'components/DecoderText';
-import { tokens } from 'components/ThemeProvider/theme';
-import { cssProps, msToNum, numToMs } from 'utils/style';
+import { useFormInput } from 'hooks'
+import { Meta } from 'components/Meta'
+import { Text } from 'components/Text'
+import { Icon } from 'components/Icon'
+import { Input } from 'components/Input'
+import { Footer } from 'components/Footer'
+import { Button } from 'components/Button'
+import { Section } from 'components/Section'
+import { Heading } from 'components/Heading'
+import { Divider } from 'components/Divider'
+import { Transition } from 'components/Transition'
+import { DecoderText } from 'components/DecoderText'
+import { tokens } from 'components/ThemeProvider/theme'
+import { cssProps, msToNum, numToMs } from 'utils/style'
 
-import styles from './Contact.module.scss';
+import styles from './Contact.module.scss'
 
 export const Contact = () => {
-  const errorRef = useRef();
-  const email = useFormInput('');
-  const message = useFormInput('');
-  const [sending, setSending] = useState(false);
-  const [complete, setComplete] = useState(false);
-  const [statusError, setStatusError] = useState('');
-  const initDelay = tokens.base.durationS;
+  const errorRef = useRef()
+  const email = useFormInput('')
+  const message = useFormInput('')
+  const [sending, setSending] = useState(false)
+  const [complete, setComplete] = useState(false)
+  const [statusError, setStatusError] = useState('')
+  const initDelay = tokens.base.durationS
 
   const onSubmit = async event => {
-    event.preventDefault();
-    setStatusError('');
+    event.preventDefault()
+    setStatusError('')
 
-    if (sending) return;
+    if (sending) return
 
     try {
-      setSending(true);
+      setSending(true)
 
       const response = await fetch(`/api/contact`, {
         method: 'POST',
@@ -44,25 +44,25 @@ export const Contact = () => {
           email: email.value,
           message: message.value,
         }),
-      });
+      })
 
-      const responseMessage = await response.json();
+      const responseMessage = await response.json()
 
       const statusError = getStatusError({
         status: response?.status,
         errorMessage: responseMessage?.error,
         fallback: 'There was a problem sending your message',
-      });
+      })
 
-      if (statusError) throw new Error(statusError);
+      if (statusError) throw new Error(statusError)
 
-      setComplete(true);
-      setSending(false);
+      setComplete(true)
+      setSending(false)
     } catch (error) {
-      setSending(false);
-      setStatusError(error.message);
+      setSending(false)
+      setStatusError(error.message)
     }
-  };
+  }
 
   return (
     <Section className={styles.contact}>
@@ -179,29 +179,29 @@ export const Contact = () => {
       </Transition>
       <Footer className={styles.footer} />
     </Section>
-  );
-};
+  )
+}
 
 function getStatusError({
   status,
   errorMessage,
   fallback = 'There was a problem with your request',
 }) {
-  if (status === 200) return false;
+  if (status === 200) return false
 
   const statuses = {
     500: 'There was a problem with the server, try again later',
     404: 'There was a problem connecting to the server. Make sure you are connected to the internet',
-  };
-
-  if (errorMessage) {
-    return errorMessage;
   }
 
-  return statuses[status] || fallback;
+  if (errorMessage) {
+    return errorMessage
+  }
+
+  return statuses[status] || fallback
 }
 
 function getDelay(delayMs, offset = numToMs(0), multiplier = 1) {
-  const numDelay = msToNum(delayMs) * multiplier;
-  return cssProps({ delay: numToMs((msToNum(offset) + numDelay).toFixed(0)) });
+  const numDelay = msToNum(delayMs) * multiplier
+  return cssProps({ delay: numToMs((msToNum(offset) + numDelay).toFixed(0)) })
 }

@@ -1,84 +1,84 @@
-import { Cache, TextureLoader } from 'three';
-import { DRACOLoader, GLTFLoader } from 'three-stdlib';
+import { Cache, TextureLoader } from 'three'
+import { DRACOLoader, GLTFLoader } from 'three-stdlib'
 
 // Enable caching for all loaders
-Cache.enabled = true;
+Cache.enabled = true
 
-const dracoLoader = new DRACOLoader();
-const gltfLoader = new GLTFLoader();
-dracoLoader.setDecoderPath('/draco/');
-gltfLoader.setDRACOLoader(dracoLoader);
+const dracoLoader = new DRACOLoader()
+const gltfLoader = new GLTFLoader()
+dracoLoader.setDecoderPath('/draco/')
+gltfLoader.setDRACOLoader(dracoLoader)
 
 /**
  * GLTF model loader configured with draco decoder
  */
-export const modelLoader = gltfLoader;
-export const textureLoader = new TextureLoader();
+export const modelLoader = gltfLoader
+export const textureLoader = new TextureLoader()
 
 /**
  * Clean up a scene's materials and geometry
  */
 export const cleanScene = scene => {
   scene?.traverse(object => {
-    if (!object.isMesh) return;
+    if (!object.isMesh) return
 
-    object.geometry.dispose();
+    object.geometry.dispose()
 
     if (object.material.isMaterial) {
-      cleanMaterial(object.material);
+      cleanMaterial(object.material)
     } else {
       for (const material of object.material) {
-        cleanMaterial(material);
+        cleanMaterial(material)
       }
     }
-  });
-};
+  })
+}
 
 /**
  * Clean up and dispose of a material
  */
 export const cleanMaterial = material => {
-  material.dispose();
+  material.dispose()
 
   for (const key of Object.keys(material)) {
-    const value = material[key];
+    const value = material[key]
     if (value && typeof value === 'object' && 'minFilter' in value) {
-      value.dispose();
+      value.dispose()
 
       // Close GLTF bitmap textures
-      value.source?.data?.close?.();
+      value.source?.data?.close?.()
     }
   }
-};
+}
 
 /**
  * Clean up and dispose of a renderer
  */
 export const cleanRenderer = renderer => {
-  renderer.dispose();
-  renderer = null;
-};
+  renderer.dispose()
+  renderer = null
+}
 
 /**
  * Clean up lights by removing them from their parent
  */
 export const removeLights = lights => {
   for (const light of lights) {
-    light.parent.remove(light);
+    light.parent.remove(light)
   }
-};
+}
 
 /**
  * Get child by name
  */
 export const getChild = (name, object) => {
-  let node;
+  let node
 
   object.traverse(child => {
     if (child.name === name) {
-      node = child;
+      node = child
     }
-  });
+  })
 
-  return node;
-};
+  return node
+}

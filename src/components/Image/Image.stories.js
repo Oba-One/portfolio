@@ -1,9 +1,9 @@
-import { Image } from 'components/Image';
-import { StoryContainer } from '../../../.storybook/StoryContainer';
+import { Image } from 'components/Image'
+import { StoryContainer } from '../../../.storybook/StoryContainer'
 
 export default {
   title: 'Image',
-};
+}
 
 const imageData = {
   alt: 'An abstract purple and pink neon thing',
@@ -17,7 +17,7 @@ const imageData = {
     width: 64,
     height: 36,
   },
-};
+}
 
 const Story = args => (
   <StoryContainer>
@@ -25,17 +25,17 @@ const Story = args => (
       <Image alt="An abstract purple and pink neon thing" {...imageData} {...args} />
     </div>
   </StoryContainer>
-);
+)
 
-export const Default = Story.bind({});
+export const Default = Story.bind({})
 
 Default.args = {
   ...imageData,
-};
+}
 
-export const Reveal = Story.bind({});
+export const Reveal = Story.bind({})
 
 Reveal.args = {
   ...imageData,
   reveal: true,
-};
+}

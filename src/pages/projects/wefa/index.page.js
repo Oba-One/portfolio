@@ -1,1 +1,1 @@
-export { Wefa as default } from './Wefa';
+export { Wefa as default } from './Wefa'

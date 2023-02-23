@@ -1,26 +1,26 @@
-import { Icon } from 'components/Icon';
-import { Loader } from 'components/Loader';
-import { Transition } from 'components/Transition';
-import RouterLink from 'next/link';
-import { forwardRef } from 'react';
-import { classes } from 'utils/style';
-import styles from './Button.module.scss';
+import { Icon } from 'components/Icon'
+import { Loader } from 'components/Loader'
+import { Transition } from 'components/Transition'
+import RouterLink from 'next/link'
+import { forwardRef } from 'react'
+import { classes } from 'utils/style'
+import styles from './Button.module.scss'
 
 function isExternalLink(href) {
-  return href?.includes('://');
+  return href?.includes('://')
 }
 
 export const Button = forwardRef(({ href, ...rest }, ref) => {
   if (isExternalLink(href) || !href) {
-    return <ButtonContent href={href} ref={ref} {...rest} />;
+    return <ButtonContent href={href} ref={ref} {...rest} />
   }
 
   return (
     <RouterLink passHref href={href} scroll={false}>
       <ButtonContent href={href} ref={ref} {...rest} />
     </RouterLink>
-  );
-});
+  )
+})
 
 const ButtonContent = forwardRef(
   (
@@ -43,9 +43,9 @@ const ButtonContent = forwardRef(
     },
     ref
   ) => {
-    const isExternal = isExternalLink(href);
-    const defaultComponent = href ? 'a' : 'button';
-    const Component = as || defaultComponent;
+    const isExternal = isExternalLink(href)
+    const defaultComponent = href ? 'a' : 'button'
+    const Component = as || defaultComponent
 
     return (
       <Component
@@ -89,6 +89,6 @@ const ButtonContent = forwardRef(
           )}
         </Transition>
       </Component>
-    );
+    )
   }
-);
+)

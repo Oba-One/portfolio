@@ -1,5 +1,5 @@
-import { classes } from 'utils/style';
-import styles from './Text.module.css';
+import { classes } from 'utils/style'
+import styles from './Text.module.css'
 
 export const Text = ({
   children,
@@ -22,5 +22,5 @@ export const Text = ({
     >
       {children}
     </Component>
-  );
-};
+  )
+}

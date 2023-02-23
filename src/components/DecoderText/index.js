@@ -1,1 +1,1 @@
-export * from './DecoderText';
+export * from './DecoderText'

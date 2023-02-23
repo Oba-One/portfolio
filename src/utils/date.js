@@ -3,5 +3,5 @@ export function formatDate(date) {
     year: 'numeric',
     month: 'long',
     day: '2-digit',
-  });
+  })
 }

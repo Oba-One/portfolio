@@ -1,10 +1,10 @@
-import { forwardRef, useId } from 'react';
-import { classes } from 'utils/style';
-import styles from './Monogram.module.css';
+import { forwardRef, useId } from 'react'
+import { classes } from 'utils/style'
+import styles from './Monogram.module.css'
 
 export const Monogram = forwardRef(({ highlight, className, ...props }, ref) => {
-  const id = useId();
-  const clipId = `${id}monogram-clip`;
+  const id = useId()
+  const clipId = `${id}monogram-clip`
 
   return (
     <svg
@@ -28,5 +28,5 @@ export const Monogram = forwardRef(({ highlight, className, ...props }, ref) => 
         </g>
       )}
     </svg>
-  );
-});
+  )
+})

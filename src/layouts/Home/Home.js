@@ -1,41 +1,41 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
 
-import { Meta } from 'components/Meta';
-import { Footer } from 'components/Footer';
-import { Intro } from 'layouts/Home/Intro';
-import { Profile } from 'layouts/Home/Profile';
-import { ProjectSummary } from 'layouts/Home/ProjectSummary';
+import { Meta } from 'components/Meta'
+import { Footer } from 'components/Footer'
+import { Intro } from 'layouts/Home/Intro'
+import { Profile } from 'layouts/Home/Profile'
+import { ProjectSummary } from 'layouts/Home/ProjectSummary'
 
-import gamestackTexture from 'assets/gamestack-login.jpg';
-import gamestackTexture2 from 'assets/gamestack-list.jpg';
-import gamestackTexture2Large from 'assets/gamestack-list-large.jpg';
-import gamestackTextureLarge from 'assets/gamestack-login-large.jpg';
-import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
-import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
+import gamestackTexture from 'assets/gamestack-login.jpg'
+import gamestackTexture2 from 'assets/gamestack-list.jpg'
+import gamestackTexture2Large from 'assets/gamestack-list-large.jpg'
+import gamestackTextureLarge from 'assets/gamestack-login-large.jpg'
+import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg'
+import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg'
 
-import { GMBackgroundImg } from 'assets/gm';
+import { GMBackgroundImg } from 'assets/gm'
 // import { WefaBackgroundImg } from 'assets/wefa';
 // import { FlowBackgroundImg } from 'assets/mira-flow';
-import { FreeportBackgroundImg } from 'assets/freeport';
-import { ConnectBackgroundImg } from 'assets/mira-connect';
+import { FreeportBackgroundImg } from 'assets/freeport'
+import { ConnectBackgroundImg } from 'assets/mira-connect'
 
-import styles from './Home.module.css';
-import { projects } from '../../constants';
+import styles from './Home.module.css'
+import { projects } from '../../constants'
 
-const disciplines = ['Engineer', 'Producer', 'Architect'];
+const disciplines = ['Engineer', 'Producer', 'Architect']
 
 export const Home = () => {
-  const [visibleSections, setVisibleSections] = useState([]);
-  const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
-  const intro = useRef();
-  const projectOne = useRef();
-  const projectTwo = useRef();
-  const projectThree = useRef();
-  const projectFour = useRef();
-  const projectFive = useRef();
+  const [visibleSections, setVisibleSections] = useState([])
+  const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false)
+  const intro = useRef()
+  const projectOne = useRef()
+  const projectTwo = useRef()
+  const projectThree = useRef()
+  const projectFour = useRef()
+  const projectFive = useRef()
   // const projectSix = useRef();
 
-  const details = useRef();
+  const details = useRef()
 
   useEffect(() => {
     const sections = [
@@ -46,40 +46,40 @@ export const Home = () => {
       projectFour,
       projectFive,
       details,
-    ];
+    ]
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const section = entry.target;
-            observer.unobserve(section);
-            if (visibleSections.includes(section)) return;
-            setVisibleSections(prevSections => [...prevSections, section]);
+            const section = entry.target
+            observer.unobserve(section)
+            if (visibleSections.includes(section)) return
+            setVisibleSections(prevSections => [...prevSections, section])
           }
-        });
+        })
       },
       { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
-    );
+    )
 
     const indicatorObserver = new IntersectionObserver(
       ([entry]) => {
-        setScrollIndicatorHidden(!entry.isIntersecting);
+        setScrollIndicatorHidden(!entry.isIntersecting)
       },
       { rootMargin: '-100% 0px 0px 0px' }
-    );
+    )
 
     sections.forEach(section => {
-      sectionObserver.observe(section.current);
-    });
+      sectionObserver.observe(section.current)
+    })
 
-    indicatorObserver.observe(intro.current);
+    indicatorObserver.observe(intro.current)
 
     return () => {
-      sectionObserver.disconnect();
-      indicatorObserver.disconnect();
-    };
-  }, [visibleSections]);
+      sectionObserver.disconnect()
+      indicatorObserver.disconnect()
+    }
+  }, [visibleSections])
 
   return (
     <div className={styles.home}>
@@ -231,5 +231,5 @@ export const Home = () => {
       />
       <Footer />
     </div>
-  );
-};
+  )
+}

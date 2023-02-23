@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
-import { classes } from 'utils/style';
-import styles from './Section.module.css';
+import { forwardRef } from 'react'
+import { classes } from 'utils/style'
+import styles from './Section.module.css'
 
 export const Section = forwardRef(
   ({ as: Component = 'div', children, className, ...rest }, ref) => (
@@ -8,4 +8,4 @@ export const Section = forwardRef(
       {children}
     </Component>
   )
-);
+)

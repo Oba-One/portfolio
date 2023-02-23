@@ -1,10 +1,10 @@
-import { Icon } from 'components/Icon';
-import { tokens } from 'components/ThemeProvider/theme';
-import { Transition } from 'components/Transition';
-import { useId, useRef, useState } from 'react';
-import { classes, cssProps, msToNum } from 'utils/style';
-import styles from './Input.module.css';
-import { TextArea } from './TextArea';
+import { Icon } from 'components/Icon'
+import { tokens } from 'components/ThemeProvider/theme'
+import { Transition } from 'components/Transition'
+import { useId, useRef, useState } from 'react'
+import { classes, cssProps, msToNum } from 'utils/style'
+import styles from './Input.module.css'
+import { TextArea } from './TextArea'
 
 export const Input = ({
   id,
@@ -22,21 +22,21 @@ export const Input = ({
   onChange,
   ...rest
 }) => {
-  const [focused, setFocused] = useState(false);
-  const generatedId = useId();
-  const errorRef = useRef();
-  const inputId = id || `${generatedId}input`;
-  const labelId = `${inputId}-label`;
-  const errorId = `${inputId}-error`;
-  const InputElement = multiline ? TextArea : 'input';
+  const [focused, setFocused] = useState(false)
+  const generatedId = useId()
+  const errorRef = useRef()
+  const inputId = id || `${generatedId}input`
+  const labelId = `${inputId}-label`
+  const errorId = `${inputId}-error`
+  const InputElement = multiline ? TextArea : 'input'
 
   const handleBlur = event => {
-    setFocused(false);
+    setFocused(false)
 
     if (onBlur) {
-      onBlur(event);
+      onBlur(event)
     }
-  };
+  }
 
   return (
     <div
@@ -90,5 +90,5 @@ export const Input = ({
         )}
       </Transition>
     </div>
-  );
-};
+  )
+}

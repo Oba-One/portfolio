@@ -1,5 +1,5 @@
-import { themes } from '@storybook/theming';
-import { addons } from '@storybook/addons';
+import { themes } from '@storybook/theming'
+import { addons } from '@storybook/addons'
 
 addons.setConfig({
   theme: {
@@ -8,4 +8,4 @@ addons.setConfig({
     brandTitle: 'Afolabi Aiyeloja Components',
     brandUrl: 'https://afolabi.info',
   },
-});
+})

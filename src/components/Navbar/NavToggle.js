@@ -1,6 +1,6 @@
-import { Button } from 'components/Button';
-import { Icon } from 'components/Icon';
-import styles from './NavToggle.module.css';
+import { Button } from 'components/Button'
+import { Icon } from 'components/Icon'
+import styles from './NavToggle.module.css'
 
 export const NavToggle = ({ menuOpen, ...rest }) => {
   return (
@@ -21,5 +21,5 @@ export const NavToggle = ({ menuOpen, ...rest }) => {
         />
       </div>
     </Button>
-  );
-};
+  )
+}

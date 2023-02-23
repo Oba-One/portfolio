@@ -1,4 +1,4 @@
-import { pxToRem } from 'utils/style';
+import { pxToRem } from 'utils/style'
 
 // Full list of tokens
 const baseTokens = {
@@ -53,13 +53,13 @@ const baseTokens = {
   zIndex3: 16,
   zIndex4: 32,
   zIndex5: 64,
-};
+}
 
 // Tokens that change based on viewport size
 const tokensDesktop = {
   fontSizeH0: pxToRem(120),
   fontSizeH1: pxToRem(80),
-};
+}
 
 const tokensLaptop = {
   maxWidthS: '480px',
@@ -73,7 +73,7 @@ const tokensLaptop = {
   fontSizeH3: pxToRem(36),
   fontSizeH4: pxToRem(26),
   fontSizeH5: pxToRem(22),
-};
+}
 
 const tokensTablet = {
   fontSizeH0: pxToRem(80),
@@ -82,7 +82,7 @@ const tokensTablet = {
   fontSizeH3: pxToRem(32),
   fontSizeH4: pxToRem(24),
   fontSizeH5: pxToRem(20),
-};
+}
 
 const tokensMobile = {
   spaceOuter: '24px',
@@ -95,7 +95,7 @@ const tokensMobile = {
   fontSizeBodyL: pxToRem(17),
   fontSizeBodyM: pxToRem(16),
   fontSizeBodyS: pxToRem(14),
-};
+}
 
 const tokensMobileSmall = {
   spaceOuter: '16px',
@@ -104,7 +104,7 @@ const tokensMobileSmall = {
   fontSizeH2: pxToRem(28),
   fontSizeH3: pxToRem(24),
   fontSizeH4: pxToRem(20),
-};
+}
 
 // Tokens that change based on theme
 const dark = {
@@ -118,7 +118,7 @@ const dark = {
   colorTextTitle: 'rgb(var(--rgbText) / 1)',
   colorTextBody: 'rgb(var(--rgbText) / 0.8)',
   colorTextLight: 'rgb(var(--rgbText) / 0.6)',
-};
+}
 
 const light = {
   themeId: 'light',
@@ -131,7 +131,7 @@ const light = {
   colorTextTitle: 'rgb(var(--rgbText) / 1)',
   colorTextBody: 'rgb(var(--rgbText) / 0.8)',
   colorTextLight: 'rgb(var(--rgbText) / 0.6)',
-};
+}
 
 export const tokens = {
   base: baseTokens,
@@ -140,6 +140,6 @@ export const tokens = {
   tablet: tokensTablet,
   mobile: tokensMobile,
   mobileS: tokensMobileSmall,
-};
+}
 
-export const theme = { dark, light };
+export const theme = { dark, light }

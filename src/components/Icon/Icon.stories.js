@@ -1,9 +1,9 @@
-import { Icon, icons } from 'components/Icon';
-import { StoryContainer } from '../../../.storybook/StoryContainer';
+import { Icon, icons } from 'components/Icon'
+import { StoryContainer } from '../../../.storybook/StoryContainer'
 
 export default {
   title: 'Icon',
-};
+}
 
 export const Icons = () => {
   return (
@@ -12,5 +12,5 @@ export const Icons = () => {
         <Icon key={key} icon={key} />
       ))}
     </StoryContainer>
-  );
-};
+  )
+}

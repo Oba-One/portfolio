@@ -1,12 +1,12 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
-const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-const name = 'Afolabi Aiyeloja';
-const twitterHandle = '@Afolabi_A_A_A';
-const defaultOgImage = `${siteUrl}/social-image.png`;
+const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL
+const name = 'Afolabi Aiyeloja'
+const twitterHandle = '@Afolabi_A_A_A'
+const defaultOgImage = `${siteUrl}/social-image.png`
 
 export const Meta = ({ title, description, prefix = name, ogImage = defaultOgImage }) => {
-  const titleText = [prefix, title].filter(Boolean).join(' | ');
+  const titleText = [prefix, title].filter(Boolean).join(' | ')
 
   return (
     <Head>
@@ -33,5 +33,5 @@ export const Meta = ({ title, description, prefix = name, ogImage = defaultOgIma
       <meta name="twitter:creator" content={twitterHandle} />
       <meta name="twitter:image" content={ogImage} />
     </Head>
-  );
-};
+  )
+}

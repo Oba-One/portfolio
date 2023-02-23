@@ -1,1 +1,1 @@
-export * from './Monogram';
+export * from './Monogram'

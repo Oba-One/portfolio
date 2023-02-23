@@ -160,4 +160,4 @@ export const projects = {
       },
     ],
   },
-};
+}

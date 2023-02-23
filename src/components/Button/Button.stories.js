@@ -1,16 +1,16 @@
-import { Button } from 'components/Button';
-import { useState } from 'react';
-import { action } from '@storybook/addon-actions';
-import { StoryContainer } from '../../../.storybook/StoryContainer';
+import { Button } from 'components/Button'
+import { useState } from 'react'
+import { action } from '@storybook/addon-actions'
+import { StoryContainer } from '../../../.storybook/StoryContainer'
 
 export default {
   title: 'Button',
-};
+}
 
 const LoadableButton = props => {
-  const [loading, setLoading] = useState(false);
-  return <Button loading={loading} onClick={() => setLoading(!loading)} {...props} />;
-};
+  const [loading, setLoading] = useState(false)
+  return <Button loading={loading} onClick={() => setLoading(!loading)} {...props} />
+}
 
 export const Primary = () => (
   <StoryContainer>
@@ -22,7 +22,7 @@ export const Primary = () => (
       Icon right
     </Button>
   </StoryContainer>
-);
+)
 
 export const Secondary = () => (
   <StoryContainer>
@@ -36,7 +36,7 @@ export const Secondary = () => (
       Icon right
     </Button>
   </StoryContainer>
-);
+)
 
 export const IconOnly = () => (
   <StoryContainer gutter={20}>
@@ -44,11 +44,11 @@ export const IconOnly = () => (
     <Button iconOnly aria-label="Figma" icon="figma" onClick={action('clicked')} />
     <Button iconOnly aria-label="Close" icon="close" onClick={action('clicked')} />
   </StoryContainer>
-);
+)
 
 export const Loader = () => (
   <StoryContainer>
     <LoadableButton>Click to load</LoadableButton>
     <LoadableButton icon="send">Click to load</LoadableButton>
   </StoryContainer>
-);
+)

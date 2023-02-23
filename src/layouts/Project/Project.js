@@ -1,18 +1,18 @@
-import { forwardRef, useRef } from 'react';
+import { forwardRef, useRef } from 'react'
 
-import { useParallax } from 'hooks';
-import { Text } from 'components/Text';
-import { Image } from 'components/Image';
-import { Button } from 'components/Button';
-import { Heading } from 'components/Heading';
-import { Section } from 'components/Section';
-import { Transition } from 'components/Transition';
-import { tokens } from 'components/ThemeProvider/theme';
-import { classes, cssProps, msToNum, numToMs } from 'utils/style';
+import { useParallax } from 'hooks'
+import { Text } from 'components/Text'
+import { Image } from 'components/Image'
+import { Button } from 'components/Button'
+import { Heading } from 'components/Heading'
+import { Section } from 'components/Section'
+import { Transition } from 'components/Transition'
+import { tokens } from 'components/ThemeProvider/theme'
+import { classes, cssProps, msToNum, numToMs } from 'utils/style'
 
-import styles from './Project.module.scss';
+import styles from './Project.module.scss'
 
-const initDelay = 300;
+const initDelay = 300
 
 export function ProjectHeader({ title, description, links = [], roles, className }) {
   return (
@@ -60,12 +60,12 @@ export function ProjectHeader({ title, description, links = [], roles, className
         )}
       </div>
     </Section>
-  );
+  )
 }
 
 export const ProjectContainer = ({ className, ...rest }) => (
   <article className={classes(styles.project, className)} {...rest} />
-);
+)
 
 export const ProjectSection = forwardRef(
   (
@@ -101,15 +101,15 @@ export const ProjectSection = forwardRef(
       </Section>
     </section>
   )
-);
+)
 
 export const ProjectBackground = ({ opacity = 0.7, className, ...rest }) => {
-  const imageRef = useRef();
+  const imageRef = useRef()
 
   useParallax(0.6, value => {
-    if (!imageRef.current) return;
-    imageRef.current.style.setProperty('--offset', `${value}px`);
-  });
+    if (!imageRef.current) return
+    imageRef.current.style.setProperty('--offset', `${value}px`)
+  })
 
   return (
     <Transition in timeout={msToNum(tokens.base.durationM)}>
@@ -125,14 +125,14 @@ export const ProjectBackground = ({ opacity = 0.7, className, ...rest }) => {
         </div>
       )}
     </Transition>
-  );
-};
+  )
+}
 
 export const ProjectImage = ({ className, alt, ...rest }) => (
   <div className={classes(styles.image, className)}>
     <Image reveal alt={alt} delay={300} {...rest} />
   </div>
-);
+)
 
 export const ProjectSectionContent = ({ className, width = 'l', ...rest }) => (
   <div
@@ -140,7 +140,7 @@ export const ProjectSectionContent = ({ className, width = 'l', ...rest }) => (
     data-width={width}
     {...rest}
   />
-);
+)
 
 export const ProjectSectionHeading = ({ className, level = 3, as = 'h2', ...rest }) => (
   <Heading
@@ -150,11 +150,11 @@ export const ProjectSectionHeading = ({ className, level = 3, as = 'h2', ...rest
     align="auto"
     {...rest}
   />
-);
+)
 
 export const ProjectSectionText = ({ className, ...rest }) => (
   <Text className={classes(styles.sectionText, className)} size="l" as="p" {...rest} />
-);
+)
 
 export const ProjectTextRow = ({
   center,
@@ -176,7 +176,7 @@ export const ProjectTextRow = ({
     data-justify={justify}
     {...rest}
   />
-);
+)
 
 export const ProjectSectionColumns = ({ className, centered, ...rest }) => (
   <ProjectSectionContent
@@ -184,4 +184,4 @@ export const ProjectSectionColumns = ({ className, centered, ...rest }) => (
     data-centered={centered}
     {...rest}
   />
-);
+)

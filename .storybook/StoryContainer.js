@@ -1,4 +1,4 @@
-import './StoryContainer.css';
+import './StoryContainer.css'
 
 export const StoryContainer = ({
   padding = 32,
@@ -21,4 +21,4 @@ export const StoryContainer = ({
   >
     {children}
   </div>
-);
+)

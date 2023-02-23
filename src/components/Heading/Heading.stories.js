@@ -1,9 +1,9 @@
-import { Heading } from 'components/Heading';
-import { StoryContainer } from '../../../.storybook/StoryContainer';
+import { Heading } from 'components/Heading'
+import { StoryContainer } from '../../../.storybook/StoryContainer'
 
 export default {
   title: 'Heading',
-};
+}
 
 export const Level = () => (
   <StoryContainer vertical>
@@ -14,7 +14,7 @@ export const Level = () => (
     <Heading level={4}>Heading 4</Heading>
     <Heading level={5}>Heading 5</Heading>
   </StoryContainer>
-);
+)
 
 export const Weight = () => (
   <StoryContainer vertical>
@@ -28,7 +28,7 @@ export const Weight = () => (
       Bold
     </Heading>
   </StoryContainer>
-);
+)
 
 export const Align = () => (
   <StoryContainer vertical stretch>
@@ -39,4 +39,4 @@ export const Align = () => (
       Center
     </Heading>
   </StoryContainer>
-);
+)

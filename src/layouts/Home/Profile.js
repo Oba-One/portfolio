@@ -1,19 +1,19 @@
-import profileKatakana from 'assets/katakana-profile.svg?url';
-import profileImgLarge from 'assets/profile-large.jpg';
-import profileImgPlaceholder from 'assets/profile-placeholder.jpg';
-import profileImg from 'assets/profile.jpg';
-import { Button } from 'components/Button';
-import { DecoderText } from 'components/DecoderText';
-import { Divider } from 'components/Divider';
-import { Heading } from 'components/Heading';
-import { Image } from 'components/Image';
-import { Link } from 'components/Link';
-import { Section } from 'components/Section';
-import { Text } from 'components/Text';
-import { Transition } from 'components/Transition';
-import { Fragment, useState } from 'react';
-import { media } from 'utils/style';
-import styles from './Profile.module.scss';
+import profileKatakana from 'assets/katakana-profile.svg?url'
+import profileImgLarge from 'assets/profile-large.jpg'
+import profileImgPlaceholder from 'assets/profile-placeholder.jpg'
+import profileImg from 'assets/profile.jpg'
+import { Button } from 'components/Button'
+import { DecoderText } from 'components/DecoderText'
+import { Divider } from 'components/Divider'
+import { Heading } from 'components/Heading'
+import { Image } from 'components/Image'
+import { Link } from 'components/Link'
+import { Section } from 'components/Section'
+import { Text } from 'components/Text'
+import { Transition } from 'components/Transition'
+import { Fragment, useState } from 'react'
+import { media } from 'utils/style'
+import styles from './Profile.module.scss'
 
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
@@ -33,11 +33,11 @@ const ProfileText = ({ visible, titleId }) => (
       down to discuss ideas or projects, so feel free to reach out.
     </Text>
   </Fragment>
-);
+)
 
 export const Profile = ({ id, visible, sectionRef }) => {
-  const [focused, setFocused] = useState(false);
-  const titleId = `${id}-title`;
+  const [focused, setFocused] = useState(false)
+  const titleId = `${id}-title`
 
   return (
     <Section
@@ -99,5 +99,5 @@ export const Profile = ({ id, visible, sectionRef }) => {
         )}
       </Transition>
     </Section>
-  );
-};
+  )
+}

@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment } from 'react'
 
 import {
   ConnectBackgroundImg,
@@ -7,7 +7,7 @@ import {
   ConnectDevelopmentImg,
   ConnectLearningsImg,
   // ConnectBackground2Img
-} from 'assets/mira-connect';
+} from 'assets/mira-connect'
 import {
   ProjectBackground,
   ProjectContainer,
@@ -19,25 +19,25 @@ import {
   ProjectSectionHeading,
   ProjectSectionText,
   ProjectTextRow,
-} from 'layouts/Project';
-import { media } from 'utils/style';
-import { Meta } from 'components/Meta';
-import { Image } from 'components/Image';
-import { Footer } from 'components/Footer';
-import { useTheme } from 'components/ThemeProvider';
+} from 'layouts/Project'
+import { media } from 'utils/style'
+import { Meta } from 'components/Meta'
+import { Image } from 'components/Image'
+import { Footer } from 'components/Footer'
+import { useTheme } from 'components/ThemeProvider'
 
-import { projects } from '../../../constants';
+import { projects } from '../../../constants'
 
-const project = projects['mira_connect'];
+const project = projects['mira_connect']
 
-const title = project.title;
-const description = project.description;
-const roles = project.skills;
+const title = project.title
+const description = project.description
+const roles = project.skills
 
 export const MiraConnect = () => {
-  const { themeId } = useTheme();
+  const { themeId } = useTheme()
 
-  const isDark = themeId === 'dark';
+  const isDark = themeId === 'dark'
 
   return (
     <Fragment>
@@ -124,5 +124,5 @@ export const MiraConnect = () => {
       </ProjectContainer>
       <Footer />
     </Fragment>
-  );
-};
+  )
+}

@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment } from 'react'
 
 import {
   GMBackgroundImg,
@@ -7,7 +7,7 @@ import {
   GMDevelopmentImg,
   GMLearningsImg,
   // GMDevelopment2Img
-} from 'assets/gm';
+} from 'assets/gm'
 import {
   ProjectBackground,
   ProjectContainer,
@@ -19,25 +19,25 @@ import {
   ProjectSectionHeading,
   ProjectSectionText,
   ProjectTextRow,
-} from 'layouts/Project';
-import { media } from 'utils/style';
-import { Meta } from 'components/Meta';
-import { Image } from 'components/Image';
-import { Footer } from 'components/Footer';
-import { useTheme } from 'components/ThemeProvider';
+} from 'layouts/Project'
+import { media } from 'utils/style'
+import { Meta } from 'components/Meta'
+import { Image } from 'components/Image'
+import { Footer } from 'components/Footer'
+import { useTheme } from 'components/ThemeProvider'
 
-import { projects } from '../../../constants';
+import { projects } from '../../../constants'
 
-const project = projects['gentle_monster'];
+const project = projects['gentle_monster']
 
-const title = project.title;
-const description = project.description;
-const roles = project.skills;
+const title = project.title
+const description = project.description
+const roles = project.skills
 
 export const GentleMonster = () => {
-  const { themeId } = useTheme();
+  const { themeId } = useTheme()
 
-  const isDark = themeId === 'dark';
+  const isDark = themeId === 'dark'
 
   return (
     <Fragment>
@@ -124,5 +124,5 @@ export const GentleMonster = () => {
       </ProjectContainer>
       <Footer />
     </Fragment>
-  );
-};
+  )
+}

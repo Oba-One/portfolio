@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment } from 'react'
 
 import {
   sliceSidebarAnnotationsLarge,
@@ -11,7 +11,7 @@ import {
   sliceSlidesPlaceholder,
   sliceSlides,
   WefaBackgroundImg,
-} from 'assets/wefa';
+} from 'assets/wefa'
 import {
   ProjectBackground,
   ProjectContainer,
@@ -22,26 +22,26 @@ import {
   ProjectSectionHeading,
   ProjectSectionText,
   ProjectTextRow,
-} from 'layouts/Project';
-import { media } from 'utils/style';
-import { Meta } from 'components/Meta';
-import { Image } from 'components/Image';
-import { Footer } from 'components/Footer';
-import { useTheme } from 'components/ThemeProvider';
+} from 'layouts/Project'
+import { media } from 'utils/style'
+import { Meta } from 'components/Meta'
+import { Image } from 'components/Image'
+import { Footer } from 'components/Footer'
+import { useTheme } from 'components/ThemeProvider'
 
-import styles from './Wefa.module.scss';
-import { projects } from '../../../constants';
+import styles from './Wefa.module.scss'
+import { projects } from '../../../constants'
 
-const project = projects['wefa'];
+const project = projects['wefa']
 
-const title = project.title;
-const description = project.description;
-const roles = project.skills;
+const title = project.title
+const description = project.description
+const roles = project.skills
 
 export const Wefa = () => {
-  const { themeId } = useTheme();
+  const { themeId } = useTheme()
 
-  const isDark = themeId === 'dark';
+  const isDark = themeId === 'dark'
 
   return (
     <Fragment>
@@ -114,5 +114,5 @@ export const Wefa = () => {
       </ProjectContainer>
       <Footer />
     </Fragment>
-  );
-};
+  )
+}

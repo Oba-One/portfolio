@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
-import { classes } from 'utils/style';
-import styles from './Heading.module.css';
+import { Fragment } from 'react'
+import { classes } from 'utils/style'
+import styles from './Heading.module.css'
 
 export const Heading = ({
   children,
@@ -11,8 +11,8 @@ export const Heading = ({
   className,
   ...rest
 }) => {
-  const clampedLevel = Math.min(Math.max(level, 0), 5);
-  const Component = as || `h${Math.max(clampedLevel, 1)}`;
+  const clampedLevel = Math.min(Math.max(level, 0), 5)
+  const Component = as || `h${Math.max(clampedLevel, 1)}`
 
   return (
     <Fragment>
@@ -26,5 +26,5 @@ export const Heading = ({
         {children}
       </Component>
     </Fragment>
-  );
-};
+  )
+}

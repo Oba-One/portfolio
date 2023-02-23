@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
-import { classes } from 'utils/style';
-import styles from './VisuallyHidden.module.css';
+import { forwardRef } from 'react'
+import { classes } from 'utils/style'
+import styles from './VisuallyHidden.module.css'
 
 export const VisuallyHidden = forwardRef(
   (
@@ -17,6 +17,6 @@ export const VisuallyHidden = forwardRef(
       >
         {children}
       </Component>
-    );
+    )
   }
-);
+)

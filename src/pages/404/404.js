@@ -1,12 +1,12 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react'
 
-import { Meta } from 'components/Meta';
-import { Text } from 'components/Text';
-import { Button } from 'components/Button';
-import { Heading } from 'components/Heading';
-import { Transition } from 'components/Transition';
-import { DecoderText } from 'components/DecoderText';
-import notFoundPoster from 'assets/nostalgia/ang-floating.gif';
+import { Meta } from 'components/Meta'
+import { Text } from 'components/Text'
+import { Button } from 'components/Button'
+import { Heading } from 'components/Heading'
+import { Transition } from 'components/Transition'
+import { DecoderText } from 'components/DecoderText'
+import notFoundPoster from 'assets/nostalgia/ang-floating.gif'
 
 import {
   ArthurVid,
@@ -28,9 +28,9 @@ import {
   XMenVid,
   YuGiOhVid,
   ZaboomafooVid,
-} from 'assets/nostalgia';
+} from 'assets/nostalgia'
 
-import styles from './404.module.scss';
+import styles from './404.module.scss'
 
 const videos = [
   {
@@ -147,26 +147,26 @@ const videos = [
     title: 'Zaboomafoo',
     imdb: 'https://www.imdb.com/title/tt0190211',
   },
-];
+]
 
-let mount = false;
+let mount = false
 export function Page404() {
   const [randomVideo, setRandomVideo] = useState({
     title: '',
     src: '',
     alt: '',
     imdb: '',
-  });
+  })
 
   useEffect(() => {
     if (!mount) {
-      const video = videos[Math.floor(Math.random() * videos.length)];
-      console.log('video', video);
-      setRandomVideo(video);
-      mount = true;
+      const video = videos[Math.floor(Math.random() * videos.length)]
+      console.log('video', video)
+      setRandomVideo(video)
+      mount = true
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   return (
     <section className={styles.page}>
@@ -255,5 +255,5 @@ export function Page404() {
         )}
       </Transition>
     </section>
-  );
+  )
 }

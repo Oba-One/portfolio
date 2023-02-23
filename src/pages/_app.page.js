@@ -1,33 +1,33 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { Fragment, createContext, useEffect, useReducer } from 'react';
-import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { Fragment, createContext, useEffect, useReducer } from 'react'
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 
-import { msToNum } from 'utils/style';
-import { Navbar } from 'components/Navbar';
-import { tokens } from 'components/ThemeProvider/theme';
-import { ThemeProvider } from 'components/ThemeProvider';
-import { VisuallyHidden } from 'components/VisuallyHidden';
-import { useFoucFix, useLocalStorage } from 'hooks';
-import { ScrollRestore } from 'layouts/App/ScrollRestore';
-import { initialState, reducer } from 'layouts/App/reducer';
+import { msToNum } from 'utils/style'
+import { Navbar } from 'components/Navbar'
+import { tokens } from 'components/ThemeProvider/theme'
+import { ThemeProvider } from 'components/ThemeProvider'
+import { VisuallyHidden } from 'components/VisuallyHidden'
+import { useFoucFix, useLocalStorage } from 'hooks'
+import { ScrollRestore } from 'layouts/App/ScrollRestore'
+import { initialState, reducer } from 'layouts/App/reducer'
 
-import styles from 'layouts/App/App.module.scss';
-import 'layouts/App/global.scss';
-import 'layouts/App/reset.css';
+import styles from 'layouts/App/App.module.scss'
+import 'layouts/App/global.scss'
+import 'layouts/App/reset.css'
 
-export const AppContext = createContext({});
+export const AppContext = createContext({})
 
 const App = ({ Component, pageProps }) => {
-  const [storedTheme] = useLocalStorage('theme', 'dark');
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { route, asPath } = useRouter();
-  const canonicalRoute = route === '/' ? '' : `${asPath}`;
-  useFoucFix();
+  const [storedTheme] = useLocalStorage('theme', 'dark')
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const { route, asPath } = useRouter()
+  const canonicalRoute = route === '/' ? '' : `${asPath}`
+  useFoucFix()
 
   useEffect(() => {
-    dispatch({ type: 'setTheme', value: storedTheme || 'dark' });
-  }, [storedTheme]);
+    dispatch({ type: 'setTheme', value: storedTheme || 'dark' })
+  }, [storedTheme])
 
   return (
     <AppContext.Provider value={{ ...state, dispatch }}>
@@ -73,7 +73,7 @@ const App = ({ Component, pageProps }) => {
         </LazyMotion>
       </ThemeProvider>
     </AppContext.Provider>
-  );
-};
+  )
+}
 
-export default App;
+export default App
