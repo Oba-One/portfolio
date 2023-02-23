@@ -6,7 +6,6 @@
   "repository": "https://github.com/Oba-One/portfolio.git",
   "author": "Afolabi Aiyeloja <afo@wefa.app>",
   "devDependencies": {
-    "@mapbox/rehype-prism": "^0.8.0",
     "@storybook/addon-a11y": "^6.5.10",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-controls": "^6.5.10",
@@ -15,27 +14,26 @@
     "@storybook/manager-webpack5": "^6.5.10",
     "@storybook/react": "^6.5.10",
     "@svgr/webpack": "^6.3.1",
-    "esbuild": "^0.15.2",
+    "@types/node": "18.7.21",
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
     "eslint": "^8.21.0",
     "eslint-config-next": "^12.2.5",
+    "eslint-config-prettier": "8.6.0",
     "fs-extra": "^10.1.0",
     "globby": "^13.1.2",
+    "mdx-bundler": "^9.2.1",
     "postcss": "^8.4.16",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^7.7.2",
     "prettier": "^2.7.1",
-    "puppeteer": "^16.1.0",
-    "reading-time": "^1.5.0",
-    "rehype-img-size": "^1.0.1",
-    "rehype-preset-minify": "^6.0.0",
-    "rehype-slug": "^5.0.1",
     "sass": "^1.58.3",
     "storybook": "^6.5.10",
-    "storybook-addon-next": "^1.6.7"
+    "storybook-addon-next": "^1.6.7",
+    "typescript": "4.9.5"
   },
   "dependencies": {
     "framer-motion": "^7.1.0",
-    "mdx-bundler": "^9.2.1",
     "next": "^12.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -45,11 +43,11 @@
   },
   "scripts": {
     "dev": "next dev",
+    "storybook": "start-storybook -p 9009 -h localhost",
     "build": "next build",
     "build:storybook": "build-storybook -o build-storybook && node scripts/draco-storybook",
     "start": "next start",
-    "test": "echo 'write some tests'",
-    "storybook": "start-storybook -p 9009 -h localhost"
+    "test": "echo 'write some tests'"
   },
   "browserslist": {
     "production": [
@@ -69,7 +67,7 @@
     "printWidth": 90,
     "trailingComma": "es5",
     "tabWidth": 2,
-    "semi": true,
+    "semi": false,
     "singleQuote": true
   },
   "eslintConfig": {
@@ -77,10 +75,20 @@
       "es6": true
     },
     "extends": [
+      "next",
       "eslint:recommended",
-      "next/core-web-vitals"
+      "next/core-web-vitals",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
     ],
     "rules": {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "prefer-const": "error",
       "semi": "error",
       "no-unused-vars": "warn",
       "import/no-anonymous-default-export": "off",
