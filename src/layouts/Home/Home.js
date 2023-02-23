@@ -15,7 +15,7 @@ import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg'
 
 import { GMBackgroundImg } from 'assets/gm'
 // import { WefaBackgroundImg } from 'assets/wefa';
-// import { FlowBackgroundImg } from 'assets/mira-flow';
+import { FlowArchitectureImg, FlowArchitecture2Img } from 'assets/mira-flow'
 import { FreeportBackgroundImg } from 'assets/freeport'
 import { ConnectBackgroundImg } from 'assets/mira-connect'
 
@@ -194,12 +194,12 @@ export const Home = () => {
           alt: 'App login screen',
           textures: [
             {
-              srcSet: [gamestackTexture, gamestackTextureLarge],
-              placeholder: gamestackTexturePlaceholder,
+              srcSet: [FlowArchitectureImg, FlowArchitectureImg],
+              placeholder: FlowArchitectureImg,
             },
             {
-              srcSet: [gamestackTexture2, gamestackTexture2Large],
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: [FlowArchitecture2Img, FlowArchitecture2Img],
+              placeholder: FlowArchitecture2Img,
             },
           ],
         }}

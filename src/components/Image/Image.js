@@ -8,6 +8,8 @@ import { resolveSrcFromSrcSet, srcSetToString } from 'utils/image'
 import { classes, cssProps, numToMs } from 'utils/style'
 import styles from './Image.module.css'
 
+import Img from 'next/image'
+
 export const Image = ({
   className,
   style,
@@ -171,7 +173,7 @@ const ImageElements = ({
         </Fragment>
       )}
       {!isVideo && (
-        <img
+        <Img
           className={styles.element}
           data-loaded={loaded}
           onLoad={onLoad}
@@ -186,7 +188,7 @@ const ImageElements = ({
         />
       )}
       {showPlaceholder && (
-        <img
+        <Img
           aria-hidden
           className={styles.placeholder}
           data-loaded={loaded}
