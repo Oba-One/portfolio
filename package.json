@@ -5,6 +5,24 @@
   "description": "Portfolio site for Afolabi Aiyeloja",
   "repository": "https://github.com/Oba-One/portfolio.git",
   "author": "Afolabi Aiyeloja <afo@wefa.app>",
+  "scripts": {
+    "dev": "next dev",
+    "storybook": "start-storybook -p 9009 -h localhost",
+    "build": "next build",
+    "build:storybook": "build-storybook -o build-storybook && node scripts/draco-storybook",
+    "start": "next start",
+    "test": "echo 'write some tests'",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "framer-motion": "^7.1.0",
+    "next": "^12.2.5",
+    "nodemailer": "6.9.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.146.0",
+    "three-stdlib": "^2.21.8"
+  },
   "devDependencies": {
     "@storybook/addon-a11y": "^6.5.10",
     "@storybook/addon-actions": "^6.5.10",
@@ -17,6 +35,9 @@
     "@types/node": "18.7.21",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "esbuild": "^0.17.10",
     "eslint": "^8.21.0",
     "eslint-config-next": "^12.2.5",
     "eslint-config-prettier": "8.6.0",
@@ -32,36 +53,6 @@
     "storybook-addon-next": "^1.6.7",
     "typescript": "4.9.5"
   },
-  "dependencies": {
-    "framer-motion": "^7.1.0",
-    "next": "^12.2.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "three": "^0.146.0",
-    "three-stdlib": "^2.21.8",
-    "nodemailer": "6.9.1"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "storybook": "start-storybook -p 9009 -h localhost",
-    "build": "next build",
-    "build:storybook": "build-storybook -o build-storybook && node scripts/draco-storybook",
-    "start": "next start",
-    "test": "echo 'write some tests'"
-  },
-  "browserslist": {
-    "production": [
-      ">10%",
-      "not dead",
-      "not ie 11",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "prettier": {
     "arrowParens": "avoid",
     "printWidth": 90,
@@ -76,7 +67,6 @@
     },
     "extends": [
       "next",
-      "eslint:recommended",
       "next/core-web-vitals",
       "plugin:@typescript-eslint/recommended",
       "prettier"
@@ -89,12 +79,24 @@
         }
       ],
       "prefer-const": "error",
-      "semi": "error",
       "no-unused-vars": "warn",
       "import/no-anonymous-default-export": "off",
       "react/display-name": "off",
       "@next/next/no-img-element": "off"
     }
+  },
+  "browserslist": {
+    "production": [
+      ">10%",
+      "not dead",
+      "not ie 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "engines": {
     "npm": ">=8.6.0",
