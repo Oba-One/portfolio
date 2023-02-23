@@ -4,8 +4,8 @@ import { addons } from '@storybook/addons';
 addons.setConfig({
   theme: {
     ...themes.dark,
-    brandImage: 'https://hamishw.com/icon.svg',
+    brandImage: 'https://afolabi.info/icon.svg',
     brandTitle: 'Afolabi Aiyeloja Components',
-    brandUrl: 'https://hamishw.com',
+    brandUrl: 'https://afolabi.info',
   },
 });
