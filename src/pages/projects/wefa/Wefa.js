@@ -1,11 +1,6 @@
 import { Fragment } from 'react';
 
 import {
-  sliceAppLarge,
-  sliceAppPlaceholder,
-  sliceApp,
-  sliceIrlPlaceholder,
-  sliceIrl,
   sliceSidebarAnnotationsLarge,
   sliceSidebarAnnotationsPlaceholder,
   sliceSidebarAnnotations,
@@ -21,7 +16,6 @@ import {
   ProjectBackground,
   ProjectContainer,
   ProjectHeader,
-  ProjectImage,
   ProjectSection,
   ProjectSectionColumns,
   ProjectSectionContent,
@@ -57,7 +51,7 @@ export const Wefa = () => {
           src={WefaBackgroundImg}
           srcSet={`${WefaBackgroundImg.src} 1280w, ${WefaBackgroundImg.src} 2560w`}
           placeholder={WefaBackgroundImg}
-          opacity={isDark ? 0.5 : 0.8}
+          opacity={isDark ? 0.5 : 0.6}
         />
         <ProjectHeader
           title={title}
@@ -65,16 +59,6 @@ export const Wefa = () => {
           url="https://www.best.edu.au/s/q2yjjvl7?data=8%404!9%4020303!10%40-15087&version=1"
           roles={roles}
         />
-        <ProjectSection padding="top">
-          <ProjectSectionContent>
-            <ProjectImage
-              srcSet={[sliceApp, sliceAppLarge]}
-              placeholder={sliceAppPlaceholder}
-              alt="The Wefa web application showing a selected user annotation."
-              sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 90vw, 80vw`}
-            />
-          </ProjectSectionContent>
-        </ProjectSection>
         <ProjectSection>
           <ProjectSectionColumns centered className={styles.columns}>
             <div className={styles.imagesText}>
@@ -125,11 +109,6 @@ export const Wefa = () => {
                 and easy to use the application was.
               </ProjectSectionText>
             </ProjectTextRow>
-            <Image
-              src={sliceIrl}
-              placeholder={sliceIrlPlaceholder}
-              alt="Students at the University of New South Wales using the new collaborative annotation features"
-            />
           </ProjectSectionContent>
         </ProjectSection>
       </ProjectContainer>

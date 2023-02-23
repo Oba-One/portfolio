@@ -161,6 +161,7 @@
 .header {
   padding-top: calc(var(--space5XL) + var(--space3XL));
   padding-bottom: 0;
+  mix-blend-mode: darken;
 
   @media (--mediaLaptop) {
     padding-top: var(--space5XL);
