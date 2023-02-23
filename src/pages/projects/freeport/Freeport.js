@@ -47,6 +47,7 @@ export const Freeport = () => {
           src={FreeportBackgroundImg}
           srcSet={`${FreeportBackgroundImg.src} 1080w, ${FreeportBackgroundImg.src} 2160w`}
           placeholder={FreeportBackgroundImg}
+          blurDataURL={'LEPskuo|~qrs4TX7x^s8o~oID*od'}
         />
         <ProjectHeader
           title={title}
@@ -61,6 +62,7 @@ export const Freeport = () => {
               key={themeId}
               srcSet={[FreeportProblemImg, FreeportProblemImg]}
               placeholder={FreeportProblemImg}
+              blurDataURL={'LEPskuo|~qrs4TX7x^s8o~oID*od'}
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
               alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
             />

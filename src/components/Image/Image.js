@@ -6,7 +6,7 @@ import { useHasMounted, useInViewport } from 'hooks'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { resolveSrcFromSrcSet, srcSetToString } from 'utils/image'
 import { classes, cssProps, numToMs } from 'utils/style'
-import styles from './Image.module.css'
+import styles from './Image.module.scss'
 
 import Img from 'next/image'
 
@@ -48,6 +48,7 @@ export const Image = ({
         inViewport={inViewport}
         reveal={reveal}
         src={src}
+        theme={themeId}
         srcSet={srcSet}
         placeholder={placeholder}
         {...rest}
@@ -61,7 +62,8 @@ const ImageElements = ({
   loaded,
   inViewport,
   srcSet,
-  placeholder,
+  // placeholder,
+  theme,
   delay,
   src,
   alt,
@@ -73,11 +75,11 @@ const ImageElements = ({
   ...rest
 }) => {
   const reduceMotion = useReducedMotion()
-  const [showPlaceholder, setShowPlaceholder] = useState(true)
+  // const [showPlaceholder, setShowPlaceholder] = useState(true)
   const [playing, setPlaying] = useState(!reduceMotion)
   const [videoSrc, setVideoSrc] = useState()
   const [videoInteracted, setVideoInteracted] = useState(false)
-  const placeholderRef = useRef()
+  // const placeholderRef = useRef()
   const videoRef = useRef()
   const isVideo = getIsVideo(src)
   const showFullRes = inViewport
@@ -184,10 +186,13 @@ const ImageElements = ({
           height={src.height}
           alt={alt}
           sizes={sizes}
+          // objectFit="scale-down"
+          placeholder="blur"
+          blurDataURL={theme === 'dark' ? '' : 'LCRC[7-;?a9FIB~qt70000IUxuxu'}
           {...rest}
         />
       )}
-      {showPlaceholder && (
+      {/* {showPlaceholder && (
         <Img
           aria-hidden
           className={styles.placeholder}
@@ -202,7 +207,7 @@ const ImageElements = ({
           alt=""
           role="presentation"
         />
-      )}
+      )} */}
     </div>
   )
 }
