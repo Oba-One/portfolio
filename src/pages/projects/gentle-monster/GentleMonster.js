@@ -12,7 +12,7 @@ import {
   ProjectBackground,
   ProjectContainer,
   ProjectHeader,
-  ProjectImage,
+  // ProjectImage,
   ProjectSection,
   ProjectSectionColumns,
   ProjectSectionContent,
@@ -55,23 +55,21 @@ export const GentleMonster = () => {
           links={project.links}
           roles={roles}
         />
-        <ProjectSection padding="top">
-          <ProjectSectionContent>
-            <ProjectImage
+        <ProjectSection>
+          <ProjectSectionColumns centered>
+            <div>
+              <ProjectSectionHeading>The Problem</ProjectSectionHeading>
+              <ProjectSectionText>{project.problem}</ProjectSectionText>
+            </div>
+            <Image
               raised
               key={themeId}
               srcSet={[GMProblemImg, GMProblemImg]}
               placeholder={GMProblemImg}
-              sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
-              alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
+              alt="The homepage of the aero design system docs website linking to principles and components."
+              sizes="100vw"
             />
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
-          <ProjectTextRow>
-            <ProjectSectionHeading>The problem</ProjectSectionHeading>
-            <ProjectSectionText>{project.problem}</ProjectSectionText>
-          </ProjectTextRow>
+          </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection>
           <ProjectSectionContent>

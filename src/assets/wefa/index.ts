@@ -1,3 +1,6 @@
+export { default as WefaSplashImg } from './wefa-splash.png'
+export { default as WefaAppHomeImg } from './wefa-app-home.png'
+export { default as WefaAppWorldImg } from './wefa-app-world.png'
 export { default as WefaBackgroundImg } from './wefa-background.jpg'
 
 export { default as sliceSidebarAnnotationsLarge } from './slice-sidebar-annotations-large.png'

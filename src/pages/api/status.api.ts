@@ -1,12 +1,10 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 export const config = {
   runtime: 'experimental-edge',
 }
 
-/**
- * @param {import('next').NextApiRequest} req
- * @param {import('next').NextApiResponse} res
- */
-const handler = (req, res) => {
+const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method == 'GET') {
     res.status(200).send({ status: 'ok', time: Date.now() })
   } else {

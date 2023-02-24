@@ -1,7 +1,7 @@
 /**
  * Format a timecode intro a hours:minutes:seconds:centiseconds string
  */
-export function formatTimecode(time) {
+export function formatTimecode(time: number) {
   const hours = time / 1000 / 60 / 60
 
   const h = Math.floor(hours)
@@ -15,6 +15,6 @@ export function formatTimecode(time) {
 /**
  * Prefix a number with zero as a string if less than 10
  */
-export function zeroPrefix(value) {
+export function zeroPrefix(value: number) {
   return value < 10 ? `0${value}` : `${value}`
 }

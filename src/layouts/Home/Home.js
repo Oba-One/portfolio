@@ -6,18 +6,11 @@ import { Intro } from 'layouts/Home/Intro'
 import { Profile } from 'layouts/Home/Profile'
 import { ProjectSummary } from 'layouts/Home/ProjectSummary'
 
-import gamestackTexture from 'assets/gamestack-login.jpg'
-import gamestackTexture2 from 'assets/gamestack-list.jpg'
-import gamestackTexture2Large from 'assets/gamestack-list-large.jpg'
-import gamestackTextureLarge from 'assets/gamestack-login-large.jpg'
-import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg'
-import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg'
-
 import { GMBackgroundImg } from 'assets/gm'
-// import { WefaBackgroundImg } from 'assets/wefa';
-import { FlowArchitectureImg, FlowArchitecture2Img } from 'assets/mira-flow'
-import { FreeportBackgroundImg } from 'assets/freeport'
+import { FreeportDevelopmentImg } from 'assets/freeport'
 import { ConnectBackgroundImg } from 'assets/mira-connect'
+import { WefaAppWorldImg, WefaAppHomeImg } from 'assets/wefa'
+import { FlowArchitectureImg, FlowArchitecture2Img } from 'assets/mira-flow'
 
 import styles from './Home.module.css'
 import { projects } from '../../constants'
@@ -128,12 +121,12 @@ export const Home = () => {
           alt: 'App login screen',
           textures: [
             {
-              srcSet: [gamestackTexture, gamestackTextureLarge],
-              placeholder: gamestackTexturePlaceholder,
+              srcSet: [WefaAppWorldImg, WefaAppWorldImg],
+              placeholder: WefaAppWorldImg,
             },
             {
-              srcSet: [gamestackTexture2, gamestackTexture2Large],
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: [WefaAppHomeImg, WefaAppHomeImg],
+              placeholder: WefaAppHomeImg,
             },
           ],
         }}
@@ -153,8 +146,8 @@ export const Home = () => {
           alt: 'Annotating a biomedical image in the Slice app',
           textures: [
             {
-              srcSet: [FreeportBackgroundImg, FreeportBackgroundImg],
-              placeholder: FreeportBackgroundImg,
+              srcSet: [FreeportDevelopmentImg, FreeportDevelopmentImg],
+              placeholder: FreeportDevelopmentImg,
             },
           ],
         }}
