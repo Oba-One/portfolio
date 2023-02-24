@@ -1,16 +1,13 @@
 import { Fragment } from 'react'
 
 import {
-  sliceSidebarAnnotationsLarge,
-  sliceSidebarAnnotationsPlaceholder,
-  sliceSidebarAnnotations,
-  sliceSidebarLayersLarge,
-  sliceSidebarLayersPlaceholder,
-  sliceSidebarLayers,
+  WefaAppWorldImg,
   sliceSlidesLarge,
   sliceSlidesPlaceholder,
   sliceSlides,
   WefaBackgroundImg,
+  WefaAppHomeImg,
+  WefaSplashImg,
 } from 'assets/wefa'
 import {
   ProjectBackground,
@@ -68,16 +65,16 @@ export const Wefa = () => {
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}
-                srcSet={[sliceSidebarLayers, sliceSidebarLayersLarge]}
-                placeholder={sliceSidebarLayersPlaceholder}
-                alt="The layers sidebar design, now with user profiles."
+                srcSet={[WefaSplashImg, WefaSplashImg]}
+                placeholder={WefaSplashImg}
+                alt="Multiple user annotations on a shared layer."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
-                srcSet={[sliceSidebarAnnotations, sliceSidebarAnnotationsLarge]}
-                placeholder={sliceSidebarAnnotationsPlaceholder}
-                alt="Multiple user annotations on a shared layer."
+                srcSet={[WefaAppHomeImg, WefaAppHomeImg]}
+                placeholder={WefaAppHomeImg}
+                alt="The layers sidebar design, now with user profiles."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>

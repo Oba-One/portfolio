@@ -1,19 +1,18 @@
 import { Fragment } from 'react'
 
 import {
-  FlowBackgroundImg,
   FlowProblemImg,
   FlowArchitectureImg,
   FlowArchitecture2Img,
   FlowDevelopmentImg,
-  FlowLearningsImg,
+  FlowTabletHistoryImg,
+  FlowTabletLoginImg,
   // FlowDevelopment2Img
 } from 'assets/mira-flow'
 import {
   ProjectBackground,
   ProjectContainer,
   ProjectHeader,
-  ProjectImage,
   ProjectSection,
   ProjectSectionColumns,
   ProjectSectionContent,
@@ -47,9 +46,9 @@ export const MiraFlow = () => {
         <Meta title={title} prefix="Projects" description={description} />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
-          src={FlowBackgroundImg}
-          srcSet={`${FlowBackgroundImg.src} 1080w, ${FlowBackgroundImg.src} 2160w`}
-          placeholder={FlowBackgroundImg}
+          src={FlowTabletLoginImg}
+          srcSet={`${FlowTabletLoginImg.src} 1080w, ${FlowTabletLoginImg.src} 2160w`}
+          placeholder={FlowTabletLoginImg}
         />
         <ProjectHeader
           title={title}
@@ -59,8 +58,15 @@ export const MiraFlow = () => {
           roles={roles}
         />
         <ProjectSection padding="top">
-          <ProjectSectionContent>
-            <ProjectImage
+          <ProjectSectionContent></ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection>
+          <ProjectSectionColumns>
+            <ProjectTextRow>
+              <ProjectSectionHeading>The problem</ProjectSectionHeading>
+              <ProjectSectionText>{project.problem}</ProjectSectionText>
+            </ProjectTextRow>
+            <Image
               raised
               key={themeId}
               srcSet={[FlowProblemImg, FlowProblemImg]}
@@ -68,13 +74,7 @@ export const MiraFlow = () => {
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
               alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
             />
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
-          <ProjectTextRow>
-            <ProjectSectionHeading>The problem</ProjectSectionHeading>
-            <ProjectSectionText>{project.problem}</ProjectSectionText>
-          </ProjectTextRow>
+          </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection>
           <ProjectSectionColumns>
@@ -123,8 +123,8 @@ export const MiraFlow = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[FlowLearningsImg, FlowLearningsImg]}
-              placeholder={FlowLearningsImg}
+              srcSet={[FlowTabletHistoryImg, FlowTabletHistoryImg]}
+              placeholder={FlowTabletHistoryImg}
               alt="A drag and drop storyboard style editor for creating an adaptive lesson."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />

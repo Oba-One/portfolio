@@ -2,16 +2,15 @@ import { Fragment } from 'react'
 
 import {
   FreeportBackgroundImg,
-  FreeportProblemImg,
   FreeportArchitectureImg,
   FreeportDevelopmentImg,
   FreeportLearningsImg,
+  FreeportProblem2Img,
 } from 'assets/freeport'
 import {
   ProjectBackground,
   ProjectContainer,
   ProjectHeader,
-  ProjectImage,
   ProjectSection,
   ProjectSectionColumns,
   ProjectSectionContent,
@@ -44,9 +43,9 @@ export const Freeport = () => {
         <Meta title={title} prefix="Projects" description={description} />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
-          src={FreeportBackgroundImg}
-          srcSet={`${FreeportBackgroundImg.src} 1080w, ${FreeportBackgroundImg.src} 2160w`}
-          placeholder={FreeportBackgroundImg}
+          src={FreeportDevelopmentImg}
+          srcSet={`${FreeportDevelopmentImg.src} 1080w, ${FreeportDevelopmentImg.src} 2160w`}
+          placeholder={FreeportDevelopmentImg}
           blurDataURL={'LEPskuo|~qrs4TX7x^s8o~oID*od'}
         />
         <ProjectHeader
@@ -55,32 +54,29 @@ export const Freeport = () => {
           links={project.links}
           roles={roles}
         />
-        <ProjectSection padding="top">
-          <ProjectSectionContent>
-            <ProjectImage
+        <ProjectSection>
+          <ProjectSectionColumns centered>
+            <div>
+              <ProjectSectionHeading>Problem</ProjectSectionHeading>
+              <ProjectSectionText>{project.problem}</ProjectSectionText>
+            </div>
+            <Image
               raised
               key={themeId}
-              srcSet={[FreeportProblemImg, FreeportProblemImg]}
-              placeholder={FreeportProblemImg}
-              blurDataURL={'LEPskuo|~qrs4TX7x^s8o~oID*od'}
-              sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
-              alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
+              srcSet={[FreeportProblem2Img, FreeportProblem2Img]}
+              placeholder={FreeportProblem2Img}
+              alt="A drag and drop storyboard style editor for creating an adaptive lesson."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
-          <ProjectTextRow>
-            <ProjectSectionHeading>The problem</ProjectSectionHeading>
-            <ProjectSectionText>{project.problem}</ProjectSectionText>
-          </ProjectTextRow>
+          </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection>
           <ProjectSectionContent>
             <Image
               raised
               key={themeId}
-              srcSet={[FreeportArchitectureImg, FreeportArchitectureImg]}
-              placeholder={FreeportArchitectureImg}
+              srcSet={[FreeportBackgroundImg, FreeportBackgroundImg]}
+              placeholder={FreeportBackgroundImg}
               alt="The homepage of the aero design system docs website linking to principles and components."
               sizes="100vw"
             />
@@ -95,8 +91,8 @@ export const Freeport = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[FreeportDevelopmentImg, FreeportDevelopmentImg]}
-              placeholder={FreeportDevelopmentImg}
+              srcSet={[FreeportLearningsImg, FreeportLearningsImg]}
+              placeholder={FreeportLearningsImg}
               alt="A drag and drop storyboard style editor for creating an adaptive lesson."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
@@ -107,20 +103,18 @@ export const Freeport = () => {
           </ProjectSectionContent>
         </ProjectSection>
         <ProjectSection>
-          <ProjectSectionColumns>
-            <ProjectSectionContent>
-              <ProjectTextRow>
-                <ProjectSectionHeading>Learnings</ProjectSectionHeading>
-                <ProjectSectionText>{project.learnings}</ProjectSectionText>
-              </ProjectTextRow>
-            </ProjectSectionContent>
+          <ProjectSectionContent>
             <Image
-              srcSet={[FreeportLearningsImg, FreeportLearningsImg]}
-              placeholder={FreeportLearningsImg}
+              srcSet={[FreeportArchitectureImg, FreeportArchitectureImg]}
+              placeholder={FreeportArchitectureImg}
               alt="Configuration options for a component."
               sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
             />
-          </ProjectSectionColumns>
+            <ProjectTextRow>
+              <ProjectSectionHeading>Learnings</ProjectSectionHeading>
+              <ProjectSectionText>{project.learnings}</ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
         </ProjectSection>
       </ProjectContainer>
       <Footer />

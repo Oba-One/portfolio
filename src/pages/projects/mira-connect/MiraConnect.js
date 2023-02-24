@@ -2,17 +2,18 @@ import { Fragment } from 'react'
 
 import {
   ConnectBackgroundImg,
-  ConnectProblemImg,
-  ConnectArchitectureImg,
-  ConnectDevelopmentImg,
-  ConnectLearningsImg,
+  ConnectCallAnnotationsImg,
+  ConnectCallGuestsImg,
+  ConnectCallLobbyImg,
+  ConnectCallHistoryImg,
+  ConnectCallReportP1Img,
+  ConnectCallReportP2Img,
   // ConnectBackground2Img
 } from 'assets/mira-connect'
 import {
   ProjectBackground,
   ProjectContainer,
   ProjectHeader,
-  ProjectImage,
   ProjectSection,
   ProjectSectionColumns,
   ProjectSectionContent,
@@ -26,6 +27,7 @@ import { Image } from 'components/Image'
 import { Footer } from 'components/Footer'
 import { useTheme } from 'components/ThemeProvider'
 
+import styles from './MiraConnect.module.scss'
 import { projects } from '../../../constants'
 
 const project = projects['mira_connect']
@@ -44,10 +46,12 @@ export const MiraConnect = () => {
       <ProjectContainer className="spr">
         <Meta title={title} prefix="Projects" description={description} />
         <ProjectBackground
-          opacity={isDark ? 0.5 : 0.8}
-          src={ConnectBackgroundImg}
-          srcSet={`${ConnectBackgroundImg.src} 1080w, ${ConnectBackgroundImg.src} 2160w`}
-          placeholder={ConnectBackgroundImg}
+          opacity={isDark ? 0.8 : 0.5}
+          src={isDark ? ConnectBackgroundImg : ConnectBackgroundImg}
+          srcSet={`${
+            isDark ? ConnectBackgroundImg.src : ConnectBackgroundImg.src
+          } 1080w, ${isDark ? ConnectBackgroundImg.src : ConnectBackgroundImg.src} 2160w`}
+          placeholder={isDark ? ConnectBackgroundImg : ConnectBackgroundImg.src}
         />
         <ProjectHeader
           title={title}
@@ -56,30 +60,31 @@ export const MiraConnect = () => {
           roles={roles}
         />
         <ProjectSection padding="top">
-          <ProjectSectionContent>
-            <ProjectImage
+          <ProjectSectionContent></ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection>
+          <ProjectSectionColumns>
+            <ProjectTextRow>
+              <ProjectSectionHeading>The problem</ProjectSectionHeading>
+              <ProjectSectionText>{project.problem}</ProjectSectionText>
+            </ProjectTextRow>
+            <Image
               raised
               key={themeId}
-              srcSet={[ConnectProblemImg, ConnectProblemImg]}
-              placeholder={ConnectProblemImg}
+              srcSet={[ConnectCallLobbyImg, ConnectCallLobbyImg]}
+              placeholder={ConnectCallLobbyImg}
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
               alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
             />
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
-          <ProjectTextRow>
-            <ProjectSectionHeading>The problem</ProjectSectionHeading>
-            <ProjectSectionText>{project.problem}</ProjectSectionText>
-          </ProjectTextRow>
+          </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection>
           <ProjectSectionContent>
             <Image
               raised
               key={themeId}
-              srcSet={[ConnectArchitectureImg, ConnectArchitectureImg]}
-              placeholder={ConnectArchitectureImg}
+              srcSet={[ConnectCallGuestsImg, ConnectCallGuestsImg]}
+              placeholder={ConnectCallGuestsImg}
               alt="The homepage of the aero design system docs website linking to principles and components."
               sizes="100vw"
             />
@@ -94,8 +99,8 @@ export const MiraConnect = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[ConnectDevelopmentImg, ConnectDevelopmentImg]}
-              placeholder={ConnectDevelopmentImg}
+              srcSet={[ConnectCallAnnotationsImg, ConnectCallAnnotationsImg]}
+              placeholder={ConnectCallAnnotationsImg}
               alt="A drag and drop storyboard style editor for creating an adaptive lesson."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
@@ -106,19 +111,40 @@ export const MiraConnect = () => {
           </ProjectSectionContent>
         </ProjectSection>
         <ProjectSection>
-          <ProjectSectionColumns>
-            <ProjectSectionContent>
-              <ProjectTextRow>
-                <ProjectSectionHeading>Learnings</ProjectSectionHeading>
-                <ProjectSectionText>{project.learnings}</ProjectSectionText>
-              </ProjectTextRow>
-            </ProjectSectionContent>
+          <ProjectSectionContent>
             <Image
-              srcSet={[ConnectLearningsImg, ConnectLearningsImg]}
-              placeholder={ConnectLearningsImg}
-              alt="Configuration options for a component."
-              sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+              raised
+              key={themeId}
+              srcSet={[ConnectCallHistoryImg, ConnectCallHistoryImg]}
+              placeholder={ConnectCallHistoryImg}
+              alt="The homepage of the aero design system docs website linking to principles and components."
+              sizes="100vw"
             />
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection></ProjectSection>
+        <ProjectSection>
+          <ProjectSectionColumns>
+            <ProjectTextRow>
+              <ProjectSectionHeading>Learnings</ProjectSectionHeading>
+              <ProjectSectionText>{project.learnings}</ProjectSectionText>
+            </ProjectTextRow>
+            <div className={styles.sidebarImages}>
+              <Image
+                className={styles.sidebarImage}
+                srcSet={[ConnectCallReportP1Img, ConnectCallReportP1Img]}
+                placeholder={ConnectCallReportP1Img}
+                alt="Configuration options for a component."
+                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+              />
+              <Image
+                className={styles.sidebarImage}
+                srcSet={[ConnectCallReportP2Img, ConnectCallReportP2Img]}
+                placeholder={ConnectCallReportP2Img}
+                alt="Configuration options for a component."
+                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+              />
+            </div>
           </ProjectSectionColumns>
         </ProjectSection>
       </ProjectContainer>
