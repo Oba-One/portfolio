@@ -13,16 +13,20 @@
     "start": "next start",
     "test": "echo 'write some tests'",
     "lint": "next lint",
-    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'"
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
+    "optimize:assets": "zsh scripts/optimize-assets.sh",
+    "optimize:resize": "npx @squoosh/cli -s '-mobile' --webp --resize \"{'enabled':true,'width':25%,'height':25%,'method':'lanczos3'}\" src/assets/*.webp"
   },
   "dependencies": {
+    "cors": "2.8.5",
     "framer-motion": "^7.1.0",
     "next": "^12.2.5",
     "nodemailer": "6.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "^0.146.0",
-    "three-stdlib": "^2.21.8"
+    "three-stdlib": "^2.21.8",
+    "zod": "^3.20.6"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^6.5.10",
@@ -33,6 +37,7 @@
     "@storybook/manager-webpack5": "^6.5.10",
     "@storybook/react": "^6.5.10",
     "@svgr/webpack": "^6.3.1",
+    "@types/cors": "^2.8.13",
     "@types/node": "18.7.21",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",

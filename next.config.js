@@ -4,7 +4,7 @@
 module.exports = {
   reactStrictMode: true,
   trailingSlash: true,
-  pageExtensions: ['page.js', 'api.js'],
+  pageExtensions: ['page.js', 'page.ts', 'api.js', 'api.ts'],
   webpack(config, { isServer }) {
     // Run custom scripts
     if (isServer) {
