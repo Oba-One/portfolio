@@ -95,7 +95,7 @@ export const Contact = () => {
               autoComplete="email"
               label="Your Email"
               type="email"
-              maxLength={512}
+              maxLength={320}
               {...email}
             />
             <Input
@@ -106,7 +106,7 @@ export const Contact = () => {
               style={getDelay(tokens.base.durationS, initDelay)}
               autoComplete="off"
               label="Message"
-              maxLength={4096}
+              maxLength={720}
               {...message}
             />
             <Transition in={statusError} timeout={msToNum(tokens.base.durationM)}>
