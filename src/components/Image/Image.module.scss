@@ -21,7 +21,7 @@
 
     &::before {
       content: '';
-      background-color: rgb(var(--rgbAccent));
+      background-color: rgb(var(--rgbPrimary));
       position: absolute;
       inset: 0;
       transform: scale3d(0, 1, 1);
