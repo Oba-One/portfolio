@@ -1,6 +1,6 @@
 # Personal portfolio
 
-[![Site preview](/public/site-preview.png)](https://afolabi.info)
+[![Site preview](/public/site-preview.webp)](https://afolabi.info)
 
 My design portfolio to showcase my projects. Built with [Next.js](https://nextjs.org/). View the [live site](https://afolabi.info).
 
