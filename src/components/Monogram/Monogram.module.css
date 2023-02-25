@@ -4,7 +4,7 @@
 }
 
 .highlight {
-  fill: rgb(var(--rgbAccent));
+  fill: rgb(var(--rgbPrimary));
   opacity: 0;
   transform: scale3d(1, 0, 1);
   transform-origin: top;

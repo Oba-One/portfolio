@@ -1,6 +1,7 @@
-import { Button } from 'components/Button'
 import { Icon } from 'components/Icon'
-import styles from './NavToggle.module.css'
+import { Button } from 'components/Button'
+
+import styles from './NavToggle.module.scss'
 
 export const NavToggle = ({ menuOpen, ...rest }) => {
   return (

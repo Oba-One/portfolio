@@ -142,7 +142,7 @@
 .svg {
   opacity: 0;
   transition: opacity 1200ms ease 1400ms;
-  fill: var(--colorTextTitle);
+  fill: rgb(var(--rgbAccent));
 
   &[data-visible='true'] {
     opacity: var(--opacity);

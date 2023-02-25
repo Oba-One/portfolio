@@ -1,16 +1,18 @@
-import { Icon } from 'components/Icon'
-import { Monogram } from 'components/Monogram'
-import { useTheme } from 'components/ThemeProvider'
-import { tokens } from 'components/ThemeProvider/theme'
-import { Transition } from 'components/Transition'
-import { useAppContext, useScrollToHash, useWindowSize } from 'hooks'
 import RouterLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
+
+import { Icon } from 'components/Icon'
+import { Monogram } from 'components/Monogram'
+import { Transition } from 'components/Transition'
+import { useTheme } from 'components/ThemeProvider'
+import { tokens } from 'components/ThemeProvider/theme'
 import { cssProps, media, msToNum, numToMs } from 'utils/style'
-import { NavToggle } from './NavToggle'
-import styles from './Navbar.module.css'
+import { useAppContext, useScrollToHash, useWindowSize } from 'hooks'
+
 import { ThemeToggle } from './ThemeToggle'
+import { NavToggle } from './NavToggle'
+import styles from './Navbar.module.scss'
 import { navLinks, socialLinks } from './navData'
 
 export const Navbar = () => {
