@@ -57,7 +57,8 @@ button.toggle {
     }
   }
 
-  &[data-open='true']&[data-close='true'] {
+  &[data-open='true'],
+  [data-close='true'] {
     opacity: 1;
 
     @media (--mediaUseMotion) {
