@@ -125,7 +125,7 @@
   z-index: var(--zIndex3);
   opacity: 0;
   transition: opacity var(--durationM) ease var(--durationL);
-  fill: var(--colorTextTitle);
+  fill: rgb(var(--rgbAccent));
 
   &[data-visible='true'] {
     opacity: 1;

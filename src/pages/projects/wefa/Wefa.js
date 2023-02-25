@@ -1,13 +1,11 @@
 import { Fragment } from 'react'
 
 import {
-  WefaAppWorldImg,
-  sliceSlidesLarge,
-  sliceSlidesPlaceholder,
-  sliceSlides,
+  // WefaAppWorldImg,
   WefaBackgroundImg,
   WefaAppHomeImg,
   WefaSplashImg,
+  WefaStoryImg,
 } from 'assets/wefa'
 import {
   ProjectBackground,
@@ -59,7 +57,7 @@ export const Wefa = () => {
         <ProjectSection>
           <ProjectSectionColumns centered className={styles.columns}>
             <div className={styles.imagesText}>
-              <ProjectSectionHeading>Why WEFA?</ProjectSectionHeading>
+              <ProjectSectionHeading>Water Earth Fire Air</ProjectSectionHeading>
               <ProjectSectionText>{project.problem}</ProjectSectionText>
             </div>
             <div className={styles.sidebarImages}>
@@ -83,12 +81,12 @@ export const Wefa = () => {
         <ProjectSection light>
           <ProjectSectionContent>
             <ProjectTextRow>
-              <ProjectSectionHeading>Current Architecture</ProjectSectionHeading>
+              <ProjectSectionHeading>What is it?</ProjectSectionHeading>
               <ProjectSectionText>{project.architecture}</ProjectSectionText>
             </ProjectTextRow>
             <Image
-              srcSet={[sliceSlides, sliceSlidesLarge]}
-              placeholder={sliceSlidesPlaceholder}
+              srcSet={[WefaStoryImg, WefaStoryImg]}
+              placeholder={WefaStoryImg}
               alt="The new My Slides tab in slice, showing annotated and favorited slides."
               sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
             />
@@ -97,14 +95,8 @@ export const Wefa = () => {
         <ProjectSection>
           <ProjectSectionContent>
             <ProjectTextRow>
-              <ProjectSectionHeading>Goals and Learning</ProjectSectionHeading>
-              <ProjectSectionText>
-                Real-time collaborative annotation facilitated better collaboration
-                between learners, and was much easier to run group exercises with the new
-                shared layers feature. Learners gave feedback that is was enjoyable to
-                work together and see what others were doing, and liked how interactive
-                and easy to use the application was.
-              </ProjectSectionText>
+              <ProjectSectionHeading>Story & Release</ProjectSectionHeading>
+              <ProjectSectionText>{project.development}</ProjectSectionText>
             </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>
