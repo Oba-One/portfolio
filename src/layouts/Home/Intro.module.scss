@@ -142,7 +142,7 @@
 
   &::after {
     content: '';
-    background-color: rgb(var(--rgbPrimary));
+    background: rgb(var(--rgbPrimary));
     animation-duration: 1.5s;
     animation-delay: var(--delay);
     animation-fill-mode: forwards;
