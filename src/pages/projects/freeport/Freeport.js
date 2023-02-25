@@ -46,7 +46,7 @@ export const Freeport = () => {
           src={FreeportDevelopmentImg}
           srcSet={`${FreeportDevelopmentImg.src} 1080w, ${FreeportDevelopmentImg.src} 2160w`}
           placeholder={FreeportDevelopmentImg}
-          blurDataURL={'LEPskuo|~qrs4TX7x^s8o~oID*od'}
+          blur="L6LD#]0LS6rX0r~WD*R%Kk~WM{In"
         />
         <ProjectHeader
           title={title}
@@ -65,6 +65,7 @@ export const Freeport = () => {
               key={themeId}
               srcSet={[FreeportProblem2Img, FreeportProblem2Img]}
               placeholder={FreeportProblem2Img}
+              blur="LHM%.jMxDi~q_3jYV@t8~qM{axof"
               alt="A drag and drop storyboard style editor for creating an adaptive lesson."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
@@ -77,6 +78,7 @@ export const Freeport = () => {
               key={themeId}
               srcSet={[FreeportBackgroundImg, FreeportBackgroundImg]}
               placeholder={FreeportBackgroundImg}
+              blur="LEPskuo|~qrs4TX7x^s8o~oID*kA"
               alt="The homepage of the aero design system docs website linking to principles and components."
               sizes="100vw"
             />
@@ -93,6 +95,7 @@ export const Freeport = () => {
               key={themeId}
               srcSet={[FreeportLearningsImg, FreeportLearningsImg]}
               placeholder={FreeportLearningsImg}
+              blur="LCRC[7-;?a9FIB~qt70000IUxuxu"
               alt="A drag and drop storyboard style editor for creating an adaptive lesson."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
@@ -107,6 +110,7 @@ export const Freeport = () => {
             <Image
               srcSet={[FreeportArchitectureImg, FreeportArchitectureImg]}
               placeholder={FreeportArchitectureImg}
+              blur="LgPjJkae%MkC_3j[R*jZ~qbHM{ae"
               alt="Configuration options for a component."
               sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
             />
