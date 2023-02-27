@@ -4,9 +4,15 @@ import {
   GMBackgroundImg,
   GMProblemImg,
   GMArchitectureImg,
-  GMDevelopmentImg,
+  GMDevelopment2Img,
   GMLearningsImg,
-  // GMDevelopment2Img
+  GMBackgroundPlaceholderImg,
+  GMProblemPlaceholderImg,
+  GMArchitecturePlaceholderImg,
+  GMDevelopment2PlaceholderImg,
+  GMLearningsPlaceholderImg,
+  // GMDevelopment22Img
+  // GMDevelopment22PlaceholderImg
 } from 'assets/gm'
 import {
   ProjectBackground,
@@ -47,8 +53,9 @@ export const GentleMonster = () => {
           opacity={isDark ? 0.5 : 0.8}
           src={GMBackgroundImg}
           srcSet={`${GMBackgroundImg.src} 1080w, ${GMBackgroundImg.src} 2160w`}
-          placeholder={GMBackgroundImg}
-          blur="LqL|u[oftlRkD%f6bbay_4aye.j["
+          placeholder={GMBackgroundPlaceholderImg.src}
+          alt="Gentle Monster updated landing page with new UI design."
+          // blur="LqL|u[oftlRkD%f6bbay_4aye.j["
         />
         <ProjectHeader
           title={title}
@@ -66,10 +73,10 @@ export const GentleMonster = () => {
               raised
               key={themeId}
               srcSet={[GMProblemImg, GMProblemImg]}
-              placeholder={GMProblemImg}
-              blur="LpG[=;RjWBxa4nWVa|oL~qt7j[Rj"
-              alt="The homepage of the aero design system docs website linking to principles and components."
+              placeholder={GMProblemPlaceholderImg.src}
+              // blur="LpG[=;RjWBxa4nWVa|oL~qt7j[Rj"
               sizes="100vw"
+              alt="Gentle Monster 2018 landing page with old UI design."
             />
           </ProjectSectionColumns>
         </ProjectSection>
@@ -79,10 +86,10 @@ export const GentleMonster = () => {
               raised
               key={themeId}
               srcSet={[GMArchitectureImg, GMArchitectureImg]}
-              placeholder={GMArchitectureImg}
-              blur="LKPP=d00yD?v^+xCofWU?^.9n}Vs"
-              alt="The homepage of the aero design system docs website linking to principles and components."
+              placeholder={GMArchitecturePlaceholderImg.src}
+              // blur="LKPP=d00yD?v^+xCofWU?^.9n}Vs"
               sizes="100vw"
+              alt="Gentle Monster glasses collections page with the different styles of glasses."
             />
             <ProjectTextRow>
               <ProjectSectionHeading>Architecture</ProjectSectionHeading>
@@ -95,11 +102,11 @@ export const GentleMonster = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[GMDevelopmentImg, GMDevelopmentImg]}
-              placeholder={GMDevelopmentImg}
-              blur="L8RfkB00?bxuj[WBWBWB~q%NRPM{"
-              alt="A drag and drop storyboard style editor for creating an adaptive lesson."
+              srcSet={[GMDevelopment2Img, GMDevelopment2Img]}
+              placeholder={GMDevelopment2PlaceholderImg.src}
+              // blur="L8RfkB00?bxuj[WBWBWB~q%NRPM{"
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+              alt="Gentle Monster product detail page with different views of the product."
             />
             <ProjectTextRow>
               <ProjectSectionHeading>Development</ProjectSectionHeading>
@@ -117,9 +124,9 @@ export const GentleMonster = () => {
             </ProjectSectionContent>
             <Image
               srcSet={[GMLearningsImg, GMLearningsImg]}
-              placeholder={GMLearningsImg}
-              blur="LPQvtKWAjYWs~qj]WBWAt7Rjogxt"
-              alt="Configuration options for a component."
+              placeholder={GMLearningsPlaceholderImg.src}
+              // blur="LPQvtKWAjYWs~qj]WBWAt7Rjogxt"
+              alt="Gentle Monster product carousel with model wearing different glasses."
               sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
             />
           </ProjectSectionColumns>

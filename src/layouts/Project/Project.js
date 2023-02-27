@@ -53,7 +53,7 @@ export function ProjectHeader({ title, description, links = [], roles, className
                 style={cssProps({ delay: numToMs(initDelay + 300 + index * 140) })}
                 key={role}
               >
-                <Text secondary>{role}</Text>
+                <Text>{role}</Text>
               </li>
             ))}
           </ul>

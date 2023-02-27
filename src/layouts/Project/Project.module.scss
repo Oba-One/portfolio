@@ -161,7 +161,8 @@
 .header {
   padding-top: calc(var(--space5XL) + var(--space3XL));
   padding-bottom: 0;
-  // mix-blend-mode: darken;
+
+  // background: rgb(var(--rgbBackgroundLight));
 
   @media (--mediaLaptop) {
     padding-top: var(--space5XL);
@@ -231,6 +232,7 @@
 
 .title {
   margin-bottom: 0.5em;
+  color: rgb(var(--rgbText));
 
   @media (--mediaUseMotion) {
     opacity: 0;
@@ -240,6 +242,7 @@
 
 .description {
   padding-bottom: var(--spaceL);
+  color: rgb(var(--rgbText));
 
   @media (--mediaUseMotion) {
     opacity: 0;

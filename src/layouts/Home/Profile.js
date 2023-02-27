@@ -78,7 +78,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   reveal
                   delay={100}
                   placeholder={'LGMGV2^^u5HZ-@01?]V=?0?HXlY2'}
-                  blurDataURL={'LGMGV2^^u5HZ-@01?]V=?0?HXlY2'}
+                  // blurDataURL={'LGMGV2^^u5HZ-@01?]V=?0?HXlY2'}
                   srcSet={[profileImg, profileImgLarge]}
                   sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
                   alt="Me standing in front of the Torii on Miyajima, an island off the coast of Hiroshima in Japan"

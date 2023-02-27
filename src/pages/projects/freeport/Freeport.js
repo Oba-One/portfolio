@@ -5,7 +5,12 @@ import {
   FreeportArchitectureImg,
   FreeportDevelopmentImg,
   FreeportLearningsImg,
-  FreeportProblem2Img,
+  FreeportProblemImg,
+  FreeportBackgroundPlaceholderImg,
+  FreeportArchitecturePlaceholderImg,
+  FreeportDevelopmentPlaceholderImg,
+  FreeportLearningsPlaceholderImg,
+  FreeportProblemPlaceholderImg,
 } from 'assets/freeport'
 import {
   ProjectBackground,
@@ -45,8 +50,9 @@ export const Freeport = () => {
           opacity={isDark ? 0.5 : 0.8}
           src={FreeportDevelopmentImg}
           srcSet={`${FreeportDevelopmentImg.src} 1080w, ${FreeportDevelopmentImg.src} 2160w`}
-          placeholder={FreeportDevelopmentImg}
-          blur="L6LD#]0LS6rX0r~WD*R%Kk~WM{In"
+          placeholder={FreeportDevelopmentPlaceholderImg}
+          alt="Freeport gallery page showing 3D gallery built with threejs."
+          // blur="L6LD#]0LS6rX0r~WD*R%Kk~WM{In"
         />
         <ProjectHeader
           title={title}
@@ -63,11 +69,11 @@ export const Freeport = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[FreeportProblem2Img, FreeportProblem2Img]}
-              placeholder={FreeportProblem2Img}
-              blur="LHM%.jMxDi~q_3jYV@t8~qM{axof"
-              alt="A drag and drop storyboard style editor for creating an adaptive lesson."
+              srcSet={[FreeportProblemImg, FreeportProblemImg]}
+              placeholder={FreeportProblemPlaceholderImg}
+              // blur="LHM%.jMxDi~q_3jYV@t8~qM{axof"
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+              alt="Pieces of fine art hanging on the wall in a gallery."
             />
           </ProjectSectionColumns>
         </ProjectSection>
@@ -77,9 +83,9 @@ export const Freeport = () => {
               raised
               key={themeId}
               srcSet={[FreeportBackgroundImg, FreeportBackgroundImg]}
-              placeholder={FreeportBackgroundImg}
-              blur="LEPskuo|~qrs4TX7x^s8o~oID*kA"
-              alt="The homepage of the aero design system docs website linking to principles and components."
+              placeholder={FreeportBackgroundPlaceholderImg}
+              // blur="LEPskuo|~qrs4TX7x^s8o~oID*kA"
+              alt="Freeport landing page with a call to action to sign up for the launch list."
               sizes="100vw"
             />
             <ProjectTextRow>
@@ -94,9 +100,9 @@ export const Freeport = () => {
               raised
               key={themeId}
               srcSet={[FreeportLearningsImg, FreeportLearningsImg]}
-              placeholder={FreeportLearningsImg}
-              blur="LCRC[7-;?a9FIB~qt70000IUxuxu"
-              alt="A drag and drop storyboard style editor for creating an adaptive lesson."
+              placeholder={FreeportLearningsPlaceholderImg}
+              // blur="LCRC[7-;?a9FIB~qt70000IUxuxu"
+              alt="Freeport landing page showcasing Double Mickey and Mick Jagger pieces of art."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
             <ProjectTextRow>
@@ -109,9 +115,9 @@ export const Freeport = () => {
           <ProjectSectionContent>
             <Image
               srcSet={[FreeportArchitectureImg, FreeportArchitectureImg]}
-              placeholder={FreeportArchitectureImg}
-              blur="LgPjJkae%MkC_3j[R*jZ~qbHM{ae"
-              alt="Configuration options for a component."
+              placeholder={FreeportArchitecturePlaceholderImg}
+              // blur="LgPjJkae%MkC_3j[R*jZ~qbHM{ae"
+              alt="Freeport blog page on desktop."
               sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
             />
             <ProjectTextRow>

@@ -3,3 +3,8 @@ export { default as WefaSplashImg } from './wefa-splash.png'
 export { default as WefaAppHomeImg } from './wefa-app-home.png'
 export { default as WefaAppWorldImg } from './wefa-app-world.png'
 export { default as WefaBackgroundImg } from './wefa-background.jpg'
+
+export { default as WefaFruitsVsVegetablesImg } from './wefa-fruits-vs-vegetables.png'
+// export { default as WefaFruitsVsVegetablesPlaceholderImg } from './wefa-fruits-vs-vegetables-ph.png'
+export { default as WefaSpicesHerbsVsFlowersImg } from './wefa-spices-herbs-vs-flowers.png'
+// export { default as WefaSpicesHerbsVsFlowersPlaceholderImg } from './wefa-spices-herbs-vs-flowers-ph.png'

@@ -1,11 +1,12 @@
 import { Fragment } from 'react'
 
 import {
-  // WefaAppWorldImg,
+  WefaAppWorldImg,
   WefaBackgroundImg,
-  WefaAppHomeImg,
   WefaSplashImg,
   WefaStoryImg,
+  WefaFruitsVsVegetablesImg,
+  WefaSpicesHerbsVsFlowersImg,
 } from 'assets/wefa'
 import {
   ProjectBackground,
@@ -45,13 +46,14 @@ export const Wefa = () => {
         <ProjectBackground
           src={WefaBackgroundImg}
           srcSet={`${WefaBackgroundImg.src} 1280w, ${WefaBackgroundImg.src} 2560w`}
+          alt="WEFA landing page background image, showing an animated person gardening."
           placeholder={WefaBackgroundImg}
           opacity={isDark ? 0.5 : 0.6}
         />
         <ProjectHeader
           title={title}
           description={description}
-          url="https://www.best.edu.au/s/q2yjjvl7?data=8%404!9%4020303!10%40-15087&version=1"
+          links={project.links}
           roles={roles}
         />
         <ProjectSection>
@@ -63,37 +65,61 @@ export const Wefa = () => {
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}
-                srcSet={[WefaSplashImg, WefaSplashImg]}
-                placeholder={WefaSplashImg}
-                alt="Multiple user annotations on a shared layer."
+                src={WefaSplashImg}
+                srcSet={[WefaSplashImg.src, WefaSplashImg.src]}
+                placeholder={WefaSplashImg.src}
+                alt="WEFA app splash screen with logo centered."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
-                srcSet={[WefaAppHomeImg, WefaAppHomeImg]}
-                placeholder={WefaAppHomeImg}
-                alt="The layers sidebar design, now with user profiles."
+                src={WefaAppWorldImg}
+                srcSet={[WefaAppWorldImg.src, WefaAppWorldImg.src]}
+                placeholder={WefaAppWorldImg.src}
+                alt="WEFA plant selection screen showcasing a strawberry as an example."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>
           </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection light>
-          <ProjectSectionContent>
-            <ProjectTextRow>
+          <ProjectSectionColumns centered className={styles.columns}>
+            <div className={styles.sidebarImages}>
+              <Image
+                className={styles.sidebarImage}
+                src={WefaSpicesHerbsVsFlowersImg}
+                srcSet={[
+                  WefaSpicesHerbsVsFlowersImg.src,
+                  WefaSpicesHerbsVsFlowersImg.src,
+                ]}
+                placeholder={WefaSpicesHerbsVsFlowersImg.src}
+                alt="WEFA app spices/herbs vs flowers selection screen."
+                sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
+              />
+              <Image
+                className={styles.sidebarImage}
+                src={WefaFruitsVsVegetablesImg}
+                srcSet={[WefaFruitsVsVegetablesImg.src, WefaFruitsVsVegetablesImg.src]}
+                placeholder={WefaFruitsVsVegetablesImg.src}
+                alt="WEFA app fruits vs vegetables selection screen."
+                sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
+              />
+            </div>
+            <div className={styles.imagesText}>
               <ProjectSectionHeading>What is it?</ProjectSectionHeading>
               <ProjectSectionText>{project.architecture}</ProjectSectionText>
-            </ProjectTextRow>
-            <Image
-              srcSet={[WefaStoryImg, WefaStoryImg]}
-              placeholder={WefaStoryImg}
-              alt="The new My Slides tab in slice, showing annotated and favorited slides."
-              sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
-            />
-          </ProjectSectionContent>
+            </div>
+          </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection>
           <ProjectSectionContent>
+            <Image
+              src={WefaStoryImg}
+              srcSet={[WefaStoryImg.src, WefaStoryImg.src]}
+              placeholder={WefaStoryImg.src}
+              alt="WEFA comic story cover art. Detailing the protagonists walking out of a cave."
+              sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
+            />
             <ProjectTextRow>
               <ProjectSectionHeading>Story & Release</ProjectSectionHeading>
               <ProjectSectionText>{project.development}</ProjectSectionText>
