@@ -77,7 +77,7 @@ export const Home = () => {
   return (
     <div className={styles.home}>
       <Meta
-        title="Developer & Architect"
+        title="Developer & Engineer"
         description="Developer portfolio of Afolabi Aiyeloja — a developer working on web & mobile
           apps with a focus on Augmented Reality, Blockchains, & Artificial Intelligence."
       />
