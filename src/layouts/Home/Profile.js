@@ -20,16 +20,21 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hello there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I’m Afo, currently I live in Califormia working as a fullstack developer. My
-      projects include UX design, UI animations, and icon illustration. Being comfortable
-      with code allows me to rapidly prototype and validate experiences. If you’re
-      interested in the tools and software I use check out my
+      I’m Afo, currently I live in California working as a software developer. My projects
+      include front and back end development, architecture, and design with a focus on
+      Augmented Reality and Blockchains. I’m currently working on my project WEFA, while
+      open to new collaborations and opportunities.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Some of my hobbies are deep dives into comic and fantansy theories like Marvel and
-      Star Wars, playing and watching sports, and reading, currently reading{' '}
-      <Link href="/projects/volkihar-knight">The Rust Programming Book</Link>. I’m always
-      down to discuss ideas or projects, so feel free to reach out.
+      Some of my hobbies are deep dives into comic and fantansy theories like{' '}
+      <Link href="https://www.youtube.com/@NewRockstars">Marvel</Link> and{' '}
+      <Link href="https://www.youtube.com/@StarWarsTheory">Star Wars</Link>, playing and
+      watching sports, making <Link href="/projects/volkihar-knight">music</Link> and
+      reading. Currently diving in{' '}
+      <Link href="https://www.amazon.com/Rust-Programming-Language-Steve-Klabnik/dp/1593278284">
+        The Rust Programming Book
+      </Link>
+      . I’m always open to discuss ideas or projects, so feel free to reach out!
     </Text>
   </Fragment>
 )
