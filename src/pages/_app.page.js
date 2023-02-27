@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { Analytics } from '@vercel/analytics/react'
 import { Fragment, createContext, useEffect, useReducer } from 'react'
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 
@@ -66,6 +67,7 @@ const App = ({ Component, pageProps }) => {
                 >
                   <ScrollRestore />
                   <Component {...pageProps} />
+                  <Analytics />
                 </m.div>
               </AnimatePresence>
             </main>
