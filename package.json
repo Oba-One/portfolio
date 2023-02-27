@@ -15,7 +15,7 @@
     "lint": "next lint",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
     "optimize:assets": "zsh scripts/optimize-assets.sh",
-    "optimize:resize": "npx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':25%,'height':25%,'method':'lanczos3'}\" src/assets/*.webp"
+    "optimize:resize": "npx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':'25%','height':'25%','method':'lanczos3'}\" src/assets/*.webp"
   },
   "dependencies": {
     "cors": "2.8.5",
@@ -29,6 +29,7 @@
     "zod": "^3.20.6"
   },
   "devDependencies": {
+    "@squoosh/cli": "^0.7.3",
     "@storybook/addon-a11y": "^6.5.10",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-controls": "^6.5.10",
