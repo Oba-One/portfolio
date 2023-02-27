@@ -66,3 +66,8 @@ public/og
 .serverless
 .next
 .DS_Store
+# Sentry
+.sentryclirc
+
+# Sentry
+next.config.original.js

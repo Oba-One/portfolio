@@ -18,6 +18,7 @@
     "optimize:resize": "npx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':'25%','height':'25%','method':'lanczos3'}\" src/assets/*.webp"
   },
   "dependencies": {
+    "@sentry/nextjs": "^7.38.0",
     "cors": "2.8.5",
     "framer-motion": "^7.1.0",
     "next": "^12.2.5",
