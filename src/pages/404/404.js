@@ -27,7 +27,7 @@ import {
   XMenEvolutionVid,
   XMenVid,
   YuGiOhVid,
-  ZaboomafooVid,
+  ZoboomafooVid,
 } from 'assets/nostalgia'
 
 import styles from './404.module.scss'
@@ -42,16 +42,16 @@ const videos = [
   },
   {
     src: AvatarVid,
-    alt: 'Avatar the Last Airbender Intro',
+    alt: 'Avatar the Last Airbender Opening Theme',
     title: 'Avatar: The Last Airbender',
     imdb: 'https://www.imdb.com/title/tt0417299',
   },
-  {
-    src: CaillouVid,
-    alt: 'Caillou Intro Song',
-    title: 'Caillou',
-    imdb: 'https://www.imdb.com/title/tt0262153',
-  },
+  // {
+  //   src: CaillouVid,
+  //   alt: 'Caillou Intro Song',
+  //   title: 'Caillou',
+  //   imdb: 'https://www.imdb.com/title/tt0262153',
+  // },
   {
     src: CliffordVid,
     alt: 'Clifford the Big Red Dog Intro',
@@ -72,13 +72,13 @@ const videos = [
   },
   {
     src: FreshPrinceVid,
-    alt: 'Fresh Prince of Bel-Air Intro, Song By DJ Jazzy Jeff & The Fresh Prince',
+    alt: 'Fresh Prince of Bel-Air Intro By Jazzy Jeff & The Fresh Prince',
     title: 'Fresh Prince of Bel-Air',
     imdb: 'https://www.imdb.com/title/tt0098800',
   },
   {
     src: JusticeLeagueVid,
-    alt: 'Justice League Intro',
+    alt: 'Justice League: Unlimited',
     title: 'Justice League',
     imdb: 'https://www.imdb.com/title/tt6025022',
   },
@@ -96,25 +96,25 @@ const videos = [
   },
   {
     src: MalcolmVid,
-    alt: 'Malcolm in the Middle Intro',
+    alt: 'Malcolm in the Middle',
     title: 'Malcolm in the Middle',
     imdb: 'https://www.imdb.com/title/tt0212671',
   },
   {
     src: MarriedWithChildrenVid,
-    alt: 'Married with Children Intro',
+    alt: 'Married with Children',
     title: 'Married with Children',
     imdb: 'https://www.imdb.com/title/tt0092400',
   },
   {
     src: MisterRogersVid,
-    alt: 'Mister Rogers Intro, Song By Fred Rogers',
+    alt: 'Mister Rogers Intro, By Fred Rogers',
     title: 'Mister Rogers',
     imdb: 'https://www.imdb.com/title/tt0062588',
   },
   {
     src: PokemonVid,
-    alt: 'Pokemon Intro Song',
+    alt: 'Damn right I wanna be the very best!',
     title: 'Pokemon',
     imdb: 'https://www.imdb.com/title/tt0168366',
   },
@@ -126,26 +126,26 @@ const videos = [
   },
   {
     src: XMenEvolutionVid,
-    alt: 'Intro for 2000s show X Men Evolution',
+    alt: '2000s X Men Evolution',
     title: 'X Men Evolution',
     imdb: 'https://www.imdb.com/title/tt0247827',
   },
   {
     src: XMenVid,
-    alt: 'Classic X Men Into Song from 90s',
+    alt: 'X Men 90s',
     title: 'X Men',
     imdb: 'https://www.imdb.com/title/tt0103584',
   },
   {
     src: YuGiOhVid,
-    alt: 'Yu-Gi-Oh Intro',
+    alt: 'Yu-Gi-Oh Original Intro',
     title: 'Yu-Gi-Oh',
     imdb: 'https://www.imdb.com/title/tt0249327',
   },
   {
-    src: ZaboomafooVid,
-    alt: 'Zaboomafoo Intro Song',
-    title: 'Zaboomafoo',
+    src: ZoboomafooVid,
+    alt: 'Zoboomafoo Intro',
+    title: 'Zoboomafoo',
     imdb: 'https://www.imdb.com/title/tt0190211',
   },
 ]
