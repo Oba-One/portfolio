@@ -1,6 +1,6 @@
 export { default as FlowArchitectureImg } from './flow-architecture.webp'
 export { default as FlowArchitecture2Img } from './flow-architecture2.webp'
-export { default as FlowProblemImg } from './flow-problem.jpg'
+export { default as FlowProblemImg } from './flow-problem.webp'
 export { default as FlowMobileCollectionsImg } from './flow-mobile-collections.webp'
 export { default as FlowMobileProfileImg } from './flow-mobile-profile.webp'
 export { default as FlowTabletCollectionsImg } from './flow-tablet-collections.webp'
