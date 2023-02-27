@@ -15,7 +15,7 @@
     "lint": "next lint",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
     "optimize:assets": "zsh scripts/optimize-assets.sh",
-    "optimize:resize": "npx @squoosh/cli -s '-mobile' --webp --resize \"{'enabled':true,'width':25%,'height':25%,'method':'lanczos3'}\" src/assets/*.webp"
+    "optimize:resize": "npx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':25%,'height':25%,'method':'lanczos3'}\" src/assets/*.webp"
   },
   "dependencies": {
     "cors": "2.8.5",
