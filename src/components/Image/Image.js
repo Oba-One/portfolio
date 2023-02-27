@@ -1,14 +1,11 @@
-import { Button } from 'components/Button'
-import { Icon } from 'components/Icon'
+// import Img from 'next/image'
+import { useCallback, useRef, useState } from 'react'
+
 import { useTheme } from 'components/ThemeProvider'
-import { useReducedMotion } from 'framer-motion'
-import { useHasMounted, useInViewport } from 'hooks'
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
-import { resolveSrcFromSrcSet, srcSetToString } from 'utils/image'
+import { useInViewport } from 'hooks'
+import { srcSetToString } from 'utils/image'
 import { classes, cssProps, numToMs } from 'utils/style'
 import styles from './Image.module.scss'
-
-import Img from 'next/image'
 
 export const Image = ({
   className,
@@ -25,7 +22,7 @@ export const Image = ({
   const { themeId } = useTheme()
   const containerRef = useRef()
   const src = baseSrc || srcSet?.[0]
-  const inViewport = useInViewport(containerRef, !getIsVideo(src))
+  const inViewport = useInViewport(containerRef, true)
 
   const onLoad = useCallback(() => {
     setLoaded(true)
@@ -48,7 +45,6 @@ export const Image = ({
         inViewport={inViewport}
         reveal={reveal}
         src={src}
-        theme={themeId}
         srcSet={srcSet}
         placeholder={placeholder}
         {...rest}
@@ -63,85 +59,17 @@ const ImageElements = ({
   inViewport,
   srcSet,
   placeholder,
-  // theme,
   delay,
   src,
   alt,
-  play = true,
-  restartOnPause,
   reveal,
   sizes,
-  noPauseButton,
   ...rest
 }) => {
-  const reduceMotion = useReducedMotion()
   const [showPlaceholder, setShowPlaceholder] = useState(true)
-  const [playing, setPlaying] = useState(!reduceMotion)
-  const [videoSrc, setVideoSrc] = useState()
-  const [videoInteracted, setVideoInteracted] = useState(false)
   const placeholderRef = useRef()
-  const videoRef = useRef()
-  const isVideo = getIsVideo(src)
   const showFullRes = inViewport
   const srcSetString = srcSetToString(srcSet)
-  const hasMounted = useHasMounted()
-
-  useEffect(() => {
-    const resolveVideoSrc = async () => {
-      const resolvedVideoSrc = await resolveSrcFromSrcSet({ srcSet, sizes })
-      setVideoSrc(resolvedVideoSrc)
-    }
-
-    if (isVideo && srcSet) {
-      resolveVideoSrc()
-    } else if (isVideo) {
-      setVideoSrc(src.src)
-    }
-  }, [isVideo, sizes, src, srcSet])
-
-  useEffect(() => {
-    if (!videoRef.current || !videoSrc) return
-
-    const playVideo = () => {
-      setPlaying(true)
-      videoRef.current.play()
-    }
-
-    const pauseVideo = () => {
-      setPlaying(false)
-      videoRef.current.pause()
-    }
-
-    if (!play) {
-      pauseVideo()
-
-      if (restartOnPause) {
-        videoRef.current.currentTime = 0
-      }
-    }
-
-    if (videoInteracted) return
-
-    if (!inViewport) {
-      pauseVideo()
-    } else if (inViewport && !reduceMotion && play) {
-      playVideo()
-    }
-  }, [inViewport, play, reduceMotion, restartOnPause, videoInteracted, videoSrc])
-
-  const togglePlaying = event => {
-    event.preventDefault()
-
-    setVideoInteracted(true)
-
-    if (videoRef.current.paused) {
-      setPlaying(true)
-      videoRef.current.play()
-    } else {
-      setPlaying(false)
-      videoRef.current.pause()
-    }
-  }
 
   return (
     <div
@@ -150,50 +78,22 @@ const ImageElements = ({
       data-visible={inViewport || loaded}
       style={cssProps({ delay: numToMs(delay + 1000) })}
     >
-      {isVideo && hasMounted && (
-        <Fragment>
-          <video
-            muted
-            loop
-            playsInline
-            className={styles.element}
-            data-loaded={loaded}
-            autoPlay={!reduceMotion}
-            role="img"
-            onLoadStart={onLoad}
-            src={videoSrc}
-            aria-label={alt}
-            ref={videoRef}
-            {...rest}
-          />
-          {!noPauseButton && (
-            <Button className={styles.button} onClick={togglePlaying}>
-              <Icon icon={playing ? 'pause' : 'play'} />
-              {playing ? 'Pause' : 'Play'}
-            </Button>
-          )}
-        </Fragment>
-      )}
-      {!isVideo && (
-        <img
-          className={styles.element}
-          data-loaded={loaded}
-          onLoad={onLoad}
-          decoding="async"
-          src={src.src}
-          srcSet={showFullRes ? srcSetString : undefined}
-          width={src.width}
-          height={src.height}
-          alt={alt}
-          sizes={sizes}
-          // objectFit="scale-down"
-          // placeholder="blur"
-          // blurDataURL={theme === 'dark' ? '' : 'LCRC[7-;?a9FIB~qt70000IUxuxu'}
-          {...rest}
-        />
-      )}
+      <img
+        className={styles.element}
+        data-loaded={loaded}
+        onLoad={onLoad}
+        decoding="async"
+        src={showFullRes ? src.src : undefined}
+        srcSet={showFullRes ? srcSetString : undefined}
+        width={src.width}
+        height={src.height}
+        alt={alt}
+        sizes={sizes}
+        {...rest}
+      />
+
       {showPlaceholder && (
-        <Img
+        <img
           aria-hidden
           className={styles.placeholder}
           data-loaded={loaded}
@@ -210,8 +110,4 @@ const ImageElements = ({
       )}
     </div>
   )
-}
-
-function getIsVideo(src) {
-  return typeof src.src === 'string' && src.src.endsWith('.mp4')
 }
