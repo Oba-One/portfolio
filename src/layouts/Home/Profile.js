@@ -29,7 +29,8 @@ const ProfileText = ({ visible, titleId }) => (
       Some of my hobbies are deep dives into comic and fantansy theories like{' '}
       <Link href="https://www.youtube.com/@NewRockstars">Marvel</Link> and{' '}
       <Link href="https://www.youtube.com/@StarWarsTheory">Star Wars</Link>, playing and
-      watching sports, making <Link href="/projects/volkihar-knight">music</Link> and
+      watching sports, making{' '}
+      <Link href="https://soundcloud.com/oba_one/sets/hyperloop-to-la">music</Link> and
       reading. Currently diving in{' '}
       <Link href="https://www.amazon.com/Rust-Programming-Language-Steve-Klabnik/dp/1593278284">
         The Rust Programming Book
