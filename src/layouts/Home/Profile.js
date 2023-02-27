@@ -37,7 +37,7 @@ const ProfileText = ({ visible, titleId }) => (
       . I’m always open to discuss ideas or projects, so feel free to reach out!
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      If you want to know a little bit about me click on the Nostalhia link below.
+      If you want to know a little bit more about me click on the Nostalgia link below.
     </Text>
   </Fragment>
 )
