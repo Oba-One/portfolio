@@ -31,6 +31,7 @@ import {
 } from 'assets/nostalgia'
 
 import styles from './404.module.scss'
+import { Link } from 'components/Link'
 
 const videos = [
   {
@@ -205,8 +206,11 @@ export function Page404() {
                   )}
                 </Heading>
                 <Text className={styles.description} data-visible={visible} as="p">
-                  This page either doesn’t exist or was deleted. Refresh for a random
-                  nostalgia trip.
+                  This page either doesn’t exist or was deleted.{' '}
+                  <Link href="" onClick={() => window.location.reload()}>
+                    Refresh
+                  </Link>{' '}
+                  for a random nostalgia trip.
                 </Text>
                 <Button
                   secondary
