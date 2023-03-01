@@ -16,5 +16,10 @@ Sentry.init({
   // If the entire session is not sampled, use the below sample rate to sample
   // sessions when an error occurs.
   replaysOnErrorSampleRate: 1.0,
-  integrations: [new Sentry.Replay()],
+  integrations: [
+    new Sentry.Replay({
+      maskAllText: false,
+      blockAllMedia: false,
+    }),
+  ],
 })
