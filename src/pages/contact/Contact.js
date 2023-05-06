@@ -11,7 +11,7 @@ import { Section } from 'components/Section'
 import { Heading } from 'components/Heading'
 import { Divider } from 'components/Divider'
 import { Transition } from 'components/Transition'
-import { DecoderText } from 'components/DecoderText'
+// import { DecoderText } from 'components/DecoderText'
 import { tokens } from 'components/ThemeProvider/theme'
 import { cssProps, msToNum, numToMs } from 'utils/style'
 
@@ -80,7 +80,7 @@ export const Contact = () => {
               as="h1"
               style={getDelay(tokens.base.durationXS, initDelay, 0.3)}
             >
-              <DecoderText text="Say hello" start={status !== 'exited'} delay={300} />
+              {/* <DecoderText text="Say hello" start={status !== 'exited'} delay={300} /> */}
             </Heading>
             <Divider
               className={styles.divider}

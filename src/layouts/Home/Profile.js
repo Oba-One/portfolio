@@ -2,7 +2,7 @@ import profileKatakana from 'assets/katakana-profile.svg?url'
 import profileImgLarge from 'assets/profile-large.webp'
 import profileImg from 'assets/profile.webp'
 import { Button } from 'components/Button'
-import { DecoderText } from 'components/DecoderText'
+// import { DecoderText } from 'components/DecoderText'
 import { Divider } from 'components/Divider'
 import { Heading } from 'components/Heading'
 import { Image } from 'components/Image'
@@ -17,7 +17,7 @@ import styles from './Profile.module.scss'
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
     <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
-      <DecoderText text="Hello there" start={visible} delay={500} />
+      {/* <DecoderText text="Hello there" start={visible} delay={500} /> */}
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       I’m Afo, currently I live in California working as a software developer. My projects
