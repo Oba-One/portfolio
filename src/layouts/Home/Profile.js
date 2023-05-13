@@ -1,4 +1,4 @@
-import profileKatakana from 'assets/katakana-profile.svg?url'
+// import profileKatakana from 'assets/katakana-profile.svg?url'
 import profileImgLarge from 'assets/profile-large.webp'
 import profileImg from 'assets/profile.webp'
 import { Button } from 'components/Button'
@@ -100,7 +100,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   className={styles.svg}
                   data-visible={visible}
                 >
-                  <use href={`${profileKatakana}#katakana-profile`} />
+                  {/* <use href={`${profileKatakana}#katakana-profile`} /> */}
                 </svg>
               </div>
             </div>
