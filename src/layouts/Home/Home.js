@@ -15,7 +15,7 @@ import { FlowArchitectureImg, FlowArchitecture2Img } from 'assets/mira-flow'
 import styles from './Home.module.css'
 import { projects } from '../../constants'
 
-const disciplines = ['Engineer', 'Producer', 'Architect']
+const disciplines = ['Engineer', 'Creator', 'Architect']
 
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([])

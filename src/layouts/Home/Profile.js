@@ -1,6 +1,5 @@
 // import profileKatakana from 'assets/katakana-profile.svg?url'
-import profileImgLarge from 'assets/profile-large.webp'
-import profileImg from 'assets/profile.webp'
+import profileImg from 'assets/profile.jpeg'
 import { Button } from 'components/Button'
 // import { DecoderText } from 'components/DecoderText'
 import { Divider } from 'components/Divider'
@@ -88,7 +87,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   delay={100}
                   placeholder={'LGMGV2^^u5HZ-@01?]V=?0?HXlY2'}
                   // blurDataURL={'LGMGV2^^u5HZ-@01?]V=?0?HXlY2'}
-                  srcSet={[profileImg, profileImgLarge]}
+                  srcSet={[profileImg]}
                   sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
                   alt="Me standing in front of the Torii on Miyajima, an island off the coast of Hiroshima in Japan"
                 />
