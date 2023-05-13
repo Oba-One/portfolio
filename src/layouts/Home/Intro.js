@@ -65,7 +65,7 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
             <DisplacementSphere />
             <header className={styles.text}>
               <h1 className={styles.name} data-visible={visible} id={titleId}>
-                <DecoderText text="Afolabi Aiyeloja" delay={300} />
+                {/* <DecoderText text="Afolabi Aiyeloja" delay={300} /> */}
               </h1>
               <Heading level={0} as="h2" className={styles.title}>
                 <VisuallyHidden className={styles.label}>
