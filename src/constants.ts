@@ -51,16 +51,16 @@ export const projects = {
     links: [
       {
         label: 'View Site',
-        link: 'https://wefa.app',
+        link: 'https://why.wefa.app',
       },
       {
         label: 'View Github',
         link: 'https://github.com/wefa-tech',
       },
-      {
-        label: 'View Alpha Deck',
-        link: 'https://docs.google.com/presentation/d/1BFq2bfOPHuCDJVfF2roWiqw_EhmLHsOqq3xHYJMf9b0/edit?usp=sharing',
-      },
+      // {
+      //   label: 'View Alpha Deck',
+      //   link: 'https://docs.google.com/presentation/d/1BFq2bfOPHuCDJVfF2roWiqw_EhmLHsOqq3xHYJMf9b0/edit?usp=sharing',
+      // },
     ],
   },
   freeport: {
