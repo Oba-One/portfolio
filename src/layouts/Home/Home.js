@@ -7,10 +7,11 @@ import { Profile } from 'layouts/Home/Profile'
 import { ProjectSummary } from 'layouts/Home/ProjectSummary'
 
 import { GMBackgroundImg } from 'assets/gm'
+import { SynLearningsImg } from 'assets/syn'
 import { FreeportDevelopmentImg } from 'assets/freeport'
 import { ConnectBackgroundImg } from 'assets/mira-connect'
-import { WefaAppWorldImg, WefaAppHomeImg } from 'assets/wefa'
 import { FlowArchitectureImg, FlowArchitecture2Img } from 'assets/mira-flow'
+import { WefaOnboardSelectElementImg, WefaOnboardSelectPlantImg } from 'assets/wefa'
 
 import styles from './Home.module.css'
 import { projects } from '../../constants'
@@ -26,7 +27,7 @@ export const Home = () => {
   const projectThree = useRef()
   const projectFour = useRef()
   const projectFive = useRef()
-  // const projectSix = useRef();
+  const projectSix = useRef()
 
   const details = useRef()
 
@@ -38,6 +39,7 @@ export const Home = () => {
       projectThree,
       projectFour,
       projectFive,
+      projectSix,
       details,
     ]
 
@@ -87,31 +89,31 @@ export const Home = () => {
         disciplines={disciplines}
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
-      {/* <ProjectSummary
-        id="project-1"
-        sectionRef={projectOne}
-        visible={visibleSections.includes(projectOne.current)}
-        index={1}
-        title={projects['dao_squad'].title}
-        description={projects['dao_squad'].description}
-        buttonText={projects['dao_squad'].cta.label}
-        buttonLink={projects['dao_squad'].cta.link}
-        model={{
-          type: projects['dao_squad'].platform,
-          alt: 'Smart Sparrow lesson builder',
-          textures: [
-            {
-              srcSet: [sprTexture, sprTextureLarge],
-              placeholder: sprTexturePlaceholder,
-            },
-          ],
-        }}
-      /> */}
       <ProjectSummary
         id="project-1"
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
+        title={projects['syn'].title}
+        description={projects['syn'].description}
+        buttonText={projects['syn'].cta.label}
+        buttonLink={projects['syn'].cta.link}
+        model={{
+          type: projects['syn'].platform,
+          alt: 'Syn beta home page on desktop.',
+          textures: [
+            {
+              srcSet: [SynLearningsImg, SynLearningsImg],
+              placeholder: SynLearningsImg,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-2"
+        sectionRef={projectTwo}
+        visible={visibleSections.includes(projectTwo.current)}
+        index={2}
         title={projects['wefa'].title}
         description={projects['wefa'].description}
         buttonText={projects['wefa'].cta.label}
@@ -121,29 +123,29 @@ export const Home = () => {
           alt: 'App login screen',
           textures: [
             {
-              srcSet: [WefaAppWorldImg, WefaAppWorldImg],
-              placeholder: WefaAppWorldImg,
+              srcSet: [WefaOnboardSelectElementImg, WefaOnboardSelectElementImg],
+              placeholder: WefaOnboardSelectElementImg,
             },
             {
-              srcSet: [WefaAppHomeImg, WefaAppHomeImg],
-              placeholder: WefaAppHomeImg,
+              srcSet: [WefaOnboardSelectPlantImg, WefaOnboardSelectPlantImg],
+              placeholder: WefaOnboardSelectPlantImg,
             },
           ],
         }}
       />
       <ProjectSummary
-        id="project-2"
+        id="project-3"
         alternate
-        sectionRef={projectTwo}
-        visible={visibleSections.includes(projectTwo.current)}
-        index={2}
+        sectionRef={projectThree}
+        visible={visibleSections.includes(projectThree.current)}
+        index={3}
         title={projects['freeport'].title}
         description={projects['freeport'].description}
         buttonText={projects['freeport'].cta.label}
         buttonLink={projects['freeport'].cta.link}
         model={{
           type: projects['freeport'].platform,
-          alt: 'Annotating a biomedical image in the Slice app',
+          alt: 'Freeport gallery page',
           textures: [
             {
               srcSet: [FreeportDevelopmentImg, FreeportDevelopmentImg],
@@ -153,17 +155,17 @@ export const Home = () => {
         }}
       />
       <ProjectSummary
-        id="project-3"
-        sectionRef={projectThree}
-        visible={visibleSections.includes(projectThree.current)}
-        index={3}
+        id="project-4"
+        sectionRef={projectFour}
+        visible={visibleSections.includes(projectFour.current)}
+        index={4}
         title={projects['mira_connect'].title}
         description={projects['mira_connect'].description}
         buttonText={projects['mira_connect'].cta.label}
         buttonLink={projects['mira_connect'].cta.link}
         model={{
           type: projects['mira_connect'].platform,
-          alt: 'Annotating a biomedical image in the Slice app',
+          alt: 'Mira connect call',
           textures: [
             {
               srcSet: [ConnectBackgroundImg, ConnectBackgroundImg],
@@ -173,11 +175,11 @@ export const Home = () => {
         }}
       />
       <ProjectSummary
-        id="project-4"
+        id="project-5"
         alternate
-        sectionRef={projectFour}
-        visible={visibleSections.includes(projectFour.current)}
-        index={4}
+        sectionRef={projectFive}
+        visible={visibleSections.includes(projectFive.current)}
+        index={5}
         title={projects['mira_flow'].title}
         description={projects['mira_flow'].description}
         buttonText={projects['mira_flow'].cta.label}
@@ -198,17 +200,17 @@ export const Home = () => {
         }}
       />
       <ProjectSummary
-        id="project-5"
-        sectionRef={projectFive}
-        visible={visibleSections.includes(projectFive.current)}
-        index={5}
+        id="project-6"
+        sectionRef={projectSix}
+        visible={visibleSections.includes(projectSix.current)}
+        index={6}
         title={projects['gentle_monster'].title}
         description={projects['gentle_monster'].description}
         buttonText={projects['gentle_monster'].cta.label}
         buttonLink={projects['gentle_monster'].cta.link}
         model={{
           type: projects['gentle_monster'].platform,
-          alt: 'Annotating a biomedical image in the Slice app',
+          alt: 'Gentel monster home page',
           textures: [
             {
               srcSet: [GMBackgroundImg, GMBackgroundImg],

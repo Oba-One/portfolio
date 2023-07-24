@@ -1,4 +1,30 @@
 export const projects = {
+  syn: {
+    title: 'Synesthesia',
+    description:
+      'Using generative art to create a more personal relationship with music and art',
+    cta: {
+      label: 'View Synesthesia',
+      link: '/projects/synesthesia',
+    },
+    platform: 'laptop',
+    year: 2023,
+    skills: ['Solidity', 'Go', 'GraphQL', 'React', 'XState'],
+    problem:
+      'Music driven experiences have become diluted whether that’s streaming music or going to a live show with high price for merch with no utility. Syn using generative art and blockchains aims to connect experiences in a tangible way creating a unique generative art piece. The art also has utility as an NFT to give access to future experiences or other benefits such as discounts for merchandise.',
+    architecture:
+      "The initial experience being crafted is taking a synthesis of a person's Sound.xyz collection and based on the genres it contains creating a visual output mapping genre to color. The app is built with a Go GraphQL backend that queries the Sound.xyz API to get a user's sounds. The API is utilized by a frontend built in React that fetches the user stats upon wallet connection. If a user has not bought sounds (NFTs) we defer to their liked sounds on the platform if none then we encourage the user to 1st like then purchase some. The state is a combination of react hooks and xState alongside React Spring for animations. A user when minting makes a transaction with an ArtBlocks (generative art smart contract provider) based contract that generates a unique hash that can be used as an input to render the generative art.",
+    development:
+      'Initial development was focused on determining what stats to query and what API we needed to utilize. Initially the stats were more numerical based and after further discussion I brought up the idea of colors and genres. One of the core goals of the art was to show similarity amongst taste and experiences while maintaining uniqueness. After settling on the stats data needed I built on the API with gqlgen a Go package, during this time more thought started going towards the blockchain integration. After the API was complete the frontend was built in parallel with designs. An idea I presented here was using grayscale before a user connected their wallet then upon connecting transitioning the interface to the colors mapped from the genres in their stats. Some other aspects were the Synth card and stats reel which were built using react spring to animate the components.',
+    learnings:
+      'The project is still in development as we continue to build and determine the best path forward for product launch. We have ideas on how to apply this to live events soon and will be hacking on a project for an upcoming hackathon. I’ve personally learned a ton about generative art and its potential to connect music and art, alongside creating a deeper relationship between artists and fans.',
+    links: [
+      {
+        label: 'View Site',
+        link: 'https://syn.art',
+      },
+    ],
+  },
   dao_squad: {
     title: 'DAO Squad',
     description:

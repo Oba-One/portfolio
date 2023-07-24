@@ -1,12 +1,12 @@
 import { Fragment } from 'react'
 
 import {
-  WefaAppWorldImg,
-  WefaBackgroundImg,
-  WefaSplashImg,
   WefaStoryImg,
-  WefaFruitsVsVegetablesImg,
-  WefaSpicesHerbsVsFlowersImg,
+  WefaDeckPlantsImg,
+  WefaBackgroundImg,
+  WefaOnboardSelectPlantImg,
+  WefaOnboardSelectElementImg,
+  WefaOnboardGeneratedCreaturesImg,
 } from 'assets/wefa'
 import {
   ProjectBackground,
@@ -65,17 +65,20 @@ export const Wefa = () => {
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}
-                src={WefaSplashImg}
-                srcSet={[WefaSplashImg.src, WefaSplashImg.src]}
-                placeholder={WefaSplashImg.src}
+                src={WefaDeckPlantsImg}
+                srcSet={[WefaDeckPlantsImg.src, WefaDeckPlantsImg.src]}
+                placeholder={WefaDeckPlantsImg.src}
                 alt="WEFA app splash screen with logo centered."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
-                src={WefaAppWorldImg}
-                srcSet={[WefaAppWorldImg.src, WefaAppWorldImg.src]}
-                placeholder={WefaAppWorldImg.src}
+                src={WefaOnboardGeneratedCreaturesImg}
+                srcSet={[
+                  WefaOnboardGeneratedCreaturesImg.src,
+                  WefaOnboardGeneratedCreaturesImg.src,
+                ]}
+                placeholder={WefaOnboardGeneratedCreaturesImg.src}
                 alt="WEFA plant selection screen showcasing a strawberry as an example."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -87,20 +90,20 @@ export const Wefa = () => {
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}
-                src={WefaSpicesHerbsVsFlowersImg}
+                src={WefaOnboardSelectElementImg}
                 srcSet={[
-                  WefaSpicesHerbsVsFlowersImg.src,
-                  WefaSpicesHerbsVsFlowersImg.src,
+                  WefaOnboardSelectElementImg.src,
+                  WefaOnboardSelectElementImg.src,
                 ]}
-                placeholder={WefaSpicesHerbsVsFlowersImg.src}
+                placeholder={WefaOnboardSelectElementImg.src}
                 alt="WEFA app spices/herbs vs flowers selection screen."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
-                src={WefaFruitsVsVegetablesImg}
-                srcSet={[WefaFruitsVsVegetablesImg.src, WefaFruitsVsVegetablesImg.src]}
-                placeholder={WefaFruitsVsVegetablesImg.src}
+                src={WefaOnboardSelectPlantImg}
+                srcSet={[WefaOnboardSelectPlantImg.src, WefaOnboardSelectPlantImg.src]}
+                placeholder={WefaOnboardSelectPlantImg.src}
                 alt="WEFA app fruits vs vegetables selection screen."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
