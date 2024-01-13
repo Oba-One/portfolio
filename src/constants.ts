@@ -1,4 +1,30 @@
 export const projects = {
+  waves: {
+    title: 'Waves',
+    description:
+      'Using generative art to create a more personal relationship with music and art',
+    cta: {
+      label: 'View Waves',
+      link: '/projects/waves',
+    },
+    platform: 'phone',
+    year: 2023,
+    skills: ['Solidity', 'Go', 'GraphQL', 'React', 'XState'],
+    problem:
+      'Music driven experiences have become diluted whether that’s streaming music or going to a live show with high prices for merch with no utility or perks. Syn using generative art and blockchains aims to connect experiences in a tangible way creating unique generative art. The art also has utility as an NFT to give access to future experiences or other benefits such as discounts for merch.',
+    architecture:
+      "The initial experience being crafted is taking a synthesis of a person's Sound.xyz collection and based on the genres it contains creating a visual output mapping genre to color. The app is built with a Go GraphQL backend that queries the Sound.xyz API to get a user's sounds. The API is utilized by a frontend built in React that fetches the user stats upon wallet connection. If a user has not bought sounds (NFTs) we defer to their liked sounds on the platform if none then we encourage the user to 1st like then purchase some. The state is a combination of react hooks and xState alongside React Spring for animations. A user when minting makes a transaction with an ArtBlocks (generative art smart contract provider) based contract that generates a unique hash that can be used as an input to render the generative art.",
+    development:
+      'Initial development was focused on determining what stats to query and what API we needed to utilize. Initially the stats were more numerical based and after further discussion I brought up the idea of colors and genres. One of the core goals of the art was to show similarity amongst taste and experiences while maintaining uniqueness. After settling on the stats data needed I built on the API with gqlgen a Go package, during this time more thought started going towards the blockchain integration. After the API was complete the frontend was built in parallel with designs. An idea I presented here was using grayscale before a user connected their wallet then upon connecting transitioning the interface to the colors mapped from the genres in their stats. Some other aspects were the Synth card and stats reel which were built using react spring to animate the components.',
+    learnings:
+      'The project is still in development as we continue to build and determine the best path forward for product launch. We have ideas on how to apply this to live events soon and will be hacking on a project for an upcoming hackathon. I’ve personally learned a ton about generative art and its potential to connect music and art, alongside creating a deeper relationship between artists and fans.',
+    links: [
+      {
+        label: 'View Site',
+        link: 'https://beta.syn.art',
+      },
+    ],
+  },
   syn: {
     title: 'Synesthesia',
     description:
@@ -21,7 +47,7 @@ export const projects = {
     links: [
       {
         label: 'View Site',
-        link: 'https://syn.art',
+        link: 'https://beta.syn.art',
       },
     ],
   },
@@ -64,7 +90,7 @@ export const projects = {
       link: '/projects/wefa',
     },
     platform: 'phone',
-    year: 2021,
+    year: 2022,
     skills: ['WebXR (Augmented Reality)', 'Typescript', 'Solidity', 'React'],
     problem:
       "Growing up I was outside all the time playing with local neighbors and using our environment to fit whatever game we were playing. During those times things like gardening or lawn care were viewed as chores and avoided activities. However, as I reflect back it was a connective tissue to my community and neighbors. I recall meeting one of my closest childhood friends through him offering to help pickup leaves. Now having a home garden and growing vegetables, herbs, and fruits has taught me the health benefits of organic food. With a greater appreciation, understanding for plants and our environment, I'm building WEFA as a way for youth to plant deeper roots and adults to reconnect or better connect with their community and nature.",
@@ -81,7 +107,7 @@ export const projects = {
       },
       {
         label: 'View Github',
-        link: 'https://github.com/wefa-tech',
+        link: 'https://github.com/wefa-labs/wefa',
       },
       // {
       //   label: 'View Alpha Deck',
@@ -110,7 +136,7 @@ export const projects = {
       'Being a contract role I was able to learn a ton in a short period of time. First developing and deploying contracts to a testnet was great experience in Solidity development and gave me confidence to continue building contracts. Also working on a very early project allowed me to gain the vantage point of how development is at that stage. Having full autonomy for certain functionality showed where I can improve as a developer and iterate faster.',
     links: [
       {
-        label: 'View Website',
+        label: 'View Site',
         link: 'https://freeport.app',
       },
     ],
@@ -137,7 +163,7 @@ export const projects = {
     links: [
       {
         label: 'Learn More',
-        link: 'https://www.mirareality.com/connect',
+        link: 'https://web.archive.org/web/20231014040214/https://www.mirareality.com/connect/',
       },
     ],
   },
@@ -163,7 +189,7 @@ export const projects = {
     links: [
       {
         label: 'Learn More',
-        link: 'https://www.mirareality.com/flow',
+        link: 'https://web.archive.org/web/20231014040214/https://www.mirareality.com/flow/',
       },
     ],
   },
@@ -188,7 +214,7 @@ export const projects = {
       'This was my 1st full time role working in a team, before this point I mainly had done freelance work for clients. Stepping into a team environment was invigorating and gave me a boost in confidence and peers to learn from. Initially I had imposter syndrome having not worked in a professional software environment and it took some time to settle into the role. It helped having a supportive team and manager in traversing the environment. One of the key takeaways is I had more to learn as a developer from advanced methods, data structures, and new languages like Typescript.',
     links: [
       {
-        label: 'View Website',
+        label: 'View Site',
         link: 'https://gentlemonster.com',
       },
     ],
