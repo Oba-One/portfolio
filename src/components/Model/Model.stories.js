@@ -1,12 +1,9 @@
-import phoneTexture2Large from 'assets/gamestack-list-large.jpg'
-import phoneTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg'
-import phoneTexture2 from 'assets/gamestack-list.jpg'
-import phoneTextureLarge from 'assets/gamestack-login-large.jpg'
-import phoneTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg'
-import phoneTexture from 'assets/gamestack-login.jpg'
-import laptopTexture from 'assets/spr-lesson-builder-dark-large.jpg'
-import laptopTextureLarge from 'assets/spr-lesson-builder-dark-large.jpg'
-import laptopTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg'
+import phoneTexture2Placeholder from 'assets/mira-flow/flow-mobile-collections-ph.webp'
+import phoneTexture2 from 'assets/mira-flow/flow-mobile-collections.webp'
+import phoneTexturePlaceholder from 'assets/mira-flow/flow-mobile-profile-ph.webp'
+import phoneTexture from 'assets/mira-flow/flow-mobile-profile.webp'
+import laptopTexturePlaceholder from 'assets/mira-connect/connect-report-p1-ph.webp'
+import laptopTexture from 'assets/mira-connect/connect-report-p1.webp'
 import { Model } from 'components/Model/Model'
 import { StoryContainer } from '../../../.storybook/StoryContainer'
 import { deviceModels } from './deviceModels'
@@ -28,7 +25,7 @@ export const Phone = () => (
           ...deviceModels.phone,
           position: { x: -0.6, y: 0.8, z: 0.1 },
           texture: {
-            srcSet: [phoneTexture, phoneTextureLarge],
+            srcSet: [phoneTexture],
             placeholder: phoneTexturePlaceholder,
           },
         },
@@ -36,7 +33,7 @@ export const Phone = () => (
           ...deviceModels.phone,
           position: { x: 0.6, y: -0.8, z: 0.4 },
           texture: {
-            srcSet: [phoneTexture2, phoneTexture2Large],
+            srcSet: [phoneTexture2],
             placeholder: phoneTexture2Placeholder,
           },
         },
@@ -56,7 +53,7 @@ export const Laptop = () => (
           ...deviceModels.laptop,
           position: { x: 0, y: 0, z: 0 },
           texture: {
-            srcSet: [laptopTexture, laptopTextureLarge],
+            srcSet: [laptopTexture],
             placeholder: laptopTexturePlaceholder,
           },
         },

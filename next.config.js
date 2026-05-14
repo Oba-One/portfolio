@@ -8,7 +8,7 @@ const { withSentryConfig } = require('@sentry/nextjs')
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   pageExtensions: ['page.js', 'page.ts', 'api.js', 'api.ts'],
@@ -48,8 +48,7 @@ module.exports = {
   },
 }
 
-module.exports = withSentryConfig(
-  module.exports,
-  { silent: true },
-  { hideSourcemaps: true }
-)
+module.exports =
+  process.env.STORYBOOK === 'true'
+    ? nextConfig
+    : withSentryConfig(nextConfig, { silent: true }, { hideSourceMaps: true })

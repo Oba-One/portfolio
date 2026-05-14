@@ -1,23 +1,24 @@
 const path = require('path')
 
+process.env.STORYBOOK = 'true'
+
 module.exports = {
   addons: [
-    '@storybook/addon-actions',
-    '@storybook/addon-controls',
     '@storybook/addon-a11y',
-    '@storybook/addon-toolbars',
-    'storybook-addon-next',
   ],
+  framework: {
+    name: '@storybook/nextjs',
+    options: {},
+  },
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   staticDirs: ['../public'],
-  core: {
-    builder: 'webpack5',
-  },
   webpackFinal: async (config, { configType }) => {
     config.resolve.modules = [path.resolve(__dirname, '../src'), 'node_modules']
 
-    const imageRule = config.module.rules.find(rule => rule.test.test('.svg'))
-    imageRule.exclude = /\.svg$/
+    const imageRule = config.module.rules.find(rule => rule?.test?.test?.('.svg'))
+    if (imageRule) {
+      imageRule.exclude = /\.svg$/
+    }
 
     // Import `svg` files as React components
     config.module.rules.push({
