@@ -1,9 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export const config = {
-  runtime: 'edge',
-}
-
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method == 'GET') {
     res.status(200).send({ status: 'ok', time: Date.now() })

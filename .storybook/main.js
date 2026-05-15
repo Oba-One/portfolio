@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 
 process.env.STORYBOOK = 'true'
@@ -12,7 +13,7 @@ module.exports = {
   },
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   staticDirs: ['../public'],
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async config => {
     config.resolve.modules = [path.resolve(__dirname, '../src'), 'node_modules']
 
     const imageRule = config.module.rules.find(rule => rule?.test?.test?.('.svg'))

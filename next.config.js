@@ -51,4 +51,9 @@ const nextConfig = {
 module.exports =
   process.env.STORYBOOK === 'true'
     ? nextConfig
-    : withSentryConfig(nextConfig, { silent: true }, { hideSourceMaps: true })
+    : withSentryConfig(nextConfig, {
+        silent: true,
+        sourcemaps: {
+          deleteSourcemapsAfterUpload: true,
+        },
+      })

@@ -13,7 +13,7 @@
     "build:storybook": "storybook build -o build-storybook && node scripts/draco-storybook",
     "start": "next start",
     "test": "echo 'write some tests'",
-    "lint": "eslint src --ext js,jsx,ts,tsx",
+    "lint": "eslint src .storybook instrumentation.ts instrumentation-client.ts next.config.js sentry.edge.config.js sentry.server.config.js --ext js,jsx,ts,tsx",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
     "optimize:assets": "zsh scripts/optimize-assets.sh",
     "optimize:resize": "bunx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':'25%','height':'25%','method':'lanczos3'}\" src/assets/*.webp"

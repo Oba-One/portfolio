@@ -6,21 +6,19 @@ import * as Sentry from '@sentry/nextjs'
 import { replayIntegration } from '@sentry/browser'
 
 const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
+const isProduction = process.env.NODE_ENV === 'production'
 
 Sentry.init({
-  dsn:
-    SENTRY_DSN ||
-    'https://9b1a0b2207074e4db2473a233e04860d@o1400298.ingest.sentry.io/4504751395569664',
-  // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: 1.0,
-  replaysSessionSampleRate: 0.1,
-  // If the entire session is not sampled, use the below sample rate to sample
-  // sessions when an error occurs.
-  replaysOnErrorSampleRate: 1.0,
+  dsn: SENTRY_DSN,
+  enabled: Boolean(SENTRY_DSN),
+  tracesSampleRate: isProduction ? 0.1 : 1.0,
+  replaysSessionSampleRate: isProduction ? 0.05 : 0,
+  replaysOnErrorSampleRate: isProduction ? 1.0 : 0,
   integrations: [
     replayIntegration({
-      maskAllText: false,
-      blockAllMedia: false,
+      maskAllText: true,
+      maskAllInputs: true,
+      blockAllMedia: true,
     }),
   ],
 })

@@ -6,26 +6,26 @@ My design portfolio to showcase my projects. Built with [Next.js](https://nextjs
 
 ## Setup
 
-Make sure you have nodejs `18.0.0` or higher and npm `8.6.0` or higher installed. Install dependencies with:
+Make sure you have Node.js `22.22.1` and Bun `1.3.10` installed. This repo uses the checked-in `bun.lock`, so use Bun for all package scripts and dependency installs.
 
 ```bash
-npm i
+bun install --frozen-lockfile
 ```
 
 Once it's done start up a local server with:
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 To view the components storybook:
 
 ```bash
-npm run storybook
+bun run storybook
 ```
 
 To create a production build:
 
 ```bash
-npm run build
+bun run build
 ```

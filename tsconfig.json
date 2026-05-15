@@ -24,6 +24,13 @@
       "utils/*": ["utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "src"],
+  "include": [
+    "next-env.d.ts",
+    "instrumentation.ts",
+    "instrumentation-client.ts",
+    "sentry.edge.config.js",
+    "sentry.server.config.js",
+    "src"
+  ],
   "exclude": ["node_modules"]
 }
