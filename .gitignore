@@ -60,6 +60,7 @@ typings/
 
 build/
 build-storybook/
+output/agentic-browser-proof/
 public/sitemap.xml
 public/draco/
 public/og

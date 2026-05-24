@@ -51,9 +51,27 @@ export const DisplacementSphere = props => {
 
   useEffect(() => {
     const { innerWidth, innerHeight } = window
+    const canvas = canvasRef.current
+    const context =
+      canvas.getContext('webgl', {
+        antialias: false,
+        alpha: true,
+        powerPreference: 'high-performance',
+        failIfMajorPerformanceCaveat: true,
+      }) ||
+      canvas.getContext('experimental-webgl', {
+        antialias: false,
+        alpha: true,
+        powerPreference: 'high-performance',
+        failIfMajorPerformanceCaveat: true,
+      })
+
+    if (!context) return undefined
+
     mouse.current = new Vector2(0.8, 0.5)
     renderer.current = new WebGLRenderer({
-      canvas: canvasRef.current,
+      canvas,
+      context,
       antialias: false,
       alpha: true,
       powerPreference: 'high-performance',
@@ -95,6 +113,8 @@ export const DisplacementSphere = props => {
   }, [])
 
   useEffect(() => {
+    if (!scene.current) return undefined
+
     const dirLight = new DirectionalLight(colorWhite, 0.6)
     const ambientLight = new AmbientLight(colorWhite, themeId === 'light' ? 0.8 : 0.1)
 
@@ -112,6 +132,8 @@ export const DisplacementSphere = props => {
   }, [rgbBackground, colorWhite, themeId])
 
   useEffect(() => {
+    if (!renderer.current || !camera.current || !sphere.current) return undefined
+
     const { width, height } = windowSize
 
     const adjustedHeight = height + height * 0.3
@@ -137,6 +159,8 @@ export const DisplacementSphere = props => {
   }, [reduceMotion, windowSize])
 
   useEffect(() => {
+    if (!sphere.current) return undefined
+
     const onMouseMove = event => {
       const position = {
         x: event.clientX / window.innerWidth,
@@ -157,6 +181,10 @@ export const DisplacementSphere = props => {
   }, [isInViewport, reduceMotion, rotationX, rotationY])
 
   useEffect(() => {
+    if (!renderer.current || !scene.current || !camera.current || !sphere.current) {
+      return undefined
+    }
+
     let animation
 
     const animate = () => {

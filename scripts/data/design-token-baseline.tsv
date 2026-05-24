@@ -1,0 +1,38 @@
+# file	code	needle	reason
+src/components/Input/Input.module.css	RAW_DURATION	transition: background-color 5000s linear 0s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/components/Input/Input.module.css	RAW_DURATION	transition: background-color 5000s linear 0s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/components/Link/Link.module.css	RAW_LINEAR_GRADIENT	--filledLineGradient: linear-gradient(rgb(var(--linkColor)), rgb(var(--linkColor)));	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/components/Link/Link.module.css	RAW_LINEAR_GRADIENT	--unfilledLineGradient: linear-gradient(	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/components/Monogram/Monogram.module.css	RAW_DURATION	transition: opacity 0.1s ease var(--durationM);	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/components/Monogram/Monogram.module.css	RAW_DURATION	transition: opacity 0.1s ease;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/components/Monogram/Monogram.module.css	RAW_DURATION	transition: transform var(--durationM) var(--bezierFastoutSlowin), opacity 0.1s ease;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/components/Navbar/Navbar.module.scss	RAW_DURATION	transition: color var(--durationS) ease 0.1s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/DisplacementSphere.module.scss	VIEWPORT_100VW	width: 100vw;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/DisplacementSphere.module.scss	RAW_DURATION	transition-duration: 3s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	VIEWPORT_100VH	height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_DURATION	transition: opacity var(--durationL) var(--bezierFastoutSlowin) 0.2s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_DURATION	animation-duration: 1.5s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_DURATION	transition: opacity 0.5s ease var(--durationM);	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_DURATION	animation-duration: 1.5s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_DURATION	animation-duration: 0.8s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_RADIUS	border-radius: 20px;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_RADIUS	border-radius: 4px;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_DURATION	animation-duration: 1.5s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Intro.module.scss	RAW_CUBIC_BEZIER	transition-timing-function: cubic-bezier(0.8, 0.1, 0.27, 1);	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Profile.module.scss	VIEWPORT_100VW	width: 100vw;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/Profile.module.scss	VIEWPORT_100VH	min-height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/ProjectSummary.module.scss	VIEWPORT_100VH	height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Home/ProjectSummary.module.scss	RAW_DURATION	transition: opacity 1200ms ease 1400ms;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Project/Project.module.scss	VIEWPORT_100VH	min-height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Project/Project.module.scss	RAW_LINEAR_GRADIENT	background: linear-gradient(	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Project/Project.module.scss	RAW_LINEAR_GRADIENT	linear-gradient(	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Project/Project.module.scss	RAW_DURATION	transition: opacity 2s ease;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/layouts/Project/Project.module.scss	RAW_LINEAR_GRADIENT	background: linear-gradient(var(--background1), var(--background2));	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/404/404.module.scss	VIEWPORT_100VH	height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/404/404.module.scss	VIEWPORT_100VH	min-height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/404/404.module.scss	RAW_DURATION	animation-duration: 1.8s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/_document.page.js	RAW_HEX	<meta name="theme-color" content="#b8abee" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/_document.page.js	RAW_HEX	<meta name="msapplication-TileColor" content="#582be0" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/_document.page.js	RAW_HEX	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#b8abee" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/contact/Contact.module.scss	VIEWPORT_100VH	min-height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/utils/image.js	RAW_RGBA	ctx.fillStyle = 'rgba(0, 0, 0, 0)'	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.

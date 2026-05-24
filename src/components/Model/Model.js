@@ -64,6 +64,7 @@ export const Model = ({
   ...rest
 }) => {
   const [loaded, setLoaded] = useState(false)
+  const [webglReady, setWebglReady] = useState(true)
   const container = useRef()
   const canvas = useRef()
   const camera = useRef()
@@ -88,9 +89,29 @@ export const Model = ({
 
   useEffect(() => {
     const { clientWidth, clientHeight } = container.current
+    const context =
+      canvas.current.getContext('webgl', {
+        alpha: true,
+        antialias: false,
+        powerPreference: 'high-performance',
+        failIfMajorPerformanceCaveat: true,
+      }) ||
+      canvas.current.getContext('experimental-webgl', {
+        alpha: true,
+        antialias: false,
+        powerPreference: 'high-performance',
+        failIfMajorPerformanceCaveat: true,
+      })
+
+    if (!context) {
+      setWebglReady(false)
+      setLoaded(true)
+      return undefined
+    }
 
     renderer.current = new WebGLRenderer({
       canvas: canvas.current,
+      context,
       alpha: true,
       antialias: false,
       powerPreference: 'high-performance',
@@ -224,6 +245,16 @@ export const Model = ({
   }, [])
 
   const blurShadow = useCallback(amount => {
+    if (
+      !renderer.current ||
+      !renderTarget.current ||
+      !renderTargetBlur.current ||
+      !blurPlane.current ||
+      !shadowCamera.current
+    ) {
+      return
+    }
+
     blurPlane.current.visible = true
 
     // Blur horizontally and draw in the renderTargetBlur
@@ -247,6 +278,18 @@ export const Model = ({
 
   // Handle render passes for a single frame
   const renderFrame = useCallback(() => {
+    if (
+      !renderer.current ||
+      !scene.current ||
+      !camera.current ||
+      !shadowCamera.current ||
+      !depthMaterial.current ||
+      !renderTarget.current ||
+      !modelGroup.current
+    ) {
+      return
+    }
+
     const blurAmount = 5
 
     // Remove the background
@@ -306,7 +349,7 @@ export const Model = ({
   // Handle window resize
   useEffect(() => {
     const handleResize = () => {
-      if (!container.current) return
+      if (!container.current || !renderer.current || !camera.current) return
 
       const { clientWidth, clientHeight } = container.current
 
@@ -336,11 +379,12 @@ export const Model = ({
       {...rest}
     >
       <canvas className={styles.canvas} ref={canvas} />
-      {models.map((model, index) => (
+      {webglReady && models.map((model, index) => (
         <Device
           key={JSON.stringify(model.position)}
           renderer={renderer}
           modelGroup={modelGroup}
+          webglReady={webglReady}
           show={show}
           showDelay={showDelay}
           renderFrame={renderFrame}
@@ -357,6 +401,7 @@ const Device = ({
   renderer,
   model,
   modelGroup,
+  webglReady,
   renderFrame,
   index,
   showDelay,
@@ -368,6 +413,8 @@ const Device = ({
   const placeholderScreen = createRef()
 
   useEffect(() => {
+    if (!webglReady || !renderer.current || !modelGroup.current) return undefined
+
     const applyScreenTexture = async (texture, node) => {
       texture.encoding = sRGBEncoding
       texture.flipY = false
@@ -494,7 +541,7 @@ const Device = ({
   }, [])
 
   useEffect(() => {
-    if (!loadDevice || !show) return
+    if (!webglReady || !loadDevice || !show) return undefined
     let animation
 
     const onLoad = async () => {
