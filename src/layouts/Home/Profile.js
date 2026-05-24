@@ -1,7 +1,7 @@
 // import profileKatakana from 'assets/katakana-profile.svg?url'
 import profileImg from 'assets/profile.jpeg'
 import { Button } from 'components/Button'
-// import { DecoderText } from 'components/DecoderText'
+import { DecoderText } from 'components/DecoderText'
 import { Divider } from 'components/Divider'
 import { Heading } from 'components/Heading'
 import { Image } from 'components/Image'
@@ -16,28 +16,32 @@ import styles from './Profile.module.scss'
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
     <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
-      {/* <DecoderText text="Hello there" start={visible} delay={500} /> */}
+      <DecoderText text="Hello there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I’m Afo, currently I live in California working as a software developer. My projects
-      include front and back end development, architecture, and design with a focus on
-      Augmented Reality and Blockchains. I’m currently working on my project WEFA, while
-      open to new collaborations and opportunities.
+      I’m Afo, a builder based in Loma Linda. My work spans front and back end, smart
+      contracts, local-first systems, and product architecture. Right now I’m building{' '}
+      <Link href="https://coop.town">Coop</Link>, a browser-first tool for capture,
+      review, and shared group memory; building{' '}
+      <Link href="https://greengoods.app">Green Goods</Link>, an offline-first PWA that
+      brings ecological and community work on-chain; and stewarding{' '}
+      <Link href="https://greenpill.network">Greenpill</Link>, where I help shape
+      GreenWill and the wider coordination layer for regenerative communities.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Some of my hobbies are deep dives into comic and fantansy theories like{' '}
+      Outside of code I’m into comic and fantasy lore like{' '}
       <Link href="https://www.youtube.com/@NewRockstars">Marvel</Link> and{' '}
       <Link href="https://www.youtube.com/@StarWarsTheory">Star Wars</Link>, playing and
       watching sports, making{' '}
-      <Link href="https://soundcloud.com/oba_one/sets/hyperloop-to-la">music</Link> and
-      reading. Currently diving in{' '}
+      <Link href="https://soundcloud.com/oba_one/sets/hyperloop-to-la">music</Link>, and
+      reading. Currently in{' '}
       <Link href="https://www.amazon.com/Rust-Programming-Language-Steve-Klabnik/dp/1593278284">
         The Rust Programming Book
       </Link>
-      . I’m always open to discuss ideas or projects, so feel free to reach out!
+      . Always open to chat about ideas or projects, so feel free to reach out.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      If you want to know a little bit more about me click on the Nostalgia link below.
+      If you want a softer look at who I am, check the Nostalgia link below.
     </Text>
   </Fragment>
 )

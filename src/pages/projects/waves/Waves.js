@@ -2,11 +2,11 @@ import { Fragment } from 'react'
 
 import {
   WavesStoryImg,
-  WavesDeckPlantsImg,
+  WavesSplashImg,
   WavesBackgroundImg,
-  WavesOnboardSelectPlantImg,
+  WavesDeckPlantsImg,
   WavesOnboardSelectElementImg,
-  WavesOnboardGeneratedCreaturesImg,
+  WavesOnboardSelectPlantImg,
 } from 'assets/waves'
 import {
   ProjectBackground,
@@ -46,7 +46,7 @@ export const Waves = () => {
         <ProjectBackground
           src={WavesBackgroundImg}
           srcSet={`${WavesBackgroundImg.src} 1280w, ${WavesBackgroundImg.src} 2560w`}
-          alt="Waves landing page background image, showing an animated person gardening."
+          alt=""
           placeholder={WavesBackgroundImg}
           opacity={isDark ? 0.5 : 0.6}
         />
@@ -59,27 +59,24 @@ export const Waves = () => {
         <ProjectSection>
           <ProjectSectionColumns centered className={styles.columns}>
             <div className={styles.imagesText}>
-              <ProjectSectionHeading>Water Earth Fire Air</ProjectSectionHeading>
+              <ProjectSectionHeading>Why Waves</ProjectSectionHeading>
               <ProjectSectionText>{project.problem}</ProjectSectionText>
             </div>
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}
-                src={WavesDeckPlantsImg}
-                srcSet={[WavesDeckPlantsImg.src, WavesDeckPlantsImg.src]}
-                placeholder={WavesDeckPlantsImg.src}
-                alt="Waves app splash screen with logo centered."
+                src={WavesSplashImg}
+                srcSet={[WavesSplashImg, WavesSplashImg]}
+                placeholder={WavesSplashImg}
+                alt=""
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
-                src={WavesOnboardGeneratedCreaturesImg}
-                srcSet={[
-                  WavesOnboardGeneratedCreaturesImg.src,
-                  WavesOnboardGeneratedCreaturesImg.src,
-                ]}
-                placeholder={WavesOnboardGeneratedCreaturesImg.src}
-                alt="Waves plant selection screen showcasing a strawberry as an example."
+                src={WavesDeckPlantsImg}
+                srcSet={[WavesDeckPlantsImg, WavesDeckPlantsImg]}
+                placeholder={WavesDeckPlantsImg}
+                alt=""
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>
@@ -91,25 +88,22 @@ export const Waves = () => {
               <Image
                 className={styles.sidebarImage}
                 src={WavesOnboardSelectElementImg}
-                srcSet={[
-                  WavesOnboardSelectElementImg.src,
-                  WavesOnboardSelectElementImg.src,
-                ]}
-                placeholder={WavesOnboardSelectElementImg.src}
-                alt="Waves app spices/herbs vs flowers selection screen."
+                srcSet={[WavesOnboardSelectElementImg, WavesOnboardSelectElementImg]}
+                placeholder={WavesOnboardSelectElementImg}
+                alt=""
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 src={WavesOnboardSelectPlantImg}
-                srcSet={[WavesOnboardSelectPlantImg.src, WavesOnboardSelectPlantImg.src]}
-                placeholder={WavesOnboardSelectPlantImg.src}
-                alt="Waves app fruits vs vegetables selection screen."
+                srcSet={[WavesOnboardSelectPlantImg, WavesOnboardSelectPlantImg]}
+                placeholder={WavesOnboardSelectPlantImg}
+                alt=""
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>
             <div className={styles.imagesText}>
-              <ProjectSectionHeading>What is it?</ProjectSectionHeading>
+              <ProjectSectionHeading>The three Cs</ProjectSectionHeading>
               <ProjectSectionText>{project.architecture}</ProjectSectionText>
             </div>
           </ProjectSectionColumns>
@@ -118,14 +112,22 @@ export const Waves = () => {
           <ProjectSectionContent>
             <Image
               src={WavesStoryImg}
-              srcSet={[WavesStoryImg.src, WavesStoryImg.src]}
-              placeholder={WavesStoryImg.src}
-              alt="Waves comic story cover art. Detailing the protagonists walking out of a cave."
+              srcSet={[WavesStoryImg, WavesStoryImg]}
+              placeholder={WavesStoryImg}
+              alt=""
               sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
             />
             <ProjectTextRow>
-              <ProjectSectionHeading>Story & Release</ProjectSectionHeading>
+              <ProjectSectionHeading>The platform</ProjectSectionHeading>
               <ProjectSectionText>{project.development}</ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection>
+          <ProjectSectionContent>
+            <ProjectTextRow>
+              <ProjectSectionHeading>What is next</ProjectSectionHeading>
+              <ProjectSectionText>{project.learnings}</ProjectSectionText>
             </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>

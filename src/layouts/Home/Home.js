@@ -6,17 +6,16 @@ import { Intro } from 'layouts/Home/Intro'
 import { Profile } from 'layouts/Home/Profile'
 import { ProjectSummary } from 'layouts/Home/ProjectSummary'
 
-import { GMBackgroundImg } from 'assets/gm'
-import { SynLearningsImg } from 'assets/syn'
-import { FreeportDevelopmentImg } from 'assets/freeport'
-import { ConnectBackgroundImg } from 'assets/mira-connect'
-import { FlowArchitectureImg, FlowArchitecture2Img } from 'assets/mira-flow'
-import { WefaOnboardSelectElementImg, WefaOnboardSelectPlantImg } from 'assets/wefa'
+import { CoopWordmarkFlatImg } from 'assets/coop'
+import { GreenGoodsLogoImg, GreenGoodsSocialCardImg } from 'assets/green-goods'
+import { GreenpillMapImg } from 'assets/greenpill'
+import { WavesDeckPlantsImg, WavesSplashImg } from 'assets/waves'
+import { WefaSplashImg, WefaOnboardSelectElementImg } from 'assets/wefa'
 
 import styles from './Home.module.css'
 import { projects } from '../../constants'
 
-const disciplines = ['Engineer', 'Creator', 'Architect']
+const disciplines = ['Architect', 'Steward', 'Engineer', 'Storyteller']
 
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([])
@@ -27,7 +26,6 @@ export const Home = () => {
   const projectThree = useRef()
   const projectFour = useRef()
   const projectFive = useRef()
-  const projectSix = useRef()
 
   const details = useRef()
 
@@ -39,7 +37,6 @@ export const Home = () => {
       projectThree,
       projectFour,
       projectFive,
-      projectSix,
       details,
     ]
 
@@ -79,9 +76,8 @@ export const Home = () => {
   return (
     <div className={styles.home}>
       <Meta
-        title="Developer & Architect"
-        description="Developer portfolio of Afolabi Aiyeloja — a developer working on web & mobile
-          apps with a focus on Augmented Reality, Blockchains, & Artificial Intelligence."
+        title="Builder & Steward"
+        description="Portfolio of Afolabi Aiyeloja, a builder and steward shaping regenerative web3 infrastructure with a background in augmented reality, blockchains, and AI."
       />
       <Intro
         id="intro"
@@ -94,17 +90,17 @@ export const Home = () => {
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title={projects['syn'].title}
-        description={projects['syn'].description}
-        buttonText={projects['syn'].cta.label}
-        buttonLink={projects['syn'].cta.link}
+        title={projects['coop'].title}
+        description={projects['coop'].description}
+        buttonText={projects['coop'].cta.label}
+        buttonLink={projects['coop'].cta.link}
         model={{
-          type: projects['syn'].platform,
-          alt: 'Syn beta home page on desktop.',
+          type: projects['coop'].platform,
+          alt: 'Coop wordmark inside a laptop frame.',
           textures: [
             {
-              srcSet: [SynLearningsImg, SynLearningsImg],
-              placeholder: SynLearningsImg,
+              srcSet: [CoopWordmarkFlatImg, CoopWordmarkFlatImg],
+              placeholder: CoopWordmarkFlatImg,
             },
           ],
         }}
@@ -114,21 +110,21 @@ export const Home = () => {
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title={projects['wefa'].title}
-        description={projects['wefa'].description}
-        buttonText={projects['wefa'].cta.label}
-        buttonLink={projects['wefa'].cta.link}
+        title={projects['green_goods'].title}
+        description={projects['green_goods'].description}
+        buttonText={projects['green_goods'].cta.label}
+        buttonLink={projects['green_goods'].cta.link}
         model={{
-          type: projects['wefa'].platform,
-          alt: 'App login screen',
+          type: projects['green_goods'].platform,
+          alt: 'Green Goods project artwork inside mobile frames.',
           textures: [
             {
-              srcSet: [WefaOnboardSelectElementImg, WefaOnboardSelectElementImg],
-              placeholder: WefaOnboardSelectElementImg,
+              srcSet: [GreenGoodsSocialCardImg, GreenGoodsSocialCardImg],
+              placeholder: GreenGoodsSocialCardImg,
             },
             {
-              srcSet: [WefaOnboardSelectPlantImg, WefaOnboardSelectPlantImg],
-              placeholder: WefaOnboardSelectPlantImg,
+              srcSet: [GreenGoodsLogoImg, GreenGoodsLogoImg],
+              placeholder: GreenGoodsLogoImg,
             },
           ],
         }}
@@ -139,17 +135,17 @@ export const Home = () => {
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title={projects['freeport'].title}
-        description={projects['freeport'].description}
-        buttonText={projects['freeport'].cta.label}
-        buttonLink={projects['freeport'].cta.link}
+        title={projects['greenpill'].title}
+        description={projects['greenpill'].description}
+        buttonText={projects['greenpill'].cta.label}
+        buttonLink={projects['greenpill'].cta.link}
         model={{
-          type: projects['freeport'].platform,
-          alt: 'Freeport gallery page',
+          type: projects['greenpill'].platform,
+          alt: 'Greenpill map inside a laptop frame.',
           textures: [
             {
-              srcSet: [FreeportDevelopmentImg, FreeportDevelopmentImg],
-              placeholder: FreeportDevelopmentImg,
+              srcSet: [GreenpillMapImg, GreenpillMapImg],
+              placeholder: GreenpillMapImg,
             },
           ],
         }}
@@ -159,17 +155,21 @@ export const Home = () => {
         sectionRef={projectFour}
         visible={visibleSections.includes(projectFour.current)}
         index={4}
-        title={projects['mira_connect'].title}
-        description={projects['mira_connect'].description}
-        buttonText={projects['mira_connect'].cta.label}
-        buttonLink={projects['mira_connect'].cta.link}
+        title={projects['waves'].title}
+        description={projects['waves'].description}
+        buttonText={projects['waves'].cta.label}
+        buttonLink={projects['waves'].cta.link}
         model={{
-          type: projects['mira_connect'].platform,
-          alt: 'Mira connect call',
+          type: projects['waves'].platform,
+          alt: 'Waves project artwork inside mobile frames.',
           textures: [
             {
-              srcSet: [ConnectBackgroundImg, ConnectBackgroundImg],
-              placeholder: ConnectBackgroundImg,
+              srcSet: [WavesSplashImg, WavesSplashImg],
+              placeholder: WavesSplashImg,
+            },
+            {
+              srcSet: [WavesDeckPlantsImg, WavesDeckPlantsImg],
+              placeholder: WavesDeckPlantsImg,
             },
           ],
         }}
@@ -180,41 +180,21 @@ export const Home = () => {
         sectionRef={projectFive}
         visible={visibleSections.includes(projectFive.current)}
         index={5}
-        title={projects['mira_flow'].title}
-        description={projects['mira_flow'].description}
-        buttonText={projects['mira_flow'].cta.label}
-        buttonLink={projects['mira_flow'].cta.link}
+        title={projects['wefa'].title}
+        description={projects['wefa'].description}
+        buttonText={projects['wefa'].cta.label}
+        buttonLink={projects['wefa'].cta.link}
         model={{
-          type: projects['mira_flow'].platform,
-          alt: 'App login screen',
+          type: projects['wefa'].platform,
+          alt: 'WEFA onboarding artwork inside mobile frames.',
           textures: [
             {
-              srcSet: [FlowArchitectureImg, FlowArchitectureImg],
-              placeholder: FlowArchitectureImg,
+              srcSet: [WefaSplashImg, WefaSplashImg],
+              placeholder: WefaSplashImg,
             },
             {
-              srcSet: [FlowArchitecture2Img, FlowArchitecture2Img],
-              placeholder: FlowArchitecture2Img,
-            },
-          ],
-        }}
-      />
-      <ProjectSummary
-        id="project-6"
-        sectionRef={projectSix}
-        visible={visibleSections.includes(projectSix.current)}
-        index={6}
-        title={projects['gentle_monster'].title}
-        description={projects['gentle_monster'].description}
-        buttonText={projects['gentle_monster'].cta.label}
-        buttonLink={projects['gentle_monster'].cta.link}
-        model={{
-          type: projects['gentle_monster'].platform,
-          alt: 'Gentel monster home page',
-          textures: [
-            {
-              srcSet: [GMBackgroundImg, GMBackgroundImg],
-              placeholder: GMBackgroundImg,
+              srcSet: [WefaOnboardSelectElementImg, WefaOnboardSelectElementImg],
+              placeholder: WefaOnboardSelectElementImg,
             },
           ],
         }}

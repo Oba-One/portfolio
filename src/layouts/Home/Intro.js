@@ -7,7 +7,7 @@ import { Heading } from 'components/Heading'
 import { Section } from 'components/Section'
 import { Transition } from 'components/Transition'
 import { useTheme } from 'components/ThemeProvider'
-// import { DecoderText } from 'components/DecoderText'
+import { DecoderText } from 'components/DecoderText'
 import { tokens } from 'components/ThemeProvider/theme'
 import { VisuallyHidden } from 'components/VisuallyHidden'
 import { useInterval, usePrevious, useScrollToHash } from 'hooks'
@@ -65,11 +65,11 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
             <DisplacementSphere />
             <header className={styles.text}>
               <h1 className={styles.name} data-visible={visible} id={titleId}>
-                {/* <DecoderText text="Afolabi Aiyeloja" delay={300} /> */}
+                <DecoderText text="Afolabi Aiyeloja" delay={300} />
               </h1>
               <Heading level={0} as="h2" className={styles.title}>
                 <VisuallyHidden className={styles.label}>
-                  {`Developer + ${introLabel}`}
+                  {`Builder + ${introLabel}`}
                 </VisuallyHidden>
                 <span aria-hidden className={styles.row}>
                   <span
@@ -77,7 +77,7 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
                     data-status={status}
                     style={cssProps({ delay: tokens.base.durationXS })}
                   >
-                    Developer
+                    Builder
                   </span>
                   <span className={styles.line} data-status={status} />
                 </span>

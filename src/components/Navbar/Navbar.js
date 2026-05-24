@@ -143,7 +143,7 @@ export const Navbar = () => {
 
   return (
     <header className={styles.navbar} ref={headerRef}>
-      <RouterLink href={route === '/' ? '/#intro' : '/'} scroll={false}>
+      <RouterLink legacyBehavior href={route === '/' ? '/#intro' : '/'} scroll={false}>
         <a
           data-navbar-item
           className={styles.logo}
@@ -157,7 +157,7 @@ export const Navbar = () => {
       <nav className={styles.nav}>
         <div className={styles.navList}>
           {navLinks.map(({ label, pathname }) => (
-            <RouterLink href={pathname} scroll={false} key={label}>
+            <RouterLink legacyBehavior href={pathname} scroll={false} key={label}>
               <a
                 data-navbar-item
                 className={styles.navLink}
@@ -175,7 +175,7 @@ export const Navbar = () => {
         {visible => (
           <nav className={styles.mobileNav} data-visible={visible}>
             {navLinks.map(({ label, pathname }, index) => (
-              <RouterLink href={pathname} scroll={false} key={label}>
+              <RouterLink legacyBehavior href={pathname} scroll={false} key={label}>
                 <a
                   className={styles.mobileNavLink}
                   data-visible={visible}
