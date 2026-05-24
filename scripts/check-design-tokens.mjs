@@ -18,6 +18,10 @@ const checks = [
   ['RAW_RADIUS', /\bborder-radius\s*:\s*(?!0\b)[0-9.]+(?:px|rem)\b/],
   ['RAW_CUBIC_BEZIER', /cubic-bezier\(/],
   ['RAW_DURATION', /\b(?:animation-duration|transition-duration)\s*:\s*[0-9.]+(?:ms|s)\b|transition\s*:[^;]*\b[0-9.]+(?:ms|s)\b/],
+  ['RAW_ANIMATION_DURATION', /\banimation\s*:[^;]*\b[0-9.]+(?:ms|s)\b/],
+  ['FOCUS_OUTLINE_SUPPRESSION', /\boutline\s*:\s*(?:0|none)\b/],
+  ['TOUCH_TARGET_MIN_SIZE', /\bmin-(?:width|height)\s*:\s*(?:[0-9]|[1-3][0-9]|4[0-3])px\b/],
+  ['FORCED_COLORS_OPTOUT', /\bforced-color-adjust\s*:\s*none\b|@media\s*\([^)]*forced-colors[^)]*:\s*none/i],
 ];
 
 function walk(dir, files = []) {
@@ -68,8 +72,23 @@ function collectHits() {
   return hits;
 }
 
-function matchesBaseline(hit, baseline) {
-  return baseline.some((entry) => entry.file === hit.file && entry.code === hit.code && hit.text.includes(entry.needle));
+function partitionBaselineMatches(hits, baseline) {
+  const remaining = baseline.map((entry) => ({ ...entry, matched: false }));
+  const unapproved = [];
+
+  for (const hit of hits) {
+    const match = remaining.find((entry) => !entry.matched && entry.file === hit.file && entry.code === hit.code && hit.text.includes(entry.needle));
+    if (match) {
+      match.matched = true;
+    } else {
+      unapproved.push(hit);
+    }
+  }
+
+  return {
+    unapproved,
+    stale: remaining.filter((entry) => !entry.matched),
+  };
 }
 
 function writeBaseline(hits) {
@@ -94,8 +113,7 @@ if (process.argv.includes('--write-baseline')) {
 }
 
 const baseline = loadBaseline();
-const unapproved = hits.filter((hit) => !matchesBaseline(hit, baseline));
-const stale = baseline.filter((entry) => !hits.some((hit) => entry.file === hit.file && entry.code === hit.code && hit.text.includes(entry.needle)));
+const { unapproved, stale } = partitionBaselineMatches(hits, baseline);
 
 if (unapproved.length || stale.length) {
   if (unapproved.length) {
