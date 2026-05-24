@@ -23,6 +23,12 @@ Create an execution-ready backlog for adopting modern CSS and Web UI primitives 
 - Each future primitive promotion should capture regression risk, vulnerable surfaces, fallback behavior, proof required, existing abstraction fit, and reversibility before runtime work starts.
 - Do not run `bun run lint`, `bun run build`, or Storybook validation for this pass because no runtime files should change and the checkout has unrelated active UI work.
 
+## Next Proof Task
+
+- Keep this plan-only until a route, case-study, media, or Storybook runtime change is scoped. The next proof task is an isolated Chrome DevTools MCP or `bun run agentic:browser-proof` pass for the changed surface, capturing route/surface URL, viewport, screenshot or DOM/accessibility snapshot, console/page errors, useful network notes, `/llms.txt`, reduced-motion behavior, and `list_webmcp_tools`.
+- For any View Transition prototype, capture LCP, INP, CLS, route label, `navigationType`, reduced-motion state, and media/3D state before and after the transition. Do not add RUM dependencies for this planning pass.
+- Keep runtime WebMCP frozen. Any future page/case-study read-only tool candidate needs an approval spec covering candidate visible tools, forbidden tools, confirmation rules, public/privacy boundary, schema tests, wrong-tool/wrong-argument evals, and proof commands.
+
 ## Assumptions
 
 - Portfolio should use the lightweight TAS-style planning model rather than the heavier Green Goods or Coop plan-hub contracts.
