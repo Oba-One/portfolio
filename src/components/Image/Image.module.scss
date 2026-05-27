@@ -4,6 +4,9 @@
   display: grid;
   grid-template-columns: 100%;
   isolation: isolate;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
 
   &[data-raised='true'] {
     box-shadow: 0 50px 100px -20px rgb(var(--rgbBlack) / 0.25),
@@ -52,6 +55,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 100%;
+  min-width: 0;
 
   &[data-reveal='true'] {
     opacity: 0;
@@ -69,6 +73,7 @@
 
 .placeholder {
   width: 100%;
+  min-width: 0;
   height: auto;
   transition: opacity var(--durationM) ease var(--delay);
   pointer-events: none;
@@ -85,6 +90,7 @@
 
 .element {
   width: 100%;
+  min-width: 0;
   height: auto;
   opacity: 0;
   grid-column: 1;

@@ -1,6 +1,6 @@
 # Portfolio WebMCP Strategy
 
-Status: strategy only. Do not ship runtime WebMCP tools in v1.
+Status: approved public read-only runtime pilot. Keep the implementation limited to `src/utils/webmcp.js`.
 
 ## Candidate Visible Tools
 
@@ -8,6 +8,11 @@ Status: strategy only. Do not ship runtime WebMCP tools in v1.
 - Contact surface: explain visible form requirements and submission states without submitting on the user's behalf.
 - Media/3D sections: describe visible controls and reduced-motion alternatives.
 - Storybook: support visible component review in local development only.
+
+## Implemented Pilot Tools
+
+- `describe_portfolio_page`: read-only summary of the current visible public page, headings, form labels, reduced-motion state, and optional visible links.
+- `find_portfolio_project_link`: read-only lookup across project links visible on the current page.
 
 ## Forbidden Tools
 
@@ -36,6 +41,6 @@ Status: strategy only. Do not ship runtime WebMCP tools in v1.
 - Tool descriptions are read-only by default and page-scoped.
 - Chrome DevTools MCP or Puppeteer WebMCP proves expected tool discovery, no forbidden tools, valid schema, graceful errors, and no contact submission side effect.
 
-## Runtime Approval Spec (Frozen)
+## Runtime Expansion Spec
 
-Before any runtime implementation request, write an approval-ready spec that lists candidate visible tools, forbidden tools, confirmation rules, the public/privacy boundary, input and output schema tests, wrong-tool and wrong-argument evals, contact/no-private-context evals, and the exact proof commands. This document is still strategy-only; do not add runtime `navigator.modelContext.registerTool`, `toolname`, or `tooldescription` without explicit user approval.
+Before expanding beyond the current read-only pilot, write an approval-ready spec that lists candidate visible tools, forbidden tools, confirmation rules, the public/privacy boundary, input and output schema tests, wrong-tool and wrong-argument evals, contact/no-private-context evals, and the exact proof commands. Do not add contact submission, email actions, analytics access, unpublished-draft access, or hidden admin behavior as WebMCP tools.

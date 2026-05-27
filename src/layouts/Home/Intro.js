@@ -10,7 +10,7 @@ import { useTheme } from 'components/ThemeProvider'
 import { DecoderText } from 'components/DecoderText'
 import { tokens } from 'components/ThemeProvider/theme'
 import { VisuallyHidden } from 'components/VisuallyHidden'
-import { useInterval, usePrevious, useScrollToHash } from 'hooks'
+import { useInterval, usePrevious } from 'hooks'
 
 import styles from './Intro.module.scss'
 
@@ -27,7 +27,6 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
   )
   const currentDiscipline = disciplines.find((item, index) => index === disciplineIndex)
   const titleId = `${id}-title`
-  const scrollToHash = useScrollToHash()
 
   useInterval(
     () => {
@@ -81,7 +80,7 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
                   </span>
                   <span className={styles.line} data-status={status} />
                 </span>
-                <div className={styles.row} component="span">
+                <span className={styles.row}>
                   <AnimatePresence>
                     {disciplines.map(item => (
                       <Transition
@@ -104,7 +103,7 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
                       </Transition>
                     ))}
                   </AnimatePresence>
-                </div>
+                </span>
               </Heading>
             </header>
           </Fragment>

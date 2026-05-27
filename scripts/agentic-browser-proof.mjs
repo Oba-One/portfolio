@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { accessSync, constants, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { accessSync, constants, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { homedir, tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
@@ -9,7 +9,11 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const host = '127.0.0.1';
 const port = Number(process.env.PORTFOLIO_BROWSER_PROOF_PORT || 3310);
 const origin = `http://${host}:${port}`;
-const routes = (process.env.PORTFOLIO_BROWSER_PROOF_ROUTES || '/,/contact,/projects/green-goods,/projects/coop,/projects/waves')
+const routeManifest = JSON.parse(readFileSync(path.join(repoRoot, 'src/utils/siteRoutes.json'), 'utf8'));
+const defaultBrowserProofRoutes = routeManifest.browserProofRoutes?.length
+  ? routeManifest.browserProofRoutes
+  : ['/', '/contact'];
+const routes = (process.env.PORTFOLIO_BROWSER_PROOF_ROUTES || defaultBrowserProofRoutes.join(','))
   .split(',')
   .map((route) => route.trim())
   .filter(Boolean);
@@ -114,7 +118,10 @@ async function auditLlmsTxt() {
 async function startNextServer() {
   const child = spawn('bun', ['run', 'start', '--', '-H', host, '-p', String(port)], {
     cwd: repoRoot,
-    env: process.env,
+    env: {
+      ...process.env,
+      NODE_ENV: 'production',
+    },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   child.stdout.on('data', (chunk) => process.stdout.write(`[next] ${chunk}`));
@@ -136,6 +143,7 @@ async function launchChrome() {
     '--disable-extensions',
     '--no-first-run',
     '--no-default-browser-check',
+    '--enable-features=WebMCPTesting,DevToolsWebMCPSupport',
     '--remote-debugging-port=0',
     `--user-data-dir=${userDataDir}`,
     'about:blank',
@@ -143,16 +151,21 @@ async function launchChrome() {
   const child = spawn(chromeBinary, args, { stdio: ['ignore', 'ignore', 'pipe'] });
   const wsUrl = await new Promise((resolve, reject) => {
     const timeout = setTimeout(() => reject(new Error('Timed out waiting for Chrome DevTools endpoint.')), 15000);
+    let stderr = '';
+    let resolved = false;
     child.stderr.on('data', (chunk) => {
+      stderr += chunk.toString();
       const match = chunk.toString().match(/DevTools listening on (ws:\/\/\S+)/);
       if (match) {
+        resolved = true;
         clearTimeout(timeout);
         resolve(match[1]);
       }
     });
-    child.once('exit', (code) => {
+    child.once('exit', (code, signal) => {
+      if (resolved) return;
       clearTimeout(timeout);
-      reject(new Error(`Chrome exited before DevTools endpoint was ready: ${code}`));
+      reject(new Error(`Chrome exited before DevTools endpoint was ready: ${code ?? signal}\n${stderr.trim()}`));
     });
   });
 
@@ -288,9 +301,16 @@ async function verifyRoute(client, route, width) {
     await new Promise((resolve) => setTimeout(resolve, 300));
 
     const runtime = await evaluate(client, sessionId, `
-      (() => {
+      (async () => {
         const proof = window.__agenticProof || { consoleErrors: [], pageErrors: [] };
         const modelContext = 'modelContext' in navigator ? navigator.modelContext : undefined;
+        const testing = 'modelContextTesting' in navigator ? navigator.modelContextTesting : undefined;
+        const testingTools = typeof testing?.listTools === 'function'
+          ? await Promise.resolve(testing.listTools()).then((tools) => tools.map((tool) => ({
+              name: tool.name || '',
+              description: tool.description || ''
+            }))).catch(() => [])
+          : [];
         const declarativeTools = [...document.querySelectorAll('form[toolname], form[tooldescription]')].map((form) => ({
           name: form.getAttribute('toolname') || '',
           description: form.getAttribute('tooldescription') || ''
@@ -320,10 +340,11 @@ async function verifyRoute(client, route, width) {
           consoleErrors: proof.consoleErrors,
           pageErrors: proof.pageErrors,
           webMcp: {
-            status: Boolean(modelContext) || declarativeTools.length > 0 ? 'detected' : 'not_configured',
+            status: Boolean(modelContext) || declarativeTools.length > 0 || testingTools.length > 0 ? 'detected' : 'not_configured',
             navigatorModelContext: Boolean(modelContext),
             registerToolType: typeof modelContext?.registerTool,
-            declarativeTools
+            declarativeTools,
+            testingTools
           }
         };
       })()
@@ -368,12 +389,16 @@ async function verifyRoute(client, route, width) {
 
 async function main() {
   mkdirSync(artifactDir, { recursive: true });
-  const server = await startNextServer();
-  const llmsTxt = await auditLlmsTxt();
-  const chrome = await launchChrome();
-  const client = new CdpClient(chrome.wsUrl);
+  let server;
+  let chrome;
+  let client;
   const results = [];
   try {
+    server = await startNextServer();
+    const llmsTxt = await auditLlmsTxt();
+    chrome = await launchChrome();
+    client = new CdpClient(chrome.wsUrl);
+
     for (const route of routes) {
       for (const width of widths) {
         const result = await verifyRoute(client, route, width);
@@ -398,9 +423,9 @@ async function main() {
     console.log(`[agentic-browser-proof] wrote ${path.relative(repoRoot, reportPath)} with ${hardCount} violation(s).`);
     if (hardCount > 0) process.exitCode = 1;
   } finally {
-    client.close();
-    await chrome.close();
-    server.kill('SIGTERM');
+    client?.close();
+    if (chrome) await chrome.close();
+    server?.kill('SIGTERM');
   }
 }
 

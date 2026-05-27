@@ -12,6 +12,7 @@ import { VisuallyHidden } from 'components/VisuallyHidden'
 import { useFoucFix, useLocalStorage } from 'hooks'
 import { ScrollRestore } from 'layouts/App/ScrollRestore'
 import { initialState, reducer } from 'layouts/App/reducer'
+import { registerPortfolioWebMcpTools } from 'utils/webmcp'
 
 import styles from 'layouts/App/App.module.scss'
 import 'layouts/App/global.scss'
@@ -29,6 +30,8 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     dispatch({ type: 'setTheme', value: storedTheme || 'dark' })
   }, [storedTheme])
+
+  useEffect(() => registerPortfolioWebMcpTools(), [asPath])
 
   return (
     <AppContext.Provider value={{ ...state, dispatch }}>

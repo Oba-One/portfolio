@@ -16,7 +16,7 @@
       "command": [
         "bun",
         "run",
-        "dev"
+        "dev:site"
       ],
       "urls": [
         "http://localhost:3201/"

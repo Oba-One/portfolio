@@ -1,32 +1,40 @@
 ---
-name: dev-surface
-description: Use when working in Portfolio and needing to start, reuse, open, inspect, validate, or clean up this repo's local development surfaces through the shared dev-surfaces workbench.
+name: portfolio-dev-surface
+description: Use when working in Portfolio and needing the local Next site or Storybook.
 ---
 
 # Portfolio Dev Surface
 
-Use the global workbench CLI instead of starting duplicate servers manually:
+Inside this repo, use the repo-native command:
 
 ```sh
-dev-surfaces status
-dev-surfaces up portfolio
-dev-surfaces open portfolio
-dev-surfaces logs portfolio:<surface>
-dev-surfaces down portfolio
+bun install
+bun run dev
 ```
 
-Stable fallback path: `/Users/afo/Code/dev-surfaces/bin/dev-surfaces.js`.
+`bun run dev` runs `scripts/dev.mjs`, which starts the Next site and Storybook together, streams both logs, and cleans up on Ctrl-C.
 
-## Surfaces
+Expected ports:
 
-- `site`: Next site on `3201`
-- `storybook`: Storybook on `3202`
+- `3201`: Next site
+- `3202`: Storybook
 
-## Validation Notes
+Useful native commands:
 
-- Use Bun scripts for local validation in this repo.
-- Run the site and Storybook together when validating portfolio UI changes.
-- The manifest pins the Node 22 mise path for both surfaces so Storybook and Next run consistently from agent sessions.
-- After changing local port docs or dev scripts, run `dev-surfaces doctor`.
+```sh
+bun run dev
+bun run dev:site
+bun run storybook
+```
 
-Never kill unknown port occupants. If a port is busy and not owned by dev-surfaces, report the PID/command and ask for direction.
+For cross-repo orchestration from anywhere, use the global workbench:
+
+```sh
+dev launch portfolio
+dev launch portfolio:site
+dev status portfolio
+dev health portfolio
+dev stop portfolio
+```
+
+Do not call `.dev-surfaces/run.mjs`; this repo should not have that wrapper.

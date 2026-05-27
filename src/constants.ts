@@ -1,3 +1,49 @@
+export const projectSlugs = [
+  'coop',
+  'green_goods',
+  'greenpill',
+  'waves',
+  'wefa',
+  'syn',
+  'freeport',
+  'mira_connect',
+  'mira_flow',
+  'gentle_monster',
+] as const
+
+export type ProjectSlug = (typeof projectSlugs)[number]
+
+export type ProjectPlatform = 'laptop' | 'phone'
+
+export type ProjectLink = {
+  label: string
+  link: string
+}
+
+export type ProjectCta = ProjectLink
+
+export type ProjectRecord = {
+  title: string
+  description: string
+  cta: ProjectCta
+  platform: ProjectPlatform
+  year: number
+  skills: readonly string[]
+  problem: string
+  architecture: string
+  development: string
+  learnings: string
+  links: readonly ProjectLink[]
+}
+
+export const featuredProjectSlugs = [
+  'coop',
+  'green_goods',
+  'greenpill',
+  'waves',
+  'wefa',
+] as const satisfies readonly ProjectSlug[]
+
 export const projects = {
   coop: {
     title: 'Coop',
@@ -277,4 +323,4 @@ export const projects = {
       },
     ],
   },
-}
+} satisfies Record<ProjectSlug, ProjectRecord>

@@ -13,13 +13,15 @@ Working agreements for AI coding agents in `portfolio`.
 - Prefer semantic HTML, native controls, platform CSS, and browser primitives before custom JavaScript. Keep landmarks, headings, links, buttons, forms, accessible names, focus states, touch targets, loading/error/empty states, and reduced-motion behavior clear in the rendered DOM and accessibility tree.
 - Run `bun run agentic:check` for the design-token guard plus lint lane. Use `bun run agentic:browser-proof` when layout, interaction, motion, 3D, or public routes change; it builds Next, captures route screenshots and accessibility summaries, checks console/page errors, `/llms.txt`, reduced-motion behavior, WebMCP discovery, and then builds Storybook.
 - For local human/agent browser walkthroughs, WebMCP validation, and DevTools MCP proof, prefer Brave with an isolated/non-default profile. Keep the repo proof commands Chrome/Chromium-compatible for contributors and CI unless a task explicitly requires Brave-only WebMCP validation.
-- WebMCP is strategy-only in v1. Do not ship runtime WebMCP tools unless explicitly requested; future tools must follow `docs/agentic-webmcp-strategy.md`, stay visible/user-confirmable/public-safe, and must not expose contact-form secrets, private analytics, hidden admin actions, destructive operations, or background-only actions.
+- WebMCP has an explicitly approved public read-only runtime pilot. Keep tools in `src/utils/webmcp.js` visible, page-scoped, and public-safe; do not add contact submission, analytics, private context, hidden admin actions, destructive operations, or background-only actions.
 
 ## Design System Guardrails
 
 - Load `DESIGN.md`, `src/components/ThemeProvider/theme.js`, the nearest CSS Module or SCSS file, and Storybook context before UI/CSS work.
 - Run `bun run check:design-tokens` for UI/CSS changes; it blocks new raw colors, gradients, viewport units, raw radii, and raw motion values unless they are intentionally recorded in `scripts/data/design-token-baseline.tsv`.
 - Keep existing Portfolio identity intact: editorial case studies, restrained motion, and 3D as supporting atmosphere rather than a new product UI system.
+- For new case studies or route changes, update project data in `src/constants.ts`, route data in `src/utils/siteRoutes.json`, and keep public/browser-proof routes aligned with `bun run check:site-routes`. Reuse `layouts/Project` and `src/pages/projects/CaseStudy.module.scss` before adding a new visual grammar.
+- For contact or form changes, keep validation shared through `src/utils/contact.ts` so client constraints and API parsing do not drift.
 
 ## Supply-chain and agent safety
 

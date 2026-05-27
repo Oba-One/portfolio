@@ -13,6 +13,7 @@ import { Divider } from 'components/Divider'
 import { Transition } from 'components/Transition'
 import { DecoderText } from 'components/DecoderText'
 import { tokens } from 'components/ThemeProvider/theme'
+import { CONTACT_EMAIL_MAX_LENGTH, CONTACT_MESSAGE_MAX_LENGTH } from 'utils/contact'
 import { cssProps, msToNum, numToMs } from 'utils/style'
 
 import styles from './Contact.module.scss'
@@ -95,7 +96,7 @@ export const Contact = () => {
               autoComplete="email"
               label="Your Email"
               type="email"
-              maxLength={320}
+              maxLength={CONTACT_EMAIL_MAX_LENGTH}
               {...email}
             />
             <Input
@@ -106,7 +107,7 @@ export const Contact = () => {
               style={getDelay(tokens.base.durationS, initDelay)}
               autoComplete="off"
               label="Message"
-              maxLength={720}
+              maxLength={CONTACT_MESSAGE_MAX_LENGTH}
               {...message}
             />
             <Transition in={statusError} timeout={msToNum(tokens.base.durationM)}>
