@@ -33,11 +33,26 @@ function existsExecutable(candidate) {
   }
 }
 
+function versionParts(entry) {
+  const match = entry.match(/(\d+(?:\.\d+)+)/);
+  return match ? match[1].split('.').map((part) => Number(part)) : [];
+}
+
+function compareVersionEntriesDesc(a, b) {
+  const aParts = versionParts(a);
+  const bParts = versionParts(b);
+  for (let index = 0; index < Math.max(aParts.length, bParts.length); index += 1) {
+    const diff = (bParts[index] || 0) - (aParts[index] || 0);
+    if (diff !== 0) return diff;
+  }
+  return b.localeCompare(a);
+}
+
 function discoverCachedChromium() {
   const found = [];
   const tryGlob = (base, leaf) => {
     try {
-      for (const entry of readdirSync(base)) {
+      for (const entry of readdirSync(base).sort(compareVersionEntriesDesc)) {
         const candidate = leaf(entry);
         if (existsExecutable(candidate)) found.push(candidate);
       }
@@ -47,6 +62,19 @@ function discoverCachedChromium() {
   };
 
   const home = homedir();
+  const chromeForTesting = path.join(home, '.cache/chrome-for-testing/chrome');
+  tryGlob(chromeForTesting, (entry) => path.join(
+    chromeForTesting,
+    entry,
+    'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+  ));
+  tryGlob(chromeForTesting, (entry) => path.join(
+    chromeForTesting,
+    entry,
+    'chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+  ));
+  tryGlob(chromeForTesting, (entry) => path.join(chromeForTesting, entry, 'chrome-linux64/chrome'));
+
   const playwright = path.join(home, 'Library/Caches/ms-playwright');
   tryGlob(playwright, (entry) => path.join(playwright, entry, 'chrome-headless-shell-mac-arm64/chrome-headless-shell'));
   tryGlob(playwright, (entry) => path.join(playwright, entry, 'chrome-headless-shell-mac-x64/chrome-headless-shell'));
@@ -65,12 +93,12 @@ function findChromeBinary() {
   const candidates = [
     process.env.CHROME_BIN,
     process.env.CHROMIUM_BIN,
+    ...discoverCachedChromium(),
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     '/Applications/Chromium.app/Contents/MacOS/Chromium',
     '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
     '/usr/bin/google-chrome',
     '/usr/bin/chromium',
-    ...discoverCachedChromium(),
   ].filter(Boolean);
   return candidates.find(existsExecutable) || '';
 }

@@ -14,6 +14,7 @@ Working agreements for AI coding agents in `portfolio`.
 - Run `bun run agentic:check` for the design-token guard plus lint lane. Use `bun run agentic:browser-proof` when layout, interaction, motion, 3D, or public routes change; it builds Next, captures route screenshots and accessibility summaries, checks console/page errors, `/llms.txt`, reduced-motion behavior, WebMCP discovery, and then builds Storybook.
 - For local human/agent browser walkthroughs, WebMCP validation, and DevTools MCP proof, prefer Brave with an isolated/non-default profile. Keep the repo proof commands Chrome/Chromium-compatible for contributors and CI unless a task explicitly requires Brave-only WebMCP validation.
 - WebMCP has an explicitly approved public read-only runtime pilot. Keep tools in `src/utils/webmcp.js` visible, page-scoped, and public-safe; do not add contact submission, analytics, private context, hidden admin actions, destructive operations, or background-only actions.
+- For MCP/tool selection and WebMCP expansion, use `docs/agentic-mcp-tooling-runbook.md` as the operating map before adding tools or changing proof lanes.
 
 ## Design System Guardrails
 

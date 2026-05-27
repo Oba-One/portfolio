@@ -2,6 +2,8 @@
 
 Status: approved public read-only runtime pilot. Keep the implementation limited to `src/utils/webmcp.js`.
 
+Related operating guide: `docs/agentic-mcp-tooling-runbook.md`.
+
 ## Candidate Visible Tools
 
 - Public pages: summarize visible case studies, project sections, writing, and navigation links.
