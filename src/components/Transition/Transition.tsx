@@ -1,6 +1,29 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { AnimatePresence, usePresence } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type MutableRefObject, type ReactNode } from 'react'
+
+type TransitionStatus = 'entering' | 'entered' | 'exiting' | 'exited'
+type TransitionTimeout = number | { enter: number; exit: number }
+type TimeoutRef = MutableRefObject<ReturnType<typeof setTimeout> | undefined>
+
+type TransitionProps = {
+  children: (visible: boolean, status: TransitionStatus) => ReactNode
+  timeout?: TransitionTimeout
+  onEnter?: () => void
+  onEntered?: () => void
+  onExit?: () => void
+  onExited?: () => void
+  in?: boolean
+  unmount?: boolean
+}
+
+type TransitionContentProps = Required<
+  Pick<TransitionProps, 'children' | 'timeout'>
+> &
+  Pick<TransitionProps, 'onEnter' | 'onEntered' | 'onExit' | 'onExited'> & {
+    enterTimeout: TimeoutRef
+    exitTimeout: TimeoutRef
+    show?: boolean
+  }
 
 /**
  * A Framer Motion AnimatePresence implementation of `react-transition-group`
@@ -15,9 +38,9 @@ export const Transition = ({
   onExited,
   in: show,
   unmount,
-}) => {
-  const enterTimeout = useRef()
-  const exitTimeout = useRef()
+}: TransitionProps) => {
+  const enterTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const exitTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
     if (show) {
@@ -57,8 +80,8 @@ const TransitionContent = ({
   onExit,
   onExited,
   show,
-}) => {
-  const [status, setStatus] = useState('exited')
+}: TransitionContentProps) => {
+  const [status, setStatus] = useState<TransitionStatus>('exited')
   const [isPresent, safeToRemove] = usePresence()
   const [hasEntered, setHasEntered] = useState(false)
   const splitTimeout = typeof timeout === 'object'
@@ -101,5 +124,5 @@ const TransitionContent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPresent, onExit, safeToRemove, timeout, onExited, show])
 
-  return children(hasEntered && show ? isPresent : false, status)
+  return <>{children(hasEntered && show ? isPresent : false, status)}</>
 }

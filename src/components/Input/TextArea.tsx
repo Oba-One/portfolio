@@ -1,7 +1,26 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { useEffect, useRef, useState } from 'react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type TextareaHTMLAttributes,
+} from 'react'
 import { classes, cssProps } from 'utils/style'
 import styles from './TextArea.module.css'
+
+type TextAreaDimensions = {
+  lineHeight: number
+  paddingHeight: number
+}
+
+type TextAreaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> & {
+  className?: string
+  resize?: string
+  value?: string
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void
+  minRows?: number
+  maxRows?: number
+}
 
 export const TextArea = ({
   className,
@@ -11,12 +30,15 @@ export const TextArea = ({
   minRows = 1,
   maxRows,
   ...rest
-}) => {
+}: TextAreaProps) => {
   const [rows, setRows] = useState(minRows)
-  const [textareaDimensions, setTextareaDimensions] = useState()
-  const textareaRef = useRef()
+  const [textareaDimensions, setTextareaDimensions] =
+    useState<TextAreaDimensions | null>(null)
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
   useEffect(() => {
+    if (!textareaRef.current) return
+
     const style = getComputedStyle(textareaRef.current)
     const lineHeight = parseInt(style.lineHeight, 10)
     const paddingHeight =
@@ -24,8 +46,10 @@ export const TextArea = ({
     setTextareaDimensions({ lineHeight, paddingHeight })
   }, [])
 
-  const handleChange = event => {
-    onChange(event)
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    onChange?.(event)
+
+    if (!textareaDimensions) return
 
     const { lineHeight, paddingHeight } = textareaDimensions
     const previousRows = event.target.rows

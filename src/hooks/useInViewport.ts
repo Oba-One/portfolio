@@ -1,10 +1,9 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type RefObject } from 'react'
 
 export function useInViewport(
-  elementRef,
-  unobserveOnIntersect,
-  options = {},
+  elementRef: RefObject<Element | null>,
+  unobserveOnIntersect = false,
+  options: IntersectionObserverInit = {},
   shouldObserve = true
 ) {
   const [intersect, setIntersect] = useState(false)

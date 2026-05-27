@@ -1,23 +1,28 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { forwardRef, useId } from 'react'
+import { forwardRef, useId, type SVGProps } from 'react'
 import { classes } from 'utils/style'
 import styles from './Monogram.module.css'
 
-export const Monogram = forwardRef(({ highlight, className, ...props }, ref) => {
-  const id = useId()
-  const clipId = `${id}monogram-clip`
+type MonogramProps = SVGProps<SVGSVGElement> & {
+  highlight?: boolean
+  className?: string
+}
 
-  return (
-    <svg
-      aria-hidden
-      className={classes(styles.monogram, className)}
-      width="48"
-      height="51"
-      viewBox="0 0 48 51"
-      fill="none"
-      ref={ref}
-      {...props}
-    >
+export const Monogram = forwardRef<SVGSVGElement, MonogramProps>(
+  ({ highlight, className, ...props }, ref) => {
+    const id = useId()
+    const clipId = `${id}monogram-clip`
+
+    return (
+      <svg
+        aria-hidden
+        className={classes(styles.monogram, className)}
+        width="48"
+        height="51"
+        viewBox="0 0 48 51"
+        fill="none"
+        ref={ref}
+        {...props}
+      >
       <defs>
         <clipPath id={clipId}>
           <path
@@ -33,6 +38,7 @@ export const Monogram = forwardRef(({ highlight, className, ...props }, ref) => 
           <rect className={styles.highlight} width="100%" height="100%" />
         </g>
       )}
-    </svg>
-  )
-})
+      </svg>
+    )
+  }
+)

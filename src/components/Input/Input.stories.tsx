@@ -1,4 +1,4 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
+// @ts-nocheck -- Storybook stories still use legacy untyped wrappers.
 import { Input } from 'components/Input'
 import { useFormInput } from 'hooks'
 

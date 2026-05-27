@@ -1,9 +1,17 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { forwardRef } from 'react'
+import { forwardRef, type ElementType, type ReactNode } from 'react'
 import { classes } from 'utils/style'
 import styles from './VisuallyHidden.module.css'
 
-export const VisuallyHidden = forwardRef(
+type VisuallyHiddenProps = {
+  className?: string
+  showOnFocus?: boolean
+  as?: ElementType
+  children?: ReactNode
+  visible?: boolean
+  [key: string]: unknown
+}
+
+export const VisuallyHidden = forwardRef<HTMLElement, VisuallyHiddenProps>(
   (
     { className, showOnFocus, as: Component = 'span', children, visible, ...rest },
     ref

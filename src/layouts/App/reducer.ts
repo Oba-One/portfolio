@@ -1,14 +1,19 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 export const initialState = {
+  theme: 'dark',
   menuOpen: false,
 }
 
-export function reducer(state, action) {
-  const { type, value } = action
+export type AppState = typeof initialState
 
-  switch (type) {
+export type AppAction =
+  | { type: 'setTheme'; value: string }
+  | { type: 'toggleTheme' }
+  | { type: 'toggleMenu' }
+
+export function reducer(state: AppState, action: AppAction): AppState {
+  switch (action.type) {
     case 'setTheme':
-      return { ...state, theme: value }
+      return { ...state, theme: action.value }
     case 'toggleTheme': {
       const newThemeId = state.theme === 'dark' ? 'light' : 'dark'
       return { ...state, theme: newThemeId }
@@ -16,6 +21,6 @@ export function reducer(state, action) {
     case 'toggleMenu':
       return { ...state, menuOpen: !state.menuOpen }
     default:
-      throw new Error()
+      throw new Error('Unknown app action')
   }
 }

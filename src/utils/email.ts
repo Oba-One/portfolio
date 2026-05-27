@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import nodemailer from 'nodemailer'
 
 const AUTH_EMAIL_USER = process.env.AUTH_EMAIL_USER

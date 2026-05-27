@@ -1,7 +1,16 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { Fragment } from 'react'
+import { Fragment, type ElementType, type ReactNode } from 'react'
 import { classes } from 'utils/style'
 import styles from './Heading.module.css'
+
+type HeadingProps = {
+  children?: ReactNode
+  level?: number
+  as?: ElementType
+  align?: string
+  weight?: string
+  className?: string
+  [key: string]: unknown
+}
 
 export const Heading = ({
   children,
@@ -11,9 +20,9 @@ export const Heading = ({
   weight = 'medium',
   className,
   ...rest
-}) => {
+}: HeadingProps) => {
   const clampedLevel = Math.min(Math.max(level, 0), 5)
-  const Component = as || `h${Math.max(clampedLevel, 1)}`
+  const Component = (as || `h${Math.max(clampedLevel, 1)}`) as ElementType
 
   return (
     <Fragment>

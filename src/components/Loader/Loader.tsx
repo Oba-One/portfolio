@@ -1,4 +1,4 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
+import type { CSSProperties, HTMLAttributes } from 'react'
 import { Text } from 'components/Text'
 import { VisuallyHidden } from 'components/VisuallyHidden'
 import { useReducedMotion } from 'framer-motion'
@@ -7,7 +7,20 @@ import { createPortal } from 'react-dom'
 import { classes, cssProps } from 'utils/style'
 import styles from './Loader.module.css'
 
-export const Loader = ({ className, style, size = 32, text = 'Loading...', ...rest }) => {
+type LoaderProps = HTMLAttributes<HTMLDivElement | HTMLSpanElement> & {
+  className?: string
+  style?: CSSProperties
+  size?: number
+  text?: string
+}
+
+export const Loader = ({
+  className,
+  style,
+  size = 32,
+  text = 'Loading...',
+  ...rest
+}: LoaderProps) => {
   const reduceMotion = useReducedMotion()
   const hasMounted = useHasMounted()
 
@@ -18,7 +31,7 @@ export const Loader = ({ className, style, size = 32, text = 'Loading...', ...re
       <VisuallyHidden className="loader-announcement" aria-live="assertive">
         {text}
       </VisuallyHidden>,
-      document.getElementById('portal-root')
+      document.getElementById('portal-root') ?? document.body
     )
   }
 

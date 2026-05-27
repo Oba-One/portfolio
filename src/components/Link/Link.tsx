@@ -1,19 +1,28 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import RouterLink from 'next/link'
-import { forwardRef } from 'react'
+import { forwardRef, type ReactNode } from 'react'
 import { classes } from 'utils/style'
 import styles from './Link.module.css'
 
 // File extensions that can be linked to
 const VALID_EXT = ['txt', 'png', 'jpg']
 
-function isAnchor(href) {
-  const isValidExtension = VALID_EXT.includes(href?.split('.').pop())
+type LinkProps = {
+  href?: string
+  rel?: string
+  target?: string
+  children?: ReactNode
+  secondary?: boolean
+  className?: string
+  [key: string]: unknown
+}
+
+function isAnchor(href?: string) {
+  const isValidExtension = VALID_EXT.includes(href?.split('.').pop() ?? '')
   return href?.includes('://') || href?.[0] === '#' || isValidExtension
 }
 
-export const Link = forwardRef(({ href, ...rest }, ref) => {
-  if (isAnchor(href)) {
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ href, ...rest }, ref) => {
+  if (isAnchor(href) || !href) {
     return <LinkContent href={href} ref={ref} {...rest} />
   }
 
@@ -24,8 +33,8 @@ export const Link = forwardRef(({ href, ...rest }, ref) => {
   )
 })
 
-export const LinkContent = forwardRef(
-  ({ rel, target, children, secondary, className, href, ...rest }, ref) => {
+export const LinkContent = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ rel, target, children, secondary, className, href, ...rest }: LinkProps, ref) => {
     const isExternal = href?.includes('://')
     const relValue = rel || (isExternal ? 'noreferrer noopener' : undefined)
     const targetValue = target || (isExternal ? '_blank' : undefined)

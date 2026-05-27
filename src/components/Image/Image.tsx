@@ -1,12 +1,34 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 // import Img from 'next/image'
-import { useCallback, useRef, useState } from 'react'
+import {
+  useCallback,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ImgHTMLAttributes,
+} from 'react'
 
 import { useTheme } from 'components/ThemeProvider'
 import { useInViewport } from 'hooks'
 import { srcSetToString } from 'utils/image'
 import { classes, cssProps, numToMs } from 'utils/style'
 import styles from './Image.module.scss'
+
+type ImageSource = {
+  src: string
+  width: number
+  height: number
+}
+
+type ImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'onLoad'> & {
+  className?: string
+  style?: CSSProperties
+  reveal?: boolean
+  delay?: number
+  raised?: boolean
+  src?: ImageSource
+  srcSet?: ImageSource[]
+  placeholder?: ImageSource
+}
 
 export const Image = ({
   className,
@@ -18,16 +40,18 @@ export const Image = ({
   srcSet,
   placeholder,
   ...rest
-}) => {
+}: ImageProps) => {
   const [loaded, setLoaded] = useState(false)
   const { themeId } = useTheme()
-  const containerRef = useRef()
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const src = baseSrc || srcSet?.[0]
   const inViewport = useInViewport(containerRef, true)
 
   const onLoad = useCallback(() => {
     setLoaded(true)
   }, [])
+
+  if (!src) return null
 
   return (
     <div
@@ -66,9 +90,14 @@ const ImageElements = ({
   reveal,
   sizes,
   ...rest
+}: Omit<ImageProps, 'onLoad'> & {
+  onLoad: () => void
+  loaded: boolean
+  inViewport: boolean
+  src: ImageSource
 }) => {
   const [showPlaceholder, setShowPlaceholder] = useState(true)
-  const placeholderRef = useRef()
+  const placeholderRef = useRef<HTMLImageElement | null>(null)
   const showFullRes = inViewport
   const srcSetString = srcSetToString(srcSet)
 
@@ -77,7 +106,7 @@ const ImageElements = ({
       className={styles.elementWrapper}
       data-reveal={reveal}
       data-visible={inViewport || loaded}
-      style={cssProps({ delay: numToMs(delay + 1000) })}
+      style={cssProps({ delay: numToMs((delay ?? 0) + 1000) })}
     >
       <img
         className={styles.element}
@@ -93,12 +122,12 @@ const ImageElements = ({
         {...rest}
       />
 
-      {showPlaceholder && (
+      {showPlaceholder && placeholder && (
         <img
           aria-hidden
           className={styles.placeholder}
           data-loaded={loaded}
-          style={cssProps({ delay: numToMs(delay) })}
+          style={cssProps({ delay: numToMs(delay ?? 0) })}
           ref={placeholderRef}
           src={placeholder.src}
           width={placeholder.width}

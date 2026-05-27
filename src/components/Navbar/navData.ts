@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 export { navLinks } from 'utils/siteRoutes'
 
 export const socialLinks = [

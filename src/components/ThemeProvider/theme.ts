@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { pxToRem } from 'utils/style'
 
 // Full list of tokens

@@ -1,11 +1,34 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { Icon } from 'components/Icon'
 import { tokens } from 'components/ThemeProvider/theme'
 import { Transition } from 'components/Transition'
-import { useId, useRef, useState } from 'react'
+import {
+  useId,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type CSSProperties,
+  type FocusEvent,
+  type InputHTMLAttributes,
+  type ReactNode,
+} from 'react'
 import { classes, cssProps, msToNum } from 'utils/style'
 import styles from './Input.module.css'
 import { TextArea } from './TextArea'
+
+type FieldEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+type FieldFocusEvent = FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+
+type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onBlur'> & {
+  id?: string
+  label?: ReactNode
+  value?: string
+  multiline?: boolean
+  className?: string
+  style?: CSSProperties
+  error?: ReactNode
+  onBlur?: (event: FieldFocusEvent) => void
+  onChange?: (event: FieldEvent) => void
+}
 
 export const Input = ({
   id,
@@ -22,16 +45,16 @@ export const Input = ({
   type,
   onChange,
   ...rest
-}) => {
+}: InputProps) => {
   const [focused, setFocused] = useState(false)
   const generatedId = useId()
-  const errorRef = useRef()
+  const errorRef = useRef<HTMLDivElement | null>(null)
   const inputId = id || `${generatedId}input`
   const labelId = `${inputId}-label`
   const errorId = `${inputId}-error`
   const InputElement = multiline ? TextArea : 'input'
 
-  const handleBlur = event => {
+  const handleBlur = (event: FieldFocusEvent) => {
     setFocused(false)
 
     if (onBlur) {
@@ -72,7 +95,7 @@ export const Input = ({
         />
         <div className={styles.underline} data-focused={focused} />
       </div>
-      <Transition unmount in={error} timeout={msToNum(tokens.base.durationM)}>
+      <Transition unmount in={Boolean(error)} timeout={msToNum(tokens.base.durationM)}>
         {visible => (
           <div
             className={styles.error}

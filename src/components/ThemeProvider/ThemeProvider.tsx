@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import GothamBoldItalic from 'assets/fonts/gotham-bold-italic.woff2'
 import GothamBold from 'assets/fonts/gotham-bold.woff2'
 import GothamBookItalic from 'assets/fonts/gotham-book-italic.woff2'
@@ -7,12 +6,33 @@ import GothamMediumItalic from 'assets/fonts/gotham-medium-italic.woff2'
 import GothamMedium from 'assets/fonts/gotham-medium.woff2'
 import { useHasMounted } from 'hooks'
 import Head from 'next/head'
-import { createContext, useEffect } from 'react'
+import {
+  createContext,
+  useEffect,
+  type CSSProperties,
+  type ElementType,
+  type ReactNode,
+} from 'react'
 import { classes, media } from 'utils/style'
 import { theme, tokens } from './theme'
 import { useTheme } from './useTheme'
 
-export const ThemeContext = createContext({})
+type ThemeId = keyof typeof theme
+type ThemeValue = (typeof theme)[ThemeId]
+type TokenValue = string | number
+type TokenMap = Record<string, TokenValue>
+type ThemeStyleObject = CSSProperties & Record<`--${string}`, TokenValue>
+
+type ThemeProviderProps = {
+  themeId?: ThemeId
+  theme?: Partial<ThemeValue>
+  children?: ReactNode
+  className?: string
+  as?: ElementType
+  [key: string]: unknown
+}
+
+export const ThemeContext = createContext<Partial<ThemeValue>>({})
 
 export const ThemeProvider = ({
   themeId = 'dark',
@@ -21,7 +41,7 @@ export const ThemeProvider = ({
   className,
   as: Component = 'div',
   ...rest
-}) => {
+}: ThemeProviderProps) => {
   const currentTheme = { ...theme[themeId], ...themeOverrides }
   const parentTheme = useTheme()
   const isRootProvider = !parentTheme.themeId
@@ -62,14 +82,14 @@ export const ThemeProvider = ({
 /**
  * Squeeze out spaces and newlines
  */
-export function squish(styles) {
+export function squish(styles: string) {
   return styles.replace(/\s\s+/g, ' ')
 }
 
 /**
  * Transform theme token objects into CSS custom property strings
  */
-export function createThemeProperties(theme) {
+export function createThemeProperties(theme: TokenMap) {
   return squish(
     Object.keys(theme)
       .filter(key => key !== 'themeId')
@@ -81,8 +101,8 @@ export function createThemeProperties(theme) {
 /**
  * Transform theme tokens into a React CSSProperties object
  */
-export function createThemeStyleObject(theme) {
-  const style = {}
+export function createThemeStyleObject(theme: TokenMap) {
+  const style: ThemeStyleObject = {}
 
   for (const key of Object.keys(theme)) {
     if (key !== 'themeId') {
@@ -100,10 +120,11 @@ export function createMediaTokenProperties() {
   return squish(
     Object.keys(media)
       .map(key => {
+        const mediaKey = key as keyof typeof media
         return `
-        @media (max-width: ${media[key]}px) {
+        @media (max-width: ${media[mediaKey]}px) {
           :root {
-            ${createThemeProperties(tokens[key])}
+            ${createThemeProperties(tokens[mediaKey])}
           }
         }
       `

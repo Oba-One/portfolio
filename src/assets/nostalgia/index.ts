@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 export { default as SeventiesShowVid } from './70s-show.mp4'
 export { default as ArthurVid } from './arthur.mp4'
 export { default as AvatarVid } from './avatar.mp4'

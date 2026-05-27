@@ -1,13 +1,12 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { useReducedMotion } from 'framer-motion'
 import { useEffect } from 'react'
 
-export function useParallax(multiplier, onChange) {
+export function useParallax(multiplier: number, onChange: (value: number) => void) {
   const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     let ticking = false
-    let animationFrame = null
+    let animationFrame: number | null = null
 
     const animate = () => {
       const { innerHeight } = window
@@ -34,7 +33,9 @@ export function useParallax(multiplier, onChange) {
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      cancelAnimationFrame(animationFrame)
+      if (animationFrame !== null) {
+        cancelAnimationFrame(animationFrame)
+      }
     }
   }, [multiplier, onChange, reduceMotion])
 }

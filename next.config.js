@@ -11,7 +11,7 @@ const { withSentryConfig } = require('@sentry/nextjs')
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
-  pageExtensions: ['page.js', 'page.ts', 'api.js', 'api.ts'],
+  pageExtensions: ['page.js', 'page.ts', 'page.tsx', 'api.js', 'api.ts'],
   webpack(config, { isServer }) {
     // Run custom scripts
     if (isServer) {

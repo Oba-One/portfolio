@@ -1,8 +1,7 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { useEffect, useRef } from 'react'
 
-export function useInterval(callback, delay, reset) {
-  const savedCallback = useRef()
+export function useInterval(callback: () => void, delay: number | null, reset?: unknown) {
+  const savedCallback = useRef<(() => void) | undefined>(undefined)
 
   useEffect(() => {
     savedCallback.current = callback
@@ -10,7 +9,7 @@ export function useInterval(callback, delay, reset) {
 
   useEffect(() => {
     function tick() {
-      savedCallback.current()
+      savedCallback.current?.()
     }
     if (delay !== null) {
       const id = setInterval(tick, delay)

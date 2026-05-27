@@ -1,19 +1,41 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 const MAX_TEXT_LENGTH = 180
 const MAX_ITEMS = 12
+
+type ModelContextTool = {
+  name: string
+  description: string
+  inputSchema: Record<string, unknown>
+  execute: (input?: Record<string, unknown>) => unknown
+  annotations?: Record<string, unknown>
+}
+
+type PortfolioModelContext = {
+  registerTool: (
+    tool: ModelContextTool,
+    options: {
+      signal: AbortSignal
+    }
+  ) => void
+}
+
+declare global {
+  interface Navigator {
+    modelContext?: PortfolioModelContext
+  }
+}
 
 function cleanText(value = '', maxLength = MAX_TEXT_LENGTH) {
   return value.replace(/\s+/g, ' ').trim().slice(0, maxLength)
 }
 
-function visible(element) {
+function visible(element: Element) {
   if (!element) return false
   const rect = element.getBoundingClientRect()
   const style = window.getComputedStyle(element)
   return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden'
 }
 
-function visibleText(selector, limit = MAX_ITEMS) {
+function visibleText(selector: string, limit = MAX_ITEMS) {
   return [...document.querySelectorAll(selector)]
     .filter(visible)
     .map(element => cleanText(element.textContent || ''))
@@ -23,6 +45,7 @@ function visibleText(selector, limit = MAX_ITEMS) {
 
 function visibleLinks(selector = 'main a[href], nav a[href]', limit = MAX_ITEMS) {
   return [...document.querySelectorAll(selector)]
+    .filter((link): link is HTMLAnchorElement => link instanceof HTMLAnchorElement)
     .filter(visible)
     .map(link => ({
       label: cleanText(link.textContent || link.getAttribute('aria-label') || ''),
@@ -40,7 +63,7 @@ function pageKind() {
   return 'public'
 }
 
-function describePortfolioPage({ includeLinks = true } = {}) {
+function describePortfolioPage({ includeLinks = true }: { includeLinks?: boolean } = {}) {
   const metaDescription = document
     .querySelector('meta[name="description"]')
     ?.getAttribute('content')
@@ -59,7 +82,7 @@ function describePortfolioPage({ includeLinks = true } = {}) {
   }
 }
 
-function findPortfolioProjectLink({ query = '' } = {}) {
+function findPortfolioProjectLink({ query = '' }: { query?: string } = {}) {
   const normalizedQuery = cleanText(String(query)).toLowerCase()
   const projectLinks = visibleLinks('main a[href*="/projects/"], nav a[href*="/projects/"]', 24)
   const matches = normalizedQuery

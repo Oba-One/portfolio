@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-export async function delay(ms) {
+export async function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }

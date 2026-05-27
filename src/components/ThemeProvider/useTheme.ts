@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { useContext } from 'react'
 import { ThemeContext } from '.'
 

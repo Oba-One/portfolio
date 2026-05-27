@@ -1,17 +1,34 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { Icon } from 'components/Icon'
 import { Loader } from 'components/Loader'
 import { Transition } from 'components/Transition'
 import RouterLink from 'next/link'
-import { forwardRef } from 'react'
+import { forwardRef, type ElementType, type ReactNode } from 'react'
 import { classes } from 'utils/style'
 import styles from './Button.module.scss'
 
-function isExternalLink(href) {
+type ButtonProps = {
+  href?: string
+  className?: string
+  as?: ElementType
+  secondary?: boolean
+  loading?: boolean
+  loadingText?: string
+  icon?: string
+  iconEnd?: string
+  iconHoverShift?: boolean
+  iconOnly?: boolean
+  children?: ReactNode
+  rel?: string
+  target?: string
+  disabled?: boolean
+  [key: string]: unknown
+}
+
+function isExternalLink(href?: string) {
   return href?.includes('://')
 }
 
-export const Button = forwardRef(({ href, ...rest }, ref) => {
+export const Button = forwardRef<HTMLElement, ButtonProps>(({ href, ...rest }, ref) => {
   if (isExternalLink(href) || !href) {
     return <ButtonContent href={href} ref={ref} {...rest} />
   }
@@ -23,7 +40,7 @@ export const Button = forwardRef(({ href, ...rest }, ref) => {
   )
 })
 
-const ButtonContent = forwardRef(
+const ButtonContent = forwardRef<HTMLElement, ButtonProps>(
   (
     {
       className,
@@ -41,12 +58,12 @@ const ButtonContent = forwardRef(
       href,
       disabled,
       ...rest
-    },
+    }: ButtonProps,
     ref
   ) => {
     const isExternal = isExternalLink(href)
     const defaultComponent = href ? 'a' : 'button'
-    const Component = as || defaultComponent
+    const Component = (as || defaultComponent) as ElementType
 
     return (
       <Component

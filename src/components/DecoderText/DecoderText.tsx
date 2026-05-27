@@ -1,7 +1,6 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { VisuallyHidden } from 'components/VisuallyHidden'
 import { useReducedMotion, useSpring } from 'framer-motion'
-import { memo, useEffect, useRef } from 'react'
+import { memo, useEffect, useRef, type HTMLAttributes } from 'react'
 import { delay } from 'utils/delay'
 import { classes } from 'utils/style'
 import styles from './DecoderText.module.scss'
@@ -28,9 +27,23 @@ const glyphs = [
 const CharType = {
   Glyph: 'glyph',
   Value: 'value',
+} as const
+
+type CharTypeValue = (typeof CharType)[keyof typeof CharType]
+
+type Character = {
+  type: CharTypeValue
+  value: string
 }
 
-function shuffle(content, output, position) {
+type DecoderTextProps = HTMLAttributes<HTMLSpanElement> & {
+  text: string
+  start?: boolean
+  delay?: number
+  className?: string
+}
+
+function shuffle(content: string[], output: Character[], position: number) {
   return content.map((value, index) => {
     if (index < position) {
       return { type: CharType.Value, value }
@@ -46,18 +59,20 @@ function shuffle(content, output, position) {
 }
 
 export const DecoderText = memo(
-  ({ text, start = true, delay: startDelay = 0, className, ...rest }) => {
-    const output = useRef([{ type: CharType.Glyph, value: '' }])
-    const container = useRef()
+  ({ text, start = true, delay: startDelay = 0, className, ...rest }: DecoderTextProps) => {
+    const output = useRef<Character[]>([{ type: CharType.Glyph, value: '' }])
+    const container = useRef<HTMLSpanElement | null>(null)
     const reduceMotion = useReducedMotion()
     const decoderSpring = useSpring(0, { stiffness: 8, damping: 5 })
 
     useEffect(() => {
       const containerInstance = container.current
       const content = text.split('')
-      let animation
+      let animation = false
 
       const renderOutput = () => {
+        if (!containerInstance) return
+
         const characterMap = output.current.map(item => {
           return `<span class="${styles[item.type]}">${item.value}</span>`
         })
@@ -76,6 +91,7 @@ export const DecoderText = memo(
       }
 
       if (start && !animation && !reduceMotion) {
+        animation = true
         startSpring()
       }
 

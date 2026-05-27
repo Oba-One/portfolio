@@ -1,8 +1,7 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { useEffect, useRef } from 'react'
 
-export function usePrevious(value) {
-  const ref = useRef()
+export function usePrevious<T>(value: T) {
+  const ref = useRef<T | undefined>(undefined)
 
   useEffect(() => {
     ref.current = value

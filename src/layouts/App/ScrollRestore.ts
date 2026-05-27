@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { useIsPresent } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'

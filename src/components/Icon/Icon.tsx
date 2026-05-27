@@ -1,4 +1,4 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
+import type { SVGProps } from 'react'
 import { classes } from 'utils/style'
 import styles from './Icon.module.css'
 import ArrowLeft from './svg/arrow-left.svg'
@@ -37,8 +37,15 @@ export const icons = {
   linkedin: Linkedin,
 }
 
-export const Icon = ({ icon, className, ...rest }) => {
-  const IconComponent = icons[icon]
+export type IconName = keyof typeof icons
+
+type IconProps = SVGProps<SVGSVGElement> & {
+  icon: IconName | string
+  className?: string
+}
+
+export const Icon = ({ icon, className, ...rest }: IconProps) => {
+  const IconComponent = icons[icon as IconName] ?? icons.link
 
   return (
     <IconComponent aria-hidden className={classes(styles.icon, className)} {...rest} />

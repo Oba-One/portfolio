@@ -1,7 +1,11 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { useState } from 'react'
 
-export function useLocalStorage(key, initialValue) {
+type SetStoredValue<T> = T | ((currentValue: T | undefined) => T)
+
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T | undefined, (value: SetStoredValue<T>) => void] {
   const [storedValue, setStoredValue] = useState(() => {
     if (typeof window === 'undefined') return
 
@@ -14,7 +18,7 @@ export function useLocalStorage(key, initialValue) {
     }
   })
 
-  const setValue = value => {
+  const setValue = (value: SetStoredValue<T>) => {
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value
       setStoredValue(valueToStore)

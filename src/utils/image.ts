@@ -1,10 +1,22 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
+type SrcSetItem = {
+  src: string
+  width: number | string
+}
+
+type SrcSetInput = string | SrcSetItem[]
+
+type LoadImageOptions = {
+  src?: string
+  srcSet?: SrcSetInput
+  sizes?: string
+}
+
 /**
  * Use the browser's image loading to load an image and
  * grab the `src` it chooses from a `srcSet`
  */
-export async function loadImageFromSrcSet({ src, srcSet, sizes }) {
-  return new Promise((resolve, reject) => {
+export async function loadImageFromSrcSet({ src, srcSet, sizes }: LoadImageOptions) {
+  return new Promise<string>((resolve, reject) => {
     const srcSetString = srcSetToString(srcSet)
 
     try {
@@ -12,7 +24,7 @@ export async function loadImageFromSrcSet({ src, srcSet, sizes }) {
         throw new Error('No image src or srcSet provided')
       }
 
-      let tempImage = new Image()
+      const tempImage = new Image()
 
       if (src) {
         tempImage.src = src
@@ -29,7 +41,6 @@ export async function loadImageFromSrcSet({ src, srcSet, sizes }) {
       const onLoad = () => {
         tempImage.removeEventListener('load', onLoad)
         const source = tempImage.currentSrc
-        tempImage = null
         resolve(source)
       }
 
@@ -43,7 +54,7 @@ export async function loadImageFromSrcSet({ src, srcSet, sizes }) {
 /**
  * Convert a `srcSet` array to a plain old `srcSet` string
  */
-export function srcSetToString(srcSet = []) {
+export function srcSetToString(srcSet: SrcSetInput = []) {
   if (typeof srcSet === 'string') {
     return srcSet
   }
@@ -55,9 +66,13 @@ export function srcSetToString(srcSet = []) {
  * Generates a transparent png of a given width and height
  */
 export async function generateImage(width = 1, height = 1) {
-  return new Promise(resolve => {
+  return new Promise<string>(resolve => {
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
+
+    if (!ctx) {
+      throw new Error('Canvas 2D context is unavailable')
+    }
 
     canvas.width = width
     canvas.height = height
@@ -77,7 +92,10 @@ export async function generateImage(width = 1, height = 1) {
 /**
  * Use native html image `srcSet` resolution for non-html images
  */
-export async function resolveSrcFromSrcSet({ srcSet, sizes }) {
+export async function resolveSrcFromSrcSet({
+  srcSet,
+  sizes,
+}: Pick<LoadImageOptions, 'srcSet' | 'sizes'>) {
   const stringSrcSet = srcSetToString(srcSet)
 
   const sources = await Promise.all(
@@ -93,5 +111,9 @@ export async function resolveSrcFromSrcSet({ srcSet, sizes }) {
   const fakeSrc = await loadImageFromSrcSet({ srcSet: fakeSrcSet, sizes })
 
   const output = sources.find(src => src.image === fakeSrc)
+  if (!output) {
+    throw new Error('Unable to resolve image from srcSet')
+  }
+
   return output.src
 }

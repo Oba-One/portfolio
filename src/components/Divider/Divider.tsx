@@ -1,18 +1,29 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
+import type { CSSProperties, HTMLAttributes } from 'react'
 import { classes, cssProps, numToMs } from 'utils/style'
 import styles from './Divider.module.css'
 
+type DividerProps = HTMLAttributes<HTMLDivElement> & {
+  lineWidth?: string | number
+  lineHeight?: string | number
+  notchWidth?: string | number
+  notchHeight?: string | number
+  collapseDelay?: number
+  collapsed?: boolean
+  className?: string
+  style?: CSSProperties
+}
+
 export const Divider = ({
-  lineWidth,
-  lineHeight,
-  notchWidth,
-  notchHeight,
-  collapseDelay,
-  collapsed,
+  lineWidth = '100%',
+  lineHeight = '2px',
+  notchWidth = '90px',
+  notchHeight = '10px',
+  collapseDelay = 0,
+  collapsed = false,
   className,
   style,
   ...rest
-}) => (
+}: DividerProps) => (
   <div
     className={classes(styles.divider, className)}
     style={cssProps(
@@ -35,12 +46,3 @@ export const Divider = ({
     />
   </div>
 )
-
-Divider.defaultProps = {
-  lineWidth: '100%',
-  lineHeight: '2px',
-  notchWidth: '90px',
-  notchHeight: '10px',
-  collapsed: false,
-  collapseDelay: 0,
-}
