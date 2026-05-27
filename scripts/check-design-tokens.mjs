@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const baselinePath = path.join(repoRoot, 'scripts/data/design-token-baseline.tsv');
-const tokenSources = new Set(['src/components/ThemeProvider/theme.js']);
+const tokenSources = new Set(['src/components/ThemeProvider/theme.ts']);
 const scanExts = new Set(['.js', '.jsx', '.ts', '.tsx', '.css', '.scss']);
 const skipDirs = new Set(['node_modules', '.next', 'build', 'build-storybook', 'coverage']);
 

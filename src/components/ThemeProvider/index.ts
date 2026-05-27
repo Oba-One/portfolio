@@ -1,0 +1,4 @@
+// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
+export * from './ThemeProvider'
+export * from './theme'
+export * from './useTheme'

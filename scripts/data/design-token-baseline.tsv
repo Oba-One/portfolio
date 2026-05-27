@@ -42,8 +42,8 @@ src/layouts/Project/Project.module.scss	RAW_ANIMATION_DURATION	animation: projec
 src/pages/404/404.module.scss	VIEWPORT_100VH	height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
 src/pages/404/404.module.scss	VIEWPORT_100VH	min-height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
 src/pages/404/404.module.scss	RAW_DURATION	animation-duration: 1.8s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
-src/pages/_document.page.js	RAW_HEX	<meta name="theme-color" content="#b8abee" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
-src/pages/_document.page.js	RAW_HEX	<meta name="msapplication-TileColor" content="#582be0" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
-src/pages/_document.page.js	RAW_HEX	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#b8abee" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/_document.page.tsx	RAW_HEX	<meta name="theme-color" content="#b8abee" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/_document.page.tsx	RAW_HEX	<meta name="msapplication-TileColor" content="#582be0" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/_document.page.tsx	RAW_HEX	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#b8abee" />	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
 src/pages/contact/Contact.module.scss	VIEWPORT_100VH	min-height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
-src/utils/image.js	RAW_RGBA	ctx.fillStyle = 'rgba(0, 0, 0, 0)'	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/utils/image.ts	RAW_RGBA	ctx.fillStyle = 'rgba(0, 0, 0, 0)'	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.

@@ -9,7 +9,7 @@ This site is a personal portfolio and case-study surface. It should feel precise
 
 ## Source Of Truth
 
-- Runtime theme tokens live in `src/components/ThemeProvider/theme.js`.
+- Runtime theme tokens live in `src/components/ThemeProvider/theme.ts`.
 - Global CSS ownership lives in `src/layouts/App/global.scss` and `src/layouts/App/reset.css`.
 - Component and route styling lives in CSS Modules next to the component or page.
 - Project content contracts live in `src/constants.ts`; public route, nav, and browser-proof route ownership lives in `src/utils/siteRoutes.json`.
@@ -20,7 +20,7 @@ This site is a personal portfolio and case-study surface. It should feel precise
 - Use `ThemeProvider` tokens for color, spacing, typography, motion duration, easing, and z-index before adding raw values.
 - New project pages should add a typed project record first, add the route manifest entry, reuse `src/pages/projects/CaseStudy.module.scss` and existing `layouts/Project` patterns, then run `bun run check:site-routes` before adding a new visual grammar.
 - Raw hex, `rgba()`, `linear-gradient()`, `100vw`, `100vh`, raw radius, raw duration, and raw easing values are design-system risks. They are allowed only when captured in `scripts/data/design-token-baseline.tsv` with a reason.
-- Metadata colors in `_document.page.js` are allowed because browser chrome cannot consume CSS variables reliably.
+- Metadata colors in `_document.page.tsx` are allowed because browser chrome cannot consume CSS variables reliably.
 
 ## Layout And Responsiveness
 

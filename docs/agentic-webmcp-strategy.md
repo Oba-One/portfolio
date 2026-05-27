@@ -1,6 +1,6 @@
 # Portfolio WebMCP Strategy
 
-Status: approved public read-only runtime pilot. Keep the implementation limited to `src/utils/webmcp.js`.
+Status: approved public read-only runtime pilot. Keep the implementation limited to `src/utils/webmcp.ts`.
 
 Related operating guide: `docs/agentic-mcp-tooling-runbook.md`.
 

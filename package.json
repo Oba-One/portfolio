@@ -13,16 +13,17 @@
     "build": "next build",
     "build:storybook": "bunx --bun storybook build -o build-storybook && bun scripts/draco-storybook.js",
     "start": "next start -p 3201",
-    "agentic:check": "bun run check:site-routes && bun run check:design-tokens && bun run lint",
+    "agentic:check": "bun run check:site-routes && bun run check:design-tokens && bun run typecheck && bun run lint",
     "check:site-routes": "bun scripts/check-site-routes.mjs",
     "check:design-tokens": "node scripts/check-design-tokens.mjs",
     "agentic:browser-proof": "bun run build && bun scripts/agentic-browser-proof.mjs && bun run build:storybook",
     "agentic:verify": "bun run agentic:browser-proof",
-    "test": "bun run lint",
-    "lint": "eslint src .storybook instrumentation.ts instrumentation-client.ts next.config.js sentry.edge.config.js sentry.server.config.js --ext js,jsx,ts,tsx",
+    "test": "bun run typecheck && bun run lint",
+    "lint": "eslint src .storybook instrumentation.ts instrumentation-client.ts next.config.js sentry.edge.config.ts sentry.server.config.ts --ext ts,tsx,js,jsx",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
     "optimize:assets": "zsh scripts/optimize-assets.sh",
-    "optimize:resize": "bunx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':'25%','height':'25%','method':'lanczos3'}\" src/assets/*.webp"
+    "optimize:resize": "bunx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':'25%','height':'25%','method':'lanczos3'}\" src/assets/*.webp",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@sentry/browser": "10.52.0",
@@ -115,7 +116,14 @@
       "no-unused-vars": "warn",
       "import/no-anonymous-default-export": "off",
       "react/display-name": "off",
-      "@next/next/no-img-element": "off"
+      "@next/next/no-img-element": "off",
+      "@typescript-eslint/ban-ts-comment": [
+        "error",
+        {
+          "ts-nocheck": "allow-with-description",
+          "minimumDescriptionLength": 10
+        }
+      ]
     }
   },
   "browserslist": {
