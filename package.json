@@ -16,7 +16,10 @@
     "lint": "eslint src .storybook instrumentation.ts instrumentation-client.ts next.config.js sentry.edge.config.js sentry.server.config.js --ext js,jsx,ts,tsx",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
     "optimize:assets": "zsh scripts/optimize-assets.sh",
-    "optimize:resize": "bunx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':'25%','height':'25%','method':'lanczos3'}\" src/assets/*.webp"
+    "optimize:resize": "bunx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':'25%','height':'25%','method':'lanczos3'}\" src/assets/*.webp",
+    "check:browser-verification-policy": "bun scripts/check-browser-verification-policy.mjs",
+    "agentic:check": "bun run check:browser-verification-policy",
+    "agentic:browser-proof": "bun scripts/require-authenticated-browser-qa.mjs"
   },
   "dependencies": {
     "@sentry/browser": "10.52.0",
