@@ -7,14 +7,35 @@ import { Intro } from 'layouts/Home/Intro'
 import { Profile } from 'layouts/Home/Profile'
 import { ProjectSummary } from 'layouts/Home/ProjectSummary'
 
-import { GreenGoodsLogoImg, GreenGoodsSocialCardImg } from 'assets/green-goods'
-import { GreenpillMapImg } from 'assets/greenpill'
-import { WefaSplashImg, WefaOnboardSelectElementImg } from 'assets/wefa'
-import { SynBackgroundImg } from 'assets/syn'
-import { FreeportBackgroundImg } from 'assets/freeport'
-import { ConnectCallMessagesImg } from 'assets/mira-connect'
-import { FlowTabletCollectionsImg, FlowTabletReferencePhotoImg } from 'assets/mira-flow'
-import { GMBackgroundImg } from 'assets/gm'
+import {
+  GreenGoodsActionSelectionPwaImg,
+  GreenGoodsActionSelectionPwaPlaceholderImg,
+  GreenGoodsMediaSectionPwaImg,
+  GreenGoodsMediaSectionPwaPlaceholderImg,
+} from 'assets/green-goods'
+import {
+  GreenpillNetworkMapImg,
+  GreenpillNetworkMapPlaceholderImg,
+} from 'assets/greenpill'
+import {
+  WefaSplashImg,
+  WefaSplashPlaceholderImg,
+  WefaOnboardSelectElementImg,
+  WefaOnboardSelectElementPlaceholderImg,
+} from 'assets/wefa'
+import { SynLearningsImg, SynLearningsPlaceholderImg } from 'assets/syn'
+import { FreeportBackgroundImg, FreeportBackgroundPlaceholderImg } from 'assets/freeport'
+import {
+  ConnectCallMessagesImg,
+  ConnectCallMessagesPlaceholderImg,
+} from 'assets/mira-connect'
+import {
+  FlowTabletCollectionsImg,
+  FlowTabletCollectionsPlaceholderImg,
+  FlowTabletReferencePhotoImg,
+  FlowTabletReferencePhotoPlaceholderImg,
+} from 'assets/mira-flow'
+import { GMBackgroundImg, GMBackgroundPlaceholderImg } from 'assets/gm'
 
 import styles from './Home.module.css'
 import { featuredProjectSlugs, projects } from '../../constants'
@@ -23,24 +44,24 @@ const disciplines = ['Steward', 'Engineer', 'Storyteller', 'Artist']
 
 const projectMedia = {
   green_goods: {
-    alt: 'Green Goods project artwork inside mobile frames.',
+    alt: 'Green Goods work selection and media capture screens inside mobile frames.',
     textures: [
       {
-        srcSet: [GreenGoodsSocialCardImg, GreenGoodsSocialCardImg],
-        placeholder: GreenGoodsSocialCardImg,
+        srcSet: [GreenGoodsActionSelectionPwaImg, GreenGoodsActionSelectionPwaImg],
+        placeholder: GreenGoodsActionSelectionPwaPlaceholderImg,
       },
       {
-        srcSet: [GreenGoodsLogoImg, GreenGoodsLogoImg],
-        placeholder: GreenGoodsLogoImg,
+        srcSet: [GreenGoodsMediaSectionPwaImg, GreenGoodsMediaSectionPwaImg],
+        placeholder: GreenGoodsMediaSectionPwaPlaceholderImg,
       },
     ],
   },
   greenpill: {
-    alt: 'Greenpill map inside a laptop frame.',
+    alt: 'Greenpill Network homepage map hero inside a laptop frame.',
     textures: [
       {
-        srcSet: [GreenpillMapImg, GreenpillMapImg],
-        placeholder: GreenpillMapImg,
+        srcSet: [GreenpillNetworkMapImg, GreenpillNetworkMapImg],
+        placeholder: GreenpillNetworkMapPlaceholderImg,
       },
     ],
   },
@@ -49,20 +70,20 @@ const projectMedia = {
     textures: [
       {
         srcSet: [WefaSplashImg, WefaSplashImg],
-        placeholder: WefaSplashImg,
+        placeholder: WefaSplashPlaceholderImg,
       },
       {
         srcSet: [WefaOnboardSelectElementImg, WefaOnboardSelectElementImg],
-        placeholder: WefaOnboardSelectElementImg,
+        placeholder: WefaOnboardSelectElementPlaceholderImg,
       },
     ],
   },
   syn: {
-    alt: 'Synesthesia launch artwork inside a laptop frame.',
+    alt: 'Synesthesia colorful blog page inside a laptop frame.',
     textures: [
       {
-        srcSet: [SynBackgroundImg, SynBackgroundImg],
-        placeholder: SynBackgroundImg,
+        srcSet: [SynLearningsImg, SynLearningsImg],
+        placeholder: SynLearningsPlaceholderImg,
       },
     ],
   },
@@ -71,7 +92,7 @@ const projectMedia = {
     textures: [
       {
         srcSet: [FreeportBackgroundImg, FreeportBackgroundImg],
-        placeholder: FreeportBackgroundImg,
+        placeholder: FreeportBackgroundPlaceholderImg,
       },
     ],
   },
@@ -80,7 +101,7 @@ const projectMedia = {
     textures: [
       {
         srcSet: [ConnectCallMessagesImg, ConnectCallMessagesImg],
-        placeholder: ConnectCallMessagesImg,
+        placeholder: ConnectCallMessagesPlaceholderImg,
       },
     ],
   },
@@ -89,11 +110,11 @@ const projectMedia = {
     textures: [
       {
         srcSet: [FlowTabletCollectionsImg, FlowTabletCollectionsImg],
-        placeholder: FlowTabletCollectionsImg,
+        placeholder: FlowTabletCollectionsPlaceholderImg,
       },
       {
         srcSet: [FlowTabletReferencePhotoImg, FlowTabletReferencePhotoImg],
-        placeholder: FlowTabletReferencePhotoImg,
+        placeholder: FlowTabletReferencePhotoPlaceholderImg,
       },
     ],
   },
@@ -102,7 +123,7 @@ const projectMedia = {
     textures: [
       {
         srcSet: [GMBackgroundImg, GMBackgroundImg],
-        placeholder: GMBackgroundImg,
+        placeholder: GMBackgroundPlaceholderImg,
       },
     ],
   },
@@ -155,6 +176,7 @@ export const Home = () => {
   return (
     <div className={styles.home}>
       <Meta
+        route="/"
         title="Architect & Steward"
         description="Portfolio of Afolabi Aiyeloja, a systems architect and steward shaping regenerative web3 infrastructure with a background in augmented reality, blockchains, and AI."
       />

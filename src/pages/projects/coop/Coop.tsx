@@ -1,7 +1,12 @@
 // @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { Fragment } from 'react'
 
-import { CoopMarkGlowImg, CoopWordmarkFlatImg } from 'assets/coop'
+import {
+  CoopMarkGlowImg,
+  CoopMarkGlowPlaceholderImg,
+  CoopWordmarkFlatImg,
+  CoopWordmarkFlatPlaceholderImg,
+} from 'assets/coop'
 import { Footer } from 'components/Footer'
 import { Image } from 'components/Image'
 import { Meta } from 'components/Meta'
@@ -34,12 +39,18 @@ export const Coop = () => {
 
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
+      <Meta
+        title={title}
+        prefix="Projects"
+        description={description}
+        route={project.cta.link}
+        socialImage={project.socialImage}
+      />
       <ProjectContainer>
         <ProjectBackground
           src={CoopMarkGlowImg}
           srcSet={`${CoopMarkGlowImg.src} 1024w, ${CoopMarkGlowImg.src} 2048w`}
-          placeholder={CoopMarkGlowImg}
+          placeholder={CoopMarkGlowPlaceholderImg}
           alt=""
           opacity={isDark ? 0.48 : 0.72}
         />
@@ -60,7 +71,7 @@ export const Coop = () => {
                 className={styles.sidebarImage}
                 src={CoopMarkGlowImg}
                 srcSet={[CoopMarkGlowImg, CoopMarkGlowImg]}
-                placeholder={CoopMarkGlowImg}
+                placeholder={CoopMarkGlowPlaceholderImg}
                 alt="Coop glowing mark."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -68,7 +79,7 @@ export const Coop = () => {
                 className={styles.sidebarImage}
                 src={CoopWordmarkFlatImg}
                 srcSet={[CoopWordmarkFlatImg, CoopWordmarkFlatImg]}
-                placeholder={CoopWordmarkFlatImg}
+                placeholder={CoopWordmarkFlatPlaceholderImg}
                 alt="Coop wordmark."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -80,7 +91,7 @@ export const Coop = () => {
             <Image
               raised
               srcSet={[CoopWordmarkFlatImg, CoopWordmarkFlatImg]}
-              placeholder={CoopWordmarkFlatImg}
+              placeholder={CoopWordmarkFlatPlaceholderImg}
               alt="Coop wordmark used as temporary project artwork."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />

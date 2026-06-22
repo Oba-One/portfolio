@@ -3,11 +3,17 @@ import { Fragment } from 'react'
 
 import {
   WefaElementalCharactersImg,
+  WefaElementalCharactersPlaceholderImg,
   WefaOlaRedFruitImg,
+  WefaOlaRedFruitPlaceholderImg,
   WefaDeckPlantsImg,
+  WefaDeckPlantsPlaceholderImg,
   WefaOnboardSelectPlantImg,
+  WefaOnboardSelectPlantPlaceholderImg,
   WefaOnboardSelectElementImg,
+  WefaOnboardSelectElementPlaceholderImg,
   WefaOnboardGeneratedCreaturesImg,
+  WefaOnboardGeneratedCreaturesPlaceholderImg,
 } from 'assets/wefa'
 import {
   ProjectBackground,
@@ -42,14 +48,20 @@ export const Wefa = () => {
 
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
+      <Meta
+        title={title}
+        prefix="Projects"
+        description={description}
+        route={project.cta.link}
+        socialImage={project.socialImage}
+      />
       <ProjectContainer className={styles.slice}>
         <ProjectBackground
           className={styles.heroBackground}
           src={WefaOlaRedFruitImg}
           srcSet={`${WefaOlaRedFruitImg.src} 1280w, ${WefaOlaRedFruitImg.src} 2560w`}
           alt="Ola sitting in a tree holding red fruit beside a basket of fruit."
-          placeholder={WefaOlaRedFruitImg}
+          placeholder={WefaOlaRedFruitPlaceholderImg}
           opacity={isDark ? 0.5 : 0.6}
         />
         <ProjectHeader
@@ -68,8 +80,8 @@ export const Wefa = () => {
               <Image
                 className={styles.sidebarImage}
                 src={WefaDeckPlantsImg}
-                srcSet={[WefaDeckPlantsImg.src, WefaDeckPlantsImg.src]}
-                placeholder={WefaDeckPlantsImg.src}
+                srcSet={[WefaDeckPlantsImg, WefaDeckPlantsImg]}
+                placeholder={WefaDeckPlantsPlaceholderImg}
                 alt="WEFA app splash screen with logo centered."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -77,10 +89,10 @@ export const Wefa = () => {
                 className={styles.sidebarImage}
                 src={WefaOnboardGeneratedCreaturesImg}
                 srcSet={[
-                  WefaOnboardGeneratedCreaturesImg.src,
-                  WefaOnboardGeneratedCreaturesImg.src,
+                  WefaOnboardGeneratedCreaturesImg,
+                  WefaOnboardGeneratedCreaturesImg,
                 ]}
-                placeholder={WefaOnboardGeneratedCreaturesImg.src}
+                placeholder={WefaOnboardGeneratedCreaturesPlaceholderImg}
                 alt="WEFA plant selection screen showcasing a strawberry as an example."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -93,19 +105,16 @@ export const Wefa = () => {
               <Image
                 className={styles.sidebarImage}
                 src={WefaOnboardSelectElementImg}
-                srcSet={[
-                  WefaOnboardSelectElementImg.src,
-                  WefaOnboardSelectElementImg.src,
-                ]}
-                placeholder={WefaOnboardSelectElementImg.src}
+                srcSet={[WefaOnboardSelectElementImg, WefaOnboardSelectElementImg]}
+                placeholder={WefaOnboardSelectElementPlaceholderImg}
                 alt="WEFA app spices/herbs vs flowers selection screen."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 src={WefaOnboardSelectPlantImg}
-                srcSet={[WefaOnboardSelectPlantImg.src, WefaOnboardSelectPlantImg.src]}
-                placeholder={WefaOnboardSelectPlantImg.src}
+                srcSet={[WefaOnboardSelectPlantImg, WefaOnboardSelectPlantImg]}
+                placeholder={WefaOnboardSelectPlantPlaceholderImg}
                 alt="WEFA app fruits vs vegetables selection screen."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -121,7 +130,7 @@ export const Wefa = () => {
             <Image
               src={WefaElementalCharactersImg}
               srcSet={[WefaElementalCharactersImg, WefaElementalCharactersImg]}
-              placeholder={WefaElementalCharactersImg}
+              placeholder={WefaElementalCharactersPlaceholderImg}
               alt="Four WEFA elemental character concepts standing together."
               sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
             />

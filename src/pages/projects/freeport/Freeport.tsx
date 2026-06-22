@@ -46,7 +46,13 @@ export const Freeport = () => {
   return (
     <Fragment>
       <ProjectContainer className="spr">
-        <Meta title={title} prefix="Projects" description={description} />
+        <Meta
+          title={title}
+          prefix="Projects"
+          description={description}
+          route={project.cta.link}
+          socialImage={project.socialImage}
+        />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
           src={FreeportDevelopmentImg}

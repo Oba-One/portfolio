@@ -70,6 +70,7 @@ export const Contact = () => {
     <Section className={styles.contact}>
       <Meta
         title="Contact"
+        route="/contact"
         description="Get in touch to discuss ideas, projects, or just to say hi!"
       />
       <Transition unmount in={!complete} timeout={1600}>

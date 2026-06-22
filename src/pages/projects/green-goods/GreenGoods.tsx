@@ -1,7 +1,20 @@
 // @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { Fragment } from 'react'
 
-import { GreenGoodsLogoImg, GreenGoodsSocialCardImg } from 'assets/green-goods'
+import {
+  GreenGoodsActionSelectionPwaImg,
+  GreenGoodsActionSelectionPwaPlaceholderImg,
+  GreenGoodsHeroWebsiteImg,
+  GreenGoodsHeroWebsitePlaceholderImg,
+  GreenGoodsImpactValueCycleImg,
+  GreenGoodsImpactValueCyclePlaceholderImg,
+  GreenGoodsMediaSectionPwaImg,
+  GreenGoodsMediaSectionPwaPlaceholderImg,
+  RefiSiciliaAgroforestryImg,
+  RefiSiciliaAgroforestryPlaceholderImg,
+  TasSolarHubSessionImg,
+  TasSolarHubSessionPlaceholderImg,
+} from 'assets/green-goods'
 import { Footer } from 'components/Footer'
 import { Image } from 'components/Image'
 import { Meta } from 'components/Meta'
@@ -19,8 +32,8 @@ import {
 } from 'layouts/Project'
 import { media } from 'utils/style'
 
-import styles from '../CaseStudy.module.scss'
 import { projects } from '../../../constants'
+import styles from './GreenGoods.module.scss'
 
 const project = projects['green_goods']
 
@@ -34,14 +47,21 @@ export const GreenGoods = () => {
 
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
-      <ProjectContainer>
+      <Meta
+        title={title}
+        prefix="Projects"
+        description={description}
+        route={project.cta.link}
+        socialImage={project.socialImage}
+      />
+      <ProjectContainer className={styles.greenGoods}>
         <ProjectBackground
-          src={GreenGoodsSocialCardImg}
-          srcSet={`${GreenGoodsSocialCardImg.src} 1440w, ${GreenGoodsSocialCardImg.src} 2880w`}
-          placeholder={GreenGoodsSocialCardImg}
+          className={styles.heroBackground}
+          src={GreenGoodsHeroWebsiteImg}
+          srcSet={`${GreenGoodsHeroWebsiteImg.src} 1672w, ${GreenGoodsHeroWebsiteImg.src} 3344w`}
+          placeholder={GreenGoodsHeroWebsitePlaceholderImg}
           alt=""
-          opacity={isDark ? 0.52 : 0.75}
+          opacity={isDark ? 0.56 : 0.72}
         />
         <ProjectHeader
           title={title}
@@ -50,61 +70,83 @@ export const GreenGoods = () => {
           roles={roles}
         />
         <ProjectSection>
-          <ProjectSectionColumns centered className={styles.columns}>
-            <div className={styles.imagesText}>
+          <ProjectSectionContent className={styles.problemContent}>
+            <Image
+              raised
+              className={styles.fieldPhoto}
+              src={TasSolarHubSessionImg}
+              srcSet={[TasSolarHubSessionImg, TasSolarHubSessionImg]}
+              placeholder={TasSolarHubSessionPlaceholderImg}
+              alt="TAS solar hub team standing in front of a solar powered community hub in Awka, Nigeria."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 50vw`}
+            />
+            <ProjectTextRow>
               <ProjectSectionHeading>Problem</ProjectSectionHeading>
               <ProjectSectionText>{project.problem}</ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection light>
+          <ProjectSectionColumns centered className={styles.columns}>
+            <div className={styles.appScreens}>
+              <Image
+                className={styles.appScreen}
+                src={GreenGoodsActionSelectionPwaImg}
+                srcSet={[
+                  GreenGoodsActionSelectionPwaImg,
+                  GreenGoodsActionSelectionPwaImg,
+                ]}
+                placeholder={GreenGoodsActionSelectionPwaPlaceholderImg}
+                alt="Green Goods mobile app action selection screen with solar, agroforestry, education, and waste domains."
+                sizes={`(max-width: ${media.mobile}px) 58vw, 300px`}
+              />
+              <Image
+                className={styles.appScreen}
+                src={GreenGoodsMediaSectionPwaImg}
+                srcSet={[GreenGoodsMediaSectionPwaImg, GreenGoodsMediaSectionPwaImg]}
+                placeholder={GreenGoodsMediaSectionPwaPlaceholderImg}
+                alt="Green Goods mobile app media step for capturing planting photos and optional audio evidence."
+                sizes={`(max-width: ${media.mobile}px) 58vw, 300px`}
+              />
             </div>
-            <div className={styles.sidebarImages}>
-              <Image
-                className={styles.sidebarImage}
-                src={GreenGoodsLogoImg}
-                srcSet={[GreenGoodsLogoImg, GreenGoodsLogoImg]}
-                placeholder={GreenGoodsLogoImg}
-                alt="Green Goods logo."
-                sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
-              />
-              <Image
-                className={styles.sidebarImage}
-                src={GreenGoodsSocialCardImg}
-                srcSet={[GreenGoodsSocialCardImg, GreenGoodsSocialCardImg]}
-                placeholder={GreenGoodsSocialCardImg}
-                alt="Green Goods social card placeholder artwork."
-                sizes={`(max-width: ${media.mobile}px) 260px, 420px`}
-              />
+            <div className={styles.imagesText}>
+              <ProjectSectionHeading>Architecture</ProjectSectionHeading>
+              <ProjectSectionText>{project.architecture}</ProjectSectionText>
+            </div>
+          </ProjectSectionColumns>
+        </ProjectSection>
+        <ProjectSection>
+          <ProjectSectionColumns centered className={styles.columns}>
+            <Image
+              className={styles.impactCycle}
+              src={GreenGoodsImpactValueCycleImg}
+              srcSet={[GreenGoodsImpactValueCycleImg, GreenGoodsImpactValueCycleImg]}
+              placeholder={GreenGoodsImpactValueCyclePlaceholderImg}
+              alt="Green Goods impact value cycle showing work, tokenization, evaluation, and funding as a circular flow."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 520px`}
+            />
+            <div className={styles.imagesText}>
+              <ProjectSectionHeading>Development</ProjectSectionHeading>
+              <ProjectSectionText>{project.development}</ProjectSectionText>
             </div>
           </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection light>
-          <ProjectSectionContent>
+          <ProjectSectionColumns centered className={styles.columns}>
             <Image
               raised
-              srcSet={[GreenGoodsSocialCardImg, GreenGoodsSocialCardImg]}
-              placeholder={GreenGoodsSocialCardImg}
-              alt="Green Goods temporary project artwork."
-              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+              className={styles.fieldPhoto}
+              src={RefiSiciliaAgroforestryImg}
+              srcSet={[RefiSiciliaAgroforestryImg, RefiSiciliaAgroforestryImg]}
+              placeholder={RefiSiciliaAgroforestryPlaceholderImg}
+              alt="ReFi Sicilia agroforestry work with a participant pruning trees near the coastline."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 50vw`}
             />
-            <ProjectTextRow>
-              <ProjectSectionHeading>Architecture</ProjectSectionHeading>
-              <ProjectSectionText>{project.architecture}</ProjectSectionText>
-            </ProjectTextRow>
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
-          <ProjectSectionContent>
-            <ProjectTextRow>
-              <ProjectSectionHeading>Development</ProjectSectionHeading>
-              <ProjectSectionText>{project.development}</ProjectSectionText>
-            </ProjectTextRow>
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
-          <ProjectSectionContent>
-            <ProjectTextRow>
+            <div className={styles.imagesText}>
               <ProjectSectionHeading>Learnings</ProjectSectionHeading>
               <ProjectSectionText>{project.learnings}</ProjectSectionText>
-            </ProjectTextRow>
-          </ProjectSectionContent>
+            </div>
+          </ProjectSectionColumns>
         </ProjectSection>
       </ProjectContainer>
       <Footer />

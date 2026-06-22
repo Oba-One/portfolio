@@ -13,7 +13,7 @@
     "build": "next build",
     "build:storybook": "bunx --bun storybook build -o build-storybook && bun scripts/draco-storybook.js",
     "start": "next start -p 3201",
-"check:browser-verification-policy": "bun scripts/check-browser-verification-policy.mjs",
+    "check:browser-verification-policy": "bun scripts/check-browser-verification-policy.mjs",
     "agentic:guidance": "DISABLE_TELEMETRY=1 bun --bun modern-web-guidance search \"agentic frontend CSS accessibility browser validation DevTools MCP\" && DISABLE_TELEMETRY=1 bun --bun modern-web-guidance retrieve accessibility",
     "agentic:check": "bun run agentic:guidance && bun run check:browser-verification-policy && bun run check:site-routes && bun run check:design-tokens && bun run typecheck && bun run lint",
     "check:site-routes": "bun scripts/check-site-routes.mjs",
@@ -23,7 +23,8 @@
     "test": "bun run typecheck && bun run lint",
     "lint": "eslint src .storybook instrumentation.ts instrumentation-client.ts next.config.js sentry.edge.config.ts sentry.server.config.ts --ext ts,tsx,js,jsx",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
-    "optimize:assets": "zsh scripts/optimize-assets.sh",
+    "generate:social-images": "node scripts/generate-social-images.mjs",
+    "optimize:assets": "node scripts/optimize-assets.mjs",
     "optimize:resize": "bunx @squoosh/cli -s '-mobile' --webp auto --resize \"{'enabled':true,'width':'25%','height':'25%','method':'lanczos3'}\" src/assets/*.webp",
     "typecheck": "tsc --noEmit"
   },
@@ -66,6 +67,7 @@
     "postcss-preset-env": "^7.8.3",
     "prettier": "^2.8.8",
     "sass": "^1.99.0",
+    "sharp": "0.34.5",
     "storybook": "10.3.6",
     "typescript": "4.9.5"
   },

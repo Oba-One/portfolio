@@ -3,10 +3,15 @@ import { Fragment } from 'react'
 
 import {
   GreenpillBooksImg,
+  GreenpillBooksPlaceholderImg,
   GreenpillGardenEntryImg,
+  GreenpillGardenEntryPlaceholderImg,
   GreenpillMonthlyCallImg,
+  GreenpillMonthlyCallPlaceholderImg,
   GreenpillNetworkMapImg,
+  GreenpillNetworkMapPlaceholderImg,
   GreenpillTechAndSunImg,
+  GreenpillTechAndSunPlaceholderImg,
 } from 'assets/greenpill'
 import { Footer } from 'components/Footer'
 import { Image } from 'components/Image'
@@ -39,11 +44,17 @@ export const Greenpill = () => {
 
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
+      <Meta
+        title={title}
+        prefix="Projects"
+        description={description}
+        route={project.cta.link}
+        socialImage={project.socialImage}
+      />
       <ProjectContainer>
         <ProjectBackground
           src={GreenpillNetworkMapImg}
-          placeholder={GreenpillNetworkMapImg}
+          placeholder={GreenpillNetworkMapPlaceholderImg}
           alt=""
           opacity={isDark ? 0.58 : 0.78}
         />
@@ -58,7 +69,7 @@ export const Greenpill = () => {
             <Image
               raised
               src={GreenpillBooksImg}
-              placeholder={GreenpillBooksImg}
+              placeholder={GreenpillBooksPlaceholderImg}
               alt="Greenpilled book spread describing regenerative cryptoeconomics, public goods funding, and coordination as the foundation for the network."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
@@ -73,8 +84,8 @@ export const Greenpill = () => {
             <Image
               raised
               src={GreenpillGardenEntryImg}
-              placeholder={GreenpillGardenEntryImg}
-              alt="Greenpill Garden entry section with low-pressure paths to subscribe, join the public conversation, take the Regen Assessment, or book a steward call."
+              placeholder={GreenpillGardenEntryPlaceholderImg}
+              alt="Greenpill Garden entry section with low pressure paths to subscribe, join the public conversation, take the Regen Assessment, or book a steward call."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
             <ProjectTextRow>
@@ -82,10 +93,9 @@ export const Greenpill = () => {
               <ProjectSectionText>{project.architecture}</ProjectSectionText>
               <ProjectSectionText>
                 That network architecture also feeds into{' '}
-                <Link href="/projects/green-goods">Green Goods</Link>, where the
-                field-facing tools focus more directly on accessible impact reporting and
-                funding while helping chapters and stewards make their work legible and
-                verifiable.
+                <Link href="/projects/green-goods">Green Goods</Link>, where the field
+                tools focus more directly on accessible impact reporting and funding while
+                helping chapters and stewards make their work legible and verifiable.
               </ProjectSectionText>
             </ProjectTextRow>
           </ProjectSectionContent>
@@ -95,7 +105,7 @@ export const Greenpill = () => {
             <Image
               raised
               src={GreenpillMonthlyCallImg}
-              placeholder={GreenpillMonthlyCallImg}
+              placeholder={GreenpillMonthlyCallPlaceholderImg}
               alt="Greenpill Network monthly community call slide with Afolabi Aiyeloja visible beside the presentation."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
@@ -110,8 +120,8 @@ export const Greenpill = () => {
             <Image
               raised
               src={GreenpillTechAndSunImg}
-              placeholder={GreenpillTechAndSunImg}
-              alt="Afolabi Aiyeloja and Amio on a Greenpill Dev Guild call presenting Tech and Sun, a solar-powered hub project for builders and communities."
+              placeholder={GreenpillTechAndSunPlaceholderImg}
+              alt="Afolabi Aiyeloja and Amio on a Greenpill Dev Guild call presenting Tech and Sun, a solar powered hub project for builders and communities."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
             />
             <ProjectTextRow>

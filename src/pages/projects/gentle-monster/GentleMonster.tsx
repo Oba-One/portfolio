@@ -49,12 +49,18 @@ export const GentleMonster = () => {
   return (
     <Fragment>
       <ProjectContainer className="spr">
-        <Meta title={title} prefix="Projects" description={description} />
+        <Meta
+          title={title}
+          prefix="Projects"
+          description={description}
+          route={project.cta.link}
+          socialImage={project.socialImage}
+        />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
           src={GMBackgroundImg}
           srcSet={`${GMBackgroundImg.src} 1080w, ${GMBackgroundImg.src} 2160w`}
-          placeholder={GMBackgroundPlaceholderImg.src}
+          placeholder={GMBackgroundPlaceholderImg}
           alt="Gentle Monster updated landing page with new UI design."
           // blur="LqL|u[oftlRkD%f6bbay_4aye.j["
         />
@@ -74,7 +80,7 @@ export const GentleMonster = () => {
               raised
               key={themeId}
               srcSet={[GMProblemImg, GMProblemImg]}
-              placeholder={GMProblemPlaceholderImg.src}
+              placeholder={GMProblemPlaceholderImg}
               // blur="LpG[=;RjWBxa4nWVa|oL~qt7j[Rj"
               sizes="100vw"
               alt="Gentle Monster 2018 landing page with old UI design."
@@ -87,7 +93,7 @@ export const GentleMonster = () => {
               raised
               key={themeId}
               srcSet={[GMArchitectureImg, GMArchitectureImg]}
-              placeholder={GMArchitecturePlaceholderImg.src}
+              placeholder={GMArchitecturePlaceholderImg}
               // blur="LKPP=d00yD?v^+xCofWU?^.9n}Vs"
               sizes="100vw"
               alt="Gentle Monster glasses collections page with the different styles of glasses."
@@ -104,7 +110,7 @@ export const GentleMonster = () => {
               raised
               key={themeId}
               srcSet={[GMDevelopment2Img, GMDevelopment2Img]}
-              placeholder={GMDevelopment2PlaceholderImg.src}
+              placeholder={GMDevelopment2PlaceholderImg}
               // blur="L8RfkB00?bxuj[WBWBWB~q%NRPM{"
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
               alt="Gentle Monster product detail page with different views of the product."
@@ -125,7 +131,7 @@ export const GentleMonster = () => {
             </ProjectSectionContent>
             <Image
               srcSet={[GMLearningsImg, GMLearningsImg]}
-              placeholder={GMLearningsPlaceholderImg.src}
+              placeholder={GMLearningsPlaceholderImg}
               // blur="LPQvtKWAjYWs~qj]WBWAt7Rjogxt"
               alt="Gentle Monster product carousel with model wearing different glasses."
               sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
