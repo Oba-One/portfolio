@@ -30,9 +30,13 @@ const springConfig = {
   mass: 2,
 }
 
+const colorFromRgbToken = (rgb = '255 255 255') => new Color(...rgbToThreeColor(rgb))
+
 export const DisplacementSphere = props => {
   const theme = useTheme()
-  const { rgbBackground, themeId, colorWhite } = theme
+  const { rgbAccent, rgbBackground, rgbBackgroundLight, rgbPrimary, rgbWhite, themeId } =
+    theme
+  const initialPalette = useRef({ rgbAccent, rgbBackgroundLight, rgbPrimary })
   const start = useRef(Date.now())
   const canvasRef = useRef()
   const mouse = useRef()
@@ -91,7 +95,18 @@ export const DisplacementSphere = props => {
     material.current.onBeforeCompile = shader => {
       uniforms.current = UniformsUtils.merge([
         shader.uniforms,
-        { time: { type: 'f', value: 0 } },
+        {
+          time: { value: 0 },
+          palettePrimary: {
+            value: colorFromRgbToken(initialPalette.current.rgbPrimary),
+          },
+          paletteAccent: {
+            value: colorFromRgbToken(initialPalette.current.rgbAccent),
+          },
+          paletteBackground: {
+            value: colorFromRgbToken(initialPalette.current.rgbBackgroundLight),
+          },
+        },
       ])
 
       shader.uniforms = uniforms.current
@@ -114,10 +129,39 @@ export const DisplacementSphere = props => {
   }, [])
 
   useEffect(() => {
+    if (!material.current) return undefined
+
+    const primary = colorFromRgbToken(rgbPrimary)
+    const accent = colorFromRgbToken(rgbAccent)
+    const backgroundLight = colorFromRgbToken(rgbBackgroundLight)
+
+    material.current.color.copy(primary)
+    material.current.specular.copy(accent)
+    material.current.emissive.copy(backgroundLight)
+    material.current.emissiveIntensity = themeId === 'light' ? 0.08 : 0.14
+    material.current.shininess = themeId === 'light' ? 28 : 36
+
+    if (uniforms.current) {
+      uniforms.current.palettePrimary.value.copy(primary)
+      uniforms.current.paletteAccent.value.copy(accent)
+      uniforms.current.paletteBackground.value.copy(backgroundLight)
+    }
+
+    if (renderer.current && scene.current && camera.current && reduceMotion) {
+      renderer.current.render(scene.current, camera.current)
+    }
+
+    return undefined
+  }, [rgbAccent, rgbBackgroundLight, rgbPrimary, reduceMotion, themeId])
+
+  useEffect(() => {
     if (!scene.current) return undefined
 
-    const dirLight = new DirectionalLight(colorWhite, 0.6)
-    const ambientLight = new AmbientLight(colorWhite, themeId === 'light' ? 0.8 : 0.1)
+    const dirLight = new DirectionalLight(colorFromRgbToken(rgbPrimary), 0.7)
+    const ambientLight = new AmbientLight(
+      colorFromRgbToken(rgbWhite),
+      themeId === 'light' ? 0.7 : 0.16
+    )
 
     dirLight.position.z = 200
     dirLight.position.x = 100
@@ -130,7 +174,7 @@ export const DisplacementSphere = props => {
     return () => {
       removeLights(lights.current)
     }
-  }, [rgbBackground, colorWhite, themeId])
+  }, [rgbBackground, rgbPrimary, rgbWhite, themeId])
 
   useEffect(() => {
     if (!renderer.current || !camera.current || !sphere.current) return undefined

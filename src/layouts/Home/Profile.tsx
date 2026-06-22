@@ -20,29 +20,29 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hello there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I’m Afo, a builder based in Loma Linda. My work spans front and back end, smart
-      contracts, local-first systems, and product architecture. Right now I’m building{' '}
-      <Link href="https://coop.town">Coop</Link>, a browser-first tool for capture,
-      review, and shared group memory; building{' '}
-      <Link href="https://greengoods.app">Green Goods</Link>, an offline-first PWA that
-      brings ecological and community work on-chain; and stewarding{' '}
-      <Link href="https://greenpill.network">Greenpill</Link>, where I help shape
-      GreenWill and the wider coordination layer for regenerative communities.
+      I’m Afo, an ecosystem architect and systems builder working across regenerative
+      technology, cultural community, and public goods infrastructure. My work blends
+      software architecture and product strategy with partnerships, grants, events, and
+      community stewardship. Right now that centers on{' '}
+      <Link href="/projects/green-goods">Green Goods</Link>,{' '}
+      <Link href="/projects/greenpill">Greenpill</Link>,{' '}
+      <Link href="https://techandsun.com">Tech & Sun</Link>, and{' '}
+      <Link href="https://www.omoyoruba.org/">Omo Yoruba</Link>: helping communities
+      document their work, coordinate resources, support students at Nigerian universities
+      through solar powered hubs, and organize cultural festivals including Yoruba New Year
+      celebrations in Los Angeles.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Outside of code I’m into comic and fantasy lore like{' '}
-      <Link href="https://www.youtube.com/@NewRockstars">Marvel</Link> and{' '}
-      <Link href="https://www.youtube.com/@StarWarsTheory">Star Wars</Link>, playing and
-      watching sports, making{' '}
+      The personal thread underneath that work is a lifelong pull toward culture and
+      imagination: comics, fantasy worlds,{' '}
       <Link href="https://soundcloud.com/oba_one/sets/hyperloop-to-la">music</Link>, and
-      reading. Currently in{' '}
-      <Link href="https://www.amazon.com/Rust-Programming-Language-Steve-Klabnik/dp/1593278284">
-        The Rust Programming Book
-      </Link>
-      . Always open to chat about ideas or projects, so feel free to reach out.
+      stories like Toy Story, X-Men, and Lord of the Rings. Those worlds shaped how I
+      think about belonging, teams, and the communities people build around shared
+      meaning.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      If you want a softer look at who I am, check the Nostalgia link below.
+      If you want a softer look at the shows and stories that grounded me growing up,
+      check the Nostalgia link below.
     </Text>
   </Fragment>
 )

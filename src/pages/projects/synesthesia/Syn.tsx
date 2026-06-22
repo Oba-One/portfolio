@@ -27,6 +27,7 @@ import {
 import { media } from 'utils/style'
 import { Meta } from 'components/Meta'
 import { Image } from 'components/Image'
+import { Link } from 'components/Link'
 import { Footer } from 'components/Footer'
 import { useTheme } from 'components/ThemeProvider'
 
@@ -37,6 +38,9 @@ const project = projects['syn']
 const title = project.title
 const description = project.description
 const roles = project.skills
+const wavesPitchDeckLink =
+  'https://docs.google.com/presentation/d/14GG0bUyRBPSHkP_KFvxN04PnkaGQiGt7S0AZBddc90c/edit?usp=sharing'
+const [learningsBeforeWaves, learningsAfterWaves] = project.learnings.split('Waves')
 
 export const Syn = () => {
   const { themeId } = useTheme()
@@ -122,7 +126,11 @@ export const Syn = () => {
             />
             <ProjectTextRow>
               <ProjectSectionHeading>Learnings</ProjectSectionHeading>
-              <ProjectSectionText>{project.learnings}</ProjectSectionText>
+              <ProjectSectionText>
+                {learningsBeforeWaves}
+                <Link href={wavesPitchDeckLink}>Waves</Link>
+                {learningsAfterWaves}
+              </ProjectSectionText>
             </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>

@@ -193,7 +193,7 @@ export function Page404() {
                   as="h3"
                   level={4}
                 >
-                  <DecoderText text="Error: Nostalgia Pit" start={visible} delay={300} />
+                  <DecoderText text="Error: Nostalgia Zone" start={visible} delay={300} />
                 </Heading>
                 <Heading
                   aria-hidden

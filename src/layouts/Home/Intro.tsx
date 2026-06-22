@@ -69,7 +69,7 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
               </h1>
               <Heading level={0} as="h2" className={styles.title}>
                 <VisuallyHidden className={styles.label}>
-                  {`Builder + ${introLabel}`}
+                  {`Architect + ${introLabel}`}
                 </VisuallyHidden>
                 <span aria-hidden className={styles.row}>
                   <span
@@ -77,7 +77,7 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
                     data-status={status}
                     style={cssProps({ delay: tokens.base.durationXS })}
                   >
-                    Builder
+                    Architect
                   </span>
                   <span className={styles.line} data-status={status} />
                 </span>

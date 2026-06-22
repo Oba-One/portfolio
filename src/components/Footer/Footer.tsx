@@ -13,7 +13,7 @@ export const Footer = ({ className }: FooterProps) => (
       <span className={styles.date}>
         {`© ${new Date().getFullYear()} Afolabi Aiyeloja.`}
       </span>
-      <Link href="/help-im-lost">Enter Nostalgia Pit</Link>
+      <Link href="/help-im-lost">Enter Nostalgia Zone</Link>
     </Text>
   </footer>
 )

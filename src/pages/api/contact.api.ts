@@ -3,9 +3,7 @@ import Cors from 'cors'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { parseContactPayload } from 'utils/contact'
-import { transporter } from 'utils/email'
-
-const AUTH_EMAIL_USER = process.env.AUTH_EMAIL_USER ?? ''
+import { sendContactEmail } from 'utils/email'
 
 export const config = {
   // runtime: 'experimental-edge',
@@ -14,11 +12,6 @@ export const config = {
       sizeLimit: '1200b',
     },
   },
-}
-
-const mailOptions = {
-  to: AUTH_EMAIL_USER,
-  subject: 'Contact Form Submission',
 }
 
 const cors = Cors({
@@ -71,9 +64,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const escapedMessage = escapeHtml(message).replace(/\n/g, '<br />')
 
     try {
-      const info = await transporter.sendMail({
-        ...mailOptions,
-        from: email,
+      const info = await sendContactEmail({
+        replyTo: email,
+        subject: `Portfolio contact from ${email}`,
         text: [
           'You have a new contact form submission',
           '',
@@ -92,15 +85,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         `,
       })
 
-      console.log('Email sent: ' + info.response)
+      console.log('Contact email sent: ' + (info.id ?? 'accepted'))
       res.status(200).json({
         status: 200,
-        message: 'Email succesfully sent',
-        data: info.response,
+        message: 'Email successfully sent',
+        data: info.id ?? null,
       })
     } catch (error) {
-      console.log(error)
-      res.status(400).json({ status: 400, error: 'Error forwarding email' })
+      console.error(error)
+      res.status(500).json({ status: 500, error: 'Error forwarding email' })
     }
   } else {
     res.status(404).json({ status: 404, error: 'Not Found' })

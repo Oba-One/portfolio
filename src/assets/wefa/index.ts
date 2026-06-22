@@ -1,4 +1,6 @@
 export { default as WefaStoryImg } from './wefa-story.webp'
+export { default as WefaElementalCharactersImg } from './wefa-elemental-characters.png'
+export { default as WefaOlaRedFruitImg } from './wefa-ola-red-fruit.jpg'
 export { default as WefaSplashImg } from './wefa-splash.webp'
 export { default as WefaBackgroundImg } from './wefa-background.webp'
 

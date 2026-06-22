@@ -37,11 +37,14 @@ export type ProjectRecord = {
 }
 
 export const featuredProjectSlugs = [
-  'coop',
   'green_goods',
   'greenpill',
-  'waves',
   'wefa',
+  'syn',
+  'freeport',
+  'mira_connect',
+  'mira_flow',
+  'gentle_monster',
 ] as const satisfies readonly ProjectSlug[]
 
 export const projects = {
@@ -93,7 +96,7 @@ export const projects = {
     development:
       'Built with the Greenpill Dev Guild as the field-facing layer of a four-part regen funding stack alongside Squad Staking, Allo Alliance, and GreenWill. The first alpha rolled out across global gardening communities, with v1.0.0 tagged and pilots continuing into 2026. The stack uses Vite plus TailwindCSS on the client, Bun for runtime, Foundry for contracts, and Playwright for E2E tests.',
     learnings:
-      'Designing for offline-first changed how I think about data trust. Letting a phone collect attestations without a server forces the protocol layer to do the verification work the network usually does. Working in a stewarded, open collective also shifted how I scope features. Anything that demands a permanent core team to maintain is not the right shape for public-goods software, and the projects that survive are the ones a community can pick up and keep running.',
+      'Designing for offline-first changed how I think about data trust. Letting a phone collect attestations without a server forces the protocol layer to do the verification work the network usually does. Working in a stewarded, open collective also shifted how I scope features. Anything that demands a permanent core team to maintain is not the right shape for public goods software, and the projects that survive are the ones a community can pick up and keep running.',
     links: [
       {
         label: 'View Site',
@@ -137,6 +140,10 @@ export const projects = {
         label: 'View Github',
         link: 'https://github.com/greenpill-dev-guild/network',
       },
+      {
+        label: 'Watch Videos',
+        link: 'https://www.youtube.com/@GreenpillNet',
+      },
     ],
   },
   waves: {
@@ -166,7 +173,8 @@ export const projects = {
   },
   wefa: {
     title: 'WEFA',
-    description: 'Connecting people to the environment and community in a fun way',
+    description:
+      'Connecting people to nature and community through play, storytelling, and plant care',
     cta: {
       label: 'View Project',
       link: '/projects/wefa',
@@ -175,21 +183,25 @@ export const projects = {
     year: 2022,
     skills: ['WebXR (Augmented Reality)', 'Typescript', 'Solidity', 'React'],
     problem:
-      'Growing up I was outside all the time playing with local neighbors and using our environment to fit whatever game we were playing. During those times things like gardening or lawn care were viewed as chores and avoided activities. However, as I reflect back it was a connective tissue to my community and neighbors. I recall meeting one of my closest childhood friends through him offering to help pickup leaves. Now having a home garden and growing vegetables, herbs, and fruits has taught me the health benefits of organic food. With a greater appreciation and understanding for plants and our environment, I’m building WEFA as a way for youth to plant deeper roots and adults to reconnect or better connect with their community and nature.',
+      'Growing up, I was outside constantly, playing with neighbors and turning whatever environment we had into the game for that day. Gardening and lawn care felt like chores then, but looking back, they were part of the connective tissue of my community. I met one of my closest childhood friends when he offered to help pick up leaves. Now, having a home garden and growing vegetables, herbs, and fruit has given me a deeper appreciation for organic food, local ecology, and the patience plants require. WEFA comes from that reflection: a way for young people to plant deeper roots and for adults to reconnect with nature, community, and the places they live.',
     architecture:
-      'WEFA aims to make cultivating your environment fun whether it’s a single plant in a bedroom or a full garden. Many will ask how that can be fun. Many have tried and failed or downright find plants and caring for them boring. I’ll now ask how many play or have played games like Farmville, Minecraft, Pokemon Go, or WoW spending countless hours? For those who have or do, WEFA is a platform connecting nature and games with Augmented Reality, blockchains, and AI to create a symbiotic relationship between the two. Helping individuals and communities find short and long term success in health, social connection, and sustainability. I’ve told my story to WEFA, now below is the plot for the initial comic release of WEFA in correlation with the platform and initial game, think Pokemon meets Avatar: The Last Airbender.',
+      'WEFA turns plant care into a loop between physical plants, digital creatures, and local community action. The app uses augmented reality to make the real environment part of play, blockchain primitives to give people ownership over creatures and progress, and AI to support plant identification, care, and creature generation. The goal is not to make nature feel like a screen. It is to use familiar game patterns from Farmville, Minecraft, Pokemon Go, and MMOs to help people build short and long term habits around health, social connection, and sustainability.',
     development:
-      'A group of college kids find themselves on an unexpected journey where worlds collide. Taking place in 2042 in a recently industrialized town in Nigeria now a part of a larger country called Wau (wa-ooo), with a newly minted university funded by a multinational corporation known as CoeUp. Known for a rare mineral finding almost 100 years ago and since then pillaging the local lands unknowingly causing an imbalance between two worlds. The brightest and most privileged students from all corners of the world are chosen to attend the university, with a few locals allowed. In an unexpected turn during a class forest exhibition the group gain a set of unique abilities when wandering off into a cave and an earthquake hits. Though all coming from different backgrounds they learn to trust each other, forging a deep connection not only to one another but to this new world and creatures they’ve found through their abilities. To address the issues caused by CoeUp, the group must lean on nature and community to find a solution and restore balance.',
+      'The story world for WEFA is still being shaped alongside the product. The current direction follows four college students in 2042, in a newly industrialized town in Nigeria that is now part of a larger country called Wau. Their university is funded by CoeUp, a multinational corporation built around a rare mineral discovery that has slowly damaged the local land and created an imbalance between two worlds. During a forest exhibition, the group wanders into a cave just as an earthquake opens a hidden passage to underground aquifers. Seeking safety, they follow the water deeper underground, bathe in it, and come out changed, fused with elemental powers they do not yet understand. Coming from different backgrounds, they have to learn trust, community, and stewardship as they work to understand what has been damaged and what restoration could look like.',
     learnings:
-      'WEFA’s comic release coincides with the app release. The comic is a physical and digital collectible that lets users redeem creature packs when planting their first plants, with story elements tying into gameplay for a cohesive experience between them. The wider goal is to take what we are learning on WEFA and feed it back into the public-goods stack we are building through Greenpill, so the lessons from one project carry forward into the next.',
+      'WEFA has helped me see storytelling as product infrastructure. The characters, comic direction, and game mechanics are still developing, but the goal is for the story to give the product emotional weight rather than sit beside it as marketing. As the world takes shape, I’m thinking through how physical and digital collectibles, creature packs, and planting milestones could connect without forcing the product to pretend it is further along than it is. The wider goal is to take what I learn from WEFA and feed it back into the public goods stack we are building through Greenpill, so lessons from one project can carry into the next.',
     links: [
       {
         label: 'View Site',
-        link: 'https://why.wefa.app',
+        link: 'https://www.wefa.world',
       },
       {
-        label: 'View Github',
-        link: 'https://github.com/wefa-labs/wefa',
+        label: 'View Repository',
+        link: 'https://github.com/wefa-world/wefa',
+      },
+      {
+        label: 'View Blog',
+        link: 'https://blog.wefa.world',
       },
     ],
   },
@@ -205,19 +217,14 @@ export const projects = {
     year: 2023,
     skills: ['Solidity', 'Go', 'GraphQL', 'React', 'XState'],
     problem:
-      'Music driven experiences have become diluted, whether that is streaming music or going to a live show with high prices for merch that carries no utility or perks. Synesthesia uses generative art and blockchains to connect those experiences in a tangible way, turning a person’s listening history into unique generative art. The art itself has utility as an NFT that can unlock future experiences or perks like discounts on merch.',
+      'Music-driven experiences can feel flattened. Streaming turns taste into a feed, live shows often end with expensive merch that carries little utility, and the connection between artist, listener, and moment rarely becomes something lasting. Synesthesia explored a more personal bridge between listening and ownership: turning a person’s music history into generative art that could also unlock future perks, access, or experiences.',
     architecture:
-      'The initial experience takes a synthesis of a person’s Sound.xyz collection and, based on the genres it contains, creates a visual output mapping genre to color. The app is built with a Go GraphQL backend that queries the Sound.xyz API to get a user’s sounds. The API is consumed by a React frontend that fetches user stats upon wallet connection. If a user has not bought sounds (NFTs), we defer to their liked sounds on the platform, and if there are none we encourage the user to first like and then purchase some. State is a combination of React hooks and XState alongside React Spring for animations. When minting, a user makes a transaction with an ArtBlocks-based contract that generates a unique hash used as the input to render the generative art.',
+      'The initial experience mapped a person’s Sound.xyz collection into a visual output, using genre as the bridge between music and color. A Go GraphQL backend queried Sound.xyz for a user’s sounds, while the React frontend fetched stats after wallet connection. If someone had not collected any sounds, the app fell back to liked tracks, and if there were none, it guided them back toward listening and collecting first. State lived across React hooks and XState, with React Spring handling transitions. Minting used an ArtBlocks-based contract to generate a unique hash that became the input for the final generative artwork.',
     development:
-      'Initial development focused on determining what stats to query and what API we needed. The stats were originally more numerical, and after discussion I brought up the idea of colors and genres. A core goal of the art was to show similarity in taste and experiences while maintaining uniqueness. After settling on the stats data, I built on the API with gqlgen, a Go package, and during that time more thought went toward the blockchain integration. After the API was complete, the frontend was built in parallel with the designs. One idea I introduced was using grayscale before a user connected their wallet, then transitioning the interface to the colors mapped from the genres in their stats once they did. Other touches like the Synth card and stats reel were built with React Spring to animate the components.',
+      'My work started with figuring out which stats were worth querying and what the API needed to support. The early direction was more numerical, but I pushed the concept toward color and genre so the output could show similarity in taste without losing uniqueness. I built the API with gqlgen, helped shape the blockchain integration, and then worked on the frontend in parallel with design. One interaction I introduced was a grayscale interface before wallet connection that shifted into the user’s mapped colors once their stats loaded. Details like the Synth card and stats reel used React Spring to make the experience feel more alive without overpowering the art.',
     learnings:
-      'The project is still evolving as we determine the best path forward for product launch. We have ideas on how to apply this to live events, which is part of what eventually grew into Waves. I have personally learned a ton about generative art and its potential to connect music and listeners, alongside creating a deeper relationship between artists and fans.',
-    links: [
-      {
-        label: 'View Site',
-        link: 'https://beta.syn.art',
-      },
-    ],
+      'Synesthesia taught me how much meaning can come from the translation layer between data and art. The project also made the live-event opportunity clearer: if a listening history can become visual identity, an event can become a collectible memory with future utility. That thread eventually fed into Waves, and it sharpened how I think about generative art as a way to deepen the relationship between artists and fans.',
+    links: [],
   },
   freeport: {
     title: 'Freeport',
@@ -257,17 +264,21 @@ export const projects = {
     year: 2020,
     skills: ['WebRTC', 'RabbitMQ', 'React', 'Websockets'],
     problem:
-      'As one of the core products of Mira, we wanted to revamp the video chat platform to enable clients to be more productive while providing a more stable environment for headset operators in the field. In the previous version of the video platform only two people could be in a call. To enable our clients to more effectively help headset and mobile operators in the field, we updated to a multiparty call structure while adding features such as invites, guest calls, and meeting reports.',
+      'Mira Connect was one of Mira’s core products, but the existing video platform was limited to one expert and one headset operator at a time. Clients needed a more stable way to support field teams, bring in the right people, and keep a record of what happened during a call. The product needed to move from a two-person call tool into a multiparty collaboration surface for industrial support.',
     architecture:
-      'The team spent a good amount of time determining how to architect the app given it was the next major version of a core product. To facilitate larger calls, using a provider for the turn/stun and media servers was the most optimal path for a good UX. Another key element was revamping the UI to work in a multi-call fashion, adopting a layout similar to Google Meet with an industrial aesthetic. Lastly, communication between clients that was not facilitated by the provider, such as annotations, messages, and availability, needed its own channel. We initially used polling websockets on the client, sending status every few seconds and updating a Redis store. During development we switched to a more robust messaging tool with RabbitMQ and MQTT for message reliability and faster communication.',
+      'Because this was the next major version of a core product, the architecture had to balance reliability, speed, and the reality of field conditions. We used a third-party provider for TURN/STUN and media servers so larger calls could feel stable for clients. The UI shifted toward a multiparty meeting model with an industrial aesthetic, while product-specific events like annotations, messages, ringing, and availability needed their own channel. We started with polling websockets and Redis, then moved to RabbitMQ and MQTT when reliability became the higher priority.',
     development:
-      'Focusing on the web client, initial UI work was done with Storybook to build components in isolation and quickly iterate on shifting designs. On the state and data side I built a new module to interface with our third-party WebRTC provider using MobX State Tree. I also created modules for internal services such as ringing and joining or leaving a room, along with post-meeting reports. After the initial alpha release we realized our message transport was unreliable on websockets, so we pivoted to a message broker using RabbitMQ which greatly improved reliability. We then continued to integrate new features such as call links and invites, exposing meetings to external guests and organizations.',
+      'I focused on the web client and used Storybook to build UI components in isolation while designs were still moving. On the state and data side, I built a MobX State Tree module for the third-party WebRTC provider and created modules for ringing, room join/leave flows, guest access, and post-meeting reports. After the alpha release exposed reliability issues in our websocket transport, I helped pivot the client toward a RabbitMQ-backed message flow. From there we added call links, invites, guest calls, and meeting reports so external collaborators and organizations could join the workflow.',
     learnings:
-      'Leading a project as a sole contributor was much simpler than leading a team, in this case contracted developers based in Romania. Navigating the time difference and delegating work was challenging at times but overall a rewarding experience. It was also the first project where I led the architecture discussions, creating initial PRDs for the web, sequence and flow diagrams, and more. This taught me more about network protocols and how they transfer data in different manners along with complex state management. Lastly, cross-team collaboration across the headset, web, and API teams is not always easy, and being transparent when making changes that may affect another team is the best way to avoid friction.',
+      'This was the first project where I led architecture discussions, wrote initial PRDs for the web client, and created sequence and flow diagrams for cross-team alignment. It also taught me the difference between leading as a sole contributor and leading a distributed team of contracted developers. The time zone gap made delegation and clarity more important. Technically, the project deepened my understanding of network protocols, complex state, and the need to be transparent when web, headset, and API changes affect one another.',
     links: [
       {
-        label: 'Learn More',
-        link: 'https://web.archive.org/web/20231014040214/https://www.mirareality.com/connect/',
+        label: 'Apple Acquisition Article',
+        link: 'https://www.theverge.com/2023/6/6/23751350/apple-mira-ar-headset-startup',
+      },
+      {
+        label: 'Mira LinkedIn',
+        link: 'https://www.linkedin.com/company/miralabs',
       },
     ],
   },
@@ -283,17 +294,21 @@ export const projects = {
     year: 2019,
     skills: ['React Native', 'Swift', 'Typescript', 'MobX'],
     problem:
-      'Clients doing handsfree workflows with headsets wanted to bring all of their workflow onto the platform. To enable that, they needed another way to complete workflows that were input heavy and could be held in hand. A tablet companion app was the most ideal way to address it. This would be useful for work that was more observation than manipulation based, letting those workflows live on the same platform and adding another source of revenue for the company.',
+      'Mira’s headset workflows worked well for handsfree tasks, but clients also had workflows that were too input-heavy for a headset alone. They needed a companion surface that could handle observation, forms, photos, and review while still belonging to the same workflow platform. A tablet app gave the company a way to support more use cases, keep more client work inside the product, and open a new revenue path.',
     architecture:
-      'Given this was a new platform being added to the product, it was important to pick the right tools given the team’s skill set and the urgency to release an MVP. Through discussions we settled on React Native, which let the web and unity teams contribute, with Unity writing native modules that React Native could hook into. At the business logic level we had to transfer our workflow and compliance logic into TypeScript. Within this process some differences between how workflows should function on the headset versus a mobile device emerged, with tweaks made to accommodate each platform. The final stack consisted of a Node.js API and a React Native client with Swift modules for data queueing and uploading.',
+      'The stack needed to move quickly without splitting the team too far from its existing strengths. We chose React Native so web engineers could contribute and the Unity team could expose native modules where the app needed platform-specific support. The harder architectural work was moving workflow and compliance logic from C# into TypeScript while respecting the differences between headset and tablet use. The final stack paired a Node.js API with a React Native client and Swift modules for queueing and uploading heavier workflow data.',
     development:
-      'The first element to key in on was the workflow logic, writing it in TypeScript. This was one of the more challenging aspects because we had no documentation on our logic and only a version written in C#. After transferring logic, the next step was building the UI, which consisted of a tab based navigation with tabs to view workflows, recent workflows, and history, along with authentication views for individual and team login. The workflow tab was a directory style view where users could click into folders, which was fun to architect and optimize. Once the UI was complete, integration with the API started, and some routes needed to be updated to add a new platform (mobile) for database and analytics purposes. Lastly, to optimize the uploading of workflows which could contain images, we built a queue in Swift to offload that process from the single JavaScript thread, improving UI performance.',
+      'I started by rebuilding the workflow logic in TypeScript from an undocumented C# implementation. Once that foundation was working, I built the main app UI: authentication for individual and team login, tab navigation for workflows, recents, and history, and a directory-style workflow browser that needed to feel fast on tablet. I then integrated the app with the API, including route updates so mobile activity could be tracked correctly in the database and analytics. For workflows with images, we moved uploads into a Swift queue so heavy file work did not block the JavaScript thread.',
     learnings:
-      'This was a huge step forward for me in responsibility and leading a project. It was also my first time stepping into mobile development which, though using React Native, was a different development process with subtle differences in code. The workflow logic was a fun exercise in building complex logic and conditional flows. One thing I learned was to avoid over-optimizing too early in a project, which actually causes more performance issues. It is a lot simpler to complete the initial flow and structure, then focus on optimization.',
+      'Mira Flow was a big step forward in responsibility and my first real move into mobile development. React Native made the transition approachable, but the development rhythm and platform details were different enough to stretch me. The workflow engine also taught me how much clarity matters when translating complex conditional logic across platforms. One lesson that stuck was to avoid optimizing too early: it is usually better to get the full flow working clearly, then optimize the parts that are actually under pressure.',
     links: [
       {
-        label: 'Learn More',
-        link: 'https://web.archive.org/web/20231014040214/https://www.mirareality.com/flow/',
+        label: 'Apple Acquisition Article',
+        link: 'https://www.theverge.com/2023/6/6/23751350/apple-mira-ar-headset-startup',
+      },
+      {
+        label: 'Mira LinkedIn',
+        link: 'https://www.linkedin.com/company/miralabs',
       },
     ],
   },
@@ -309,17 +324,17 @@ export const projects = {
     year: 2018,
     skills: ['E-Commerce', 'React', 'Javascript', 'GraphQL'],
     problem:
-      'In 2018 Gentle Monster was looking to revamp their online presence with a more modern and performant UI. They wanted to focus on a UI/UX that was bold and minimal, letting users focus on the unique content from video promos and the glasses themselves.',
+      'In 2018, Gentle Monster needed an online store that felt closer to the brand’s physical world: bold, minimal, visual, and strange in the right ways. The site had to let campaign videos, product imagery, and the glasses themselves carry the experience while still behaving like a fast, usable e-commerce platform.',
     architecture:
-      'Joining the project, the stack was already set as Python on the backend and JavaScript on the front, with GraphQL connecting the two. On the frontend the initial focus was determining how GraphQL would be integrated, settling on Apollo as the client. The UI, given its emphasis on images, was architected to lazy load images and videos to improve performance.',
+      'The backend stack was already set in Python, with JavaScript on the frontend and GraphQL connecting the two. My early frontend focus was deciding how the GraphQL layer should be consumed, which led us to Apollo for its client tooling. Because the UI depended heavily on large images and video, the frontend architecture also had to account for lazy loading and performance so the brand direction did not come at the cost of usability.',
     development:
-      'I joined the team about a week into development with the initial backend being the only work completed. The first task was integrating GraphQL with Apollo due to its comprehensive tooling. With the data layer completed I switched focus to the UI, creating the home, product detail, and products pages. The home page was mainly a use of flexbox and carousels for product viewing with bold full-screen heroes throughout. The products page was a grid layout using flexbox (at the time css-grid had partial support) with a trailing animation. The product detail page was more complex with a two column layout, the left being scrollable and the right fixed. Lastly was integrating the payment flow with the backend, which thanks to GraphQL was pretty seamless.',
+      'I joined about a week into development, when the initial backend work was in place and the frontend still needed to come together. I integrated GraphQL with Apollo, then moved into the core shopping surfaces: the home page, product listing page, product detail page, and payment flow. The home page used bold full-screen heroes and carousels, the listing page used a flexbox grid with trailing animation because CSS Grid support was still partial, and the product detail page used a two-column layout with scrollable imagery and fixed product information. GraphQL made the final payment integration with the backend much smoother than it would have been otherwise.',
     learnings:
-      'This was my first full time role working in a team. Before this point I had mainly done freelance work for clients. Stepping into a team environment was invigorating and gave me a boost in confidence and peers to learn from. Initially I had imposter syndrome, having not worked in a professional software environment, and it took some time to settle into the role. It helped having a supportive team and manager in navigating the environment. One of the key takeaways is I had more to learn as a developer, from advanced methods to data structures to new languages like TypeScript.',
+      'This was my first full-time role on a product team after mostly doing freelance client work. Stepping into that environment was energizing, but I also had to work through imposter syndrome and learn how professional software teams actually move. Having a supportive team and manager helped me settle in. The project gave me confidence, while also making it clear how much more I wanted to learn: stronger data structures, more advanced frontend patterns, and eventually TypeScript.',
     links: [
       {
-        label: 'View Site',
-        link: 'https://gentlemonster.com',
+        label: 'Archived Site',
+        link: 'https://web.archive.org/web/20181001000000/https://www.gentlemonster.com/',
       },
     ],
   },

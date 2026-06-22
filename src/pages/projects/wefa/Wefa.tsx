@@ -2,9 +2,9 @@
 import { Fragment } from 'react'
 
 import {
-  WefaStoryImg,
+  WefaElementalCharactersImg,
+  WefaOlaRedFruitImg,
   WefaDeckPlantsImg,
-  WefaBackgroundImg,
   WefaOnboardSelectPlantImg,
   WefaOnboardSelectElementImg,
   WefaOnboardGeneratedCreaturesImg,
@@ -45,10 +45,11 @@ export const Wefa = () => {
       <Meta title={title} prefix="Projects" description={description} />
       <ProjectContainer className={styles.slice}>
         <ProjectBackground
-          src={WefaBackgroundImg}
-          srcSet={`${WefaBackgroundImg.src} 1280w, ${WefaBackgroundImg.src} 2560w`}
-          alt="WEFA landing page background image, showing an animated person gardening."
-          placeholder={WefaBackgroundImg}
+          className={styles.heroBackground}
+          src={WefaOlaRedFruitImg}
+          srcSet={`${WefaOlaRedFruitImg.src} 1280w, ${WefaOlaRedFruitImg.src} 2560w`}
+          alt="Ola sitting in a tree holding red fruit beside a basket of fruit."
+          placeholder={WefaOlaRedFruitImg}
           opacity={isDark ? 0.5 : 0.6}
         />
         <ProjectHeader
@@ -118,15 +119,23 @@ export const Wefa = () => {
         <ProjectSection>
           <ProjectSectionContent>
             <Image
-              src={WefaStoryImg}
-              srcSet={[WefaStoryImg.src, WefaStoryImg.src]}
-              placeholder={WefaStoryImg.src}
-              alt="WEFA comic story cover art. Detailing the protagonists walking out of a cave."
+              src={WefaElementalCharactersImg}
+              srcSet={[WefaElementalCharactersImg, WefaElementalCharactersImg]}
+              placeholder={WefaElementalCharactersImg}
+              alt="Four WEFA elemental character concepts standing together."
               sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
             />
             <ProjectTextRow>
-              <ProjectSectionHeading>Story & Release</ProjectSectionHeading>
+              <ProjectSectionHeading>Story</ProjectSectionHeading>
               <ProjectSectionText>{project.development}</ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection light>
+          <ProjectSectionContent>
+            <ProjectTextRow>
+              <ProjectSectionHeading>Learnings</ProjectSectionHeading>
+              <ProjectSectionText>{project.learnings}</ProjectSectionText>
             </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>

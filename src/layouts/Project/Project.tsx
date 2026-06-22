@@ -29,7 +29,7 @@ export function ProjectHeader({ title, description, links = [], roles, className
           <Text className={styles.description} size="xl" as="p">
             {description}
           </Text>
-          {links?.length && (
+          {links?.length > 0 && (
             <ul className={styles.links}>
               {links.map(({ label, link }) => (
                 <Button
