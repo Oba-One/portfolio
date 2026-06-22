@@ -130,7 +130,7 @@ export const projects = {
       },
       {
         label: 'View Docs',
-        link: 'https://docs.greengoods.app/builders/',
+        link: 'https://docs.greengoods.app',
       },
       {
         label: 'View GitHub',
@@ -199,12 +199,7 @@ export const projects = {
       'The platform is a suite of PWAs powered by account abstraction. Organizers manage Synths and Waves from a dashboard. Attendees mint Synths and catch Waves from a mobile app at the event. A digital and physical storefront handles after event orders for NFC embedded apparel, with the option to pop up in person for live drops.',
     learnings:
       'Designing around event time changes the protocol. Waves only make sense if they can be caught in the moment they are released, so the architecture has to assume crowded, unreliable connectivity and a window of minutes, not days. Future work expands Wave properties beyond color into sound (music stems), opens gated features for Synth and Wave holders, and integrates Farcaster and Lens so social actions can mint Waves on their own.',
-    links: [
-      {
-        label: 'View Site',
-        link: 'https://waves.house',
-      },
-    ],
+    links: [],
   },
   wefa: {
     title: 'WEFA',
@@ -374,8 +369,8 @@ export const projects = {
       'This was my first full time role on a product team after mostly doing freelance client work. Stepping into that environment was energizing, but I also had to work through imposter syndrome and learn how professional software teams actually move. Having a supportive team and manager helped me settle in. The project gave me confidence, while also making it clear how much more I wanted to learn: stronger data structures, more advanced frontend patterns, and eventually TypeScript.',
     links: [
       {
-        label: 'Archived Site',
-        link: 'https://web.archive.org/web/20181001000000/https://www.gentlemonster.com/',
+        label: 'View Site',
+        link: 'https://www.gentlemonster.com/',
       },
     ],
   },

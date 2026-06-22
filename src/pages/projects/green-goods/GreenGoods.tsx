@@ -17,6 +17,7 @@ import {
 } from 'assets/green-goods'
 import { Footer } from 'components/Footer'
 import { Image } from 'components/Image'
+import { Link } from 'components/Link'
 import { Meta } from 'components/Meta'
 import { useTheme } from 'components/ThemeProvider'
 import {
@@ -128,6 +129,11 @@ export const GreenGoods = () => {
             <div className={styles.imagesText}>
               <ProjectSectionHeading>Development</ProjectSectionHeading>
               <ProjectSectionText>{project.development}</ProjectSectionText>
+              <ProjectSectionText>
+                Green Goods is one of the main products I steward through the{' '}
+                <Link href="/projects/greenpill">Greenpill</Link> ecosystem, so the
+                technical work and community work feed into each other.
+              </ProjectSectionText>
             </div>
           </ProjectSectionColumns>
         </ProjectSection>

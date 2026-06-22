@@ -29,6 +29,7 @@ import {
 import { media } from 'utils/style'
 import { Meta } from 'components/Meta'
 import { Image } from 'components/Image'
+import { Link } from 'components/Link'
 import { Footer } from 'components/Footer'
 import { useTheme } from 'components/ThemeProvider'
 
@@ -40,6 +41,8 @@ const project = projects['wefa']
 const title = project.title
 const description = project.description
 const roles = project.skills
+const [learningsBeforeGreenpill, learningsAfterGreenpill] =
+  project.learnings.split('Greenpill')
 
 export const Wefa = () => {
   const { themeId } = useTheme()
@@ -144,7 +147,11 @@ export const Wefa = () => {
           <ProjectSectionContent>
             <ProjectTextRow>
               <ProjectSectionHeading>Learnings</ProjectSectionHeading>
-              <ProjectSectionText>{project.learnings}</ProjectSectionText>
+              <ProjectSectionText>
+                {learningsBeforeGreenpill}
+                <Link href="/projects/greenpill">Greenpill</Link>
+                {learningsAfterGreenpill}
+              </ProjectSectionText>
             </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>
