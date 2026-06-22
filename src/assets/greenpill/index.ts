@@ -1,5 +1,6 @@
 export { default as GreenpillMapImg } from './greenpill-map.png'
 export { default as GreenpillTwitterCardImg } from './greenpill-twitter-card.png'
+export { default as GreenpillBooksImg } from './greenpill-books.webp'
 export { default as GreenpillGardenEntryImg } from './greenpill-garden-entry.webp'
 export { default as GreenpillMonthlyCallImg } from './greenpill-monthly-call.webp'
 export { default as GreenpillNetworkMapImg } from './greenpill-network-map.webp'

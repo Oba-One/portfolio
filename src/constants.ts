@@ -123,12 +123,12 @@ export const projects = {
     platform: 'laptop',
     year: 2026,
     skills: [
-      'Community Strategy',
+      'Community Building',
+      'Ecosystem Strategy',
       'Technical Program Leadership',
       'Developer Relations',
-      'Product & Tooling Direction',
-      'Partnership Development',
       'Workshop Facilitation',
+      'Partnership Development',
     ],
     problem:
       'Greenpill is trying to solve a coordination problem that shows up across public goods, regenerative crypto, and local impact work. People have energy, skills, and shared values, but they are spread across cultures, time zones, funding systems, technical complexity, and local contexts. The network gives that energy a shared identity and a place to gather, learn, build trust, find collaborators, and turn ideas into useful work.',

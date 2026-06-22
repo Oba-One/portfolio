@@ -2,6 +2,7 @@
 import { Fragment } from 'react'
 
 import {
+  GreenpillBooksImg,
   GreenpillGardenEntryImg,
   GreenpillMonthlyCallImg,
   GreenpillNetworkMapImg,
@@ -54,6 +55,13 @@ export const Greenpill = () => {
         />
         <ProjectSection light>
           <ProjectSectionContent width="xl">
+            <Image
+              raised
+              src={GreenpillBooksImg}
+              placeholder={GreenpillBooksImg}
+              alt="Greenpilled book spread describing regenerative cryptoeconomics, public goods funding, and coordination as the foundation for the network."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+            />
             <ProjectTextRow>
               <ProjectSectionHeading>Problem</ProjectSectionHeading>
               <ProjectSectionText>{project.problem}</ProjectSectionText>
