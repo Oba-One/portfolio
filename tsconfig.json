@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,21 +20,33 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths": {
-      "assets/*": ["assets/*"],
-      "components/*": ["components/*"],
-      "hooks/*": ["hooks/*"],
-      "layouts/*": ["layouts/*"],
-      "pages/*": ["pages/*"],
-      "utils/*": ["utils/*"]
+      "assets/*": [
+        "assets/*"
+      ],
+      "components/*": [
+        "components/*"
+      ],
+      "hooks/*": [
+        "hooks/*"
+      ],
+      "layouts/*": [
+        "layouts/*"
+      ],
+      "pages/*": [
+        "pages/*"
+      ],
+      "utils/*": [
+        "utils/*"
+      ]
     }
   },
   "include": [
     "next-env.d.ts",
     "instrumentation.ts",
     "instrumentation-client.ts",
-    "sentry.edge.config.js",
-    "sentry.server.config.js",
     "src"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

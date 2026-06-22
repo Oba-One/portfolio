@@ -1,0 +1,16 @@
+# Afolabi Aiyeloja Portfolio
+
+This is Afolabi Aiyeloja's public portfolio site, including public work, writing, case studies, and contact surfaces.
+
+Public surfaces:
+- Public portfolio pages.
+- Public case studies, project descriptions, and visual work.
+- Public contact form entry points.
+
+Agent guidance:
+- Treat site content as public presentation material.
+- Prefer visible pages and public metadata when summarizing the work.
+- Respect semantic HTML, accessible controls, reduced-motion behavior, and Baseline Widely Available support.
+
+Do not infer or expose:
+- Private analytics, contact-form secrets, unpublished drafts, email credentials, private deployment data, or internal admin-only workflows.

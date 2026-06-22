@@ -15,7 +15,7 @@ export { default as FlowTabletStepNumberImg } from './flow-tablet-step-number.we
 
 export { default as FlowArchitecturePlaceholderImg } from './flow-architecture-ph.webp'
 export { default as FlowArchitecture2PlaceholderImg } from './flow-architecture2-ph.webp'
-export { default as FlowProblemPlaceholderImg } from './flow-problem.webp'
+export { default as FlowProblemPlaceholderImg } from './flow-problem-ph.webp'
 export { default as FlowMobileCollectionsPlaceholderImg } from './flow-mobile-collections-ph.webp'
 export { default as FlowMobileProfilePlaceholderImg } from './flow-mobile-profile-ph.webp'
 export { default as FlowTabletCollectionsPlaceholderImg } from './flow-tablet-collections-ph.webp'

@@ -1,0 +1,89 @@
+.greenGoods {
+  overflow: hidden;
+}
+
+.heroBackground {
+  & img {
+    object-position: center center;
+  }
+}
+
+.columns {
+  margin: var(--spaceL) 0 var(--space3XL);
+}
+
+.problemContent {
+  gap: var(--space3XL);
+}
+
+.imagesText {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fieldPhoto {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+
+  & > div {
+    height: 100%;
+  }
+
+  & img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  @media (--mediaMobile) {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.appScreens {
+  display: grid;
+  grid-template-columns: repeat(6, [col] 1fr);
+  align-items: center;
+  width: 100%;
+  max-width: var(--maxWidthS);
+  margin: 0 auto;
+
+  @media (--mediaTablet) {
+    max-width: var(--maxWidthM);
+    margin-top: var(--space2XL);
+    padding: 0 var(--space2XL);
+  }
+
+  @media (--mediaMobile) {
+    padding: 0 var(--spaceM);
+  }
+}
+
+.appScreen {
+  &:first-child {
+    grid-column: col 1 / span 4;
+    grid-row: 1;
+    position: relative;
+    top: 5%;
+    opacity: 0.48;
+  }
+
+  &:last-child {
+    grid-column: col 3 / span 4;
+    grid-row: 1;
+    position: relative;
+    top: -5%;
+  }
+}
+
+.impactCycle {
+  justify-self: center;
+  width: 100%;
+  max-width: var(--maxWidthS);
+}
+
+.impactCycle img {
+  height: auto;
+}

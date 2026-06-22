@@ -1,0 +1,98 @@
+{
+  "publicRoutes": [
+    "/",
+    "/contact",
+    "/projects/coop",
+    "/projects/green-goods",
+    "/projects/greenpill",
+    "/projects/waves",
+    "/projects/wefa",
+    "/projects/synesthesia",
+    "/projects/freeport",
+    "/projects/mira-connect",
+    "/projects/mira-flow",
+    "/projects/gentle-monster"
+  ],
+  "homepageAnchorRoutes": [
+    "/#intro",
+    "/#project-1",
+    "/#project-2",
+    "/#project-3",
+    "/#project-4",
+    "/#project-5",
+    "/#project-6",
+    "/#project-7",
+    "/#project-8",
+    "/#details"
+  ],
+  "browserProofRoutes": [
+    "/",
+    "/contact",
+    "/projects/coop",
+    "/projects/green-goods",
+    "/projects/greenpill",
+    "/projects/waves",
+    "/projects/wefa",
+    "/projects/synesthesia",
+    "/projects/freeport",
+    "/projects/mira-connect",
+    "/projects/mira-flow",
+    "/projects/gentle-monster"
+  ],
+  "projectRoutes": [
+    {
+      "slug": "coop",
+      "route": "/projects/coop"
+    },
+    {
+      "slug": "green_goods",
+      "route": "/projects/green-goods"
+    },
+    {
+      "slug": "greenpill",
+      "route": "/projects/greenpill"
+    },
+    {
+      "slug": "waves",
+      "route": "/projects/waves"
+    },
+    {
+      "slug": "wefa",
+      "route": "/projects/wefa"
+    },
+    {
+      "slug": "syn",
+      "route": "/projects/synesthesia"
+    },
+    {
+      "slug": "freeport",
+      "route": "/projects/freeport"
+    },
+    {
+      "slug": "mira_connect",
+      "route": "/projects/mira-connect"
+    },
+    {
+      "slug": "mira_flow",
+      "route": "/projects/mira-flow"
+    },
+    {
+      "slug": "gentle_monster",
+      "route": "/projects/gentle-monster"
+    }
+  ],
+  "navLinks": [
+    {
+      "label": "Projects",
+      "pathname": "/#project-1"
+    },
+    {
+      "label": "Details",
+      "pathname": "/#details"
+    },
+    {
+      "label": "Contact",
+      "pathname": "/contact"
+    }
+  ]
+}

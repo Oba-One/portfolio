@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "project": {
+    "id": "portfolio",
+    "name": "Portfolio",
+    "root": "/Users/afo/Code/portfolio"
+  },
+  "surfaces": [
+    {
+      "id": "site",
+      "name": "Next site",
+      "kind": "ui",
+      "ports": [
+        3201
+      ],
+      "command": [
+        "bun",
+        "run",
+        "dev:site"
+      ],
+      "urls": [
+        "http://localhost:3201/"
+      ],
+      "env": {
+        "PATH": "/Users/afo/.local/share/mise/installs/node/22.22.1/bin:${PATH}"
+      }
+    },
+    {
+      "id": "storybook",
+      "name": "Storybook",
+      "kind": "docs-ui",
+      "ports": [
+        3202
+      ],
+      "command": [
+        "bun",
+        "run",
+        "storybook"
+      ],
+      "urls": [
+        "http://localhost:3202/"
+      ],
+      "env": {
+        "PATH": "/Users/afo/.local/share/mise/installs/node/22.22.1/bin:${PATH}"
+      }
+    }
+  ]
+}
