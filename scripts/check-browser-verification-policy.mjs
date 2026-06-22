@@ -1,23 +1,23 @@
 #!/usr/bin/env bun
 
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { join, relative } from 'node:path'
 
-const repoRoot = process.cwd();
-const requiredPolicyFiles = ["AGENTS.md"];
+const repoRoot = process.cwd()
+const requiredPolicyFiles = ['AGENTS.md']
 
-const failures = [];
+const failures = []
 
 function fail(message) {
-  failures.push(message);
+  failures.push(message)
 }
 
 function read(relPath) {
-  return readFileSync(join(repoRoot, relPath), 'utf8');
+  return readFileSync(join(repoRoot, relPath), 'utf8')
 }
 
 function walk(dir, result = []) {
-  if (!existsSync(dir)) return result;
+  if (!existsSync(dir)) return result
   for (const entry of readdirSync(dir)) {
     if (
       [
@@ -32,31 +32,31 @@ function walk(dir, result = []) {
         'output',
       ].includes(entry)
     ) {
-      continue;
+      continue
     }
-    const fullPath = join(dir, entry);
-    let stat;
+    const fullPath = join(dir, entry)
+    let stat
     try {
-      stat = statSync(fullPath);
+      stat = statSync(fullPath)
     } catch {
-      continue;
+      continue
     }
     if (stat.isDirectory()) {
-      walk(fullPath, result);
+      walk(fullPath, result)
     } else if (entry === 'AGENTS.md' || entry === 'CLAUDE.md') {
-      result.push(fullPath);
+      result.push(fullPath)
     }
   }
-  return result;
+  return result
 }
 
 for (const relPath of requiredPolicyFiles) {
   if (!existsSync(join(repoRoot, relPath))) {
-    fail(`${relPath}: missing required authenticated-browser QA policy file`);
-    continue;
+    fail(`${relPath}: missing required authenticated-browser QA policy file`)
+    continue
   }
 
-  const text = read(relPath);
+  const text = read(relPath)
   for (const phrase of [
     'authenticated Brave QA profile',
     'Codex browser-extension path',
@@ -66,7 +66,7 @@ for (const relPath of requiredPolicyFiles) {
     'If authenticated Brave access is blocked, stop and report QA as blocked',
   ]) {
     if (!text.includes(phrase)) {
-      fail(`${relPath}: missing required authenticated-browser QA phrase "${phrase}"`);
+      fail(`${relPath}: missing required authenticated-browser QA phrase "${phrase}"`)
     }
   }
 }
@@ -86,47 +86,70 @@ const stalePatterns = [
   /DevTools MCP path for live browser debugging/i,
   /isolated\/public proof lane/i,
   /browser proof still runs in Brave/i,
-];
+  /only when the authenticated QA browser is Chrome\/Edge/i,
+  /Brave-only QA/i,
+  /Chrome\/Edge QA profiles/i,
+  /for Brave-only QA/i,
+]
 
 for (const filePath of walk(repoRoot)) {
-  const relPath = relative(repoRoot, filePath);
-  const text = readFileSync(filePath, 'utf8');
+  const relPath = relative(repoRoot, filePath)
+  const text = readFileSync(filePath, 'utf8')
   for (const pattern of stalePatterns) {
     if (pattern.test(text)) {
-      fail(`${relPath}: stale isolated-browser QA guidance matched ${pattern}`);
+      fail(`${relPath}: stale isolated-browser QA guidance matched ${pattern}`)
     }
   }
 }
 
-const packageJsonPath = join(repoRoot, 'package.json');
+const packageJsonPath = join(repoRoot, 'package.json')
 if (existsSync(packageJsonPath)) {
-  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
-  const scripts = packageJson.scripts ?? {};
+  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
+  const scripts = packageJson.scripts ?? {}
 
-  if (scripts['check:browser-verification-policy'] !== 'bun scripts/check-browser-verification-policy.mjs') {
-    fail('package.json: missing check:browser-verification-policy script');
+  if (
+    scripts['check:browser-verification-policy'] !==
+    'bun scripts/check-browser-verification-policy.mjs'
+  ) {
+    fail('package.json: missing check:browser-verification-policy script')
   }
 
   if (!scripts['agentic:check']?.includes('check:browser-verification-policy')) {
-    fail('package.json: agentic:check must run check:browser-verification-policy');
+    fail('package.json: agentic:check must run check:browser-verification-policy')
   }
 
   if (
     scripts['agentic:browser-proof'] &&
-    !scripts['agentic:browser-proof'].startsWith('bun scripts/require-authenticated-browser-qa.mjs && ')
+    !scripts['agentic:browser-proof'].startsWith(
+      'bun scripts/require-authenticated-browser-qa.mjs'
+    )
   ) {
-    fail('package.json: local agentic:browser-proof must be guarded by require-authenticated-browser-qa.mjs');
+    fail(
+      'package.json: local agentic:browser-proof must be guarded by require-authenticated-browser-qa.mjs'
+    )
+  }
+
+  if (
+    scripts['agentic:verify'] &&
+    scripts['agentic:verify'].includes('ui:verify') &&
+    !scripts['agentic:verify'].startsWith(
+      'bun scripts/require-authenticated-browser-qa.mjs'
+    )
+  ) {
+    fail(
+      'package.json: local agentic:verify browser lane must be guarded by require-authenticated-browser-qa.mjs'
+    )
   }
 }
 
 if (failures.length > 0) {
-  console.error('Authenticated browser QA policy check failed:');
+  console.error('Authenticated browser QA policy check failed:')
   for (const failure of failures) {
-    console.error(`- ${failure}`);
+    console.error(`- ${failure}`)
   }
-  process.exit(1);
+  process.exit(1)
 }
 
 console.log(
-  `Authenticated browser QA policy check passed for ${requiredPolicyFiles.length} guidance file(s).`,
-);
+  `Authenticated browser QA policy check passed for ${requiredPolicyFiles.length} guidance file(s).`
+)
