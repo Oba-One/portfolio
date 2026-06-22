@@ -66,6 +66,7 @@ export const Model = ({
 }) => {
   const [loaded, setLoaded] = useState(false)
   const [webglReady, setWebglReady] = useState(true)
+  const [rendererReady, setRendererReady] = useState(false)
   const container = useRef()
   const canvas = useRef()
   const camera = useRef()
@@ -232,6 +233,7 @@ export const Model = ({
 
     const unsubscribeX = rotationX.onChange(renderFrame)
     const unsubscribeY = rotationY.onChange(renderFrame)
+    setRendererReady(true)
 
     return () => {
       renderTarget.current.dispose()
@@ -380,7 +382,7 @@ export const Model = ({
       {...rest}
     >
       <canvas className={styles.canvas} ref={canvas} />
-      {webglReady && models.map((model, index) => (
+      {webglReady && rendererReady && models.map((model, index) => (
         <Device
           key={JSON.stringify(model.position)}
           renderer={renderer}

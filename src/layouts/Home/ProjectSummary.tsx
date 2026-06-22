@@ -10,7 +10,7 @@ import { useTheme } from 'components/ThemeProvider'
 import { Transition } from 'components/Transition'
 import { useWindowSize } from 'hooks'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { media } from 'utils/style'
 import styles from './ProjectSummary.module.scss'
 
@@ -30,6 +30,7 @@ export const ProjectSummary = ({
   ...rest
 }) => {
   const [focused, setFocused] = useState(false)
+  const [locallyVisible, setLocallyVisible] = useState(false)
   const theme = useTheme()
   const { width } = useWindowSize()
   const titleId = `${id}-title`
@@ -38,6 +39,34 @@ export const ProjectSummary = ({
   const indexText = index < 10 ? `0${index}` : index
   const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`
   const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`
+  const visible = sectionVisible || focused || locallyVisible
+
+  useEffect(() => {
+    if (locallyVisible) return
+
+    const element = sectionRef?.current
+    if (!element) return
+
+    const checkVisibility = () => {
+      const rect = element.getBoundingClientRect()
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+      const isVisible = rect.top < viewportHeight && rect.bottom > 0
+
+      if (isVisible) {
+        setLocallyVisible(true)
+      }
+    }
+
+    const frame = window.requestAnimationFrame(checkVisibility)
+    window.addEventListener('scroll', checkVisibility, { passive: true })
+    window.addEventListener('resize', checkVisibility)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', checkVisibility)
+      window.removeEventListener('resize', checkVisibility)
+    }
+  }, [locallyVisible, sectionRef])
 
   // const renderKatakana = (device, visible) => (
   //   <svg
@@ -161,19 +190,19 @@ export const ProjectSummary = ({
       {...rest}
     >
       <div className={styles.content}>
-        <Transition in={sectionVisible || focused}>
-          {visible => (
+        <Transition in={visible}>
+          {transitionVisible => (
             <>
               {!alternate && !isMobile && (
                 <>
-                  {renderDetails(visible)}
-                  {renderPreview(visible)}
+                  {renderDetails(transitionVisible)}
+                  {renderPreview(transitionVisible)}
                 </>
               )}
               {(alternate || isMobile) && (
                 <>
-                  {renderPreview(visible)}
-                  {renderDetails(visible)}
+                  {renderPreview(transitionVisible)}
+                  {renderDetails(transitionVisible)}
                 </>
               )}
             </>

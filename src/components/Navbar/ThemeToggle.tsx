@@ -3,13 +3,16 @@ import { useId } from 'react'
 
 import { useAppContext } from 'hooks'
 import { Button } from 'components/Button'
+import { useTheme } from 'components/ThemeProvider'
 
 import styles from './ThemeToggle.module.scss'
 
 export const ThemeToggle = ({ isMobile, ...rest }) => {
   const { dispatch } = useAppContext()
+  const { themeId } = useTheme()
   const id = useId()
   const maskId = `${id}theme-toggle-mask`
+  const nextTheme = themeId === 'dark' ? 'light' : 'dark'
 
   const handleClick = () => {
     dispatch({ type: 'toggleTheme' })
@@ -20,7 +23,8 @@ export const ThemeToggle = ({ isMobile, ...rest }) => {
       iconOnly
       className={styles.toggle}
       data-mobile={isMobile}
-      aria-label="Toggle theme"
+      data-current-theme={themeId}
+      aria-label={`Switch to ${nextTheme} theme`}
       onClick={handleClick}
       {...rest}
     >
