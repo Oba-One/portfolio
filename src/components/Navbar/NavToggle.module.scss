@@ -39,7 +39,7 @@ button.toggle {
     transition-property: opacity, transform, fill;
   }
 
-  &[data-open='true'] {
+  &[data-menu='true'][data-open='true'] {
     opacity: 0;
 
     @media (--mediaUseMotion) {
@@ -57,8 +57,7 @@ button.toggle {
     }
   }
 
-  &[data-open='true'],
-  [data-close='true'] {
+  &[data-close='true'][data-open='true'] {
     opacity: 1;
 
     @media (--mediaUseMotion) {

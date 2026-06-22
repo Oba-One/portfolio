@@ -2,6 +2,14 @@
   margin: 20px 0 60px;
 }
 
+.heroBackground {
+  @media (--mediaMobile) {
+    & img {
+      object-position: left center;
+    }
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

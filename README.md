@@ -12,15 +12,19 @@ Make sure you have Node.js `22.22.1` and Bun `1.3.10` installed. This repo uses 
 bun install --frozen-lockfile
 ```
 
-Once it's done start up a local server with:
+Once it's done, start the full local environment with:
 
 ```bash
 bun run dev
 ```
 
-To view the components storybook:
+That launches the Next site on `3201` and Storybook on `3202` through the
+repo-native coordinator in `scripts/dev.mjs`. Press Ctrl-C to stop both.
+
+To run only the Next site or only Storybook:
 
 ```bash
+bun run dev:site
 bun run storybook
 ```
 

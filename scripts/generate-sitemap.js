@@ -1,20 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs')
 const { bundleMDX } = require('mdx-bundler')
+const { homepage } = require('../package.json')
 
-function addPage(page) {
-  const path = page
-    .replace('src/pages', '')
-    .replace('.page.js', '')
-    .replace('.page.mdx', '')
-    .replace('/index', '/')
-  const route = path === '/index' ? '' : path
+const siteRoutes = JSON.parse(fs.readFileSync('src/utils/siteRoutes.json', 'utf8'))
+const siteUrl = (process.env.NEXT_PUBLIC_WEBSITE_URL || homepage).replace(/\/$/, '')
 
-  // Exclude 404 page and generated `[]` pages
-  if (route.includes('[') || route.includes('404')) return
-
+function addRoute(route) {
   return `  <url>
-    <loc>${`${process.env.NEXT_PUBLIC_WEBSITE_URL}${route}`}</loc>
+    <loc>${`${siteUrl}${route}`}</loc>
     <changefreq>monthly</changefreq>
   </url>`
 }
@@ -28,24 +22,18 @@ async function addPost(post) {
   const path = post.replace('src/posts', '/articles').replace('.mdx', '')
 
   return `  <url>
-    <loc>${`${process.env.NEXT_PUBLIC_WEBSITE_URL}${path}`}</loc>
+    <loc>${`${siteUrl}${path}`}</loc>
     <changefreq>monthly</changefreq>
   </url>`
 }
 
 async function generateSitemap() {
   const { globby } = await import('globby')
-  // Ignore Next.js specific files (e.g., _app.js) and API routes.
-  const pages = await globby([
-    'src/pages/**/*{.page.js,.page.mdx}',
-    '!src/pages/_*.js',
-    '!src/pages/api',
-  ])
   const postUrls = await globby(['src/posts/**/*.mdx'])
   const posts = await Promise.all(postUrls.map(addPost))
 
   const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map(addPage).filter(Boolean).join('\n')}
+${siteRoutes.publicRoutes.map(addRoute).join('\n')}
 ${posts.filter(Boolean).join('\n')}
 </urlset>\n`
 
