@@ -1,9 +1,15 @@
 // @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { Fragment } from 'react'
 
-import { GreenpillMapImg, GreenpillTwitterCardImg } from 'assets/greenpill'
+import {
+  GreenpillGardenEntryImg,
+  GreenpillMonthlyCallImg,
+  GreenpillNetworkMapImg,
+  GreenpillTechAndSunImg,
+} from 'assets/greenpill'
 import { Footer } from 'components/Footer'
 import { Image } from 'components/Image'
+import { Link } from 'components/Link'
 import { Meta } from 'components/Meta'
 import { useTheme } from 'components/ThemeProvider'
 import {
@@ -11,7 +17,6 @@ import {
   ProjectContainer,
   ProjectHeader,
   ProjectSection,
-  ProjectSectionColumns,
   ProjectSectionContent,
   ProjectSectionHeading,
   ProjectSectionText,
@@ -19,7 +24,6 @@ import {
 } from 'layouts/Project'
 import { media } from 'utils/style'
 
-import styles from '../CaseStudy.module.scss'
 import { projects } from '../../../constants'
 
 const project = projects['greenpill']
@@ -37,11 +41,10 @@ export const Greenpill = () => {
       <Meta title={title} prefix="Projects" description={description} />
       <ProjectContainer>
         <ProjectBackground
-          src={GreenpillTwitterCardImg}
-          srcSet={`${GreenpillTwitterCardImg.src} 1920w, ${GreenpillTwitterCardImg.src} 3840w`}
-          placeholder={GreenpillTwitterCardImg}
+          src={GreenpillNetworkMapImg}
+          placeholder={GreenpillNetworkMapImg}
           alt=""
-          opacity={isDark ? 0.48 : 0.74}
+          opacity={isDark ? 0.58 : 0.78}
         />
         <ProjectHeader
           title={title}
@@ -49,49 +52,45 @@ export const Greenpill = () => {
           links={project.links}
           roles={roles}
         />
-        <ProjectSection>
-          <ProjectSectionColumns centered className={styles.columns}>
-            <div className={styles.imagesText}>
+        <ProjectSection light>
+          <ProjectSectionContent width="xl">
+            <ProjectTextRow>
               <ProjectSectionHeading>Problem</ProjectSectionHeading>
               <ProjectSectionText>{project.problem}</ProjectSectionText>
-            </div>
-            <div className={styles.sidebarImages}>
-              <Image
-                className={styles.sidebarImage}
-                src={GreenpillTwitterCardImg}
-                srcSet={[GreenpillTwitterCardImg, GreenpillTwitterCardImg]}
-                placeholder={GreenpillTwitterCardImg}
-                alt="Greenpill social card artwork."
-                sizes={`(max-width: ${media.mobile}px) 260px, 420px`}
-              />
-              <Image
-                className={styles.sidebarImage}
-                src={GreenpillMapImg}
-                srcSet={[GreenpillMapImg, GreenpillMapImg]}
-                placeholder={GreenpillMapImg}
-                alt="Greenpill map artwork."
-                sizes={`(max-width: ${media.mobile}px) 260px, 420px`}
-              />
-            </div>
-          </ProjectSectionColumns>
-        </ProjectSection>
-        <ProjectSection light>
-          <ProjectSectionContent>
-            <Image
-              raised
-              srcSet={[GreenpillMapImg, GreenpillMapImg]}
-              placeholder={GreenpillMapImg}
-              alt="Greenpill map used as temporary project artwork."
-              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
-            />
-            <ProjectTextRow>
-              <ProjectSectionHeading>Architecture</ProjectSectionHeading>
-              <ProjectSectionText>{project.architecture}</ProjectSectionText>
             </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>
         <ProjectSection>
           <ProjectSectionContent>
+            <Image
+              raised
+              src={GreenpillGardenEntryImg}
+              placeholder={GreenpillGardenEntryImg}
+              alt="Greenpill Garden entry section with low-pressure paths to subscribe, join the public conversation, take the Regen Assessment, or book a steward call."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+            />
+            <ProjectTextRow>
+              <ProjectSectionHeading>Architecture</ProjectSectionHeading>
+              <ProjectSectionText>{project.architecture}</ProjectSectionText>
+              <ProjectSectionText>
+                That network architecture also feeds into{' '}
+                <Link href="/projects/green-goods">Green Goods</Link>, where the
+                field-facing tools focus more directly on accessible impact reporting and
+                funding while helping chapters and stewards make their work legible and
+                verifiable.
+              </ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection light>
+          <ProjectSectionContent>
+            <Image
+              raised
+              src={GreenpillMonthlyCallImg}
+              placeholder={GreenpillMonthlyCallImg}
+              alt="Greenpill Network monthly community call slide with Afolabi Aiyeloja visible beside the presentation."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+            />
             <ProjectTextRow>
               <ProjectSectionHeading>Development</ProjectSectionHeading>
               <ProjectSectionText>{project.development}</ProjectSectionText>
@@ -100,6 +99,13 @@ export const Greenpill = () => {
         </ProjectSection>
         <ProjectSection>
           <ProjectSectionContent>
+            <Image
+              raised
+              src={GreenpillTechAndSunImg}
+              placeholder={GreenpillTechAndSunImg}
+              alt="Afolabi Aiyeloja and Amio on a Greenpill Dev Guild call presenting Tech and Sun, a solar-powered hub project for builders and communities."
+              sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
+            />
             <ProjectTextRow>
               <ProjectSectionHeading>Learnings</ProjectSectionHeading>
               <ProjectSectionText>{project.learnings}</ProjectSectionText>

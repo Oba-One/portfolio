@@ -115,22 +115,29 @@ export const projects = {
   greenpill: {
     title: 'Greenpill',
     description:
-      'Stewarding public goods software, coordination infrastructure, and regenerative web3 work across Greenpill and the wider ecosystem',
+      'Building a global regenerative network through community strategy, developer programs, public learning, and partnerships',
     cta: {
       label: 'View Greenpill',
       link: '/projects/greenpill',
     },
     platform: 'laptop',
     year: 2026,
-    skills: ['Astro', 'Directus', 'Hono', 'Postgres', 'Bun', 'Content Architecture'],
+    skills: [
+      'Community Strategy',
+      'Technical Program Leadership',
+      'Developer Relations',
+      'Product & Tooling Direction',
+      'Partnership Development',
+      'Workshop Facilitation',
+    ],
     problem:
-      'Greenpill is not a single app. It is an ecosystem of chapters, guilds, projects, stories, events, funding experiments, and public goods tooling. That makes the work less about shipping one interface and more about keeping the public story, private operations, contributor pathways, and steward review loops aligned without leaking private context or flattening living work into a stale directory.',
+      'Greenpill is trying to solve a coordination problem that shows up across public goods, regenerative crypto, and local impact work. People have energy, skills, and shared values, but they are spread across cultures, time zones, funding systems, technical complexity, and local contexts. The network gives that energy a shared identity and a place to gather, learn, build trust, find collaborators, and turn ideas into useful work.',
     architecture:
-      'The current Greenpill stack is packages-first. The public website is a static Astro site; Keystatic remains local for editorial composition; Directus and Postgres own operational content; a Fly-hosted Hono agent handles private intake, public snapshots, chapter impact payloads, and map-node workflows; and shared contracts define what is safe to expose. That same boundary thinking carries into Green Goods, GreenWill, builder spaces, grant reporting, and regen coordination work.',
+      'The architecture is human first. Chapters ground the work in place. Guilds like the Dev Guild give builders a focused home. Stewards create rhythm through syncs, review, and shared decision-making. Monthly calls, workshops, podcasts, books, field notes, and public resources move knowledge across the network. The website, live map, and Garden act as public orientation layers, helping people find the network, understand where they fit, and make chapter and steward work more legible, verifiable, and easier to support.',
     development:
-      'My stewardship work has focused on making Greenpill easier to understand, safer to operate, and more useful to regenerative communities. That includes mapping content ownership across Keystatic, Directus, the static site, and the agent API; tightening plain-language themes for chapters and projects; shaping the Greenpill Garden as a low-pressure participation ramp; and aligning Green Goods, GreenWill, builder spaces, grants, and public stories into one coherent ecosystem narrative.',
+      'I first came into Greenpill from the developer side, looking for people to build with around WEFA. I quickly realized there was more to learn inside a shared identity than I could by keeping everything as my own project. As the Dev Guild grew, my role expanded into community and ecosystem leadership. I lead product and tooling direction, contributor pathways, community calls, workshops, partnerships, and the public story around what the Dev Guild and wider network are building.',
     learnings:
-      'Stewardship is architecture. A public network needs clean handoffs, clear source-of-truth boundaries, and language that newcomers can understand without losing the depth of the underlying ecosystem. This work has taught me to treat content, privacy, and contributor routing as product infrastructure, not as docs that sit beside the real system.',
+      'Greenpill has taught me what it really means to build community across cultures, time zones, and limited resources. That is a different kind of work than building solo or joining a team with an established culture and rhythm. Trust has to be earned slowly. Communication has to make room for different contexts. The human moments matter, like bringing people together at ETHDenver 2025 for Greenpill House, cooking meals, learning from one another, and remembering that the network is not only tools and calls. It is relationships. This work has stretched me from an engineer and individual contributor into a team builder, community builder, and steward where the network needs one.',
     links: [
       {
         label: 'View Site',
