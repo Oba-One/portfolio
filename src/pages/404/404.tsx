@@ -212,7 +212,12 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
                   level={5}
                 >
                   {randomVideo.title && (
-                    <DecoderText text={randomVideo.title} start={visible} delay={300} />
+                    <DecoderText
+                      key={randomVideo.title}
+                      text={randomVideo.title}
+                      start={visible}
+                      delay={300}
+                    />
                   )}
                 </Heading>
                 <Text className={styles.description} data-visible={visible} as="p">
@@ -242,6 +247,7 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
               {randomVideo.src && (
                 <>
                   <video
+                    key={randomVideo.src}
                     autoPlay
                     muted
                     loop
