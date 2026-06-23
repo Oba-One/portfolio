@@ -12,6 +12,15 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   pageExtensions: ['page.js', 'page.ts', 'page.tsx', 'api.js', 'api.ts'],
+  async redirects() {
+    return [
+      {
+        source: '/help-im-lost',
+        destination: '/nostalgia-zone',
+        permanent: true,
+      },
+    ]
+  },
   webpack(config, { isServer }) {
     // Run custom scripts
     if (isServer) {
