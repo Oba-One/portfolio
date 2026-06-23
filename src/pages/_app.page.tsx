@@ -1,5 +1,4 @@
 // @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Analytics } from '@vercel/analytics/react'
 import { Fragment, createContext, useEffect, useReducer } from 'react'
@@ -25,7 +24,6 @@ const App = ({ Component, pageProps }) => {
   const [storedTheme] = useLocalStorage('theme', 'dark')
   const [state, dispatch] = useReducer(reducer, initialState)
   const { route, asPath } = useRouter()
-  const canonicalRoute = route === '/' ? '' : `${asPath}`
   useFoucFix()
 
   useEffect(() => {
@@ -39,12 +37,6 @@ const App = ({ Component, pageProps }) => {
       <ThemeProvider themeId={state.theme}>
         <LazyMotion features={domAnimation}>
           <Fragment>
-            <Head>
-              <link
-                rel="canonical"
-                href={`${process.env.NEXT_PUBLIC_WEBSITE_URL}${canonicalRoute}`}
-              />
-            </Head>
             <VisuallyHidden
               showOnFocus
               as="a"

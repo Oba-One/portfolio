@@ -1,7 +1,14 @@
 import Head from 'next/head'
 
-const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL || 'https://afolabi.info'
+const siteUrl = (process.env.NEXT_PUBLIC_WEBSITE_URL || 'https://afolabi.info').replace(
+  /\/+$/,
+  ''
+)
 const name = 'Afolabi Aiyeloja'
+const socialProfiles = [
+  'https://github.com/Oba-One',
+  'https://www.linkedin.com/in/afolabi-aiyeloja/',
+]
 
 export type SocialImage = {
   src: string
@@ -12,7 +19,7 @@ export type SocialImage = {
 }
 
 const defaultSocialImage = {
-  src: '/social-image.png',
+  src: '/social/home.png',
   alt: 'Social preview for Afolabi Aiyeloja portfolio.',
   width: 1200,
   height: 630,
@@ -20,7 +27,18 @@ const defaultSocialImage = {
 } satisfies SocialImage
 
 function absoluteUrl(value = '/') {
-  return new URL(value, siteUrl).toString()
+  return new URL(value, `${siteUrl}/`).toString()
+}
+
+function normalizeText(value: string) {
+  return value.replace(/\s+/g, ' ').trim()
+}
+
+function normalizeRoute(route = '/') {
+  const url = new URL(route, `${siteUrl}/`)
+  const pathname = url.pathname === '/' ? '/' : `${url.pathname.replace(/\/+$/, '')}/`
+
+  return `${pathname}${url.search}${url.hash}`
 }
 
 type MetaProps = {
@@ -30,6 +48,7 @@ type MetaProps = {
   route?: string
   ogImage?: string
   socialImage?: SocialImage
+  noIndex?: boolean
 }
 
 export const Meta = ({
@@ -39,22 +58,39 @@ export const Meta = ({
   route = '/',
   ogImage,
   socialImage,
+  noIndex = false,
 }: MetaProps) => {
-  const titleText = [prefix, title].filter(Boolean).join(' | ')
+  const titleText = normalizeText([prefix, title].filter(Boolean).join(' | '))
+  const descriptionText = normalizeText(description)
   const image = socialImage ?? {
     ...defaultSocialImage,
     src: ogImage ?? defaultSocialImage.src,
   }
   const imageUrl = absoluteUrl(image.src)
-  const pageUrl = absoluteUrl(route)
+  const pageUrl = absoluteUrl(normalizeRoute(route))
+  const robots = noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'
+  const structuredData =
+    pageUrl === `${siteUrl}/`
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name,
+          url: pageUrl,
+          jobTitle: 'Systems architect and steward',
+          sameAs: socialProfiles,
+        }
+      : null
 
   return (
     <Head>
       <title key="title">{titleText}</title>
-      <meta key="description" name="description" content={description} />
+      <meta key="description" name="description" content={descriptionText} />
+      <meta key="robots" name="robots" content={robots} />
       <meta name="author" content={name} />
+      <link key="canonical" rel="canonical" href={pageUrl} />
 
       <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:secure_url" content={imageUrl} />
       <meta property="og:image:alt" content={image.alt} />
       <meta property="og:image:type" content={image.type ?? defaultSocialImage.type} />
       <meta
@@ -68,15 +104,23 @@ export const Meta = ({
 
       <meta property="og:title" content={titleText} />
       <meta property="og:site_name" content={name} />
+      <meta property="og:locale" content="en_US" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={pageUrl} />
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={descriptionText} />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:url" content={pageUrl} />
+      <meta name="twitter:description" content={descriptionText} />
       <meta name="twitter:title" content={titleText} />
       <meta name="twitter:image" content={imageUrl} />
       <meta name="twitter:image:alt" content={image.alt} />
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      )}
     </Head>
   )
 }

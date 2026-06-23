@@ -181,7 +181,12 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
 
   return (
     <section className={styles.page}>
-      <Meta title={title} description={description} route={notFound ? undefined : '/nostalgia-zone'} />
+      <Meta
+        title={title}
+        description={description}
+        route={notFound ? '/404' : '/nostalgia-zone'}
+        noIndex={notFound}
+      />
       <Transition in>
         {visible => (
           <Fragment>

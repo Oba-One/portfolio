@@ -3,10 +3,10 @@ and graphic assets behind this site humanstxt.org.
 
 _______________________________________________________________________________
 
-DEVELOPER | Olùgbéejáde
+ARCHITECT + STEWARD | Olùgbéejáde
 
 Afolabi Aiyeloja
-Software Developer and Engineer
+Systems Architect and Ecosystem Steward
 
 Design tools:
 Figma

@@ -6,8 +6,6 @@ import {
   WavesStoryPlaceholderImg,
   WavesSplashImg,
   WavesSplashPlaceholderImg,
-  WavesBackgroundImg,
-  WavesBackgroundPlaceholderImg,
   WavesDeckPlantsImg,
   WavesDeckPlantsPlaceholderImg,
   WavesOnboardSelectElementImg,
@@ -57,10 +55,10 @@ export const Waves = () => {
       />
       <ProjectContainer className={styles.slice}>
         <ProjectBackground
-          src={WavesBackgroundImg}
-          srcSet={`${WavesBackgroundImg.src} 1280w, ${WavesBackgroundImg.src} 2560w`}
-          alt=""
-          placeholder={WavesBackgroundPlaceholderImg}
+          src={WavesStoryImg}
+          srcSet={`${WavesStoryImg.src} 1280w, ${WavesStoryImg.src} 2560w`}
+          alt="Silhouetted figures walking toward a bright live-event horizon."
+          placeholder={WavesStoryPlaceholderImg}
           opacity={isDark ? 0.5 : 0.6}
         />
         <ProjectHeader

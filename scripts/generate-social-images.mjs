@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdirSync } from 'node:fs'
+import { mkdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
@@ -8,9 +8,23 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const outputRoot = path.join(repoRoot, 'public', 'social')
 const projectOutputRoot = path.join(outputRoot, 'projects')
 const legacyOutput = path.join(repoRoot, 'public', 'social-image.png')
+const fontRoot = path.join(repoRoot, 'src', 'assets', 'fonts')
+const gothamBook = readFileSync(path.join(fontRoot, 'gotham-book.woff2')).toString(
+  'base64'
+)
+const gothamMedium = readFileSync(path.join(fontRoot, 'gotham-medium.woff2')).toString(
+  'base64'
+)
+const gothamBold = readFileSync(path.join(fontRoot, 'gotham-bold.woff2')).toString(
+  'base64'
+)
 
 const width = 1200
 const height = 630
+const homeScreenshotCrop = {
+  left: 0,
+  top: 0,
+}
 
 const palette = {
   background: '#1b1e1b',
@@ -24,8 +38,6 @@ const cards = [
   {
     slug: 'home',
     title: 'Afolabi Aiyeloja',
-    kicker: 'Portfolio',
-    description: 'Systems architect, ecosystem steward, and builder',
     source: 'public/site-preview.webp',
     output: '../social-image.png',
   },
@@ -33,70 +45,60 @@ const cards = [
     slug: 'coop',
     title: 'Coop',
     kicker: 'Project',
-    description: 'Local-first group memory and agentic review workflows',
     source: 'src/assets/coop/coop-mark-glow.png',
   },
   {
     slug: 'green-goods',
     title: 'Green Goods',
     kicker: 'Project',
-    description: 'Evidence, funding, and reporting for regenerative communities',
     source: 'src/assets/green-goods/green-goods-hero-website.webp',
   },
   {
     slug: 'greenpill',
     title: 'Greenpill',
     kicker: 'Project',
-    description: 'Community strategy, public learning, and regenerative coordination',
     source: 'src/assets/greenpill/greenpill-network-map.webp',
   },
   {
     slug: 'waves',
     title: 'Waves',
     kicker: 'Project',
-    description: 'Generative art and culture for live events',
-    source: 'src/assets/waves/waves-background.webp',
+    source: 'src/assets/waves/waves-story.webp',
   },
   {
     slug: 'wefa',
     title: 'WEFA',
     kicker: 'Project',
-    description: 'Nature, community, storytelling, and plant care',
     source: 'src/assets/wefa/wefa-ola-red-fruit.jpg',
   },
   {
     slug: 'synesthesia',
     title: 'Synesthesia',
     kicker: 'Project',
-    description: 'Mapping music taste into a personal visual signature',
-    source: 'src/assets/syn/syn-background.webp',
+    source: 'src/assets/syn/syn-learnings.webp',
   },
   {
     slug: 'freeport',
     title: 'Freeport',
     kicker: 'Project',
-    description: 'Fine art ownership, DeFi liquidity, and NFT infrastructure',
     source: 'src/assets/freeport/freeport-development.webp',
   },
   {
     slug: 'mira-connect',
     title: 'Mira Connect',
     kicker: 'Project',
-    description: 'Field support, expert calls, and industrial collaboration',
     source: 'src/assets/mira-connect/connect-call-messages.webp',
   },
   {
     slug: 'mira-flow',
     title: 'Mira Flow',
     kicker: 'Project',
-    description: 'Tablet workflows for field observation, forms, and review',
     source: 'src/assets/mira-flow/flow-tablet-login.webp',
   },
   {
     slug: 'gentle-monster',
     title: 'Gentle Monster',
     kicker: 'Project',
-    description: 'E-commerce for a bold, visual eyewear brand',
     source: 'src/assets/gm/gm-background.webp',
   },
 ]
@@ -235,12 +237,89 @@ function renderPixelBlock(value, { x, y, scale, fill, opacity, maxWidth }) {
     .join('')
 }
 
-function textSvg({ title, kicker, description }) {
-  const titleScale = measureLine(title, 8) > 720 ? 7 : 8
+function fontFaceSvg() {
+  return `
+    <style type="text/css"><![CDATA[
+      @font-face {
+        font-family: 'Gotham';
+        font-weight: 400;
+        src: url('data:font/woff2;base64,${gothamBook}') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Gotham';
+        font-weight: 500;
+        src: url('data:font/woff2;base64,${gothamMedium}') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Gotham';
+        font-weight: 700;
+        src: url('data:font/woff2;base64,${gothamBold}') format('woff2');
+      }
+
+      .title {
+        font-family: 'Gotham', Arial, sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.005em;
+      }
+
+      .kicker {
+        font-family: 'Gotham', Arial, sans-serif;
+        font-weight: 500;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+    ]]></style>
+  `
+}
+
+function escapeXml(value) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
+function titleSize(title, base = 108) {
+  if (title.length > 18) return 88
+  if (title.length > 13) return 96
+  return base
+}
+
+function renderTitle(title, { x, y, size, fill = palette.text, opacity = 0.94 }) {
+  return `<text class="title" x="${x}" y="${y}" font-size="${size}" fill="${fill}" opacity="${opacity}">${escapeXml(
+    title
+  )}</text>`
+}
+
+function renderKicker(kicker, { x, y, size = 28 }) {
+  return `<text class="kicker" x="${x}" y="${y}" font-size="${size}" fill="${palette.primary}" opacity="0.88">${escapeXml(
+    kicker
+  )}</text>`
+}
+
+function renderMonogram({ x, y, width = 72, stroke = palette.primary, opacity = 0.9 }) {
+  const scale = width / 48
+
+  return `
+    <g transform="translate(${x} ${y}) scale(${scale})" fill="none" stroke="${stroke}" stroke-linecap="round" stroke-linejoin="round" opacity="${opacity}">
+      <path stroke-width="1.45" d="M24 1.2L46.2 49.4H37.5L33.7 40.7H14.3L10.5 49.4H1.8L24 1.2ZM18.2 32.7H29.8L24 19.5L18.2 32.7Z" />
+      <path stroke-width="1.35" opacity="0.72" d="M24 6.5L41.3 46.1H35.7L32 37.2H16L12.3 46.1H6.7L24 6.5ZM19.7 29.6H28.3L24 19.7L19.7 29.6Z" />
+      <path stroke-width="1.25" opacity="0.52" d="M24 12L36.3 43H32.6L29.5 34.6H18.5L15.4 43H11.7L24 12ZM21.1 27H26.9L24 19.9L21.1 27Z" />
+    </g>
+  `
+}
+
+function titleOverlaySvg({ title, kicker }) {
+  const size = titleSize(title)
 
   return Buffer.from(`
     <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
       <defs>
+        ${fontFaceSvg()}
         <linearGradient id="scrim" x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stop-color="${palette.background}" stop-opacity="0.96" />
           <stop offset="48%" stop-color="${palette.background}" stop-opacity="0.74" />
@@ -248,44 +327,32 @@ function textSvg({ title, kicker, description }) {
         </linearGradient>
       </defs>
       <rect width="${width}" height="${height}" fill="url(#scrim)" />
-      <rect x="64" y="64" width="72" height="72" rx="36" fill="none" stroke="${
-        palette.primary
-      }" stroke-width="3" opacity="0.9" />
-      <rect x="79" y="79" width="42" height="42" rx="21" fill="none" stroke="${
-        palette.primary
-      }" stroke-width="2" opacity="0.6" />
-      ${renderPixelLine(kicker, {
-        x: 64,
-        y: 212,
-        scale: 4,
-        fill: palette.primary,
-        opacity: 0.92,
-      })}
-      ${renderPixelBlock(title, {
-        x: 64,
-        y: 280,
-        scale: titleScale,
-        fill: palette.text,
-        opacity: 0.92,
-        maxWidth: 720,
-      })}
-      ${renderPixelBlock(description, {
-        x: 68,
-        y: 392,
-        scale: 3,
-        fill: palette.muted,
-        opacity: 0.86,
-        maxWidth: 620,
-      })}
-      ${renderPixelLine('afolabi.info', {
-        x: 64,
-        y: 536,
-        scale: 3,
-        fill: palette.primary,
-        opacity: 0.94,
-      })}
+      ${renderMonogram({ x: 64, y: 64 })}
+      ${kicker ? renderKicker(kicker, { x: 64, y: 270, size: 38 }) : ''}
+      ${renderTitle(title, { x: 64, y: 384, size })}
     </svg>
   `)
+}
+
+function getLeftAlignedSocialCrop({ sourceWidth, sourceHeight }) {
+  const targetRatio = width / height
+  let cropWidth = sourceWidth
+  let cropHeight = Math.round(sourceWidth / targetRatio)
+
+  if (cropHeight > sourceHeight) {
+    cropHeight = sourceHeight
+    cropWidth = Math.round(sourceHeight * targetRatio)
+  }
+
+  const maxLeft = Math.max(0, sourceWidth - cropWidth)
+  const maxTop = Math.max(0, sourceHeight - cropHeight)
+
+  return {
+    left: Math.min(homeScreenshotCrop.left, maxLeft),
+    top: Math.min(homeScreenshotCrop.top, maxTop),
+    width: cropWidth,
+    height: cropHeight,
+  }
 }
 
 async function makeCard(card) {
@@ -294,14 +361,27 @@ async function makeCard(card) {
     ? path.join(outputRoot, card.output)
     : path.join(projectOutputRoot, `${card.slug}.png`)
 
+  if (card.slug === 'home') {
+    const metadata = await sharp(sourcePath).metadata()
+    const sourceWidth = metadata.width ?? width
+    const sourceHeight = metadata.height ?? height
+    const crop = getLeftAlignedSocialCrop({ sourceWidth, sourceHeight })
+
+    await sharp(sourcePath)
+      .rotate()
+      .extract(crop)
+      .resize(width, height, { fit: 'fill' })
+      .png({ compressionLevel: 9, adaptiveFiltering: true, quality: 90 })
+      .toFile(outputPath)
+
+    console.log(`generated ${path.relative(repoRoot, outputPath)}`)
+    return
+  }
+
   let backgroundPipeline = sharp(sourcePath)
     .rotate()
     .resize(width, height, { fit: 'cover', position: 'center' })
     .modulate({ saturation: 0.86, brightness: 0.82 })
-
-  if (card.slug === 'home') {
-    backgroundPipeline = backgroundPipeline.blur(0.4)
-  }
 
   const background = await backgroundPipeline.png().toBuffer()
 
@@ -315,7 +395,7 @@ async function makeCard(card) {
   })
     .composite([
       { input: background, left: 0, top: 0 },
-      { input: textSvg(card), left: 0, top: 0 },
+      { input: titleOverlaySvg(card), left: 0, top: 0 },
     ])
     .png({ compressionLevel: 9, adaptiveFiltering: true, quality: 90 })
     .toFile(outputPath)
