@@ -42,6 +42,14 @@
   }
 }
 
+.agroforestryPhoto {
+  aspect-ratio: 3 / 4;
+
+  @media (--mediaMobile) {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 .appScreens {
   display: grid;
   grid-template-columns: repeat(6, [col] 1fr);
