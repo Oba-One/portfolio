@@ -4,12 +4,10 @@ import { Fragment } from 'react'
 import {
   SynBackgroundImg,
   SynArchitectureImg,
-  SynDevelopmentImg,
   SynLearningsImg,
   SynProblemImg,
   SynBackgroundPlaceholderImg,
   SynArchitecturePlaceholderImg,
-  SynDevelopmentPlaceholderImg,
   SynLearningsPlaceholderImg,
   SynProblemPlaceholderImg,
 } from 'assets/syn'
