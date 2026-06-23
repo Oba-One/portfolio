@@ -1,5 +1,5 @@
 // @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { Meta } from 'components/Meta'
 import { Text } from 'components/Text'
@@ -144,6 +144,15 @@ const videos = [
   },
 ]
 
+const getRandomVideo = currentTitle => {
+  const availableVideos =
+    currentTitle && videos.length > 1
+      ? videos.filter(video => video.title !== currentTitle)
+      : videos
+
+  return availableVideos[Math.floor(Math.random() * availableVideos.length)]
+}
+
 type NostalgiaZoneProps = {
   notFound?: boolean
 }
@@ -157,8 +166,12 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
   })
 
   useEffect(() => {
-    const video = videos[Math.floor(Math.random() * videos.length)]
-    setRandomVideo(video)
+    setRandomVideo(getRandomVideo())
+  }, [])
+
+  const handleRefresh = useCallback(event => {
+    event.preventDefault()
+    setRandomVideo(video => getRandomVideo(video.title))
   }, [])
 
   const title = notFound ? '404 Not Found' : 'Nostalgia Zone'
@@ -180,23 +193,17 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
                   level={0}
                   weight="bold"
                 >
-                  {notFound ? (
-                    '404'
-                  ) : (
-                    <DecoderText text="Nostalgia Zone" start={visible} delay={300} />
-                  )}
+                  404
                 </Heading>
-                {notFound && (
-                  <Heading
-                    aria-hidden
-                    className={styles.subheading}
-                    data-visible={visible}
-                    as="h3"
-                    level={4}
-                  >
-                    <DecoderText text="Error: Nostalgia Zone" start={visible} delay={300} />
-                  </Heading>
-                )}
+                <Heading
+                  aria-hidden
+                  className={styles.subheading}
+                  data-visible={visible}
+                  as="h3"
+                  level={4}
+                >
+                  <DecoderText text="Error: Nostalgia Zone" start={visible} delay={300} />
+                </Heading>
                 <Heading
                   aria-hidden
                   className={styles.subheading}
@@ -209,8 +216,8 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
                   )}
                 </Heading>
                 <Text className={styles.description} data-visible={visible} as="p">
-                  {notFound && <>This page either doesn’t exist or was deleted. </>}
-                  <Link href="" onClick={() => window.location.reload()}>
+                  This page either doesn’t exist or was deleted.{' '}
+                  <Link href="" onClick={handleRefresh}>
                     Refresh
                   </Link>{' '}
                   for a random nostalgia trip.
