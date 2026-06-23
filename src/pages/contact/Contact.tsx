@@ -97,6 +97,7 @@ export const Contact = () => {
               style={getDelay(tokens.base.durationXS, initDelay)}
               autoComplete="email"
               label="Your Email"
+              name="email"
               type="email"
               maxLength={CONTACT_EMAIL_MAX_LENGTH}
               {...email}
@@ -109,6 +110,7 @@ export const Contact = () => {
               style={getDelay(tokens.base.durationS, initDelay)}
               autoComplete="off"
               label="Message"
+              name="message"
               maxLength={CONTACT_MESSAGE_MAX_LENGTH}
               {...message}
             />
