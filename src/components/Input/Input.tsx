@@ -40,6 +40,7 @@ export const Input = ({
   error,
   onBlur,
   autoComplete,
+  name,
   required,
   maxLength,
   type,
@@ -89,6 +90,7 @@ export const Input = ({
           value={value}
           onChange={onChange}
           autoComplete={autoComplete}
+          name={name}
           required={required}
           maxLength={maxLength}
           type={type}
