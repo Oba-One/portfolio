@@ -227,8 +227,8 @@ export const projects = {
         link: 'https://www.wefa.world',
       },
       {
-        label: 'View Repository',
-        link: 'https://github.com/wefa-world/wefa',
+        label: 'View GitHub',
+        link: 'https://github.com/wefa-labs',
       },
       {
         label: 'View Blog',
