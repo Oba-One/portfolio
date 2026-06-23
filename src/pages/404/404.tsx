@@ -12,7 +12,6 @@ import notFoundPoster from 'assets/nostalgia/ang-floating.gif'
 import {
   ArthurVid,
   AvatarVid,
-  CaillouVid,
   CliffordVid,
   CyberchaseVid,
   DragonBallVideo,
@@ -47,12 +46,6 @@ const videos = [
     title: 'Avatar: The Last Airbender',
     imdb: 'https://www.imdb.com/title/tt0417299',
   },
-  // {
-  //   src: CaillouVid,
-  //   alt: 'Caillou Intro Song',
-  //   title: 'Caillou',
-  //   imdb: 'https://www.imdb.com/title/tt0262153',
-  // },
   {
     src: CliffordVid,
     alt: 'Clifford the Big Red Dog Intro',
@@ -151,8 +144,11 @@ const videos = [
   },
 ]
 
-let mount = false
-export function Page404() {
+type NostalgiaZoneProps = {
+  notFound?: boolean
+}
+
+export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
   const [randomVideo, setRandomVideo] = useState({
     title: '',
     src: '',
@@ -161,18 +157,18 @@ export function Page404() {
   })
 
   useEffect(() => {
-    if (!mount) {
-      const video = videos[Math.floor(Math.random() * videos.length)]
-      console.log('video', video)
-      setRandomVideo(video)
-      mount = true
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const video = videos[Math.floor(Math.random() * videos.length)]
+    setRandomVideo(video)
   }, [])
+
+  const title = notFound ? '404 Not Found' : 'Nostalgia Zone'
+  const description = notFound
+    ? "Page not found. This page doesn't exist"
+    : 'A random nostalgia trip through cartoons, shows, and intros.'
 
   return (
     <section className={styles.page}>
-      <Meta title="404 Not Found" description="Page not found. This page doesn't exist" />
+      <Meta title={title} description={description} route={notFound ? undefined : '/nostalgia-zone'} />
       <Transition in>
         {visible => (
           <Fragment>
@@ -184,17 +180,23 @@ export function Page404() {
                   level={0}
                   weight="bold"
                 >
-                  404
+                  {notFound ? (
+                    '404'
+                  ) : (
+                    <DecoderText text="Nostalgia Zone" start={visible} delay={300} />
+                  )}
                 </Heading>
-                <Heading
-                  aria-hidden
-                  className={styles.subheading}
-                  data-visible={visible}
-                  as="h3"
-                  level={4}
-                >
-                  <DecoderText text="Error: Nostalgia Zone" start={visible} delay={300} />
-                </Heading>
+                {notFound && (
+                  <Heading
+                    aria-hidden
+                    className={styles.subheading}
+                    data-visible={visible}
+                    as="h3"
+                    level={4}
+                  >
+                    <DecoderText text="Error: Nostalgia Zone" start={visible} delay={300} />
+                  </Heading>
+                )}
                 <Heading
                   aria-hidden
                   className={styles.subheading}
@@ -207,7 +209,7 @@ export function Page404() {
                   )}
                 </Heading>
                 <Text className={styles.description} data-visible={visible} as="p">
-                  This page either doesn’t exist or was deleted.{' '}
+                  {notFound && <>This page either doesn’t exist or was deleted. </>}
                   <Link href="" onClick={() => window.location.reload()}>
                     Refresh
                   </Link>{' '}
@@ -261,4 +263,8 @@ export function Page404() {
       </Transition>
     </section>
   )
+}
+
+export function Page404() {
+  return <NostalgiaZone notFound />
 }
