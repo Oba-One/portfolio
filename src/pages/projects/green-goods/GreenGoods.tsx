@@ -31,7 +31,7 @@ import {
   ProjectSectionText,
   ProjectTextRow,
 } from 'layouts/Project'
-import { media } from 'utils/style'
+import { classes, media } from 'utils/style'
 
 import { projects } from '../../../constants'
 import styles from './GreenGoods.module.scss'
@@ -141,7 +141,7 @@ export const GreenGoods = () => {
           <ProjectSectionColumns centered className={styles.columns}>
             <Image
               raised
-              className={styles.fieldPhoto}
+              className={classes(styles.fieldPhoto, styles.agroforestryPhoto)}
               src={RefiSiciliaAgroforestryImg}
               srcSet={[RefiSiciliaAgroforestryImg, RefiSiciliaAgroforestryImg]}
               placeholder={RefiSiciliaAgroforestryPlaceholderImg}
