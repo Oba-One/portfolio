@@ -6,6 +6,7 @@ import {
   type CSSProperties,
   type ImgHTMLAttributes,
 } from 'react'
+import type { StaticImageData } from 'next/image'
 
 import { useTheme } from 'components/ThemeProvider'
 import { useInViewport } from 'hooks'
@@ -13,20 +14,23 @@ import { srcSetToString } from 'utils/image'
 import { classes, cssProps, numToMs } from 'utils/style'
 import styles from './Image.module.scss'
 
-type ImageSource = {
+export type ImageSource = StaticImageData | {
   src: string
   width: number
   height: number
 }
 
-type ImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'onLoad'> & {
+export type ImageProps = Omit<
+  ImgHTMLAttributes<HTMLImageElement>,
+  'src' | 'srcSet' | 'onLoad' | 'placeholder'
+> & {
   className?: string
   style?: CSSProperties
   reveal?: boolean
   delay?: number
   raised?: boolean
   src?: ImageSource
-  srcSet?: ImageSource[]
+  srcSet?: ImageSource[] | string
   placeholder?: ImageSource
 }
 
@@ -44,7 +48,7 @@ export const Image = ({
   const [loaded, setLoaded] = useState(false)
   const { themeId } = useTheme()
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const src = baseSrc || srcSet?.[0]
+  const src = baseSrc || (Array.isArray(srcSet) ? srcSet[0] : undefined) || placeholder
   const inViewport = useInViewport(containerRef, true)
 
   const onLoad = useCallback(() => {

@@ -1,7 +1,6 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import RouterLink from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 
 import { Icon } from 'components/Icon'
 import { Monogram } from 'components/Monogram'
@@ -17,13 +16,13 @@ import styles from './Navbar.module.scss'
 import { navLinks, socialLinks } from './navData'
 
 export const Navbar = () => {
-  const [current, setCurrent] = useState()
-  const [target, setTarget] = useState()
+  const [current, setCurrent] = useState<string>()
+  const [target, setTarget] = useState<string | null>(null)
   const { themeId } = useTheme()
   const { menuOpen, dispatch } = useAppContext()
   const { route, asPath } = useRouter()
   const windowSize = useWindowSize()
-  const headerRef = useRef()
+  const headerRef = useRef<HTMLElement | null>(null)
   const isMobile = windowSize.width <= media.mobile || windowSize.height <= 696
   const scrollToHash = useScrollToHash()
 
@@ -41,14 +40,24 @@ export const Navbar = () => {
 
   // Handle swapping the theme when intersecting with inverse themed elements
   useEffect(() => {
-    const navItems = document.querySelectorAll('[data-navbar-item]')
+    type NavItemMeasurement = {
+      element: HTMLElement
+      top: number
+      bottom: number
+    }
+
+    const navItems = document.querySelectorAll<HTMLElement>('[data-navbar-item]')
     const inverseTheme = themeId === 'dark' ? 'light' : 'dark'
     const { innerHeight } = window
 
-    let inverseMeasurements = []
-    let navItemMeasurements = []
+    let inverseMeasurements: NavItemMeasurement[] = []
+    let navItemMeasurements: NavItemMeasurement[] = []
 
-    const isOverlap = (rect1, rect2, scrollY) => {
+    const isOverlap = (
+      rect1: NavItemMeasurement,
+      rect2: NavItemMeasurement,
+      scrollY: number
+    ) => {
       return !(rect1.bottom - scrollY < rect2.top || rect1.top - scrollY > rect2.bottom)
     }
 
@@ -59,7 +68,7 @@ export const Navbar = () => {
     }
 
     const handleInversion = () => {
-      const invertedElements = document.querySelectorAll(
+      const invertedElements = document.querySelectorAll<HTMLElement>(
         `[data-theme='${inverseTheme}'][data-invert]`
       )
 
@@ -123,11 +132,11 @@ export const Navbar = () => {
       return 'page'
     }
 
-    return ''
+    return undefined
   }
 
   // Store the current hash to scroll to
-  const handleNavItemClick = event => {
+  const handleNavItemClick = (event: MouseEvent<HTMLAnchorElement>) => {
     const hash = event.currentTarget.href.split('#')[1]
     setTarget(null)
 
@@ -137,36 +146,37 @@ export const Navbar = () => {
     }
   }
 
-  const handleMobileNavClick = event => {
+  const handleMobileNavClick = (event: MouseEvent<HTMLAnchorElement>) => {
     handleNavItemClick(event)
     if (menuOpen) dispatch({ type: 'toggleMenu' })
   }
 
   return (
     <header className={styles.navbar} ref={headerRef}>
-      <RouterLink legacyBehavior href={route === '/' ? '/#intro' : '/'} scroll={false}>
-        <a
-          data-navbar-item
-          className={styles.logo}
-          aria-label="Afolabi Aiyeloja, ecosystem architect"
-          onClick={handleMobileNavClick}
-        >
-          <Monogram highlight />
-        </a>
+      <RouterLink
+        href={route === '/' ? '/#intro' : '/'}
+        scroll={false}
+        data-navbar-item
+        className={styles.logo}
+        aria-label="Afolabi Aiyeloja, ecosystem architect"
+        onClick={handleMobileNavClick}
+      >
+        <Monogram highlight />
       </RouterLink>
       <NavToggle onClick={() => dispatch({ type: 'toggleMenu' })} menuOpen={menuOpen} />
       <nav className={styles.nav}>
         <div className={styles.navList}>
           {navLinks.map(({ label, pathname }) => (
-            <RouterLink legacyBehavior href={pathname} scroll={false} key={label}>
-              <a
-                data-navbar-item
-                className={styles.navLink}
-                aria-current={getCurrent(pathname)}
-                onClick={handleNavItemClick}
-              >
-                {label}
-              </a>
+            <RouterLink
+              href={pathname}
+              scroll={false}
+              key={label}
+              data-navbar-item
+              className={styles.navLink}
+              aria-current={getCurrent(pathname)}
+              onClick={handleNavItemClick}
+            >
+              {label}
             </RouterLink>
           ))}
         </div>
@@ -176,20 +186,21 @@ export const Navbar = () => {
         {visible => (
           <nav className={styles.mobileNav} data-visible={visible}>
             {navLinks.map(({ label, pathname }, index) => (
-              <RouterLink legacyBehavior href={pathname} scroll={false} key={label}>
-                <a
-                  className={styles.mobileNavLink}
-                  data-visible={visible}
-                  aria-current={getCurrent(pathname)}
-                  onClick={handleMobileNavClick}
-                  style={cssProps({
-                    transitionDelay: numToMs(
-                      Number(msToNum(tokens.base.durationS)) + index * 50
-                    ),
-                  })}
-                >
-                  {label}
-                </a>
+              <RouterLink
+                href={pathname}
+                scroll={false}
+                key={label}
+                className={styles.mobileNavLink}
+                data-visible={visible}
+                aria-current={getCurrent(pathname)}
+                onClick={handleMobileNavClick}
+                style={cssProps({
+                  transitionDelay: numToMs(
+                    Number(msToNum(tokens.base.durationS)) + index * 50
+                  ),
+                })}
+              >
+                {label}
               </RouterLink>
             ))}
             <NavbarIcons />
@@ -202,7 +213,7 @@ export const Navbar = () => {
   )
 }
 
-const NavbarIcons = ({ desktop }) => (
+const NavbarIcons = ({ desktop }: { desktop?: boolean }) => (
   <div className={styles.navIcons}>
     {socialLinks.map(({ label, url, icon }) => (
       <a

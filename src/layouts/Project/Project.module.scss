@@ -10,11 +10,18 @@
 .links {
   display: flex;
   gap: var(--spaceS);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 
   @media (--mediaMobile) {
     flex-direction: column;
     gap: var(--spaceM);
   }
+}
+
+.linkItem {
+  display: flex;
 }
 
 .section {

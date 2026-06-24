@@ -1,5 +1,4 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { useId } from 'react'
+import { useId, type ComponentPropsWithoutRef } from 'react'
 
 import { useAppContext } from 'hooks'
 import { Button } from 'components/Button'
@@ -7,7 +6,11 @@ import { useTheme } from 'components/ThemeProvider'
 
 import styles from './ThemeToggle.module.scss'
 
-export const ThemeToggle = ({ isMobile, ...rest }) => {
+type ThemeToggleProps = ComponentPropsWithoutRef<typeof Button> & {
+  isMobile?: boolean
+}
+
+export const ThemeToggle = ({ isMobile, ...rest }: ThemeToggleProps) => {
   const { dispatch } = useAppContext()
   const { themeId } = useTheme()
   const id = useId()

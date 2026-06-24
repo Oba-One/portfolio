@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { Fragment } from 'react'
 
 import {

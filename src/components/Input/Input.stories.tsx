@@ -1,12 +1,16 @@
-// @ts-nocheck -- Storybook stories still use legacy untyped wrappers.
 import { Input } from 'components/Input'
 import { useFormInput } from 'hooks'
+import type { ComponentPropsWithoutRef } from 'react'
 
 export default {
   title: 'Input',
 }
 
-const Story = args => {
+type InputStory = ((args: ComponentPropsWithoutRef<typeof Input>) => JSX.Element) & {
+  args?: ComponentPropsWithoutRef<typeof Input>
+}
+
+const Story: InputStory = args => {
   const exampleValue = useFormInput('')
   return (
     <div style={{ maxWidth: 400, width: '100%', padding: 30 }}>

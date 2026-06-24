@@ -34,8 +34,8 @@ type RendererLike = Disposable
 
 type LightLike = {
   parent: {
-    remove: (light: LightLike) => void
-  }
+    remove: (light: never) => void
+  } | null
 }
 
 // Enable caching for all loaders
@@ -105,7 +105,7 @@ export const cleanRenderer = (renderer: RendererLike | null | undefined) => {
  */
 export const removeLights = (lights: LightLike[]) => {
   for (const light of lights) {
-    light.parent.remove(light)
+    light.parent?.remove(light as never)
   }
 }
 

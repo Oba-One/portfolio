@@ -1,10 +1,14 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
+import type { ComponentPropsWithoutRef } from 'react'
 import { Icon } from 'components/Icon'
 import { Button } from 'components/Button'
 
 import styles from './NavToggle.module.scss'
 
-export const NavToggle = ({ menuOpen, ...rest }) => {
+type NavToggleProps = ComponentPropsWithoutRef<typeof Button> & {
+  menuOpen: boolean
+}
+
+export const NavToggle = ({ menuOpen, ...rest }: NavToggleProps) => {
   return (
     <Button
       iconOnly

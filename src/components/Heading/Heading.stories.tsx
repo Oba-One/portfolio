@@ -1,4 +1,3 @@
-// @ts-nocheck -- Storybook stories still use legacy untyped wrappers.
 import { Heading } from 'components/Heading'
 import { StoryContainer } from '../../../.storybook/StoryContainer'
 

@@ -1,5 +1,5 @@
 import RouterLink from 'next/link'
-import { forwardRef, type ReactNode } from 'react'
+import { forwardRef, type ElementType, type ReactNode } from 'react'
 import { classes } from 'utils/style'
 import styles from './Link.module.css'
 
@@ -8,6 +8,7 @@ const VALID_EXT = ['txt', 'png', 'jpg']
 
 type LinkProps = {
   href?: string
+  as?: ElementType
   rel?: string
   target?: string
   children?: ReactNode
@@ -26,21 +27,21 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ href, ...rest },
     return <LinkContent href={href} ref={ref} {...rest} />
   }
 
-  return (
-    <RouterLink legacyBehavior passHref href={href} scroll={false}>
-      <LinkContent ref={ref} {...rest} />
-    </RouterLink>
-  )
+  return <LinkContent as={RouterLink} href={href} scroll={false} ref={ref} {...rest} />
 })
 
 export const LinkContent = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ rel, target, children, secondary, className, href, ...rest }: LinkProps, ref) => {
+  (
+    { as, rel, target, children, secondary, className, href, ...rest }: LinkProps,
+    ref
+  ) => {
     const isExternal = href?.includes('://')
     const relValue = rel || (isExternal ? 'noreferrer noopener' : undefined)
     const targetValue = target || (isExternal ? '_blank' : undefined)
+    const Component = (as || 'a') as ElementType
 
     return (
-      <a
+      <Component
         className={classes(styles.link, className)}
         data-secondary={secondary}
         rel={relValue}
@@ -50,7 +51,7 @@ export const LinkContent = forwardRef<HTMLAnchorElement, LinkProps>(
         {...rest}
       >
         {children}
-      </a>
+      </Component>
     )
   }
 )

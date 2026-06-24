@@ -1,5 +1,4 @@
-// @ts-nocheck -- Storybook stories still use legacy untyped wrappers.
-import { Image } from 'components/Image'
+import { Image, type ImageProps } from 'components/Image'
 import { StoryContainer } from '../../../.storybook/StoryContainer'
 
 export default {
@@ -20,10 +19,14 @@ const imageData = {
   },
 }
 
-const Story = args => (
+type ImageStory = ((args: ImageProps) => JSX.Element) & {
+  args?: ImageProps
+}
+
+const Story: ImageStory = args => (
   <StoryContainer>
     <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0px, 960px)' }}>
-      <Image alt="An abstract purple and pink neon thing" {...imageData} {...args} />
+      <Image {...imageData} {...args} alt={args.alt || imageData.alt} />
     </div>
   </StoryContainer>
 )

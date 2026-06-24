@@ -1,4 +1,3 @@
-// @ts-nocheck -- Storybook stories still use legacy untyped wrappers.
 import { Link } from 'components/Link'
 import { StoryContainer } from '../../../.storybook/StoryContainer'
 

@@ -1,9 +1,8 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { useTheme } from 'components/ThemeProvider'
 import { Transition } from 'components/Transition'
 import { useReducedMotion, useSpring } from 'framer-motion'
 import { useInViewport, useWindowSize } from 'hooks'
-import { startTransition, useEffect, useRef } from 'react'
+import { startTransition, useEffect, useRef, type HTMLAttributes } from 'react'
 import {
   AmbientLight,
   Color,
@@ -30,24 +29,36 @@ const springConfig = {
   mass: 2,
 }
 
-const colorFromRgbToken = (rgb = '255 255 255') => new Color(...rgbToThreeColor(rgb))
+type SphereUniforms = Record<string, { value: unknown }> & {
+  time: { value: number }
+  palettePrimary: { value: Color }
+  paletteAccent: { value: Color }
+  paletteBackground: { value: Color }
+}
 
-export const DisplacementSphere = props => {
+type DisplacementSphereProps = HTMLAttributes<HTMLCanvasElement>
+
+const colorFromRgbToken = (rgb = '255 255 255') => {
+  const [r = 1, g = 1, b = 1] = rgbToThreeColor(rgb)
+  return new Color(r, g, b)
+}
+
+export const DisplacementSphere = (props: DisplacementSphereProps) => {
   const theme = useTheme()
   const { rgbAccent, rgbBackground, rgbBackgroundLight, rgbPrimary, rgbWhite, themeId } =
     theme
   const initialPalette = useRef({ rgbAccent, rgbBackgroundLight, rgbPrimary })
   const start = useRef(Date.now())
-  const canvasRef = useRef()
-  const mouse = useRef()
-  const renderer = useRef()
-  const camera = useRef()
-  const scene = useRef()
-  const lights = useRef()
-  const uniforms = useRef()
-  const material = useRef()
-  const geometry = useRef()
-  const sphere = useRef()
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const mouse = useRef<Vector2 | null>(null)
+  const renderer = useRef<WebGLRenderer | null>(null)
+  const camera = useRef<PerspectiveCamera | null>(null)
+  const scene = useRef<Scene | null>(null)
+  const lights = useRef<(AmbientLight | DirectionalLight)[]>([])
+  const uniforms = useRef<SphereUniforms | null>(null)
+  const material = useRef<MeshPhongMaterial | null>(null)
+  const geometry = useRef<SphereGeometry | null>(null)
+  const sphere = useRef<Mesh | null>(null)
   const reduceMotion = useReducedMotion()
   const isInViewport = useInViewport(canvasRef)
   const windowSize = useWindowSize()
@@ -57,6 +68,8 @@ export const DisplacementSphere = props => {
   useEffect(() => {
     const { innerWidth, innerHeight } = window
     const canvas = canvasRef.current
+    if (!canvas) return undefined
+
     const context =
       canvas.getContext('webgl', {
         antialias: false,
@@ -74,7 +87,7 @@ export const DisplacementSphere = props => {
     if (!context) return undefined
 
     mouse.current = new Vector2(0.8, 0.5)
-    renderer.current = new WebGLRenderer({
+    const rendererInstance = new WebGLRenderer({
       canvas,
       context,
       antialias: false,
@@ -82,18 +95,22 @@ export const DisplacementSphere = props => {
       powerPreference: 'high-performance',
       failIfMajorPerformanceCaveat: true,
     })
-    renderer.current.setSize(innerWidth, innerHeight)
-    renderer.current.setPixelRatio(1)
-    renderer.current.outputEncoding = sRGBEncoding
+    renderer.current = rendererInstance
+    rendererInstance.setSize(innerWidth, innerHeight)
+    rendererInstance.setPixelRatio(1)
+    rendererInstance.outputEncoding = sRGBEncoding
 
-    camera.current = new PerspectiveCamera(54, innerWidth / innerHeight, 0.1, 100)
-    camera.current.position.z = 52
+    const cameraInstance = new PerspectiveCamera(54, innerWidth / innerHeight, 0.1, 100)
+    camera.current = cameraInstance
+    cameraInstance.position.z = 52
 
-    scene.current = new Scene()
+    const sceneInstance = new Scene()
+    scene.current = sceneInstance
 
-    material.current = new MeshPhongMaterial()
-    material.current.onBeforeCompile = shader => {
-      uniforms.current = UniformsUtils.merge([
+    const materialInstance = new MeshPhongMaterial()
+    material.current = materialInstance
+    materialInstance.onBeforeCompile = shader => {
+      const mergedUniforms = UniformsUtils.merge([
         shader.uniforms,
         {
           time: { value: 0 },
@@ -107,19 +124,22 @@ export const DisplacementSphere = props => {
             value: colorFromRgbToken(initialPalette.current.rgbBackgroundLight),
           },
         },
-      ])
+      ]) as SphereUniforms
 
-      shader.uniforms = uniforms.current
+      uniforms.current = mergedUniforms
+      shader.uniforms = mergedUniforms
       shader.vertexShader = vertShader
       shader.fragmentShader = fragShader
     }
 
     startTransition(() => {
-      geometry.current = new SphereGeometry(32, 128, 128)
-      sphere.current = new Mesh(geometry.current, material.current)
-      sphere.current.position.z = 0
-      sphere.current.modifier = Math.random()
-      scene.current.add(sphere.current)
+      const geometryInstance = new SphereGeometry(32, 128, 128)
+      const sphereInstance = new Mesh(geometryInstance, materialInstance)
+      geometry.current = geometryInstance
+      sphere.current = sphereInstance
+      sphereInstance.position.z = 0
+      sphereInstance.modifier = Math.random()
+      sceneInstance.add(sphereInstance)
     })
 
     return () => {
@@ -129,17 +149,18 @@ export const DisplacementSphere = props => {
   }, [])
 
   useEffect(() => {
-    if (!material.current) return undefined
+    const materialInstance = material.current
+    if (!materialInstance) return undefined
 
     const primary = colorFromRgbToken(rgbPrimary)
     const accent = colorFromRgbToken(rgbAccent)
     const backgroundLight = colorFromRgbToken(rgbBackgroundLight)
 
-    material.current.color.copy(primary)
-    material.current.specular.copy(accent)
-    material.current.emissive.copy(backgroundLight)
-    material.current.emissiveIntensity = themeId === 'light' ? 0.08 : 0.14
-    material.current.shininess = themeId === 'light' ? 28 : 36
+    materialInstance.color.copy(primary)
+    materialInstance.specular.copy(accent)
+    materialInstance.emissive.copy(backgroundLight)
+    materialInstance.emissiveIntensity = themeId === 'light' ? 0.08 : 0.14
+    materialInstance.shininess = themeId === 'light' ? 28 : 36
 
     if (uniforms.current) {
       uniforms.current.palettePrimary.value.copy(primary)
@@ -148,14 +169,18 @@ export const DisplacementSphere = props => {
     }
 
     if (renderer.current && scene.current && camera.current && reduceMotion) {
-      renderer.current.render(scene.current, camera.current)
+      const rendererInstance = renderer.current
+      const sceneInstance = scene.current
+      const cameraInstance = camera.current
+      rendererInstance.render(sceneInstance, cameraInstance)
     }
 
     return undefined
   }, [rgbAccent, rgbBackgroundLight, rgbPrimary, reduceMotion, themeId])
 
   useEffect(() => {
-    if (!scene.current) return undefined
+    const sceneInstance = scene.current
+    if (!sceneInstance) return undefined
 
     const dirLight = new DirectionalLight(colorFromRgbToken(rgbPrimary), 0.7)
     const ambientLight = new AmbientLight(
@@ -168,8 +193,8 @@ export const DisplacementSphere = props => {
     dirLight.position.y = 100
 
     lights.current = [dirLight, ambientLight]
-    scene.current.background = new Color(...rgbToThreeColor(rgbBackground))
-    lights.current.forEach(light => scene.current.add(light))
+    sceneInstance.background = colorFromRgbToken(rgbBackground)
+    lights.current.forEach(light => sceneInstance.add(light))
 
     return () => {
       removeLights(lights.current)
@@ -179,34 +204,38 @@ export const DisplacementSphere = props => {
   useEffect(() => {
     if (!renderer.current || !camera.current || !sphere.current) return undefined
 
+    const rendererInstance = renderer.current
+    const cameraInstance = camera.current
+    const sphereInstance = sphere.current
+    const sceneInstance = scene.current
     const { width, height } = windowSize
 
     const adjustedHeight = height + height * 0.3
-    renderer.current.setSize(width, adjustedHeight)
-    camera.current.aspect = width / adjustedHeight
-    camera.current.updateProjectionMatrix()
+    rendererInstance.setSize(width, adjustedHeight)
+    cameraInstance.aspect = width / adjustedHeight
+    cameraInstance.updateProjectionMatrix()
 
     // Render a single frame on resize when not animating
-    if (reduceMotion) {
-      renderer.current.render(scene.current, camera.current)
+    if (reduceMotion && sceneInstance) {
+      rendererInstance.render(sceneInstance, cameraInstance)
     }
 
     if (width <= media.mobile) {
-      sphere.current.position.x = 14
-      sphere.current.position.y = 10
+      sphereInstance.position.x = 14
+      sphereInstance.position.y = 10
     } else if (width <= media.tablet) {
-      sphere.current.position.x = 18
-      sphere.current.position.y = 14
+      sphereInstance.position.x = 18
+      sphereInstance.position.y = 14
     } else {
-      sphere.current.position.x = 22
-      sphere.current.position.y = 16
+      sphereInstance.position.x = 22
+      sphereInstance.position.y = 16
     }
   }, [reduceMotion, windowSize])
 
   useEffect(() => {
     if (!sphere.current) return undefined
 
-    const onMouseMove = event => {
+    const onMouseMove = (event: MouseEvent) => {
       const position = {
         x: event.clientX / window.innerWidth,
         y: event.clientY / window.innerHeight,
@@ -230,30 +259,38 @@ export const DisplacementSphere = props => {
       return undefined
     }
 
-    let animation
+    const rendererInstance = renderer.current
+    const sceneInstance = scene.current
+    const cameraInstance = camera.current
+    const sphereInstance = sphere.current
+
+    let animation: number | undefined
 
     const animate = () => {
       animation = requestAnimationFrame(animate)
 
-      if (uniforms.current !== undefined) {
-        uniforms.current.time.value = 0.00005 * (Date.now() - start.current)
+      const currentUniforms = uniforms.current
+      if (currentUniforms) {
+        currentUniforms.time.value = 0.00005 * (Date.now() - start.current)
       }
 
-      sphere.current.rotation.z += 0.001
-      sphere.current.rotation.x = rotationX.get()
-      sphere.current.rotation.y = rotationY.get()
+      sphereInstance.rotation.z += 0.001
+      sphereInstance.rotation.x = rotationX.get()
+      sphereInstance.rotation.y = rotationY.get()
 
-      renderer.current.render(scene.current, camera.current)
+      rendererInstance.render(sceneInstance, cameraInstance)
     }
 
     if (!reduceMotion && isInViewport) {
       animate()
     } else {
-      renderer.current.render(scene.current, camera.current)
+      rendererInstance.render(sceneInstance, cameraInstance)
     }
 
     return () => {
-      cancelAnimationFrame(animation)
+      if (animation !== undefined) {
+        cancelAnimationFrame(animation)
+      }
     }
   }, [isInViewport, reduceMotion, rotationX, rotationY])
 

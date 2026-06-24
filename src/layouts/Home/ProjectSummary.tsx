@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 // import projectKatakana from  'assets/katakana-project.svg?url'
 import { Button } from 'components/Button'
 import { Divider } from 'components/Divider'
@@ -9,11 +8,37 @@ import { Text } from 'components/Text'
 import { Transition } from 'components/Transition'
 import { useWindowSize } from 'hooks'
 import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
+import {
+  useEffect,
+  useState,
+  type HTMLAttributes,
+  type RefObject,
+} from 'react'
 import { media } from 'utils/style'
 import styles from './ProjectSummary.module.scss'
+import type { ModelConfig, ModelProps } from 'components/Model'
+import type { ProjectPlatform } from '../../constants'
 
-const Model = dynamic(() => import('components/Model').then(mod => mod.Model))
+const Model = dynamic<ModelProps>(() => import('components/Model').then(mod => mod.Model))
+
+type ProjectSummaryModel = {
+  type: ProjectPlatform
+  alt: string
+  textures: ModelConfig['texture'][]
+}
+
+type ProjectSummaryProps = HTMLAttributes<HTMLElement> & {
+  id: string
+  visible: boolean
+  sectionRef: RefObject<HTMLElement>
+  index: number
+  title: string
+  description: string
+  model: ProjectSummaryModel
+  buttonText: string
+  buttonLink: string
+  alternate?: boolean
+}
 
 export const ProjectSummary = ({
   id,
@@ -27,7 +52,7 @@ export const ProjectSummary = ({
   buttonLink,
   alternate,
   ...rest
-}) => {
+}: ProjectSummaryProps) => {
   const [focused, setFocused] = useState(false)
   const [locallyVisible, setLocallyVisible] = useState(false)
   const { width } = useWindowSize()
@@ -65,7 +90,7 @@ export const ProjectSummary = ({
     }
   }, [locallyVisible, sectionRef])
 
-  const renderDetails = visible => (
+  const renderDetails = (visible: boolean) => (
     <div className={styles.details}>
       <div aria-hidden className={styles.index}>
         <Divider
@@ -98,7 +123,7 @@ export const ProjectSummary = ({
     </div>
   )
 
-  const renderPreview = visible => (
+  const renderPreview = (visible: boolean) => (
     <div className={styles.preview}>
       {model.type === 'laptop' && (
         <>

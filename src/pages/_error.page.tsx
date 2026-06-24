@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 /**
  * NOTE: This requires `@sentry/nextjs` version 7.3.0 or higher.
  *
@@ -17,24 +16,35 @@
  *  - https://reactjs.org/docs/error-boundaries.html
  */
 
-import * as Sentry from '@sentry/nextjs';
-import NextErrorComponent from 'next/error';
+import * as Sentry from '@sentry/nextjs'
+import type { NextPageContext } from 'next'
+import NextErrorComponent from 'next/error'
+import type { ReactElement } from 'react'
 
-const CustomErrorComponent = props => {
+type ErrorPageProps = {
+  statusCode?: number
+}
+
+type CustomErrorPage = {
+  (props: ErrorPageProps): ReactElement
+  getInitialProps(contextData: NextPageContext): Promise<ErrorPageProps>
+}
+
+const CustomErrorComponent = ((props: ErrorPageProps) => {
   // If you're using a Nextjs version prior to 12.2.1, uncomment this to
   // compensate for https://github.com/vercel/next.js/issues/8592
   // Sentry.captureUnderscoreErrorException(props);
 
-  return <NextErrorComponent statusCode={props.statusCode} />;
-};
+  return <NextErrorComponent statusCode={props.statusCode ?? 500} />
+}) as CustomErrorPage
 
-CustomErrorComponent.getInitialProps = async contextData => {
+CustomErrorComponent.getInitialProps = async (contextData: NextPageContext) => {
   // In case this is running in a serverless function, await this in order to give Sentry
   // time to send the error before the lambda exits
-  await Sentry.captureUnderscoreErrorException(contextData);
+  await Sentry.captureUnderscoreErrorException(contextData)
 
   // This will contain the status code of the response
-  return NextErrorComponent.getInitialProps(contextData);
-};
+  return NextErrorComponent.getInitialProps(contextData)
+}
 
-export default CustomErrorComponent;
+export default CustomErrorComponent

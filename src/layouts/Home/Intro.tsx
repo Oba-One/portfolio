@@ -1,7 +1,12 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import dynamic from 'next/dynamic'
 import { AnimatePresence } from 'framer-motion'
-import { Fragment, useEffect, useState } from 'react'
+import {
+  Fragment,
+  useEffect,
+  useState,
+  type HTMLAttributes,
+  type RefObject,
+} from 'react'
 
 import { cssProps } from 'utils/style'
 import { Heading } from 'components/Heading'
@@ -19,7 +24,20 @@ const DisplacementSphere = dynamic(() =>
   import('layouts/Home/DisplacementSphere').then(mod => mod.DisplacementSphere)
 )
 
-export function Intro({ id, sectionRef, disciplines, ...rest }) {
+type IntroProps = HTMLAttributes<HTMLElement> & {
+  id: string
+  sectionRef: RefObject<HTMLElement>
+  disciplines: string[]
+  scrollIndicatorHidden?: boolean
+}
+
+export function Intro({
+  id,
+  sectionRef,
+  disciplines,
+  scrollIndicatorHidden,
+  ...rest
+}: IntroProps) {
   const theme = useTheme()
   const [disciplineIndex, setDisciplineIndex] = useState(0)
   const prevTheme = usePrevious(theme)
@@ -57,6 +75,7 @@ export function Intro({ id, sectionRef, disciplines, ...rest }) {
       id={id}
       aria-labelledby={titleId}
       tabIndex={-1}
+      data-scroll-indicator-hidden={scrollIndicatorHidden}
       {...rest}
     >
       <Transition in key={theme.themeId} timeout={3000}>

@@ -1,7 +1,7 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import { useRouter } from 'next/router'
 import { Analytics } from '@vercel/analytics/react'
-import { Fragment, createContext, useEffect, useReducer } from 'react'
+import type { AppProps } from 'next/app'
+import { Fragment, createContext, useEffect, useReducer, type Dispatch } from 'react'
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 
 import { msToNum } from 'utils/style'
@@ -11,23 +11,30 @@ import { ThemeProvider } from 'components/ThemeProvider'
 import { VisuallyHidden } from 'components/VisuallyHidden'
 import { useFoucFix, useLocalStorage } from 'hooks'
 import { ScrollRestore } from 'layouts/App/ScrollRestore'
-import { initialState, reducer } from 'layouts/App/reducer'
+import { initialState, reducer, type AppAction, type AppState } from 'layouts/App/reducer'
 import { registerPortfolioWebMcpTools } from 'utils/webmcp'
 
 import styles from 'layouts/App/App.module.scss'
 import 'layouts/App/global.scss'
 import 'layouts/App/reset.css'
 
-export const AppContext = createContext({})
+export type AppContextValue = AppState & {
+  dispatch: Dispatch<AppAction>
+}
 
-const App = ({ Component, pageProps }) => {
+export const AppContext = createContext<AppContextValue>({
+  ...initialState,
+  dispatch: () => undefined,
+})
+
+const App = ({ Component, pageProps }: AppProps) => {
   const [storedTheme] = useLocalStorage('theme', 'dark')
   const [state, dispatch] = useReducer(reducer, initialState)
   const { route, asPath } = useRouter()
   useFoucFix()
 
   useEffect(() => {
-    dispatch({ type: 'setTheme', value: storedTheme || 'dark' })
+    dispatch({ type: 'setTheme', value: storedTheme === 'light' ? 'light' : 'dark' })
   }, [storedTheme])
 
   useEffect(() => registerPortfolioWebMcpTools(), [asPath])

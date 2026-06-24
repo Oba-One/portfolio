@@ -1,4 +1,3 @@
-// @ts-nocheck -- Storybook stories still use legacy untyped wrappers.
 import { DecoderText } from 'components/DecoderText'
 import { Heading } from 'components/Heading'
 import { StoryContainer } from '../../../.storybook/StoryContainer'
@@ -10,7 +9,7 @@ export default {
   },
 }
 
-export const Text = ({ text }) => (
+export const Text = ({ text }: { text: string }) => (
   <StoryContainer>
     <Heading level={3}>
       <DecoderText delay={0} text={text} />

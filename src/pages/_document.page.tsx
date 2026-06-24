@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 import GothamBook from 'assets/fonts/gotham-book.woff2'
 import GothamMedium from 'assets/fonts/gotham-medium.woff2'
 import { fontStyles, tokenStyles } from 'components/ThemeProvider'

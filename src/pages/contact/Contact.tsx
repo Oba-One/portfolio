@@ -1,5 +1,4 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { useRef, useState } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 
 import { useFormInput } from 'hooks'
 import { Meta } from 'components/Meta'
@@ -20,7 +19,7 @@ import { cssProps, msToNum, numToMs } from 'utils/style'
 import styles from './Contact.module.scss'
 
 export const Contact = () => {
-  const errorRef = useRef()
+  const errorRef = useRef<HTMLDivElement | null>(null)
   const email = useFormInput('')
   const message = useFormInput('')
   const [sending, setSending] = useState(false)
@@ -28,7 +27,7 @@ export const Contact = () => {
   const [statusError, setStatusError] = useState('')
   const initDelay = tokens.base.durationS
 
-  const onSubmit = async event => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setStatusError('')
 
@@ -62,7 +61,9 @@ export const Contact = () => {
       setSending(false)
     } catch (error) {
       setSending(false)
-      setStatusError(error.message)
+      setStatusError(
+        error instanceof Error ? error.message : 'There was a problem sending your message'
+      )
     }
   }
 
@@ -114,11 +115,14 @@ export const Contact = () => {
               maxLength={CONTACT_MESSAGE_MAX_LENGTH}
               {...message}
             />
-            <Transition in={statusError} timeout={msToNum(tokens.base.durationM)}>
+            <Transition in={Boolean(statusError)} timeout={msToNum(tokens.base.durationM)}>
               {errorStatus => (
                 <div
                   className={styles.formError}
                   data-status={errorStatus}
+                  role="alert"
+                  aria-live="assertive"
+                  aria-atomic="true"
                   style={cssProps({
                     height: errorStatus ? errorRef.current?.offsetHeight : 0,
                   })}
@@ -191,10 +195,14 @@ function getStatusError({
   status,
   errorMessage,
   fallback = 'There was a problem with your request',
+}: {
+  status: number
+  errorMessage?: string
+  fallback?: string
 }) {
   if (status === 200) return false
 
-  const statuses = {
+  const statuses: Record<number, string> = {
     500: 'There was a problem with the server, try again later',
     404: 'There was a problem connecting to the server. Make sure you are connected to the internet',
   }
@@ -206,7 +214,7 @@ function getStatusError({
   return statuses[status] || fallback
 }
 
-function getDelay(delayMs, offset = numToMs(0), multiplier = 1) {
+function getDelay(delayMs: string, offset = numToMs(0), multiplier = 1) {
   const numDelay = msToNum(delayMs) * multiplier
   return cssProps({ delay: numToMs((msToNum(offset) + numDelay).toFixed(0)) })
 }

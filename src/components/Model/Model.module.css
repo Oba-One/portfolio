@@ -11,3 +11,34 @@
   position: absolute;
   inset: 0;
 }
+
+.fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spaceM);
+  opacity: 0;
+  transition: opacity var(--durationM) var(--bezierFastoutSlowin);
+  pointer-events: none;
+}
+
+.fallback[data-visible='true'] {
+  opacity: 1;
+}
+
+.fallbackImage {
+  width: 70%;
+  max-height: 80%;
+  min-width: 0;
+  object-fit: contain;
+  background: rgb(var(--rgbBlack) / 0.2);
+  border: 1px solid rgb(var(--rgbText) / 0.18);
+  padding: var(--spaceXS);
+}
+
+.fallback[data-count='2'] .fallbackImage {
+  width: 34%;
+  max-height: 76%;
+}

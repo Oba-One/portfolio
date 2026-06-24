@@ -1,6 +1,5 @@
-// @ts-nocheck -- Storybook stories still use legacy untyped wrappers.
 import { Button } from 'components/Button'
-import { useState } from 'react'
+import { useState, type ComponentPropsWithoutRef } from 'react'
 import { action } from 'storybook/actions'
 import { StoryContainer } from '../../../.storybook/StoryContainer'
 
@@ -8,7 +7,7 @@ export default {
   title: 'Button',
 }
 
-const LoadableButton = props => {
+const LoadableButton = (props: ComponentPropsWithoutRef<typeof Button>) => {
   const [loading, setLoading] = useState(false)
   return <Button loading={loading} onClick={() => setLoading(!loading)} {...props} />
 }

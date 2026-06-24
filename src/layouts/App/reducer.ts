@@ -1,12 +1,14 @@
+type ThemeId = 'dark' | 'light'
+
 export const initialState = {
-  theme: 'dark',
+  theme: 'dark' as ThemeId,
   menuOpen: false,
 }
 
 export type AppState = typeof initialState
 
 export type AppAction =
-  | { type: 'setTheme'; value: string }
+  | { type: 'setTheme'; value: ThemeId }
   | { type: 'toggleTheme' }
   | { type: 'toggleMenu' }
 

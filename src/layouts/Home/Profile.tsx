@@ -1,4 +1,3 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
 // import profileKatakana from 'assets/katakana-profile.svg?url'
 import profileImg from 'assets/profile.jpeg'
 import profileLargeImg from 'assets/profile-2x.webp'
@@ -12,11 +11,22 @@ import { Link } from 'components/Link'
 import { Section } from 'components/Section'
 import { Text } from 'components/Text'
 import { Transition } from 'components/Transition'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, type RefObject } from 'react'
 import { media } from 'utils/style'
 import styles from './Profile.module.scss'
 
-const ProfileText = ({ visible, titleId }) => (
+type ProfileTextProps = {
+  visible: boolean
+  titleId: string
+}
+
+type ProfileProps = {
+  id: string
+  visible: boolean
+  sectionRef: RefObject<HTMLElement>
+}
+
+const ProfileText = ({ visible, titleId }: ProfileTextProps) => (
   <Fragment>
     <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
       <DecoderText text="Hello there" start={visible} delay={500} />
@@ -49,7 +59,7 @@ const ProfileText = ({ visible, titleId }) => (
   </Fragment>
 )
 
-export const Profile = ({ id, visible, sectionRef }) => {
+export const Profile = ({ id, visible, sectionRef }: ProfileProps) => {
   const [focused, setFocused] = useState(false)
   const titleId = `${id}-title`
 

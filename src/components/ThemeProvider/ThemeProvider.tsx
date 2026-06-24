@@ -18,7 +18,7 @@ import { theme, tokens } from './theme'
 import { useTheme } from './useTheme'
 
 type ThemeId = keyof typeof theme
-type ThemeValue = (typeof theme)[ThemeId]
+export type ThemeValue = typeof tokens.base & (typeof theme)[ThemeId]
 type TokenValue = string | number
 type TokenMap = Record<string, TokenValue>
 type ThemeStyleObject = CSSProperties & Record<`--${string}`, TokenValue>
@@ -32,7 +32,10 @@ type ThemeProviderProps = {
   [key: string]: unknown
 }
 
-export const ThemeContext = createContext<Partial<ThemeValue>>({})
+export const ThemeContext = createContext<ThemeValue>({
+  ...tokens.base,
+  ...theme.dark,
+})
 
 export const ThemeProvider = ({
   themeId = 'dark',
@@ -42,7 +45,7 @@ export const ThemeProvider = ({
   as: Component = 'div',
   ...rest
 }: ThemeProviderProps) => {
-  const currentTheme = { ...theme[themeId], ...themeOverrides }
+  const currentTheme = { ...tokens.base, ...theme[themeId], ...themeOverrides }
   const parentTheme = useTheme()
   const isRootProvider = !parentTheme.themeId
   const hasMounted = useHasMounted()

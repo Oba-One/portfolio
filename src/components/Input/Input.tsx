@@ -9,6 +9,7 @@ import {
   type CSSProperties,
   type FocusEvent,
   type InputHTMLAttributes,
+  type InvalidEvent,
   type ReactNode,
 } from 'react'
 import { classes, cssProps, msToNum } from 'utils/style'
@@ -17,8 +18,12 @@ import { TextArea } from './TextArea'
 
 type FieldEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 type FieldFocusEvent = FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+type FieldInvalidEvent = InvalidEvent<HTMLInputElement | HTMLTextAreaElement>
 
-type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onBlur'> & {
+type InputProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'onChange' | 'onBlur' | 'onInvalid'
+> & {
   id?: string
   label?: ReactNode
   value?: string
@@ -28,6 +33,7 @@ type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onBl
   error?: ReactNode
   onBlur?: (event: FieldFocusEvent) => void
   onChange?: (event: FieldEvent) => void
+  onInvalid?: (event: FieldInvalidEvent) => void
 }
 
 export const Input = ({
@@ -45,6 +51,7 @@ export const Input = ({
   maxLength,
   type,
   onChange,
+  onInvalid,
   ...rest
 }: InputProps) => {
   const [focused, setFocused] = useState(false)
@@ -94,6 +101,7 @@ export const Input = ({
           required={required}
           maxLength={maxLength}
           type={type}
+          onInvalid={onInvalid as never}
         />
         <div className={styles.underline} data-focused={focused} />
       </div>

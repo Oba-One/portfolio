@@ -33,11 +33,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({ href, ...rest }, r
     return <ButtonContent href={href} ref={ref} {...rest} />
   }
 
-  return (
-    <RouterLink legacyBehavior passHref href={href} scroll={false}>
-      <ButtonContent href={href} ref={ref} {...rest} />
-    </RouterLink>
-  )
+  return <ButtonContent as={RouterLink} href={href} scroll={false} ref={ref} {...rest} />
 })
 
 const ButtonContent = forwardRef<HTMLElement, ButtonProps>(
@@ -64,6 +60,8 @@ const ButtonContent = forwardRef<HTMLElement, ButtonProps>(
     const isExternal = isExternalLink(href)
     const defaultComponent = href ? 'a' : 'button'
     const Component = (as || defaultComponent) as ElementType
+    const relValue = rel || (isExternal ? 'noopener noreferrer' : undefined)
+    const targetValue = target || (isExternal ? '_blank' : undefined)
 
     return (
       <Component
@@ -73,8 +71,8 @@ const ButtonContent = forwardRef<HTMLElement, ButtonProps>(
         data-secondary={secondary}
         data-icon={icon}
         href={href}
-        rel={rel || isExternal ? 'noopener noreferrer' : undefined}
-        target={target || isExternal ? '_blank' : undefined}
+        rel={relValue}
+        target={targetValue}
         disabled={disabled}
         ref={ref}
         {...rest}

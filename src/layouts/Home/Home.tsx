@@ -1,5 +1,4 @@
-// @ts-nocheck -- legacy JS migration; remove after adding explicit types.
-import { createRef, useEffect, useRef, useState } from 'react'
+import { createRef, useEffect, useRef, useState, type RefObject } from 'react'
 
 import { Meta } from 'components/Meta'
 import { Footer } from 'components/Footer'
@@ -39,8 +38,14 @@ import { GMBackgroundImg, GMBackgroundPlaceholderImg } from 'assets/gm'
 
 import styles from './Home.module.css'
 import { featuredProjectSlugs, projects } from '../../constants'
+import type { ModelConfig } from 'components/Model'
 
 const disciplines = ['Steward', 'Engineer', 'Storyteller', 'Artist']
+
+type ProjectMedia = {
+  alt: string
+  textures: ModelConfig['texture'][]
+}
 
 const projectMedia = {
   green_goods: {
@@ -127,15 +132,17 @@ const projectMedia = {
       },
     ],
   },
-}
+} satisfies Record<(typeof featuredProjectSlugs)[number], ProjectMedia>
 
 export const Home = () => {
-  const [visibleSections, setVisibleSections] = useState([])
+  const [visibleSections, setVisibleSections] = useState<Element[]>([])
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false)
-  const intro = useRef()
-  const projectRefs = useRef(featuredProjectSlugs.map(() => createRef()))
+  const intro = useRef<HTMLElement | null>(null)
+  const projectRefs = useRef<RefObject<HTMLElement>[]>(
+    featuredProjectSlugs.map(() => createRef<HTMLElement>())
+  )
 
-  const details = useRef()
+  const details = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const sections = [intro, ...projectRefs.current, details]
@@ -198,7 +205,9 @@ export const Home = () => {
             id={`project-${projectNumber}`}
             alternate={index % 2 === 1}
             sectionRef={sectionRef}
-            visible={visibleSections.includes(sectionRef.current)}
+            visible={Boolean(
+              sectionRef.current && visibleSections.includes(sectionRef.current)
+            )}
             index={projectNumber}
             title={project.title}
             description={project.description}
@@ -214,7 +223,7 @@ export const Home = () => {
       })}
       <Profile
         sectionRef={details}
-        visible={visibleSections.includes(details.current)}
+        visible={Boolean(details.current && visibleSections.includes(details.current))}
         id="details"
       />
       <Footer />
