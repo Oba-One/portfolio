@@ -210,7 +210,7 @@ export const projects = {
       'Connecting people to nature and community through play, storytelling, and plant care',
     socialImage: projectSocialImage('wefa', 'WEFA'),
     cta: {
-      label: 'View Project',
+      label: 'View WEFA',
       link: '/projects/wefa',
     },
     platform: 'phone',
@@ -271,7 +271,7 @@ export const projects = {
       'A fine-art ownership platform case study about building authentication, asset galleries, notifications, and DeFi utility for an early web3 product',
     socialImage: projectSocialImage('freeport', 'Freeport'),
     cta: {
-      label: 'View Project',
+      label: 'View Freeport',
       link: '/projects/freeport',
     },
     platform: 'laptop',
@@ -298,7 +298,7 @@ export const projects = {
       'Making connections more seamless and productive for field operators and office experts',
     socialImage: projectSocialImage('mira-connect', 'Mira Connect'),
     cta: {
-      label: 'View Project',
+      label: 'View Mira Connect',
       link: '/projects/mira-connect',
     },
     platform: 'laptop',
@@ -331,7 +331,7 @@ export const projects = {
       'A tablet workflow companion for Mira that brought forms, photos, review, and field-operator activity into the same industrial support platform',
     socialImage: projectSocialImage('mira-flow', 'Mira Flow'),
     cta: {
-      label: 'View Project',
+      label: 'View Mira Flow',
       link: '/projects/mira-flow',
     },
     platform: 'phone',
@@ -362,7 +362,7 @@ export const projects = {
       'Reimagining the form and presentation of a unique and eccentric eyewear brand',
     socialImage: projectSocialImage('gentle-monster', 'Gentle Monster'),
     cta: {
-      label: 'View Project',
+      label: 'View Gentle Monster',
       link: '/projects/gentle-monster',
     },
     platform: 'laptop',
