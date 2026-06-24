@@ -3,6 +3,8 @@ import GothamMedium from 'assets/fonts/gotham-medium.woff2'
 import { fontStyles, tokenStyles } from 'components/ThemeProvider'
 import { Head, Html, Main, NextScript } from 'next/document'
 
+const iconAssetVersion = 'monogram-a-2'
+
 export default function Document() {
   return (
     <Html lang="en">
@@ -11,12 +13,34 @@ export default function Document() {
         <meta name="theme-color" content="#b8c7a3" />
         <meta name="msapplication-TileColor" content="#4f6f52" />
 
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/icon-256.png" />
+        <link rel="manifest" href={`/manifest.json?v=${iconAssetVersion}`} />
+        <link
+          rel="icon"
+          href={`/favicon.png?v=${iconAssetVersion}`}
+          type="image/png"
+          sizes="64x64"
+        />
+        <link
+          rel="icon"
+          href={`/favicon.svg?v=${iconAssetVersion}`}
+          type="image/svg+xml"
+        />
+        <link
+          rel="shortcut icon"
+          href={`/favicon.ico?v=${iconAssetVersion}`}
+          type="image/x-icon"
+        />
+        <link
+          rel="apple-touch-icon"
+          href={`/icon-256.png?v=${iconAssetVersion}`}
+          sizes="256x256"
+        />
         <link type="text/plain" rel="author" href="/humans.txt" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#b8c7a3" />
+        <link
+          rel="mask-icon"
+          href={`/safari-pinned-tab.svg?v=${iconAssetVersion}`}
+          color="#b8c7a3"
+        />
 
         <link rel="preload" href={GothamMedium} as="font" crossOrigin="true" />
         <link rel="preload" href={GothamBook} as="font" crossOrigin="true" />

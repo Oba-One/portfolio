@@ -46,8 +46,10 @@ export type ProjectRecord = {
   socialImage?: ProjectSocialImage
 }
 
+const projectSocialImageVersion = 'project-cards-2'
+
 const projectSocialImage = (slug: string, title: string): ProjectSocialImage => ({
-  src: `/social/projects/${slug}.png`,
+  src: `/social/projects/${slug}.png?v=${projectSocialImageVersion}`,
   alt: `Social preview for the ${title} project.`,
   width: 1200,
   height: 630,
