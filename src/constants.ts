@@ -33,6 +33,7 @@ export type ProjectSocialImage = {
 export type ProjectRecord = {
   title: string
   description: string
+  metaDescription?: string
   cta: ProjectCta
   platform: ProjectPlatform
   year: number
@@ -183,6 +184,8 @@ export const projects = {
   waves: {
     title: 'Waves',
     description: 'Fusing generative art and culture for live events',
+    metaDescription:
+      'A live-event and generative-art project exploring how artists, audiences, culture, and onchain collectibles can carry the memory of a show beyond the night',
     socialImage: projectSocialImage('waves', 'Waves'),
     cta: {
       label: 'View Waves',
@@ -240,6 +243,8 @@ export const projects = {
     title: 'Synesthesia',
     description:
       'Using generative art to map your music taste into a personal visual signature',
+    metaDescription:
+      'A generative-art case study translating music history and Sound.xyz collection data into a personal visual signature',
     socialImage: projectSocialImage('synesthesia', 'Synesthesia'),
     cta: {
       label: 'View Synesthesia',
@@ -262,6 +267,8 @@ export const projects = {
     title: 'Freeport',
     description:
       'Ushering in a new form of art and asset ownership with Decentralized Finance and NFTs',
+    metaDescription:
+      'A fine-art ownership platform case study about building authentication, asset galleries, notifications, and DeFi utility for an early web3 product',
     socialImage: projectSocialImage('freeport', 'Freeport'),
     cta: {
       label: 'View Project',
@@ -320,6 +327,8 @@ export const projects = {
     title: 'Mira Flow',
     description:
       'Creating a companion to a handsfree app, enabling a unified platform for workflows',
+    metaDescription:
+      'A tablet workflow companion for Mira that brought forms, photos, review, and field-operator activity into the same industrial support platform',
     socialImage: projectSocialImage('mira-flow', 'Mira Flow'),
     cta: {
       label: 'View Project',

@@ -71,7 +71,7 @@ export const Contact = () => {
       <Meta
         title="Contact"
         route="/contact"
-        description="Get in touch to discuss ideas, projects, or just to say hi!"
+        description="Contact Afolabi Aiyeloja about systems architecture, regenerative technology, public goods infrastructure, cultural community, or creative web work."
       />
       <Transition unmount in={!complete} timeout={1600}>
         {(visible, status) => (

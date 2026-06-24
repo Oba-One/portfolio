@@ -20,7 +20,7 @@ export type SocialImage = {
 
 const defaultSocialImage = {
   src: '/social/home.png',
-  alt: 'Social preview for Afolabi Aiyeloja portfolio.',
+  alt: 'Afolabi Aiyeloja portfolio home hero with green shader.',
   width: 1200,
   height: 630,
   type: 'image/png',
@@ -76,7 +76,15 @@ export const Meta = ({
           '@type': 'Person',
           name,
           url: pageUrl,
-          jobTitle: 'Systems architect and steward',
+          jobTitle: 'Ecosystem architect and systems builder',
+          description: descriptionText,
+          image: absoluteUrl(defaultSocialImage.src),
+          knowsAbout: [
+            'Regenerative technology',
+            'Public goods infrastructure',
+            'Community stewardship',
+            'Creative web experiences',
+          ],
           sameAs: socialProfiles,
         }
       : null

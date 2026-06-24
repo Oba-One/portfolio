@@ -1,1 +1,4 @@
 User-agent: *
+Allow: /
+
+Sitemap: https://afolabi.info/sitemap.xml

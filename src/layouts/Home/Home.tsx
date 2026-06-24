@@ -177,8 +177,8 @@ export const Home = () => {
     <div className={styles.home}>
       <Meta
         route="/"
-        title="Architect & Steward"
-        description="Portfolio of Afolabi Aiyeloja, a systems architect and steward shaping regenerative web3 infrastructure with a background in augmented reality, blockchains, and AI."
+        title="Architect + Steward"
+        description="Portfolio of Afolabi Aiyeloja, an ecosystem architect and systems builder working across regenerative technology, cultural community, public goods infrastructure, and expressive web experiences."
       />
       <Intro
         id="intro"

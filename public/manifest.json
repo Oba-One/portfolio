@@ -1,6 +1,7 @@
 {
   "short_name": "Afolabi Aiyeloja",
-  "name": "Portfolio of Afolabi Aiyeloja",
+  "name": "Afolabi Aiyeloja | Architect + Steward",
+  "description": "Portfolio of Afolabi Aiyeloja, an ecosystem architect and systems builder working across regenerative technology, cultural community, public goods infrastructure, and expressive web experiences.",
   "icons": [
     {
       "src": "favicon.png",
@@ -18,7 +19,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#b8c7a3",
   "background_color": "#e8efe0"

@@ -60,7 +60,7 @@ export const MiraFlow = () => {
         <Meta
           title={title}
           prefix="Projects"
-          description={description}
+          description={project.metaDescription ?? description}
           route={project.cta.link}
           socialImage={project.socialImage}
         />

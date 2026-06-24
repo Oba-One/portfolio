@@ -2,6 +2,7 @@
 import { mkdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import fontkitBundle from 'next/dist/compiled/@next/font/dist/fontkit/index.js'
 import sharp from 'sharp'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -9,15 +10,9 @@ const outputRoot = path.join(repoRoot, 'public', 'social')
 const projectOutputRoot = path.join(outputRoot, 'projects')
 const legacyOutput = path.join(repoRoot, 'public', 'social-image.png')
 const fontRoot = path.join(repoRoot, 'src', 'assets', 'fonts')
-const gothamBook = readFileSync(path.join(fontRoot, 'gotham-book.woff2')).toString(
-  'base64'
-)
-const gothamMedium = readFileSync(path.join(fontRoot, 'gotham-medium.woff2')).toString(
-  'base64'
-)
-const gothamBold = readFileSync(path.join(fontRoot, 'gotham-bold.woff2')).toString(
-  'base64'
-)
+const createFont = fontkitBundle.default ?? fontkitBundle
+const gothamMedium = createFont(readFileSync(path.join(fontRoot, 'gotham-medium.woff2')))
+const gothamBold = createFont(readFileSync(path.join(fontRoot, 'gotham-bold.woff2')))
 
 const width = 1200
 const height = 630
@@ -237,68 +232,56 @@ function renderPixelBlock(value, { x, y, scale, fill, opacity, maxWidth }) {
     .join('')
 }
 
-function fontFaceSvg() {
-  return `
-    <style type="text/css"><![CDATA[
-      @font-face {
-        font-family: 'Gotham';
-        font-weight: 400;
-        src: url('data:font/woff2;base64,${gothamBook}') format('woff2');
-      }
-
-      @font-face {
-        font-family: 'Gotham';
-        font-weight: 500;
-        src: url('data:font/woff2;base64,${gothamMedium}') format('woff2');
-      }
-
-      @font-face {
-        font-family: 'Gotham';
-        font-weight: 700;
-        src: url('data:font/woff2;base64,${gothamBold}') format('woff2');
-      }
-
-      .title {
-        font-family: 'Gotham', Arial, sans-serif;
-        font-weight: 700;
-        letter-spacing: -0.005em;
-      }
-
-      .kicker {
-        font-family: 'Gotham', Arial, sans-serif;
-        font-weight: 500;
-        letter-spacing: 0;
-        text-transform: uppercase;
-      }
-    ]]></style>
-  `
-}
-
-function escapeXml(value) {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;')
-}
-
 function titleSize(title, base = 108) {
   if (title.length > 18) return 88
   if (title.length > 13) return 96
   return base
 }
 
+function formatNumber(value) {
+  return Number(value.toFixed(3))
+}
+
+function renderFontLine(value, { font, x, y, size, fill, opacity = 1 }) {
+  const run = font.layout(value)
+  const scale = size / font.unitsPerEm
+  let cursorX = 0
+
+  return run.glyphs
+    .map((glyph, index) => {
+      const position = run.positions[index]
+      const pathData = glyph.path.toSVG()
+      const translateX = x + (cursorX + position.xOffset) * scale
+      const translateY = y - position.yOffset * scale
+
+      cursorX += position.xAdvance
+
+      if (!pathData) {
+        return ''
+      }
+
+      return `<path d="${pathData}" fill="${fill}" opacity="${opacity}" transform="translate(${formatNumber(
+        translateX
+      )} ${formatNumber(translateY)}) scale(${formatNumber(scale)} ${formatNumber(
+        -scale
+      )})" />`
+    })
+    .join('')
+}
+
 function renderTitle(title, { x, y, size, fill = palette.text, opacity = 0.94 }) {
-  return `<text class="title" x="${x}" y="${y}" font-size="${size}" fill="${fill}" opacity="${opacity}">${escapeXml(
-    title
-  )}</text>`
+  return renderFontLine(title, { font: gothamBold, x, y, size, fill, opacity })
 }
 
 function renderKicker(kicker, { x, y, size = 28 }) {
-  return `<text class="kicker" x="${x}" y="${y}" font-size="${size}" fill="${palette.primary}" opacity="0.88">${escapeXml(
-    kicker
-  )}</text>`
+  return renderFontLine(kicker.toUpperCase(), {
+    font: gothamMedium,
+    x,
+    y,
+    size,
+    fill: palette.primary,
+    opacity: 0.88,
+  })
 }
 
 function renderMonogram({ x, y, width = 72, stroke = palette.primary, opacity = 0.9 }) {
@@ -319,7 +302,6 @@ function titleOverlaySvg({ title, kicker }) {
   return Buffer.from(`
     <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        ${fontFaceSvg()}
         <linearGradient id="scrim" x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stop-color="${palette.background}" stop-opacity="0.96" />
           <stop offset="48%" stop-color="${palette.background}" stop-opacity="0.74" />
@@ -378,7 +360,7 @@ async function makeCard(card) {
     return
   }
 
-  let backgroundPipeline = sharp(sourcePath)
+  const backgroundPipeline = sharp(sourcePath)
     .rotate()
     .resize(width, height, { fit: 'cover', position: 'center' })
     .modulate({ saturation: 0.86, brightness: 0.82 })

@@ -1,6 +1,6 @@
 # Afolabi Aiyeloja Portfolio
 
-This is Afolabi Aiyeloja's public portfolio site, including public work, writing, case studies, and contact surfaces.
+This is Afolabi Aiyeloja's public portfolio site, including public work, writing, case studies, and contact surfaces for an ecosystem architect and systems builder.
 
 Public surfaces:
 - Public portfolio pages.
