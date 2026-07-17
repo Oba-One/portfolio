@@ -1,9 +1,13 @@
 :root {
-  color-scheme: dark light;
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 :where(html, body, #__next) {

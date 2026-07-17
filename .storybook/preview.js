@@ -10,6 +10,7 @@ export const decorators = [
     const theme = context.globals.theme
 
     useEffect(() => {
+      document.documentElement.dataset.theme = theme
       document.body.dataset.theme = theme
     }, [theme])
 

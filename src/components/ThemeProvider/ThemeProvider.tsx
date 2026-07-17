@@ -5,9 +5,9 @@ import GothamBook from 'assets/fonts/gotham-book.woff2'
 import GothamMediumItalic from 'assets/fonts/gotham-medium-italic.woff2'
 import GothamMedium from 'assets/fonts/gotham-medium.woff2'
 import { useHasMounted } from 'hooks'
-import Head from 'next/head'
 import {
   createContext,
+  useContext,
   useEffect,
   type CSSProperties,
   type ElementType,
@@ -15,7 +15,6 @@ import {
 } from 'react'
 import { classes, media } from 'utils/style'
 import { theme, tokens } from './theme'
-import { useTheme } from './useTheme'
 
 type ThemeId = keyof typeof theme
 export type ThemeValue = typeof tokens.base & (typeof theme)[ThemeId]
@@ -32,10 +31,7 @@ type ThemeProviderProps = {
   [key: string]: unknown
 }
 
-export const ThemeContext = createContext<ThemeValue>({
-  ...tokens.base,
-  ...theme.dark,
-})
+export const ThemeContext = createContext<ThemeValue | null>(null)
 
 export const ThemeProvider = ({
   themeId = 'dark',
@@ -46,28 +42,28 @@ export const ThemeProvider = ({
   ...rest
 }: ThemeProviderProps) => {
   const currentTheme = { ...tokens.base, ...theme[themeId], ...themeOverrides }
-  const parentTheme = useTheme()
-  const isRootProvider = !parentTheme.themeId
+  const parentTheme = useContext(ThemeContext)
+  const isRootProvider = parentTheme === null
   const hasMounted = useHasMounted()
 
-  // Save root theme id to localstorage and apply class to body
+  // Save the root theme and keep page and browser chrome in sync.
   useEffect(() => {
     if (isRootProvider && hasMounted) {
       window.localStorage.setItem('theme', JSON.stringify(themeId))
+      document.documentElement.dataset.theme = themeId
       document.body.dataset.theme = themeId
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', `rgb(${currentTheme.rgbBackground})`)
+      document
+        .querySelector('meta[name="msapplication-TileColor"]')
+        ?.setAttribute('content', `rgb(${currentTheme.rgbBackground})`)
     }
-  }, [themeId, isRootProvider, hasMounted])
+  }, [currentTheme.rgbBackground, hasMounted, isRootProvider, themeId])
 
   return (
     <ThemeContext.Provider value={currentTheme}>
-      {isRootProvider && (
-        <>
-          <Head>
-            <meta name="theme-color" content={`rgb(${currentTheme.rgbBackground})`} />
-          </Head>
-          {children}
-        </>
-      )}
+      {isRootProvider && children}
       {/* Nested providers need a div to override theme tokens */}
       {!isRootProvider && (
         <Component

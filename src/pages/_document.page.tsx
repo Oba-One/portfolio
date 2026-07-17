@@ -4,16 +4,40 @@ import { fontStyles, tokenStyles } from 'components/ThemeProvider'
 import { Head, Html, Main, NextScript } from 'next/document'
 
 const iconAssetVersion = 'monogram-a-2'
+const manifestVersion = 'theme-chrome-1'
+const initialThemeColor = '#1b1e1b'
+const lightThemeColor = '#fafcf7'
+
+const initialThemeScript = `
+  (() => {
+    const themeColors = { dark: '${initialThemeColor}', light: '${lightThemeColor}' };
+    let initialTheme = 'dark';
+
+    try {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme && JSON.parse(savedTheme) === 'light') {
+        initialTheme = 'light';
+      }
+    } catch {}
+
+    document.documentElement.dataset.theme = initialTheme;
+    const themeColor = themeColors[initialTheme];
+    document
+      .querySelectorAll('meta[name="theme-color"], meta[name="msapplication-TileColor"]')
+      .forEach(meta => meta.setAttribute('content', themeColor));
+  })();
+`
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" data-theme="dark">
       <Head>
         <meta charSet="utf-8" />
-        <meta name="theme-color" content="#b8c7a3" />
-        <meta name="msapplication-TileColor" content="#4f6f52" />
+        <meta name="theme-color" content={initialThemeColor} />
+        <meta name="msapplication-TileColor" content={initialThemeColor} />
+        <script dangerouslySetInnerHTML={{ __html: initialThemeScript }} />
 
-        <link rel="manifest" href={`/manifest.json?v=${iconAssetVersion}`} />
+        <link rel="manifest" href={`/manifest.json?v=${manifestVersion}`} />
         <link
           rel="icon"
           href={`/favicon.png?v=${iconAssetVersion}`}
@@ -47,15 +71,7 @@ export default function Document() {
         <style dangerouslySetInnerHTML={{ __html: fontStyles }} />
         <style dangerouslySetInnerHTML={{ __html: tokenStyles }} />
       </Head>
-      <body data-theme="dark" tabIndex={-1}>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              const initialTheme = JSON.parse(localStorage.getItem('theme'));
-              document.body.dataset.theme = initialTheme || 'dark';
-            `,
-          }}
-        />
+      <body tabIndex={-1}>
         <Main />
         <NextScript />
         <div id="portal-root" />
