@@ -2,7 +2,6 @@
   "publicRoutes": [
     "/",
     "/contact",
-    "/nostalgia-zone",
     "/projects/coop",
     "/projects/green-goods",
     "/projects/greenpill",
@@ -29,7 +28,6 @@
   "browserProofRoutes": [
     "/",
     "/contact",
-    "/nostalgia-zone",
     "/projects/coop",
     "/projects/green-goods",
     "/projects/greenpill",

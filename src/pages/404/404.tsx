@@ -1,4 +1,12 @@
-import { Fragment, useCallback, useEffect, useId, useMemo, useState } from 'react'
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useState,
+  type MouseEvent,
+} from 'react'
 
 import { Meta } from 'components/Meta'
 import { Text } from 'components/Text'
@@ -28,6 +36,7 @@ import YuGiOhVid from 'assets/nostalgia/yu-gi-oh.mp4'
 import ZoboomafooVid from 'assets/nostalgia/zoboomafoo.mp4'
 
 import styles from './404.module.scss'
+import { Link } from 'components/Link'
 
 type NostalgiaVideo = {
   src: string
@@ -186,7 +195,6 @@ type NostalgiaZoneProps = {
 export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
   const videoDescriptionId = useId()
   const [randomVideo, setRandomVideo] = useState<NostalgiaVideo>(emptyVideo)
-  const [videoError, setVideoError] = useState(false)
   const descriptionTrack = useMemo(
     () => createDescriptionTrack(randomVideo),
     [randomVideo]
@@ -196,8 +204,8 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
     setRandomVideo(getRandomVideo())
   }, [])
 
-  const handleRefresh = useCallback(() => {
-    setVideoError(false)
+  const handleRefresh = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
     setRandomVideo(video => getRandomVideo(video.title))
   }, [])
 
@@ -205,16 +213,9 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
   const description = notFound
     ? "Page not found. This page doesn't exist"
     : 'A random nostalgia trip through cartoons, shows, and intros.'
-  const pageHeading = notFound ? '404' : 'Nostalgia Zone'
-  const eyebrow = notFound
-    ? 'Error: Nostalgia Zone'
-    : 'A small archive of familiar worlds'
-  const body = notFound
-    ? 'This page either doesn’t exist or was deleted. Stay a moment for a familiar intro.'
-    : 'A random trip through the cartoons, shows, and opening themes that still feel like home.'
 
   return (
-    <section className={styles.page} data-not-found={notFound}>
+    <section className={styles.page}>
       <Meta
         title={title}
         description={description}
@@ -229,25 +230,25 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
                 <Heading
                   className={styles.title}
                   data-visible={visible}
-                  level={notFound ? 0 : 1}
+                  level={0}
                   weight="bold"
                 >
-                  {pageHeading}
+                  404
                 </Heading>
                 <Heading
                   aria-hidden
                   className={styles.subheading}
                   data-visible={visible}
-                  as="p"
+                  as="h3"
                   level={4}
                 >
-                  <DecoderText text={eyebrow} start={visible} delay={300} />
+                  <DecoderText text="Error: Nostalgia Zone" start={visible} delay={300} />
                 </Heading>
                 <Heading
                   aria-hidden
-                  className={styles.nowPlaying}
+                  className={styles.subheading}
                   data-visible={visible}
-                  as="p"
+                  as="h4"
                   level={5}
                 >
                   {randomVideo.title && (
@@ -259,30 +260,31 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
                     />
                   )}
                 </Heading>
-                <VisuallyHidden as="h2" aria-live="polite" aria-atomic="true">
-                  {randomVideo.title
-                    ? `Now playing: ${randomVideo.title}`
-                    : 'Choosing a clip'}
-                </VisuallyHidden>
                 <Text className={styles.description} data-visible={visible} as="p">
-                  {body}
+                  This page either doesn’t exist or was deleted.{' '}
+                  <Link href="" onClick={handleRefresh}>
+                    Refresh
+                  </Link>{' '}
+                  for a random nostalgia trip.
                 </Text>
-                <div className={styles.actions} data-visible={visible}>
-                  <Button type="button" icon="play" onClick={handleRefresh}>
-                    Play another memory
-                  </Button>
-                  <Button secondary iconHoverShift href="/" icon="chevronRight">
-                    Back to homepage
-                  </Button>
-                </div>
+                <Button
+                  secondary
+                  iconHoverShift
+                  className={styles.button}
+                  data-visible={visible}
+                  href="/"
+                  icon="chevronRight"
+                >
+                  Back to homepage
+                </Button>
               </div>
             </div>
 
-            <figure
+            <div
               className={styles.videoContainer}
-              data-visible={Boolean(visible && randomVideo.src && !videoError)}
+              data-visible={Boolean(visible && randomVideo.src)}
             >
-              {randomVideo.src && !videoError && (
+              {randomVideo.src && (
                 <>
                   <video
                     key={randomVideo.src}
@@ -296,7 +298,6 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
                     data-visible={visible}
                     poster={notFoundPoster.src}
                     aria-describedby={videoDescriptionId}
-                    onError={() => setVideoError(true)}
                   >
                     <source src={randomVideo.src} type="video/mp4" />
                     {descriptionTrack && (
@@ -313,22 +314,18 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
                       ? `Selected nostalgia clip: ${randomVideo.title}. ${randomVideo.alt}.`
                       : 'Selected nostalgia clip.'}
                   </VisuallyHidden>
-                  <figcaption className={styles.credit} data-visible={visible}>
-                    <a href={randomVideo.imdb} target="_blank" rel="noopener noreferrer">
-                      {randomVideo.alt}
-                    </a>
-                  </figcaption>
+                  <a
+                    className={styles.credit}
+                    data-visible={visible}
+                    href={randomVideo.imdb}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {randomVideo.alt}
+                  </a>
                 </>
               )}
-              {videoError && (
-                <div className={styles.videoError} role="status">
-                  <Text as="p">This memory couldn’t play.</Text>
-                  <Button secondary type="button" onClick={handleRefresh}>
-                    Try another clip
-                  </Button>
-                </div>
-              )}
-            </figure>
+            </div>
           </Fragment>
         )}
       </Transition>

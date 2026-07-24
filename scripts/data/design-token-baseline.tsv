@@ -39,6 +39,9 @@ src/layouts/Project/Project.module.scss	RAW_ANIMATION_DURATION	animation: projec
 src/layouts/Project/Project.module.scss	RAW_ANIMATION_DURATION	animation: projectFadeSlide 1.4s var(--bezierFastoutSlowin)	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
 src/layouts/Project/Project.module.scss	RAW_ANIMATION_DURATION	animation: projectFadeSlide 1.4s var(--bezierFastoutSlowin)	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
 src/layouts/Project/Project.module.scss	RAW_ANIMATION_DURATION	animation: projectFadeSlide 1.5s var(--bezierFastoutSlowin) var(--delay) forwards;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/404/404.module.scss	VIEWPORT_100VH	height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/404/404.module.scss	VIEWPORT_100VH	min-height: 100vh;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
+src/pages/404/404.module.scss	RAW_DURATION	animation-duration: 1.8s;	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
 src/pages/_document.page.tsx	RAW_HEX	const initialThemeColor = '#1b1e1b'	Browser chrome metadata cannot consume CSS variables.
 src/pages/_document.page.tsx	RAW_HEX	const lightThemeColor = '#fafcf7'	Browser chrome metadata cannot consume CSS variables.
 src/pages/_document.page.tsx	RAW_HEX	color="#b8c7a3"	Existing audited Portfolio design risk; replace with tokens or modern viewport primitives when touching this surface.
