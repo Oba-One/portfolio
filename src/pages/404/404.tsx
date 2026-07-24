@@ -281,6 +281,7 @@ export function NostalgiaZone({ notFound = false }: NostalgiaZoneProps) {
             </div>
 
             <div
+              key={randomVideo.src}
               className={styles.videoContainer}
               data-visible={Boolean(visible && randomVideo.src)}
             >
