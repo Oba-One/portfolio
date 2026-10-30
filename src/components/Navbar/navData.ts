@@ -13,7 +13,7 @@ export const socialLinks = [
   },
   {
     label: 'CV',
-    url: 'https://docs.google.com/document/d/1vQvQwZO8823TAyvIJegNveqELUFEw_hyYSbj6q1Kvl8/preview',
+    url: 'https://docs.google.com/document/d/1dey1YW5PTCyrAzliw2_f7ceu54PGK8J3t5Rx1GoLHuE/preview',
     icon: 'fileText',
   },
 ]
