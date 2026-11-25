@@ -1,13 +1,13 @@
 import { Fragment } from 'react'
 
 import {
-  GreenpillBooksImg,
+  GreenpillBooksSources,
   GreenpillBooksPlaceholderImg,
-  GreenpillGardenEntryImg,
+  GreenpillGardenEntrySources,
   GreenpillGardenEntryPlaceholderImg,
   GreenpillMonthlyCallImg,
   GreenpillMonthlyCallPlaceholderImg,
-  GreenpillNetworkMapImg,
+  GreenpillNetworkMapSources,
   GreenpillNetworkMapPlaceholderImg,
   GreenpillTechAndSunImg,
   GreenpillTechAndSunPlaceholderImg,
@@ -52,7 +52,7 @@ export const Greenpill = () => {
       />
       <ProjectContainer>
         <ProjectBackground
-          src={GreenpillNetworkMapImg}
+          srcSet={GreenpillNetworkMapSources}
           placeholder={GreenpillNetworkMapPlaceholderImg}
           alt=""
           opacity={isDark ? 0.58 : 0.78}
@@ -67,7 +67,7 @@ export const Greenpill = () => {
           <ProjectSectionContent width="xl">
             <Image
               raised
-              src={GreenpillBooksImg}
+              srcSet={GreenpillBooksSources}
               placeholder={GreenpillBooksPlaceholderImg}
               alt="Greenpilled book spread describing regenerative cryptoeconomics, public goods funding, and coordination as the foundation for the network."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
@@ -82,7 +82,7 @@ export const Greenpill = () => {
           <ProjectSectionContent>
             <Image
               raised
-              src={GreenpillGardenEntryImg}
+              srcSet={GreenpillGardenEntrySources}
               placeholder={GreenpillGardenEntryPlaceholderImg}
               alt="Greenpill Garden entry section with low pressure paths to subscribe, join the public conversation, take the Regen Assessment, or book a steward call."
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}

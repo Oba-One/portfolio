@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
 
 import {
-  GMBackgroundImg,
-  GMProblemImg,
-  GMArchitectureImg,
+  GMBackgroundSources,
+  GMProblemSources,
+  GMArchitectureSources,
   GMDevelopment2Img,
   GMLearningsImg,
   GMBackgroundPlaceholderImg,
@@ -57,8 +57,7 @@ export const GentleMonster = () => {
         />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
-          src={GMBackgroundImg}
-          srcSet={`${GMBackgroundImg.src} 1080w, ${GMBackgroundImg.src} 2160w`}
+          srcSet={GMBackgroundSources}
           placeholder={GMBackgroundPlaceholderImg}
           alt="Gentle Monster updated landing page with new UI design."
           // blur="LqL|u[oftlRkD%f6bbay_4aye.j["
@@ -78,7 +77,7 @@ export const GentleMonster = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[GMProblemImg, GMProblemImg]}
+              srcSet={GMProblemSources}
               placeholder={GMProblemPlaceholderImg}
               // blur="LpG[=;RjWBxa4nWVa|oL~qt7j[Rj"
               sizes="100vw"
@@ -91,7 +90,7 @@ export const GentleMonster = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[GMArchitectureImg, GMArchitectureImg]}
+              srcSet={GMArchitectureSources}
               placeholder={GMArchitecturePlaceholderImg}
               // blur="LKPP=d00yD?v^+xCofWU?^.9n}Vs"
               sizes="100vw"

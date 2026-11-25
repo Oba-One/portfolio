@@ -1,6 +1,6 @@
 import { useReducedMotion, useSpring } from 'framer-motion'
 import { memo, useEffect, useRef, type HTMLAttributes } from 'react'
-import { delay } from 'utils/delay'
+import { VisuallyHidden } from 'components/VisuallyHidden'
 import { classes } from 'utils/style'
 import styles from './DecoderText.module.scss'
 
@@ -53,12 +53,18 @@ function shuffle(content: string[], output: Character[], position: number) {
       return { type: CharType.Glyph, value: glyphs[rand] }
     }
 
-    return { type: CharType.Glyph, value: output[index].value }
+    return { type: CharType.Glyph, value: output[index]?.value ?? value }
   })
 }
 
 export const DecoderText = memo(
-  ({ text, start = true, delay: startDelay = 0, className, ...rest }: DecoderTextProps) => {
+  ({
+    text,
+    start = true,
+    delay: startDelay = 0,
+    className,
+    ...rest
+  }: DecoderTextProps) => {
     const output = useRef<Character[]>([{ type: CharType.Glyph, value: '' }])
     const container = useRef<HTMLSpanElement | null>(null)
     const reduceMotion = useReducedMotion()
@@ -67,16 +73,15 @@ export const DecoderText = memo(
     useEffect(() => {
       const containerInstance = container.current
       const content = text.split('')
-      let animation = false
-
+      if (!containerInstance || !start || reduceMotion) return
       const renderOutput = () => {
-        if (!containerInstance) return
-
         const characterMap = output.current.map(item => {
-          return `<span class="${styles[item.type]}">${item.value}</span>`
+          const char = document.createElement('span')
+          char.className = styles[item.type]
+          char.textContent = item.value
+          return char
         })
-
-        containerInstance.innerHTML = characterMap.join('')
+        containerInstance.replaceChildren(...characterMap)
       }
 
       const unsubscribeSpring = decoderSpring.onChange(value => {
@@ -84,32 +89,22 @@ export const DecoderText = memo(
         renderOutput()
       })
 
-      const startSpring = async () => {
-        await delay(startDelay)
-        decoderSpring.set(content.length)
-      }
-
-      if (start && !animation && !reduceMotion) {
-        animation = true
-        startSpring()
-      }
-
-      if (reduceMotion) {
-        output.current = content.map((value, index) => ({
-          type: CharType.Value,
-          value: content[index],
-        }))
-        renderOutput()
-      }
+      const timer = setTimeout(() => decoderSpring.set(content.length), startDelay)
 
       return () => {
+        clearTimeout(timer)
         unsubscribeSpring?.()
+        decoderSpring.stop()
+        containerInstance.textContent = text
       }
     }, [decoderSpring, reduceMotion, start, startDelay, text])
 
     return (
-      <span aria-label={text} className={classes(styles.text, className)} {...rest}>
-        <span aria-hidden className={styles.content} ref={container} />
+      <span className={classes(styles.text, className)} {...rest}>
+        <VisuallyHidden>{text}</VisuallyHidden>
+        <span aria-hidden className={styles.content} ref={container}>
+          {text}
+        </span>
       </span>
     )
   }

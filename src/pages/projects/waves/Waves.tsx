@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 
 import {
   WavesStoryImg,
+  WavesStorySources,
   WavesStoryPlaceholderImg,
   WavesSplashImg,
   WavesSplashPlaceholderImg,
@@ -54,8 +55,7 @@ export const Waves = () => {
       />
       <ProjectContainer className={styles.slice}>
         <ProjectBackground
-          src={WavesStoryImg}
-          srcSet={`${WavesStoryImg.src} 1280w, ${WavesStoryImg.src} 2560w`}
+          srcSet={WavesStorySources}
           alt="Silhouetted figures walking toward a bright live-event horizon."
           placeholder={WavesStoryPlaceholderImg}
           opacity={isDark ? 0.5 : 0.6}

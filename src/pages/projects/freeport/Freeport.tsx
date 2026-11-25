@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
 
 import {
-  FreeportBackgroundImg,
+  FreeportBackgroundSources,
   FreeportArchitectureImg,
-  FreeportDevelopmentImg,
+  FreeportDevelopmentSources,
   FreeportLearningsImg,
   FreeportProblemImg,
   FreeportBackgroundPlaceholderImg,
@@ -54,8 +54,7 @@ export const Freeport = () => {
         />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
-          src={FreeportDevelopmentImg}
-          srcSet={`${FreeportDevelopmentImg.src} 1080w, ${FreeportDevelopmentImg.src} 2160w`}
+          srcSet={FreeportDevelopmentSources}
           placeholder={FreeportDevelopmentPlaceholderImg}
           alt="Freeport gallery page showing 3D gallery built with threejs."
           // blur="L6LD#]0LS6rX0r~WD*R%Kk~WM{In"
@@ -88,7 +87,7 @@ export const Freeport = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[FreeportBackgroundImg, FreeportBackgroundImg]}
+              srcSet={FreeportBackgroundSources}
               placeholder={FreeportBackgroundPlaceholderImg}
               // blur="LEPskuo|~qrs4TX7x^s8o~oID*kA"
               alt="Freeport landing page with a call to action to sign up for the launch list."

@@ -16,8 +16,6 @@
 body {
   font-family: var(--fontStack);
   font-weight: var(--fontWeightRegular);
-  background-color: rgb(var(--rgbBackground));
-  transition: background var(--durationM) ease;
   color: var(--colorTextBody);
   width: 100%;
   overflow-x: hidden;

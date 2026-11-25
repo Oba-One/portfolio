@@ -6,6 +6,38 @@ import sharp from 'sharp'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
+const responsiveImages = [
+  ['coop/coop-mark-glow.webp', [640]],
+  ['freeport/freeport-background.webp', [640, 1280]],
+  ['freeport/freeport-development.webp', [640, 1280]],
+  ['gm/gm-architecture.webp', [800, 1600]],
+  ['gm/gm-background.webp', [640, 1280]],
+  ['gm/gm-problem.webp', [800, 1600]],
+  ['green-goods/green-goods-action-selection-pwa.webp', [240, 400]],
+  ['green-goods/green-goods-hero-website.webp', [640, 800, 1280]],
+  ['green-goods/green-goods-media-section-pwa.webp', [240, 400]],
+  ['green-goods/refi-sicilia-agroforestry.jpeg', [640, 800]],
+  ['green-goods/tas-solar-hub-session.jpeg', [640, 800, 1280]],
+  ['greenpill/greenpill-books.webp', [800, 1280]],
+  ['greenpill/greenpill-garden-entry.webp', [800, 1280]],
+  ['greenpill/greenpill-network-map.webp', [640, 800, 1280]],
+  ['mira-connect/connect-call-guests.webp', [640, 1280]],
+  ['mira-connect/connect-call-lobby.webp', [640, 1280]],
+  ['mira-connect/connect-call-messages.webp', [640, 800, 1280]],
+  ['mira-flow/flow-problem.webp', [800, 1600]],
+  ['mira-flow/flow-tablet-collections.webp', [240, 480]],
+  ['mira-flow/flow-tablet-login-team.webp', [480, 800]],
+  ['mira-flow/flow-tablet-login.webp', [640, 800, 1280]],
+  ['mira-flow/flow-tablet-reference-photo.webp', [240, 480]],
+  ['syn/syn-background.webp', [800, 1600]],
+  ['syn/syn-learnings.webp', [640, 1280]],
+  ['syn/syn-problem.webp', [800, 1280]],
+  ['waves/waves-story.webp', [640, 1280]],
+  ['wefa/wefa-deck-plants.webp', [240, 360]],
+  ['wefa/wefa-ola-red-fruit.jpg', [640, 800, 1280]],
+  ['wefa/wefa-onboard-generated-creatures.webp', [240, 360]],
+]
+
 const conversions = [
   {
     input: 'src/assets/green-goods/gpdg-graphic-green-goods-impact-value-cycle.png',
@@ -235,10 +267,23 @@ async function makePlaceholder(input, output) {
   console.log(`placeholder ${output}`)
 }
 
-for (const conversion of conversions) {
-  await convertAsset(conversion)
+if (!process.argv.includes('--responsive')) {
+  for (const conversion of conversions) {
+    await convertAsset(conversion)
+  }
+
+  for (const [input, output] of placeholders) {
+    await makePlaceholder(input, output)
+  }
 }
 
-for (const [input, output] of placeholders) {
-  await makePlaceholder(input, output)
+for (const [source, widths] of responsiveImages) {
+  for (const width of widths) {
+    await convertAsset({
+      input: `src/assets/${source}`,
+      output: `src/assets/${source.replace(/\.[^.]+$/, `-${width}.webp`)}`,
+      width,
+      quality: 76,
+    })
+  }
 }

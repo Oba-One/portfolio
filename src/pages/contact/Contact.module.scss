@@ -7,7 +7,7 @@
   justify-items: center;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100svh;
   width: 100%;
 
   @media (--mediaMobile) {
@@ -33,17 +33,9 @@
   transition-timing-function: var(--bezierFastoutSlowin);
   transition-duration: var(--durationXL);
   transition-delay: var(--delay);
-  opacity: 0;
 
   @media (--mediaUseMotion) {
     transition-property: transform, opacity;
-    transform: translate3d(0, var(--space5XL), 0);
-  }
-
-  &[data-status='entering'],
-  &[data-status='entered'] {
-    transform: none;
-    opacity: 1;
   }
 
   &[data-status='exiting'] {
@@ -63,17 +55,9 @@
   transition-timing-function: var(--bezierFastoutSlowin);
   transition-duration: var(--durationXL);
   transition-delay: var(--delay);
-  opacity: 0;
 
   @media (--mediaUseMotion) {
     transition-property: transform, opacity;
-    transform: translate3d(0, var(--space5XL), 0);
-  }
-
-  &[data-status='entering'],
-  &[data-status='entered'] {
-    transform: none;
-    opacity: 1;
   }
 
   &[data-hidden='true'] {
@@ -100,21 +84,13 @@
   transition-timing-function: var(--bezierFastoutSlowin);
   transition-duration: var(--durationXL);
   transition-delay: var(--delay);
-  opacity: 0;
 
   @media (--mediaUseMotion) {
     transition-property: transform, opacity;
-    transform: translate3d(0, var(--space3XL), 0);
   }
 
   & + & {
     margin-top: var(--spaceXL);
-  }
-
-  &[data-status='entering'],
-  &[data-status='entered'] {
-    transform: none;
-    opacity: 1;
   }
 
   &[data-hidden='true'] {
@@ -145,12 +121,10 @@
   transition-timing-function: var(--bezierFastoutSlowin);
   transition-delay: var(--delay);
   transition-duration: var(--durationXL);
-  opacity: 0;
   justify-self: flex-start;
 
   @media (--mediaUseMotion) {
     transition-property: transform, opacity;
-    transform: translate3d(0, var(--space3XL), 0);
   }
 
   &[data-status='entered'] {
@@ -172,16 +146,6 @@
     }
   }
 
-  &[data-status='entering'],
-  &[data-status='entered'] {
-    opacity: 1;
-  }
-
-  &[data-status='entering']:not(:hover),
-  &[data-status='entered']:not(:hover),
-  &[data-status='entering']:hover {
-    transform: none;
-  }
 
   &[data-status='exiting'] {
     transition-duration: var(--durationM);

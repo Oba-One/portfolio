@@ -1,3 +1,11 @@
+import WefaDeckPlants240Img from './wefa-deck-plants-240.webp'
+import WefaDeckPlants360Img from './wefa-deck-plants-360.webp'
+import WefaOnboardGeneratedCreatures240Img from './wefa-onboard-generated-creatures-240.webp'
+import WefaOnboardGeneratedCreatures360Img from './wefa-onboard-generated-creatures-360.webp'
+import WefaOlaRedFruit800Img from './wefa-ola-red-fruit-800.webp'
+import WefaOlaRedFruit640Img from './wefa-ola-red-fruit-640.webp'
+import WefaOlaRedFruit1280Img from './wefa-ola-red-fruit-1280.webp'
+
 export { default as WefaStoryImg } from './wefa-story.webp'
 export { default as WefaStoryPlaceholderImg } from './wefa-story-ph.webp'
 export { default as WefaElementalCharactersImg } from './wefa-elemental-characters.webp'
@@ -20,3 +28,16 @@ export { default as WefaOnboardSelectPlantImg } from './wefa-onboard-select-plan
 export { default as WefaOnboardSelectPlantPlaceholderImg } from './wefa-onboard-select-plant-ph.webp'
 export { default as WefaOnboardGeneratedCreaturesImg } from './wefa-onboard-generated-creatures.webp'
 export { default as WefaOnboardGeneratedCreaturesPlaceholderImg } from './wefa-onboard-generated-creatures-ph.webp'
+
+export const WefaOlaRedFruitSources = [
+  WefaOlaRedFruit640Img,
+  WefaOlaRedFruit800Img,
+  WefaOlaRedFruit1280Img,
+]
+
+export const WefaOnboardGeneratedCreaturesSources = [
+  WefaOnboardGeneratedCreatures240Img,
+  WefaOnboardGeneratedCreatures360Img,
+]
+
+export const WefaDeckPlantsSources = [WefaDeckPlants240Img, WefaDeckPlants360Img]

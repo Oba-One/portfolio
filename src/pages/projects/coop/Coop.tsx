@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 
 import {
   CoopMarkGlowImg,
+  CoopMarkGlowSources,
   CoopMarkGlowPlaceholderImg,
   CoopWordmarkFlatImg,
   CoopWordmarkFlatPlaceholderImg,
@@ -47,8 +48,7 @@ export const Coop = () => {
       />
       <ProjectContainer>
         <ProjectBackground
-          src={CoopMarkGlowImg}
-          srcSet={`${CoopMarkGlowImg.src} 1024w, ${CoopMarkGlowImg.src} 2048w`}
+          srcSet={CoopMarkGlowSources}
           placeholder={CoopMarkGlowPlaceholderImg}
           alt=""
           opacity={isDark ? 0.48 : 0.72}

@@ -36,10 +36,3 @@ export const Default = Story.bind({})
 Default.args = {
   ...imageData,
 }
-
-export const Reveal = Story.bind({})
-
-Reveal.args = {
-  ...imageData,
-  reveal: true,
-}

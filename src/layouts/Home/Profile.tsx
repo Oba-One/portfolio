@@ -100,8 +100,6 @@ export const Profile = ({ id, visible, sectionRef }: ProfileProps) => {
               </div>
               <div className={styles.image}>
                 <Image
-                  reveal
-                  delay={100}
                   placeholder={profilePlaceholderImg}
                   srcSet={[profileImg, profileLargeImg]}
                   sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
