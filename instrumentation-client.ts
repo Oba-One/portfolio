@@ -30,8 +30,25 @@ if (isProduction && SENTRY_DSN) {
       .catch(error => Sentry.captureException(error))
   }
 
-  if (document.readyState === 'complete') loadReplay()
-  else window.addEventListener('load', loadReplay, { once: true })
+  const waitForInteraction = () => {
+    const listeners = new AbortController()
+    const scheduleReplay = () => {
+      listeners.abort()
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadReplay, { timeout: 2000 })
+      } else {
+        setTimeout(loadReplay, 200)
+      }
+    }
+
+    const options = { passive: true, signal: listeners.signal }
+    window.addEventListener('pointerdown', scheduleReplay, options)
+    window.addEventListener('keydown', scheduleReplay, options)
+    window.addEventListener('wheel', scheduleReplay, options)
+  }
+
+  if (document.readyState === 'complete') waitForInteraction()
+  else window.addEventListener('load', waitForInteraction, { once: true })
 }
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart

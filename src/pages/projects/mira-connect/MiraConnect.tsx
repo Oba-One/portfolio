@@ -3,10 +3,10 @@ import { Fragment } from 'react'
 import {
   // ConnectBackgroundImg,
   // ConnectBackgroundPlaceholderImg,
-  ConnectCallAnnotationsImg,
+  ConnectCallAnnotationsSources,
   ConnectCallGuestsSources,
   ConnectCallLobbySources,
-  ConnectCallHistoryImg,
+  ConnectCallHistorySources,
   ConnectCallReportP1Img,
   ConnectCallReportP2Img,
   ConnectCallMessagesSources,
@@ -115,7 +115,7 @@ export const MiraConnect = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[ConnectCallAnnotationsImg, ConnectCallAnnotationsImg]}
+              srcSet={ConnectCallAnnotationsSources}
               placeholder={ConnectCallAnnotationsPlaceholderImg}
               // blur="LSIg$H%M.m-W-poKj[WB0~M|m,S1"
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
@@ -132,7 +132,7 @@ export const MiraConnect = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[ConnectCallHistoryImg, ConnectCallHistoryImg]}
+              srcSet={ConnectCallHistorySources}
               placeholder={ConnectCallHistoryPlaceholderImg}
               // blur="L6Ryvo0K%g~q00-;RkIA00xZxuxu"
               sizes="100vw"

@@ -14,16 +14,18 @@ const responsiveImages = [
   ['gm/gm-background.webp', [640, 1280]],
   ['gm/gm-problem.webp', [800, 1600]],
   ['green-goods/green-goods-action-selection-pwa.webp', [240, 400]],
-  ['green-goods/green-goods-hero-website.webp', [640, 800, 1280]],
+  ['green-goods/green-goods-hero-website.webp', [640, 800, 1280], { 640: 55, 800: 55 }],
   ['green-goods/green-goods-media-section-pwa.webp', [240, 400]],
   ['green-goods/refi-sicilia-agroforestry.jpeg', [640, 800]],
   ['green-goods/tas-solar-hub-session.jpeg', [640, 800, 1280]],
   ['greenpill/greenpill-books.webp', [800, 1280]],
   ['greenpill/greenpill-garden-entry.webp', [800, 1280]],
   ['greenpill/greenpill-network-map.webp', [640, 800, 1280]],
+  ['mira-connect/connect-call-annotations.webp', [400, 640, 800, 1280]],
   ['mira-connect/connect-call-guests.webp', [640, 1280]],
   ['mira-connect/connect-call-lobby.webp', [640, 1280]],
   ['mira-connect/connect-call-messages.webp', [640, 800, 1280]],
+  ['mira-connect/connect-history.webp', [400, 640, 800, 1280]],
   ['mira-flow/flow-problem.webp', [800, 1600]],
   ['mira-flow/flow-tablet-collections.webp', [240, 480]],
   ['mira-flow/flow-tablet-login-team.webp', [480, 800]],
@@ -277,13 +279,13 @@ if (!process.argv.includes('--responsive')) {
   }
 }
 
-for (const [source, widths] of responsiveImages) {
+for (const [source, widths, qualityByWidth = {}] of responsiveImages) {
   for (const width of widths) {
     await convertAsset({
       input: `src/assets/${source}`,
       output: `src/assets/${source.replace(/\.[^.]+$/, `-${width}.webp`)}`,
       width,
-      quality: 76,
+      quality: qualityByWidth[width] ?? 76,
     })
   }
 }
