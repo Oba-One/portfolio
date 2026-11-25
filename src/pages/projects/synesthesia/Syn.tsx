@@ -1,10 +1,10 @@
 import { Fragment } from 'react'
 
 import {
-  SynBackgroundImg,
+  SynBackgroundSources,
   SynArchitectureImg,
-  SynLearningsImg,
-  SynProblemImg,
+  SynLearningsSources,
+  SynProblemSources,
   SynBackgroundPlaceholderImg,
   SynArchitecturePlaceholderImg,
   SynLearningsPlaceholderImg,
@@ -56,8 +56,7 @@ export const Syn = () => {
         />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
-          src={SynLearningsImg}
-          srcSet={`${SynLearningsImg.src} 1080w, ${SynLearningsImg.src} 2160w`}
+          srcSet={SynLearningsSources}
           placeholder={SynLearningsPlaceholderImg}
           alt="Syn beta home page on desktop."
         />
@@ -76,7 +75,7 @@ export const Syn = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[SynProblemImg, SynProblemImg]}
+              srcSet={SynProblemSources}
               placeholder={SynProblemPlaceholderImg}
               // blur="LHM%.jMxDi~q_3jYV@t8~qM{axof"
               sizes={`(max-width: ${media.mobile}px) 100vw, 80vw`}
@@ -89,7 +88,7 @@ export const Syn = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[SynBackgroundImg, SynBackgroundImg]}
+              srcSet={SynBackgroundSources}
               placeholder={SynBackgroundPlaceholderImg}
               // blur="LEPskuo|~qrs4TX7x^s8o~oID*kA"
               alt="Syn landing page with a call to action to sign up for the launch list."
@@ -121,7 +120,7 @@ export const Syn = () => {
         <ProjectSection>
           <ProjectSectionContent>
             <Image
-              srcSet={[SynLearningsImg, SynLearningsImg]}
+              srcSet={SynLearningsSources}
               placeholder={SynLearningsPlaceholderImg}
               // blur="LgPjJkae%MkC_3j[R*jZ~qbHM{ae"
               alt="Syn blog page on desktop."

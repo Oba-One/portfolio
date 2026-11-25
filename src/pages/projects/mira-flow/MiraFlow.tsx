@@ -1,13 +1,13 @@
 import { Fragment } from 'react'
 
 import {
-  FlowProblemImg,
+  FlowProblemSources,
   FlowTabletRecentImg,
   FlowTabletHistoryImg,
-  FlowTabletLoginImg,
-  FlowTabletCollectionsImg,
-  FlowTabletLoginTeamImg,
-  FlowTabletReferencePhotoImg,
+  FlowTabletLoginSources,
+  FlowTabletCollectionsSources,
+  FlowTabletLoginTeamSources,
+  FlowTabletReferencePhotoSources,
   FlowTabletStepNumberImg,
   FlowTabletStepSelectImg,
   FlowTabletStepYesNoImg,
@@ -65,8 +65,7 @@ export const MiraFlow = () => {
         />
         <ProjectBackground
           opacity={isDark ? 0.5 : 0.8}
-          src={FlowTabletLoginImg}
-          srcSet={`${FlowTabletLoginImg.src} 1080w, ${FlowTabletLoginImg.src} 2160w`}
+          srcSet={FlowTabletLoginSources}
           placeholder={FlowTabletLoginPlaceholderImg}
           alt="The Mira Flow app login screen on a tablet."
           // blur="LCM@.p0000~U00%0s.WB00R?RoxB"
@@ -89,7 +88,7 @@ export const MiraFlow = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[FlowProblemImg, FlowProblemImg]}
+              srcSet={FlowProblemSources}
               placeholder={FlowProblemPlaceholderImg}
               // blur="L6Ryvo0K%g~q00-;RkIA00xZxuxu"
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
@@ -102,7 +101,7 @@ export const MiraFlow = () => {
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}
-                srcSet={[FlowTabletLoginTeamImg, FlowTabletLoginTeamImg]}
+                srcSet={FlowTabletLoginTeamSources}
                 placeholder={FlowTabletLoginTeamPlaceholderImg}
                 // blur="L7RpF3R.~T?F00WBNgof00xWt6E5"
                 alt="The Mira Flow team login screen with list of teams to choose on a tablet."
@@ -110,7 +109,7 @@ export const MiraFlow = () => {
               />
               <Image
                 className={styles.sidebarImage}
-                srcSet={[FlowTabletCollectionsImg, FlowTabletCollectionsImg]}
+                srcSet={FlowTabletCollectionsSources}
                 placeholder={FlowTabletCollectionsPlaceholderImg}
                 // blur="L0SPIcT3~W~q00RNx^Iu009a-Twa"
                 alt="The Mira Flow collections screen a file and folder directory for workflows."
@@ -132,7 +131,7 @@ export const MiraFlow = () => {
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}
-                srcSet={[FlowTabletReferencePhotoImg, FlowTabletReferencePhotoImg]}
+                srcSet={FlowTabletReferencePhotoSources}
                 placeholder={FlowTabletReferencePhotoPlaceholderImg}
                 // blur="L]O3|SV@t6oKsmofayjt~pj]WCfk"
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}

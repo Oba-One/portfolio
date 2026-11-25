@@ -4,11 +4,9 @@ import GothamBookItalic from 'assets/fonts/gotham-book-italic.woff2'
 import GothamBook from 'assets/fonts/gotham-book.woff2'
 import GothamMediumItalic from 'assets/fonts/gotham-medium-italic.woff2'
 import GothamMedium from 'assets/fonts/gotham-medium.woff2'
-import { useHasMounted } from 'hooks'
 import {
   createContext,
   useContext,
-  useEffect,
   type CSSProperties,
   type ElementType,
   type ReactNode,
@@ -44,22 +42,6 @@ export const ThemeProvider = ({
   const currentTheme = { ...tokens.base, ...theme[themeId], ...themeOverrides }
   const parentTheme = useContext(ThemeContext)
   const isRootProvider = parentTheme === null
-  const hasMounted = useHasMounted()
-
-  // Save the root theme and keep page and browser chrome in sync.
-  useEffect(() => {
-    if (isRootProvider && hasMounted) {
-      window.localStorage.setItem('theme', JSON.stringify(themeId))
-      document.documentElement.dataset.theme = themeId
-      document.body.dataset.theme = themeId
-      document
-        .querySelector('meta[name="theme-color"]')
-        ?.setAttribute('content', `rgb(${currentTheme.rgbBackground})`)
-      document
-        .querySelector('meta[name="msapplication-TileColor"]')
-        ?.setAttribute('content', `rgb(${currentTheme.rgbBackground})`)
-    }
-  }, [currentTheme.rgbBackground, hasMounted, isRootProvider, themeId])
 
   return (
     <ThemeContext.Provider value={currentTheme}>
@@ -135,6 +117,13 @@ export function createMediaTokenProperties() {
 export const tokenStyles = squish(`
   :root {
     ${createThemeProperties(tokens.base)}
+    background-color: rgb(var(--rgbBackground));
+    color: var(--colorTextBody);
+    color-scheme: dark;
+  }
+
+  :root[data-theme='light'] {
+    color-scheme: light;
   }
 
   ${createMediaTokenProperties()}
@@ -153,7 +142,7 @@ export const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 400;
     src: url(${GothamBook}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: normal;
   }
 
@@ -161,7 +150,7 @@ export const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 400;
     src: url(${GothamBookItalic}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: italic;
   }
 
@@ -169,7 +158,7 @@ export const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 500;
     src: url(${GothamMedium}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: normal;
   }
 
@@ -177,7 +166,7 @@ export const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 500;
     src: url(${GothamMediumItalic}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: italic;
   }
 
@@ -185,7 +174,7 @@ export const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 700;
     src: url(${GothamBold}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: normal;
   }
 
@@ -193,7 +182,7 @@ export const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 700;
     src: url(${GothamBoldItalic}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: italic;
   }
 `)

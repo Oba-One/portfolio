@@ -1,25 +1,25 @@
-// import projectKatakana from  'assets/katakana-project.svg?url'
 import { Button } from 'components/Button'
 import { Divider } from 'components/Divider'
 import { Heading } from 'components/Heading'
+import { Image } from 'components/Image'
 import { deviceModels } from 'components/Model/deviceModels'
 import { Section } from 'components/Section'
 import { Text } from 'components/Text'
-import { Transition } from 'components/Transition'
-import { useWindowSize } from 'hooks'
+import { useInViewport } from 'hooks'
 import dynamic from 'next/dynamic'
-import {
-  useEffect,
-  useState,
-  type HTMLAttributes,
-  type RefObject,
-} from 'react'
+import { useRef, useState, type HTMLAttributes } from 'react'
 import { media } from 'utils/style'
 import styles from './ProjectSummary.module.scss'
 import type { ModelConfig, ModelProps } from 'components/Model'
 import type { ProjectPlatform } from '../../constants'
 
-const Model = dynamic<ModelProps>(() => import('components/Model').then(mod => mod.Model))
+const Model = dynamic<ModelProps>(
+  () => import('components/Model').then(mod => mod.Model),
+  {
+    ssr: false,
+  }
+)
+const previewViewport = { threshold: 0.25 }
 
 type ProjectSummaryModel = {
   type: ProjectPlatform
@@ -29,8 +29,7 @@ type ProjectSummaryModel = {
 
 type ProjectSummaryProps = HTMLAttributes<HTMLElement> & {
   id: string
-  visible: boolean
-  sectionRef: RefObject<HTMLElement>
+  enhance: boolean
   index: number
   title: string
   description: string
@@ -42,8 +41,7 @@ type ProjectSummaryProps = HTMLAttributes<HTMLElement> & {
 
 export const ProjectSummary = ({
   id,
-  visible: sectionVisible,
-  sectionRef,
+  enhance,
   index,
   title,
   description,
@@ -53,165 +51,87 @@ export const ProjectSummary = ({
   alternate,
   ...rest
 }: ProjectSummaryProps) => {
-  const [focused, setFocused] = useState(false)
-  const [locallyVisible, setLocallyVisible] = useState(false)
-  const { width } = useWindowSize()
+  const previewRef = useRef<HTMLDivElement>(null)
+  const [modelReady, setModelReady] = useState(false)
+  const previewInViewport = useInViewport(previewRef, false, previewViewport, enhance)
+  const showModel = enhance && previewInViewport
   const titleId = `${id}-title`
-  const isMobile = width <= media.tablet
-  const indexText = index < 10 ? `0${index}` : index
-  const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`
-  const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`
-  const visible = sectionVisible || focused || locallyVisible
-
-  useEffect(() => {
-    if (locallyVisible) return
-
-    const element = sectionRef?.current
-    if (!element) return
-
-    const checkVisibility = () => {
-      const rect = element.getBoundingClientRect()
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight
-      const isVisible = rect.top < viewportHeight && rect.bottom > 0
-
-      if (isVisible) {
-        setLocallyVisible(true)
-      }
-    }
-
-    const frame = window.requestAnimationFrame(checkVisibility)
-    window.addEventListener('scroll', checkVisibility, { passive: true })
-    window.addEventListener('resize', checkVisibility)
-
-    return () => {
-      window.cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', checkVisibility)
-      window.removeEventListener('resize', checkVisibility)
-    }
-  }, [locallyVisible, sectionRef])
-
-  const renderDetails = (visible: boolean) => (
-    <div className={styles.details}>
-      <div aria-hidden className={styles.index}>
-        <Divider
-          notchWidth="64px"
-          notchHeight="8px"
-          collapsed={!visible}
-          collapseDelay={1000}
-        />
-        <span className={styles.indexNumber} data-visible={visible}>
-          {indexText}
-        </span>
-      </div>
-      <Heading
-        level={3}
-        as="h2"
-        className={styles.title}
-        data-visible={visible}
-        id={titleId}
-      >
-        {title}
-      </Heading>
-      <Text className={styles.description} data-visible={visible} as="p">
-        {description}
-      </Text>
-      <div className={styles.button} data-visible={visible}>
-        <Button iconHoverShift href={buttonLink} iconEnd="arrowRight">
-          {buttonText}
-        </Button>
-      </div>
-    </div>
-  )
-
-  const renderPreview = (visible: boolean) => (
-    <div className={styles.preview}>
-      {model.type === 'laptop' && (
-        <>
-          <div className={styles.model} data-device="laptop">
-            <Model
-              alt={model.alt}
-              cameraPosition={{ x: 0, y: 0, z: 8 }}
-              showDelay={700}
-              show={visible}
-              models={[
-                {
-                  ...deviceModels.laptop,
-                  texture: {
-                    ...model.textures[0],
-                    sizes: laptopSizes,
-                  },
-                },
-              ]}
-            />
-          </div>
-        </>
-      )}
-      {model.type === 'phone' && (
-        <>
-          <div className={styles.model} data-device="phone">
-            <Model
-              alt={model.alt}
-              cameraPosition={{ x: 0, y: 0, z: 11.5 }}
-              showDelay={300}
-              show={visible}
-              models={[
-                {
-                  ...deviceModels.phone,
-                  position: { x: -0.6, y: 1.1, z: 0 },
-                  texture: {
-                    ...model.textures[0],
-                    sizes: phoneSizes,
-                  },
-                },
-                {
-                  ...deviceModels.phone,
-                  position: { x: 0.6, y: -0.5, z: 0.3 },
-                  texture: {
-                    ...model.textures[1],
-                    sizes: phoneSizes,
-                  },
-                },
-              ]}
-            />
-          </div>
-        </>
-      )}
-    </div>
-  )
+  const isPhone = model.type === 'phone'
+  const sizes = isPhone
+    ? `(max-width: ${media.tablet}px) 28vw, 18vw`
+    : `(max-width: ${media.tablet}px) 84vw, 46vw`
 
   return (
     <Section
       className={styles.summary}
       data-alternate={alternate}
       data-first={index === 1}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
       as="section"
       aria-labelledby={titleId}
-      ref={sectionRef}
       id={id}
       tabIndex={-1}
       {...rest}
     >
       <div className={styles.content}>
-        <Transition in={visible}>
-          {transitionVisible => (
-            <>
-              {!alternate && !isMobile && (
-                <>
-                  {renderDetails(transitionVisible)}
-                  {renderPreview(transitionVisible)}
-                </>
-              )}
-              {(alternate || isMobile) && (
-                <>
-                  {renderPreview(transitionVisible)}
-                  {renderDetails(transitionVisible)}
-                </>
-              )}
-            </>
-          )}
-        </Transition>
+        <div className={styles.details}>
+          <div aria-hidden="true" className={styles.index}>
+            <Divider notchWidth="64px" notchHeight="8px" />
+            <span className={styles.indexNumber}>{String(index).padStart(2, '0')}</span>
+          </div>
+          <Heading level={3} as="h2" className={styles.title} id={titleId}>
+            {title}
+          </Heading>
+          <Text className={styles.description} as="p">
+            {description}
+          </Text>
+          <Button iconHoverShift href={buttonLink} iconEnd="arrowRight">
+            {buttonText}
+          </Button>
+        </div>
+        <div
+          className={styles.preview}
+          ref={previewRef}
+          role="img"
+          aria-label={model.alt}
+        >
+          <div className={styles.model} data-device={model.type}>
+            <div
+              className={styles.poster}
+              data-model-ready={showModel && modelReady}
+              aria-hidden="true"
+            >
+              {model.textures.map(texture => (
+                <Image
+                  key={texture.placeholder.src}
+                  srcSet={texture.srcSet}
+                  placeholder={texture.placeholder}
+                  sizes={sizes}
+                  alt=""
+                />
+              ))}
+            </div>
+            {showModel && (
+              <Model
+                aria-hidden="true"
+                alt={model.alt}
+                cameraPosition={{ x: 0, y: 0, z: isPhone ? 11.5 : 8 }}
+                animateIn={false}
+                fallback={false}
+                onReadyChange={setModelReady}
+                models={model.textures.map((texture, index) => ({
+                  ...deviceModels[model.type],
+                  ...(isPhone && {
+                    position:
+                      index === 0
+                        ? { x: -0.6, y: 1.1, z: 0 }
+                        : { x: 0.6, y: -0.5, z: 0.3 },
+                  }),
+                  texture: { ...texture, sizes },
+                }))}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </Section>
   )

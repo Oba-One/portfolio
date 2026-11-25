@@ -1,3 +1,5 @@
+const path = require('node:path')
+
 module.exports = {
   plugins: {
     'postcss-flexbugs-fixes': {},
@@ -9,7 +11,10 @@ module.exports = {
       features: {
         'nesting-rules': true,
         'custom-media-queries': {
-          importFrom: 'src/layouts/App/global.scss',
+          importFrom: {
+            from: path.join(__dirname, 'src/layouts/App/global.scss'),
+            type: 'css',
+          },
         },
       },
     },

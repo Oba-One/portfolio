@@ -2,10 +2,12 @@
 
 This is Afolabi Aiyeloja's public portfolio site, including public work, writing, case studies, and contact surfaces for an ecosystem architect and systems builder.
 
-Public surfaces:
-- Public portfolio pages.
-- Public case studies, project descriptions, and visual work.
-- Public contact form entry points.
+## Public pages
+
+- [Portfolio](https://afolabi.info/): Featured work and background.
+- [Green Goods](https://afolabi.info/projects/green-goods/): Reporting and funding for regenerative communities.
+- [Greenpill](https://afolabi.info/projects/greenpill/): Community strategy, developer programs, and partnerships.
+- [Contact](https://afolabi.info/contact/): Public contact form.
 
 Agent guidance:
 - Treat site content as public presentation material.

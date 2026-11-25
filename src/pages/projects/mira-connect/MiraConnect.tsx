@@ -4,12 +4,12 @@ import {
   // ConnectBackgroundImg,
   // ConnectBackgroundPlaceholderImg,
   ConnectCallAnnotationsImg,
-  ConnectCallGuestsImg,
-  ConnectCallLobbyImg,
+  ConnectCallGuestsSources,
+  ConnectCallLobbySources,
   ConnectCallHistoryImg,
   ConnectCallReportP1Img,
   ConnectCallReportP2Img,
-  ConnectCallMessagesImg,
+  ConnectCallMessagesSources,
   ConnectCallAnnotationsPlaceholderImg,
   ConnectCallGuestsPlaceholderImg,
   ConnectCallLobbyPlaceholderImg,
@@ -61,12 +61,7 @@ export const MiraConnect = () => {
         />
         <ProjectBackground
           opacity={isDark ? 0.8 : 0.5}
-          src={isDark ? ConnectCallMessagesImg : ConnectCallMessagesImg}
-          srcSet={`${
-            isDark ? ConnectCallMessagesImg.src : ConnectCallMessagesImg.src
-          } 1080w, ${
-            isDark ? ConnectCallMessagesImg.src : ConnectCallMessagesImg.src
-          } 2160w`}
+          srcSet={ConnectCallMessagesSources}
           placeholder={ConnectCallMessagesPlaceholderImg}
           // blur="LSHe2o-nPA~p%MM{WCRjEgE2m-V@"
           // blur="LPHBPU?FTx~p-:WBRkaz5QE3icRQ"
@@ -90,7 +85,7 @@ export const MiraConnect = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[ConnectCallLobbyImg, ConnectCallLobbyImg]}
+              srcSet={ConnectCallLobbySources}
               placeholder={ConnectCallLobbyPlaceholderImg}
               // blur="LPQJfm~q%g9E9FWAaxof?b4.Mx.8"
               sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
@@ -103,7 +98,7 @@ export const MiraConnect = () => {
             <Image
               raised
               key={themeId}
-              srcSet={[ConnectCallGuestsImg, ConnectCallGuestsImg]}
+              srcSet={ConnectCallGuestsSources}
               placeholder={ConnectCallGuestsPlaceholderImg}
               // blur="LPGI4M?G%g~pR-Rks-M{9uIoR6RP"
               sizes="100vw"

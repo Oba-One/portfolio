@@ -7,10 +7,8 @@ import {
   useRef,
   useState,
   type CSSProperties,
-  type Dispatch,
   type HTMLAttributes,
   type MutableRefObject,
-  type SetStateAction,
 } from 'react'
 import {
   AmbientLight,
@@ -35,7 +33,7 @@ import {
 } from 'three'
 import type { ImageSource } from 'components/Image'
 import { HorizontalBlurShader, VerticalBlurShader } from 'three-stdlib'
-import { resolveSrcFromSrcSet } from 'utils/image'
+import { loadImageFromSrcSet } from 'utils/image'
 import { classes, cssProps, numToMs } from 'utils/style'
 import {
   cleanRenderer,
@@ -85,6 +83,9 @@ export type ModelProps = Omit<HTMLAttributes<HTMLDivElement>, 'style'> & {
   models: ModelConfig[]
   show?: boolean
   showDelay?: number
+  animateIn?: boolean
+  fallback?: boolean
+  onReadyChange?: (ready: boolean) => void
   cameraPosition?: VectorPosition
   style?: CSSProperties
   className?: string
@@ -101,20 +102,23 @@ type LoadDeviceResult = {
 }
 
 type LoadDeviceState = {
-  start: () => Promise<LoadDeviceResult>
+  start: (signal: AbortSignal) => Promise<LoadDeviceResult>
 }
 
 export const Model = ({
   models,
   show = true,
   showDelay = 0,
+  animateIn = true,
+  fallback = true,
+  onReadyChange,
   cameraPosition = { x: 0, y: 0, z: 8 },
   style,
   className,
   alt,
   ...rest
 }: ModelProps) => {
-  const [loaded, setLoaded] = useState(false)
+  const [readyDevices, setReadyDevices] = useState(0)
   const [webglReady, setWebglReady] = useState(true)
   const [rendererReady, setRendererReady] = useState(false)
   const [fallbackVisible, setFallbackVisible] = useState(false)
@@ -139,22 +143,34 @@ export const Model = ({
   const reduceMotion = useReducedMotion()
   const rotationX = useSpring(0, rotationSpringConfig)
   const rotationY = useSpring(0, rotationSpringConfig)
-  const fallbackImages = models
-    .map(model => model.texture.srcSet?.[0] || model.texture.placeholder)
-    .filter((image): image is ImageSource => Boolean(image))
+  const fallbackImages = fallback
+    ? models.map(model => model.texture.srcSet?.[0] || model.texture.placeholder)
+    : []
+  const ready = readyDevices === models.length && webglReady && !fallbackVisible
+
+  const onDeviceReady = useCallback(() => {
+    setReadyDevices(count => count + 1)
+  }, [])
 
   useEffect(() => {
-    if (!container.current || !canvas.current) return undefined
+    onReadyChange?.(ready)
+  }, [onReadyChange, ready])
+
+  useEffect(() => () => onReadyChange?.(false), [onReadyChange])
+
+  useEffect(() => {
+    const canvasElement = canvas.current
+    if (!container.current || !canvasElement) return undefined
 
     const { clientWidth, clientHeight } = container.current
     const context =
-      canvas.current.getContext('webgl', {
+      canvasElement.getContext('webgl', {
         alpha: true,
         antialias: false,
         powerPreference: 'high-performance',
         failIfMajorPerformanceCaveat: true,
       }) ||
-      canvas.current.getContext('experimental-webgl', {
+      canvasElement.getContext('experimental-webgl', {
         alpha: true,
         antialias: false,
         powerPreference: 'high-performance',
@@ -164,12 +180,11 @@ export const Model = ({
     if (!context) {
       setWebglReady(false)
       setFallbackVisible(true)
-      setLoaded(true)
       return undefined
     }
 
     const rendererInstance = new WebGLRenderer({
-      canvas: canvas.current,
+      canvas: canvasElement,
       context,
       alpha: true,
       antialias: false,
@@ -219,10 +234,7 @@ export const Model = ({
     const shadowDarkness = 3
 
     // The render target that will show the shadows in the plane texture
-    const renderTargetInstance = new WebGLRenderTarget(
-      renderTargetSize,
-      renderTargetSize
-    )
+    const renderTargetInstance = new WebGLRenderTarget(renderTargetSize, renderTargetSize)
     renderTarget.current = renderTargetInstance
     renderTargetInstance.texture.generateMipmaps = false
 
@@ -235,9 +247,7 @@ export const Model = ({
     renderTargetBlurInstance.texture.generateMipmaps = false
 
     // Make a plane and make it face up
-    const planeGeometry = new PlaneGeometry(planeWidth, planeHeight).rotateX(
-      Math.PI / 2
-    )
+    const planeGeometry = new PlaneGeometry(planeWidth, planeHeight).rotateX(Math.PI / 2)
 
     const planeMaterial = new MeshBasicMaterial({
       map: renderTargetInstance.texture,
@@ -311,9 +321,15 @@ export const Model = ({
 
     const unsubscribeX = rotationX.onChange(renderFrame)
     const unsubscribeY = rotationY.onChange(renderFrame)
+    const handleContextLost = () => {
+      setWebglReady(false)
+      setFallbackVisible(true)
+    }
+    canvasElement.addEventListener('webglcontextlost', handleContextLost)
     setRendererReady(true)
 
     return () => {
+      canvasElement.removeEventListener('webglcontextlost', handleContextLost)
       renderTarget.current?.dispose()
       renderTargetBlur.current?.dispose()
       removeLights(lights.current)
@@ -469,14 +485,14 @@ export const Model = ({
   return (
     <div
       className={classes(styles.model, className)}
-      data-loaded={loaded}
+      data-loaded={ready || (fallback && fallbackVisible)}
       style={cssProps({ delay: numToMs(showDelay) }, style)}
       ref={container}
       role="img"
       aria-label={alt}
       {...rest}
     >
-      <canvas className={styles.canvas} ref={canvas} />
+      <canvas className={styles.canvas} data-visible={ready} ref={canvas} />
       {fallbackImages.length > 0 && (
         <div
           aria-hidden="true"
@@ -494,25 +510,29 @@ export const Model = ({
               height={image.height}
               alt=""
               decoding="async"
+              loading="lazy"
             />
           ))}
         </div>
       )}
-      {webglReady && rendererReady && models.map((model, index) => (
-        <Device
-          key={JSON.stringify(model.position)}
-          renderer={renderer}
-          modelGroup={modelGroup}
-          webglReady={webglReady}
-          show={show}
-          showDelay={showDelay}
-          renderFrame={renderFrame}
-          index={index}
-          setLoaded={setLoaded}
-          setFallbackVisible={setFallbackVisible}
-          model={model}
-        />
-      ))}
+      {webglReady &&
+        rendererReady &&
+        models.map((model, index) => (
+          <Device
+            key={JSON.stringify(model.position)}
+            renderer={renderer}
+            modelGroup={modelGroup}
+            webglReady={webglReady}
+            show={show}
+            showDelay={showDelay}
+            animateIn={animateIn}
+            renderFrame={renderFrame}
+            index={index}
+            onReady={onDeviceReady}
+            setFallbackVisible={setFallbackVisible}
+            model={model}
+          />
+        ))}
     </div>
   )
 }
@@ -525,8 +545,9 @@ type DeviceProps = {
   renderFrame: () => void
   index: number
   showDelay: number
-  setLoaded: Dispatch<SetStateAction<boolean>>
-  setFallbackVisible: Dispatch<SetStateAction<boolean>>
+  animateIn: boolean
+  onReady: () => void
+  setFallbackVisible: (visible: boolean) => void
   show: boolean
 }
 
@@ -546,7 +567,8 @@ const Device = ({
   renderFrame,
   index,
   showDelay,
-  setLoaded,
+  animateIn,
+  onReady,
   setFallbackVisible,
   show,
 }: DeviceProps) => {
@@ -560,7 +582,7 @@ const Device = ({
     const rendererInstance = renderer.current
     const modelGroupInstance = modelGroup.current
 
-    const applyScreenTexture = async (texture: Texture, node: Mesh) => {
+    const applyScreenTexture = (texture: Texture, node: Mesh) => {
       const material = getPrimaryMaterial(node)
       if (!material) return
 
@@ -568,9 +590,10 @@ const Device = ({
       texture.flipY = false
       texture.anisotropy = rendererInstance.capabilities.getMaxAnisotropy()
       texture.generateMipmaps = false
+      texture.needsUpdate = true
 
       // Decode the texture to prevent jank on first render
-      await rendererInstance.initTexture(texture)
+      rendererInstance.initTexture(texture)
 
       material.color = new Color(0xffffff)
       material.transparent = true
@@ -578,19 +601,36 @@ const Device = ({
     }
 
     // Generate promises to await when ready
-    const load = async (): Promise<LoadDeviceResult> => {
+    const load = async (signal: AbortSignal): Promise<LoadDeviceResult> => {
       const { texture, position, url } = model
       let loadFullResTexture: (() => Promise<void>) | undefined
       let playAnimation: (() => AnimationControls | void) | undefined
 
-      const [placeholder, gltf] = await Promise.all([
-        await textureLoader.loadAsync(texture.placeholder.src),
-        await modelLoader.loadAsync(url),
+      const loadFullTexture = async () => {
+        const src = texture.srcSet?.[0]?.src || texture.placeholder.src
+        const image = await loadImageFromSrcSet({ src, ...texture })
+        return new Texture(image)
+      }
+      const [initialTexture, modelResult] = await Promise.allSettled([
+        animateIn ? textureLoader.loadAsync(texture.placeholder.src) : loadFullTexture(),
+        modelLoader.loadAsync(url),
       ])
 
-      modelGroupInstance.add(gltf.scene)
+      if (
+        signal.aborted ||
+        initialTexture.status === 'rejected' ||
+        modelResult.status === 'rejected'
+      ) {
+        if (initialTexture.status === 'fulfilled') initialTexture.value.dispose()
+        if (modelResult.status === 'fulfilled') cleanScene(modelResult.value.scene)
+        if (signal.aborted) return {}
+        throw new Error('Could not load the device preview')
+      }
 
-      gltf.scene.traverse(async (node: Object3D) => {
+      const screenTexture = initialTexture.value
+      const gltf = modelResult.value
+      let hasScreen = false
+      gltf.scene.traverse((node: Object3D) => {
         if (isMesh(node)) {
           const material = getPrimaryMaterial(node)
           if (material) {
@@ -602,6 +642,11 @@ const Device = ({
         if (node.name === MeshType.Screen && isMesh(node) && node.parent) {
           const material = getPrimaryMaterial(node)
           if (!material) return
+          hasScreen = true
+          if (!animateIn) {
+            applyScreenTexture(screenTexture, node)
+            return
+          }
 
           // Create a copy of the screen mesh so we can fade it out
           // over the full resolution screen texture
@@ -614,17 +659,21 @@ const Device = ({
           placeholderMaterial.opacity = 1
           clonedScreen.position.z += 0.001
 
-          applyScreenTexture(placeholder, clonedScreen)
+          applyScreenTexture(screenTexture, clonedScreen)
 
           loadFullResTexture = async () => {
-            const image = await resolveSrcFromSrcSet(texture)
-            const fullSize = await textureLoader.loadAsync(image)
-            await applyScreenTexture(fullSize, node)
+            if (!texture.srcSet?.length) return
+            const fullSize = await loadFullTexture()
+            if (signal.aborted) {
+              fullSize.dispose()
+              return
+            }
+            applyScreenTexture(fullSize, node)
 
             animate(1, 0, {
               onUpdate: value => {
                 const currentPlaceholder = placeholderScreen.current
-                if (!currentPlaceholder) return
+                if (!currentPlaceholder || signal.aborted) return
                 const currentMaterial = getPrimaryMaterial(currentPlaceholder)
                 currentMaterial.opacity = value
                 renderFrame()
@@ -636,7 +685,14 @@ const Device = ({
 
       const targetPosition = new Vector3(position.x, position.y, position.z)
 
-      if (reduceMotion) {
+      if (!hasScreen) {
+        screenTexture.dispose()
+        cleanScene(gltf.scene)
+        throw new Error('The model is missing a screen mesh')
+      }
+      modelGroupInstance.add(gltf.scene)
+
+      if (reduceMotion || !animateIn) {
         gltf.scene.position.set(...targetPosition.toArray())
       }
 
@@ -706,26 +762,25 @@ const Device = ({
 
   useEffect(() => {
     if (!webglReady || !loadDevice || !show) return undefined
+    const controller = new AbortController()
     let animation: AnimationControls | void
 
     const onLoad = async () => {
       try {
-        const { loadFullResTexture, playAnimation } = await loadDevice.start()
+        const { loadFullResTexture, playAnimation } = await loadDevice.start(
+          controller.signal
+        )
+        if (controller.signal.aborted) return
 
-        setLoaded(true)
-
-        if (!reduceMotion) {
+        if (!reduceMotion && animateIn) {
           animation = playAnimation?.()
         }
 
+        renderFrame()
+        onReady()
         await loadFullResTexture?.()
-
-        if (reduceMotion) {
-          renderFrame()
-        }
       } catch {
-        setFallbackVisible(true)
-        setLoaded(true)
+        if (!controller.signal.aborted) setFallbackVisible(true)
       }
     }
 
@@ -734,6 +789,7 @@ const Device = ({
     })
 
     return () => {
+      controller.abort()
       animation?.stop()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

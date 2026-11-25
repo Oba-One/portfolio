@@ -1,3 +1,6 @@
+import WavesStory640Img from './waves-story-640.webp'
+import WavesStory1280Img from './waves-story-1280.webp'
+
 export { default as WavesStoryImg } from './waves-story.webp'
 export { default as WavesStoryPlaceholderImg } from './waves-story-ph.webp'
 export { default as WavesSplashImg } from './waves-splash.webp'
@@ -17,3 +20,5 @@ export { default as WavesOnboardSelectPlantImg } from './waves-onboard-select-pl
 export { default as WavesOnboardSelectPlantPlaceholderImg } from './waves-onboard-select-plant-ph.webp'
 export { default as WavesOnboardGeneratedCreaturesImg } from './waves-onboard-generated-creatures.webp'
 export { default as WavesOnboardGeneratedCreaturesPlaceholderImg } from './waves-onboard-generated-creatures-ph.webp'
+
+export const WavesStorySources = [WavesStory640Img, WavesStory1280Img]

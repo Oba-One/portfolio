@@ -1,12 +1,12 @@
 import GothamBook from 'assets/fonts/gotham-book.woff2'
 import GothamMedium from 'assets/fonts/gotham-medium.woff2'
-import { fontStyles, tokenStyles } from 'components/ThemeProvider'
+import { fontStyles, theme, tokenStyles } from 'components/ThemeProvider'
 import { Head, Html, Main, NextScript } from 'next/document'
 
 const iconAssetVersion = 'monogram-a-2'
 const manifestVersion = 'theme-chrome-1'
-const initialThemeColor = '#1b1e1b'
-const lightThemeColor = '#fafcf7'
+const initialThemeColor = `rgb(${theme.dark.rgbBackground})`
+const lightThemeColor = `rgb(${theme.light.rgbBackground})`
 
 const initialThemeScript = `
   (() => {
@@ -35,6 +35,7 @@ export default function Document() {
         <meta charSet="utf-8" />
         <meta name="theme-color" content={initialThemeColor} />
         <meta name="msapplication-TileColor" content={initialThemeColor} />
+        <style dangerouslySetInnerHTML={{ __html: tokenStyles }} />
         <script dangerouslySetInnerHTML={{ __html: initialThemeScript }} />
 
         <link rel="manifest" href={`/manifest.json?v=${manifestVersion}`} />
@@ -69,7 +70,6 @@ export default function Document() {
         <link rel="preload" href={GothamMedium} as="font" crossOrigin="true" />
         <link rel="preload" href={GothamBook} as="font" crossOrigin="true" />
         <style dangerouslySetInnerHTML={{ __html: fontStyles }} />
-        <style dangerouslySetInnerHTML={{ __html: tokenStyles }} />
       </Head>
       <body tabIndex={-1}>
         <Main />

@@ -3,15 +3,15 @@ import { Fragment } from 'react'
 import {
   WefaElementalCharactersImg,
   WefaElementalCharactersPlaceholderImg,
-  WefaOlaRedFruitImg,
+  WefaOlaRedFruitSources,
   WefaOlaRedFruitPlaceholderImg,
-  WefaDeckPlantsImg,
+  WefaDeckPlantsSources,
   WefaDeckPlantsPlaceholderImg,
   WefaOnboardSelectPlantImg,
   WefaOnboardSelectPlantPlaceholderImg,
   WefaOnboardSelectElementImg,
   WefaOnboardSelectElementPlaceholderImg,
-  WefaOnboardGeneratedCreaturesImg,
+  WefaOnboardGeneratedCreaturesSources,
   WefaOnboardGeneratedCreaturesPlaceholderImg,
 } from 'assets/wefa'
 import {
@@ -60,8 +60,7 @@ export const Wefa = () => {
       <ProjectContainer className={styles.slice}>
         <ProjectBackground
           className={styles.heroBackground}
-          src={WefaOlaRedFruitImg}
-          srcSet={`${WefaOlaRedFruitImg.src} 1280w, ${WefaOlaRedFruitImg.src} 2560w`}
+          srcSet={WefaOlaRedFruitSources}
           alt="Ola sitting in a tree holding red fruit beside a basket of fruit."
           placeholder={WefaOlaRedFruitPlaceholderImg}
           opacity={isDark ? 0.5 : 0.6}
@@ -81,19 +80,14 @@ export const Wefa = () => {
             <div className={styles.sidebarImages}>
               <Image
                 className={styles.sidebarImage}
-                src={WefaDeckPlantsImg}
-                srcSet={[WefaDeckPlantsImg, WefaDeckPlantsImg]}
+                srcSet={WefaDeckPlantsSources}
                 placeholder={WefaDeckPlantsPlaceholderImg}
                 alt="WEFA app splash screen with logo centered."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
-                src={WefaOnboardGeneratedCreaturesImg}
-                srcSet={[
-                  WefaOnboardGeneratedCreaturesImg,
-                  WefaOnboardGeneratedCreaturesImg,
-                ]}
+                srcSet={WefaOnboardGeneratedCreaturesSources}
                 placeholder={WefaOnboardGeneratedCreaturesPlaceholderImg}
                 alt="WEFA plant selection screen showcasing a strawberry as an example."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}

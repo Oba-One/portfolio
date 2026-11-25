@@ -190,10 +190,12 @@ declare module "three" {
   }
 
   export class Texture {
+    constructor(image?: HTMLImageElement)
     encoding: unknown
     flipY: boolean
     anisotropy: number
     generateMipmaps: boolean
+    set needsUpdate(value: boolean)
     dispose(): void
   }
 

@@ -12,14 +12,10 @@ import { Image, type ImageProps } from 'components/Image'
 import { Button } from 'components/Button'
 import { Heading } from 'components/Heading'
 import { Section } from 'components/Section'
-import { Transition } from 'components/Transition'
-import { tokens } from 'components/ThemeProvider/theme'
 import type { ProjectLink } from '../../constants'
-import { classes, cssProps, msToNum, numToMs } from 'utils/style'
+import { classes, cssProps } from 'utils/style'
 
 import styles from './Project.module.scss'
-
-const initDelay = 300
 
 type ProjectHeaderProps = {
   title: string
@@ -92,10 +88,7 @@ export function ProjectHeader({
 }: ProjectHeaderProps) {
   return (
     <Section className={classes(styles.header, className)} as="section">
-      <div
-        className={styles.headerContent}
-        style={cssProps({ initDelay: numToMs(initDelay) })}
-      >
+      <div className={styles.headerContent}>
         <div className={styles.details}>
           <Heading className={styles.title} level={2} as="h1">
             {title}
@@ -123,12 +116,8 @@ export function ProjectHeader({
         </div>
         {!!roles?.length && (
           <ul className={styles.meta}>
-            {roles?.map((role, index) => (
-              <li
-                className={styles.metaItem}
-                style={cssProps({ delay: numToMs(initDelay + 300 + index * 140) })}
-                key={role}
-              >
+            {roles.map(role => (
+              <li className={styles.metaItem} key={role}>
                 <Text>{role}</Text>
               </li>
             ))}
@@ -139,10 +128,7 @@ export function ProjectHeader({
   )
 }
 
-export const ProjectContainer = ({
-  className,
-  ...rest
-}: HTMLAttributes<HTMLElement>) => (
+export const ProjectContainer = ({ className, ...rest }: HTMLAttributes<HTMLElement>) => (
   <article className={classes(styles.project, className)} {...rest} />
 )
 
@@ -195,25 +181,18 @@ export const ProjectBackground = ({
   })
 
   return (
-    <Transition in timeout={msToNum(tokens.base.durationM)}>
-      {visible => (
-        <div
-          className={classes(styles.backgroundImage, className)}
-          data-visible={visible}
-        >
-          <div className={styles.backgroundImageElement} ref={imageRef}>
-            <Image alt="" role="presentation" {...rest} />
-          </div>
-          <div className={styles.backgroundScrim} style={cssProps({ opacity })} />
-        </div>
-      )}
-    </Transition>
+    <div className={classes(styles.backgroundImage, className)}>
+      <div className={styles.backgroundImageElement} ref={imageRef}>
+        <Image alt="" sizes="100vw" loading="eager" {...rest} />
+      </div>
+      <div className={styles.backgroundScrim} style={cssProps({ opacity })} />
+    </div>
   )
 }
 
 export const ProjectImage = ({ className, alt, ...rest }: ProjectImageProps) => (
   <div className={classes(styles.image, className)}>
-    <Image reveal alt={alt} delay={300} {...rest} />
+    <Image alt={alt} {...rest} />
   </div>
 )
 
@@ -244,10 +223,7 @@ export const ProjectSectionHeading = ({
   />
 )
 
-export const ProjectSectionText = ({
-  className,
-  ...rest
-}: ProjectSectionTextProps) => (
+export const ProjectSectionText = ({ className, ...rest }: ProjectSectionTextProps) => (
   <Text className={classes(styles.sectionText, className)} size="l" as="p" {...rest} />
 )
 

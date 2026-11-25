@@ -1,4 +1,6 @@
-import { createRef, useEffect, useRef, useState, type RefObject } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useInViewport } from 'hooks'
+import { media } from 'utils/style'
 
 import { Meta } from 'components/Meta'
 import { Footer } from 'components/Footer'
@@ -7,13 +9,13 @@ import { Profile } from 'layouts/Home/Profile'
 import { ProjectSummary } from 'layouts/Home/ProjectSummary'
 
 import {
-  GreenGoodsActionSelectionPwaImg,
+  GreenGoodsActionSelectionPwaSources,
   GreenGoodsActionSelectionPwaPlaceholderImg,
-  GreenGoodsMediaSectionPwaImg,
+  GreenGoodsMediaSectionPwaSources,
   GreenGoodsMediaSectionPwaPlaceholderImg,
 } from 'assets/green-goods'
 import {
-  GreenpillNetworkMapImg,
+  GreenpillNetworkMapSources,
   GreenpillNetworkMapPlaceholderImg,
 } from 'assets/greenpill'
 import {
@@ -22,19 +24,22 @@ import {
   WefaOnboardSelectElementImg,
   WefaOnboardSelectElementPlaceholderImg,
 } from 'assets/wefa'
-import { SynLearningsImg, SynLearningsPlaceholderImg } from 'assets/syn'
-import { FreeportBackgroundImg, FreeportBackgroundPlaceholderImg } from 'assets/freeport'
+import { SynLearningsSources, SynLearningsPlaceholderImg } from 'assets/syn'
 import {
-  ConnectCallMessagesImg,
+  FreeportBackgroundSources,
+  FreeportBackgroundPlaceholderImg,
+} from 'assets/freeport'
+import {
+  ConnectCallMessagesSources,
   ConnectCallMessagesPlaceholderImg,
 } from 'assets/mira-connect'
 import {
-  FlowTabletCollectionsImg,
+  FlowTabletCollectionsSources,
   FlowTabletCollectionsPlaceholderImg,
-  FlowTabletReferencePhotoImg,
+  FlowTabletReferencePhotoSources,
   FlowTabletReferencePhotoPlaceholderImg,
 } from 'assets/mira-flow'
-import { GMBackgroundImg, GMBackgroundPlaceholderImg } from 'assets/gm'
+import { GMBackgroundSources, GMBackgroundPlaceholderImg } from 'assets/gm'
 
 import styles from './Home.module.css'
 import { featuredProjectSlugs, projects } from '../../constants'
@@ -49,85 +54,85 @@ type ProjectMedia = {
 
 const projectMedia = {
   green_goods: {
-    alt: 'Green Goods work selection and media capture screens inside mobile frames.',
+    alt: 'Green Goods work selection and media capture screens.',
     textures: [
       {
-        srcSet: [GreenGoodsActionSelectionPwaImg, GreenGoodsActionSelectionPwaImg],
+        srcSet: GreenGoodsActionSelectionPwaSources,
         placeholder: GreenGoodsActionSelectionPwaPlaceholderImg,
       },
       {
-        srcSet: [GreenGoodsMediaSectionPwaImg, GreenGoodsMediaSectionPwaImg],
+        srcSet: GreenGoodsMediaSectionPwaSources,
         placeholder: GreenGoodsMediaSectionPwaPlaceholderImg,
       },
     ],
   },
   greenpill: {
-    alt: 'Greenpill Network homepage map hero inside a laptop frame.',
+    alt: 'Greenpill Network homepage map hero.',
     textures: [
       {
-        srcSet: [GreenpillNetworkMapImg, GreenpillNetworkMapImg],
+        srcSet: GreenpillNetworkMapSources,
         placeholder: GreenpillNetworkMapPlaceholderImg,
       },
     ],
   },
   wefa: {
-    alt: 'WEFA onboarding artwork inside mobile frames.',
+    alt: 'WEFA onboarding artwork.',
     textures: [
       {
-        srcSet: [WefaSplashImg, WefaSplashImg],
+        srcSet: [WefaSplashImg],
         placeholder: WefaSplashPlaceholderImg,
       },
       {
-        srcSet: [WefaOnboardSelectElementImg, WefaOnboardSelectElementImg],
+        srcSet: [WefaOnboardSelectElementImg],
         placeholder: WefaOnboardSelectElementPlaceholderImg,
       },
     ],
   },
   syn: {
-    alt: 'Synesthesia colorful blog page inside a laptop frame.',
+    alt: 'Synesthesia colorful blog page.',
     textures: [
       {
-        srcSet: [SynLearningsImg, SynLearningsImg],
+        srcSet: SynLearningsSources,
         placeholder: SynLearningsPlaceholderImg,
       },
     ],
   },
   freeport: {
-    alt: 'Freeport launch artwork inside a laptop frame.',
+    alt: 'Freeport launch artwork.',
     textures: [
       {
-        srcSet: [FreeportBackgroundImg, FreeportBackgroundImg],
+        srcSet: FreeportBackgroundSources,
         placeholder: FreeportBackgroundPlaceholderImg,
       },
     ],
   },
   mira_connect: {
-    alt: 'Mira Connect call interface inside a laptop frame.',
+    alt: 'Mira Connect call interface.',
     textures: [
       {
-        srcSet: [ConnectCallMessagesImg, ConnectCallMessagesImg],
+        srcSet: ConnectCallMessagesSources,
         placeholder: ConnectCallMessagesPlaceholderImg,
       },
     ],
   },
   mira_flow: {
-    alt: 'Mira Flow workflow screens inside mobile frames.',
+    alt: 'Mira Flow workflow screens.',
     textures: [
       {
-        srcSet: [FlowTabletCollectionsImg, FlowTabletCollectionsImg],
+        srcSet: FlowTabletCollectionsSources,
         placeholder: FlowTabletCollectionsPlaceholderImg,
       },
       {
-        srcSet: [FlowTabletReferencePhotoImg, FlowTabletReferencePhotoImg],
+        srcSet: FlowTabletReferencePhotoSources,
         placeholder: FlowTabletReferencePhotoPlaceholderImg,
       },
     ],
   },
   gentle_monster: {
-    alt: 'Gentle Monster landing page inside a laptop frame.',
+    alt: 'Gentle Monster landing page.',
     textures: [
       {
-        srcSet: [GMBackgroundImg, GMBackgroundImg],
+        srcSet: GMBackgroundSources,
         placeholder: GMBackgroundPlaceholderImg,
       },
     ],
@@ -135,50 +140,27 @@ const projectMedia = {
 } satisfies Record<(typeof featuredProjectSlugs)[number], ProjectMedia>
 
 export const Home = () => {
-  const [visibleSections, setVisibleSections] = useState<Element[]>([])
-  const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false)
-  const intro = useRef<HTMLElement | null>(null)
-  const projectRefs = useRef<RefObject<HTMLElement>[]>(
-    featuredProjectSlugs.map(() => createRef<HTMLElement>())
-  )
-
   const details = useRef<HTMLElement | null>(null)
+  const detailsVisible = useInViewport(details, true)
+  const [enhance, setEnhance] = useState(false)
 
   useEffect(() => {
-    const sections = [intro, ...projectRefs.current, details]
-
-    const sectionObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const section = entry.target
-            observer.unobserve(section)
-            if (visibleSections.includes(section)) return
-            setVisibleSections(prevSections => [...prevSections, section])
-          }
-        })
-      },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    const query = window.matchMedia(
+      `(min-width: ${
+        media.tablet + 1
+      }px) and (pointer: fine) and (prefers-reduced-motion: no-preference)`
     )
+    const update = () => setEnhance(query.matches)
 
-    const indicatorObserver = new IntersectionObserver(
-      ([entry]) => {
-        setScrollIndicatorHidden(!entry.isIntersecting)
-      },
-      { rootMargin: '-100% 0px 0px 0px' }
-    )
-
-    sections.forEach(section => {
-      if (section.current) sectionObserver.observe(section.current)
-    })
-
-    if (intro.current) indicatorObserver.observe(intro.current)
+    if (document.readyState === 'complete') update()
+    else window.addEventListener('load', update, { once: true })
+    query.addEventListener('change', update)
 
     return () => {
-      sectionObserver.disconnect()
-      indicatorObserver.disconnect()
+      window.removeEventListener('load', update)
+      query.removeEventListener('change', update)
     }
-  }, [visibleSections])
+  }, [])
 
   return (
     <div className={styles.home}>
@@ -187,15 +169,9 @@ export const Home = () => {
         title="Architect + Steward"
         description="Portfolio of Afolabi Aiyeloja, an ecosystem architect and systems builder working across regenerative technology, cultural community, public goods infrastructure, and expressive web experiences."
       />
-      <Intro
-        id="intro"
-        sectionRef={intro}
-        disciplines={disciplines}
-        scrollIndicatorHidden={scrollIndicatorHidden}
-      />
+      <Intro id="intro" disciplines={disciplines} enhance={enhance} />
       {featuredProjectSlugs.map((slug, index) => {
         const project = projects[slug]
-        const sectionRef = projectRefs.current[index]
         const media = projectMedia[slug]
         const projectNumber = index + 1
 
@@ -204,10 +180,7 @@ export const Home = () => {
             key={slug}
             id={`project-${projectNumber}`}
             alternate={index % 2 === 1}
-            sectionRef={sectionRef}
-            visible={Boolean(
-              sectionRef.current && visibleSections.includes(sectionRef.current)
-            )}
+            enhance={enhance}
             index={projectNumber}
             title={project.title}
             description={project.description}
@@ -221,11 +194,7 @@ export const Home = () => {
           />
         )
       })}
-      <Profile
-        sectionRef={details}
-        visible={Boolean(details.current && visibleSections.includes(details.current))}
-        id="details"
-      />
+      <Profile sectionRef={details} visible={detailsVisible} id="details" />
       <Footer />
     </div>
   )

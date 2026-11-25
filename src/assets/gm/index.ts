@@ -1,3 +1,10 @@
+import GMProblem800Img from './gm-problem-800.webp'
+import GMProblem1600Img from './gm-problem-1600.webp'
+import GMArchitecture800Img from './gm-architecture-800.webp'
+import GMArchitecture1600Img from './gm-architecture-1600.webp'
+import GMBackground640Img from './gm-background-640.webp'
+import GMBackground1280Img from './gm-background-1280.webp'
+
 export { default as GMArchitectureImg } from './gm-architecture.webp'
 export { default as GMBackgroundImg } from './gm-background.webp'
 export { default as GMDevelopmentImg } from './gm-development.webp'
@@ -10,3 +17,9 @@ export { default as GMBackgroundPlaceholderImg } from './gm-background-ph.webp'
 export { default as GMDevelopment2PlaceholderImg } from './gm-development2-ph.webp'
 export { default as GMLearningsPlaceholderImg } from './gm-learnings-ph.webp'
 export { default as GMProblemPlaceholderImg } from './gm-problem-ph.webp'
+
+export const GMBackgroundSources = [GMBackground640Img, GMBackground1280Img]
+
+export const GMArchitectureSources = [GMArchitecture800Img, GMArchitecture1600Img]
+
+export const GMProblemSources = [GMProblem800Img, GMProblem1600Img]

@@ -1,17 +1,17 @@
 import { Fragment } from 'react'
 
 import {
-  GreenGoodsActionSelectionPwaImg,
+  GreenGoodsActionSelectionPwaSources,
   GreenGoodsActionSelectionPwaPlaceholderImg,
-  GreenGoodsHeroWebsiteImg,
+  GreenGoodsHeroWebsiteSources,
   GreenGoodsHeroWebsitePlaceholderImg,
   GreenGoodsImpactValueCycleImg,
   GreenGoodsImpactValueCyclePlaceholderImg,
-  GreenGoodsMediaSectionPwaImg,
+  GreenGoodsMediaSectionPwaSources,
   GreenGoodsMediaSectionPwaPlaceholderImg,
-  RefiSiciliaAgroforestryImg,
+  RefiSiciliaAgroforestrySources,
   RefiSiciliaAgroforestryPlaceholderImg,
-  TasSolarHubSessionImg,
+  TasSolarHubSessionSources,
   TasSolarHubSessionPlaceholderImg,
 } from 'assets/green-goods'
 import { Footer } from 'components/Footer'
@@ -57,8 +57,7 @@ export const GreenGoods = () => {
       <ProjectContainer className={styles.greenGoods}>
         <ProjectBackground
           className={styles.heroBackground}
-          src={GreenGoodsHeroWebsiteImg}
-          srcSet={`${GreenGoodsHeroWebsiteImg.src} 1672w, ${GreenGoodsHeroWebsiteImg.src} 3344w`}
+          srcSet={GreenGoodsHeroWebsiteSources}
           placeholder={GreenGoodsHeroWebsitePlaceholderImg}
           alt=""
           opacity={isDark ? 0.56 : 0.72}
@@ -74,8 +73,7 @@ export const GreenGoods = () => {
             <Image
               raised
               className={styles.fieldPhoto}
-              src={TasSolarHubSessionImg}
-              srcSet={[TasSolarHubSessionImg, TasSolarHubSessionImg]}
+              srcSet={TasSolarHubSessionSources}
               placeholder={TasSolarHubSessionPlaceholderImg}
               alt="TAS solar hub team standing in front of a solar powered community hub in Awka, Nigeria."
               sizes={`(max-width: ${media.mobile}px) 100vw, 50vw`}
@@ -91,19 +89,14 @@ export const GreenGoods = () => {
             <div className={styles.appScreens}>
               <Image
                 className={styles.appScreen}
-                src={GreenGoodsActionSelectionPwaImg}
-                srcSet={[
-                  GreenGoodsActionSelectionPwaImg,
-                  GreenGoodsActionSelectionPwaImg,
-                ]}
+                srcSet={GreenGoodsActionSelectionPwaSources}
                 placeholder={GreenGoodsActionSelectionPwaPlaceholderImg}
                 alt="Green Goods mobile app action selection screen with solar, agroforestry, education, and waste domains."
                 sizes={`(max-width: ${media.mobile}px) 58vw, 300px`}
               />
               <Image
                 className={styles.appScreen}
-                src={GreenGoodsMediaSectionPwaImg}
-                srcSet={[GreenGoodsMediaSectionPwaImg, GreenGoodsMediaSectionPwaImg]}
+                srcSet={GreenGoodsMediaSectionPwaSources}
                 placeholder={GreenGoodsMediaSectionPwaPlaceholderImg}
                 alt="Green Goods mobile app media step for capturing planting photos and optional audio evidence."
                 sizes={`(max-width: ${media.mobile}px) 58vw, 300px`}
@@ -141,8 +134,7 @@ export const GreenGoods = () => {
             <Image
               raised
               className={classes(styles.fieldPhoto, styles.agroforestryPhoto)}
-              src={RefiSiciliaAgroforestryImg}
-              srcSet={[RefiSiciliaAgroforestryImg, RefiSiciliaAgroforestryImg]}
+              srcSet={RefiSiciliaAgroforestrySources}
               placeholder={RefiSiciliaAgroforestryPlaceholderImg}
               alt="ReFi Sicilia agroforestry work with a participant pruning trees near the coastline."
               sizes={`(max-width: ${media.mobile}px) 100vw, 50vw`}
