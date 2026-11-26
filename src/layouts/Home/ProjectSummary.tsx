@@ -1,13 +1,12 @@
 import { Button } from 'components/Button'
 import { Divider } from 'components/Divider'
 import { Heading } from 'components/Heading'
-import { Image } from 'components/Image'
 import { deviceModels } from 'components/Model/deviceModels'
 import { Section } from 'components/Section'
 import { Text } from 'components/Text'
 import { useInViewport } from 'hooks'
 import dynamic from 'next/dynamic'
-import { useRef, useState, type HTMLAttributes } from 'react'
+import { useRef, type HTMLAttributes } from 'react'
 import { media } from 'utils/style'
 import styles from './ProjectSummary.module.scss'
 import type { ModelConfig, ModelProps } from 'components/Model'
@@ -17,9 +16,15 @@ const Model = dynamic<ModelProps>(
   () => import('components/Model').then(mod => mod.Model),
   {
     ssr: false,
+    loading: () => (
+      <span className={styles.loading} role="status">
+        Loading 3D preview…
+      </span>
+    ),
   }
 )
-const previewViewport = { threshold: 0.25 }
+const previewViewport = { rootMargin: '100% 0px', threshold: 0 }
+const entranceViewport = { threshold: 0.15 }
 
 type ProjectSummaryModel = {
   type: ProjectPlatform
@@ -51,9 +56,10 @@ export const ProjectSummary = ({
   alternate,
   ...rest
 }: ProjectSummaryProps) => {
+  const contentRef = useRef<HTMLDivElement>(null)
   const previewRef = useRef<HTMLDivElement>(null)
-  const [modelReady, setModelReady] = useState(false)
-  const previewInViewport = useInViewport(previewRef, false, previewViewport, enhance)
+  const hasEntered = useInViewport(contentRef, true, entranceViewport)
+  const previewInViewport = useInViewport(previewRef, true, previewViewport, enhance)
   const showModel = enhance && previewInViewport
   const titleId = `${id}-title`
   const isPhone = model.type === 'phone'
@@ -72,10 +78,15 @@ export const ProjectSummary = ({
       tabIndex={-1}
       {...rest}
     >
-      <div className={styles.content}>
+      <div className={styles.content} ref={contentRef} data-entered={hasEntered}>
         <div className={styles.details}>
           <div aria-hidden="true" className={styles.index}>
-            <Divider notchWidth="64px" notchHeight="8px" />
+            <Divider
+              notchWidth="64px"
+              notchHeight="8px"
+              collapsed={!hasEntered}
+              collapseDelay={1000}
+            />
             <span className={styles.indexNumber}>{String(index).padStart(2, '0')}</span>
           </div>
           <Heading level={3} as="h2" className={styles.title} id={titleId}>
@@ -84,40 +95,23 @@ export const ProjectSummary = ({
           <Text className={styles.description} as="p">
             {description}
           </Text>
-          <Button iconHoverShift href={buttonLink} iconEnd="arrowRight">
-            {buttonText}
-          </Button>
+          <div className={styles.button}>
+            <Button iconHoverShift href={buttonLink} iconEnd="arrowRight">
+              {buttonText}
+            </Button>
+          </div>
         </div>
-        <div
-          className={styles.preview}
-          ref={previewRef}
-          role="img"
-          aria-label={model.alt}
-        >
+        <div className={styles.preview} ref={previewRef}>
           <div className={styles.model} data-device={model.type}>
-            <div
-              className={styles.poster}
-              data-model-ready={showModel && modelReady}
-              aria-hidden="true"
-            >
-              {model.textures.map(texture => (
-                <Image
-                  key={texture.placeholder.src}
-                  srcSet={texture.srcSet}
-                  placeholder={texture.placeholder}
-                  sizes={sizes}
-                  alt=""
-                />
-              ))}
-            </div>
             {showModel && (
               <Model
-                aria-hidden="true"
                 alt={model.alt}
                 cameraPosition={{ x: 0, y: 0, z: isPhone ? 11.5 : 8 }}
-                animateIn={false}
+                preload
+                show={hasEntered}
+                showDelay={isPhone ? 300 : 700}
+                loadTextureBeforeAnimation
                 fallback={false}
-                onReadyChange={setModelReady}
                 models={model.textures.map((texture, index) => ({
                   ...deviceModels[model.type],
                   ...(isPhone && {
@@ -129,6 +123,11 @@ export const ProjectSummary = ({
                   texture: { ...texture, sizes },
                 }))}
               />
+            )}
+            {!showModel && (
+              <span className={styles.loading} role="status">
+                Loading 3D preview…
+              </span>
             )}
           </div>
         </div>

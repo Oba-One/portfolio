@@ -82,8 +82,10 @@ export type ModelConfig = {
 export type ModelProps = Omit<HTMLAttributes<HTMLDivElement>, 'style'> & {
   models: ModelConfig[]
   show?: boolean
+  preload?: boolean
   showDelay?: number
   animateIn?: boolean
+  loadTextureBeforeAnimation?: boolean
   fallback?: boolean
   onReadyChange?: (ready: boolean) => void
   cameraPosition?: VectorPosition
@@ -99,6 +101,7 @@ type AnimationControls = {
 type LoadDeviceResult = {
   loadFullResTexture?: () => Promise<void>
   playAnimation?: () => AnimationControls | void
+  finishAnimation?: () => void
 }
 
 type LoadDeviceState = {
@@ -108,8 +111,10 @@ type LoadDeviceState = {
 export const Model = ({
   models,
   show = true,
+  preload = false,
   showDelay = 0,
   animateIn = true,
+  loadTextureBeforeAnimation = false,
   fallback = true,
   onReadyChange,
   cameraPosition = { x: 0, y: 0, z: 8 },
@@ -485,14 +490,19 @@ export const Model = ({
   return (
     <div
       className={classes(styles.model, className)}
-      data-loaded={ready || (fallback && fallbackVisible)}
+      data-loaded={ready || fallbackVisible || !fallback}
       style={cssProps({ delay: numToMs(showDelay) }, style)}
       ref={container}
-      role="img"
+      role={!fallback && !ready ? 'group' : 'img'}
       aria-label={alt}
       {...rest}
     >
       <canvas className={styles.canvas} data-visible={ready} ref={canvas} />
+      {!fallback && !ready && (
+        <span className={styles.status} role="status">
+          {fallbackVisible ? '3D preview unavailable' : 'Loading 3D preview…'}
+        </span>
+      )}
       {fallbackImages.length > 0 && (
         <div
           aria-hidden="true"
@@ -524,8 +534,11 @@ export const Model = ({
             modelGroup={modelGroup}
             webglReady={webglReady}
             show={show}
+            preload={preload}
+            ready={ready}
             showDelay={showDelay}
             animateIn={animateIn}
+            loadTextureBeforeAnimation={loadTextureBeforeAnimation}
             renderFrame={renderFrame}
             index={index}
             onReady={onDeviceReady}
@@ -546,9 +559,12 @@ type DeviceProps = {
   index: number
   showDelay: number
   animateIn: boolean
+  loadTextureBeforeAnimation: boolean
   onReady: () => void
   setFallbackVisible: (visible: boolean) => void
   show: boolean
+  preload: boolean
+  ready: boolean
 }
 
 const getPrimaryMaterial = (mesh: Mesh) => {
@@ -568,12 +584,19 @@ const Device = ({
   index,
   showDelay,
   animateIn,
+  loadTextureBeforeAnimation,
   onReady,
   setFallbackVisible,
   show,
+  preload,
+  ready,
 }: DeviceProps) => {
   const [loadDevice, setLoadDevice] = useState<LoadDeviceState | null>(null)
+  const [loadedDevice, setLoadedDevice] = useState<LoadDeviceResult | null>(null)
+  const animationStarted = useRef(false)
   const reduceMotion = useReducedMotion()
+  const shouldLoad = show || preload
+  const usePlaceholderTexture = animateIn && !loadTextureBeforeAnimation
   const placeholderScreen = useRef<Mesh | null>(null)
 
   useEffect(() => {
@@ -612,7 +635,9 @@ const Device = ({
         return new Texture(image)
       }
       const [initialTexture, modelResult] = await Promise.allSettled([
-        animateIn ? textureLoader.loadAsync(texture.placeholder.src) : loadFullTexture(),
+        usePlaceholderTexture
+          ? textureLoader.loadAsync(texture.placeholder.src)
+          : loadFullTexture(),
         modelLoader.loadAsync(url),
       ])
 
@@ -643,7 +668,7 @@ const Device = ({
           const material = getPrimaryMaterial(node)
           if (!material) return
           hasScreen = true
-          if (!animateIn) {
+          if (!usePlaceholderTexture) {
             applyScreenTexture(screenTexture, node)
             return
           }
@@ -692,8 +717,21 @@ const Device = ({
       }
       modelGroupInstance.add(gltf.scene)
 
-      if (reduceMotion || !animateIn) {
+      const frameNode = gltf.scene.children.find(node => node.name === MeshType.Frame)
+      const finishAnimation = () => {
         gltf.scene.position.set(...targetPosition.toArray())
+        if (frameNode) frameNode.rotation.x = 0
+        renderFrame()
+      }
+
+      gltf.scene.position.set(...targetPosition.toArray())
+      if (!reduceMotion && animateIn) {
+        if (model.animation === ModelAnimationType.SpringUp) {
+          gltf.scene.position.y -= 1
+        }
+        if (model.animation === ModelAnimationType.LaptopOpen) {
+          if (frameNode) frameNode.rotation.x = MathUtils.degToRad(90)
+        }
       }
 
       // Simple slide up animation
@@ -726,9 +764,6 @@ const Device = ({
       // Swing the laptop lid open
       if (model.animation === ModelAnimationType.LaptopOpen) {
         playAnimation = () => {
-          const frameNode = gltf.scene.children.find(
-            (node: Object3D) => node.name === MeshType.Frame
-          )
           if (!frameNode) return undefined
 
           const startRotation = new Vector3(MathUtils.degToRad(90), 0, 0)
@@ -752,7 +787,7 @@ const Device = ({
         }
       }
 
-      return { loadFullResTexture, playAnimation }
+      return { loadFullResTexture, playAnimation, finishAnimation }
     }
 
     setLoadDevice({ start: load })
@@ -761,22 +796,17 @@ const Device = ({
   }, [])
 
   useEffect(() => {
-    if (!webglReady || !loadDevice || !show) return undefined
+    if (!webglReady || !loadDevice || !shouldLoad) return undefined
     const controller = new AbortController()
-    let animation: AnimationControls | void
 
     const onLoad = async () => {
       try {
-        const { loadFullResTexture, playAnimation } = await loadDevice.start(
-          controller.signal
-        )
+        const { loadFullResTexture, playAnimation, finishAnimation } =
+          await loadDevice.start(controller.signal)
         if (controller.signal.aborted) return
 
-        if (!reduceMotion && animateIn) {
-          animation = playAnimation?.()
-        }
-
         renderFrame()
+        setLoadedDevice({ playAnimation, finishAnimation })
         onReady()
         await loadFullResTexture?.()
       } catch {
@@ -790,10 +820,22 @@ const Device = ({
 
     return () => {
       controller.abort()
-      animation?.stop()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadDevice, show])
+  }, [loadDevice, shouldLoad])
+
+  useEffect(() => {
+    if (!loadedDevice || !show || !ready) return
+    if (reduceMotion || !animateIn) {
+      loadedDevice.finishAnimation?.()
+      animationStarted.current = true
+      return
+    }
+    if (animationStarted.current) return
+    animationStarted.current = true
+    const animation = loadedDevice.playAnimation?.()
+    return () => animation?.stop()
+  }, [loadedDevice, show, ready, reduceMotion, animateIn])
 
   return null
 }

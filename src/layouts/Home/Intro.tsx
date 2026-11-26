@@ -1,11 +1,16 @@
 import dynamic from 'next/dynamic'
-import { useReducedMotion } from 'framer-motion'
-import { useState } from 'react'
+import { AnimatePresence, useReducedMotion } from 'framer-motion'
+import { Fragment, useEffect, useState } from 'react'
 
+import { cssProps } from 'utils/style'
 import { Heading } from 'components/Heading'
 import { Section } from 'components/Section'
+import { Transition } from 'components/Transition'
+import { useTheme } from 'components/ThemeProvider'
+import { DecoderText } from 'components/DecoderText'
+import { tokens } from 'components/ThemeProvider/theme'
 import { VisuallyHidden } from 'components/VisuallyHidden'
-import { useInterval } from 'hooks'
+import { useInterval, usePrevious } from 'hooks'
 
 import styles from './Intro.module.scss'
 
@@ -21,17 +26,30 @@ type IntroProps = {
 }
 
 export function Intro({ id, disciplines, enhance }: IntroProps) {
-  const [disciplineIndex, setDisciplineIndex] = useState(0)
+  const theme = useTheme()
   const reduceMotion = useReducedMotion()
+  const [disciplineIndex, setDisciplineIndex] = useState(0)
+  const prevTheme = usePrevious(theme)
   const introLabel = [disciplines.slice(0, -1).join(', '), disciplines.slice(-1)[0]].join(
     ', and '
   )
+  const currentDiscipline = disciplines.find((item, index) => index === disciplineIndex)
   const titleId = `${id}-title`
 
   useInterval(
-    () => setDisciplineIndex(index => (index + 1) % disciplines.length),
-    reduceMotion ? null : 5000
+    () => {
+      const index = (disciplineIndex + 1) % disciplines.length
+      setDisciplineIndex(index)
+    },
+    reduceMotion ? null : 5000,
+    theme.themeId
   )
+
+  useEffect(() => {
+    if (prevTheme && prevTheme.themeId !== theme.themeId) {
+      setDisciplineIndex(0)
+    }
+  }, [theme.themeId, prevTheme])
 
   return (
     <Section
@@ -41,24 +59,60 @@ export function Intro({ id, disciplines, enhance }: IntroProps) {
       aria-labelledby={titleId}
       tabIndex={-1}
     >
-      {enhance && <DisplacementSphere />}
-      <header className={styles.text}>
-        <h1 className={styles.name} id={titleId}>
-          Afolabi Aiyeloja
-        </h1>
-        <Heading level={0} as="h2" className={styles.title}>
-          <VisuallyHidden>{`Architect + ${introLabel}`}</VisuallyHidden>
-          <span aria-hidden="true" className={styles.row}>
-            <span className={styles.word}>Architect</span>
-            <span className={styles.line} />
-          </span>
-          <span aria-hidden="true" className={styles.row}>
-            <span className={styles.word} data-plus="true" key={disciplineIndex}>
-              {disciplines[disciplineIndex]}
-            </span>
-          </span>
-        </Heading>
-      </header>
+      <Transition in key={theme.themeId} timeout={3000}>
+        {(visible, status) => (
+          <Fragment>
+            {enhance && <DisplacementSphere />}
+            <header className={styles.text}>
+              <h1 className={styles.name} data-visible={visible} id={titleId}>
+                <DecoderText text="Afolabi Aiyeloja" delay={300} />
+              </h1>
+              <Heading level={0} as="h2" className={styles.title}>
+                <VisuallyHidden className={styles.label}>
+                  {`Architect + ${introLabel}`}
+                </VisuallyHidden>
+                <span aria-hidden className={styles.row}>
+                  <span
+                    className={styles.word}
+                    data-status={reduceMotion ? 'entered' : status}
+                    style={cssProps({ delay: tokens.base.durationXS })}
+                  >
+                    Architect
+                  </span>
+                  <span
+                    className={styles.line}
+                    data-status={reduceMotion ? 'entered' : status}
+                  />
+                </span>
+                <span className={styles.row}>
+                  <AnimatePresence>
+                    {disciplines.map(item => (
+                      <Transition
+                        unmount
+                        in={item === currentDiscipline}
+                        timeout={{ enter: 3000, exit: 2000 }}
+                        key={item}
+                      >
+                        {(visible, status) => (
+                          <span
+                            aria-hidden
+                            className={styles.word}
+                            data-plus={true}
+                            data-status={reduceMotion ? 'entered' : status}
+                            style={cssProps({ delay: tokens.base.durationL })}
+                          >
+                            {item}
+                          </span>
+                        )}
+                      </Transition>
+                    ))}
+                  </AnimatePresence>
+                </span>
+              </Heading>
+            </header>
+          </Fragment>
+        )}
+      </Transition>
     </Section>
   )
 }

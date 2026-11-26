@@ -33,6 +33,15 @@
   opacity: 1;
 }
 
+.status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: var(--fontSizeBodyS);
+  color: var(--colorTextLight);
+}
+
 .fallbackImage {
   width: 70%;
   max-height: 80%;
