@@ -142,23 +142,26 @@ const projectMedia = {
 export const Home = () => {
   const details = useRef<HTMLElement | null>(null)
   const detailsVisible = useInViewport(details, true)
-  const [enhance, setEnhance] = useState(false)
+  const [enhance, setEnhance] = useState({ models: false, sphere: false })
 
   useEffect(() => {
-    const query = window.matchMedia(
+    const sphereQuery = window.matchMedia(
       `(min-width: ${
         media.tablet + 1
       }px) and (pointer: fine) and (prefers-reduced-motion: no-preference)`
     )
-    const update = () => setEnhance(query.matches)
+    const update = () => {
+      if (document.readyState !== 'complete') return
+      setEnhance({ models: true, sphere: sphereQuery.matches })
+    }
 
     if (document.readyState === 'complete') update()
     else window.addEventListener('load', update, { once: true })
-    query.addEventListener('change', update)
+    sphereQuery.addEventListener('change', update)
 
     return () => {
       window.removeEventListener('load', update)
-      query.removeEventListener('change', update)
+      sphereQuery.removeEventListener('change', update)
     }
   }, [])
 
@@ -169,7 +172,7 @@ export const Home = () => {
         title="Architect + Steward"
         description="Portfolio of Afolabi Aiyeloja, an ecosystem architect and systems builder working across regenerative technology, cultural community, public goods infrastructure, and expressive web experiences."
       />
-      <Intro id="intro" disciplines={disciplines} enhance={enhance} />
+      <Intro id="intro" disciplines={disciplines} enhance={enhance.sphere} />
       {featuredProjectSlugs.map((slug, index) => {
         const project = projects[slug]
         const media = projectMedia[slug]
@@ -180,7 +183,7 @@ export const Home = () => {
             key={slug}
             id={`project-${projectNumber}`}
             alternate={index % 2 === 1}
-            enhance={enhance}
+            enhance={enhance.models}
             index={projectNumber}
             title={project.title}
             description={project.description}
